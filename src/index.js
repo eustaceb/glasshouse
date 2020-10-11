@@ -1,16 +1,42 @@
-import * as Tone from 'tone';
+import * as Tone from "tone";
 
-function component() {
-  const element = document.createElement('button');
+var players = [];
 
-  element.onclick = function(){
-    const synth = new Tone.Synth().toDestination();
-    synth.triggerAttackRelease("C4", "8n");
+const samples = {
+    "hihats": "audio/hihats.mp3",
+    "synth": "audio/synth.mp3"
   };
 
-  element.innerHTML = "Play";
+document.getElementById("sample-play").addEventListener("click", function(){
+    const selectedSample = document.getElementById("sample-select").value;
+    const distortionEnabled = document.getElementById("distortion").checked;
+    const loopSample = document.getElementById("loop").checked;
+    const distortionAmount = document.getElementById("distortion-amount").value;
 
-  return element;
-}
+    var player = new Tone.Player(samples[selectedSample]).toDestination();
+    players.push(player);
 
-document.querySelector("main").appendChild(component());
+    if (distortionEnabled)
+    {
+        const distortion = new Tone.Distortion(distortionAmount).toDestination();
+        player.connect(distortion);
+    }
+
+    if (loopSample)
+    {
+        player.loop = true;
+    }
+
+    Tone.loaded().then(() => {
+        player.start();
+    });
+
+});
+
+document.getElementById("reset").addEventListener("click", function(){
+    players.forEach(function(player){
+        player.dispose();
+    });
+
+    players = [];
+});
