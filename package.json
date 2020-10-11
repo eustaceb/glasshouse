@@ -1,0 +1,37 @@
+{
+  "name": "collab-synth",
+  "version": "0.0.1",
+  "description": "Collaborative audio synthesis",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "server": "http-server ./dist",
+    "start": "npm build && http-server ./dist -o"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eustaceb/collab-synth.git"
+  },
+  "keywords": [
+    "audio",
+    "synth",
+    "web",
+    "collaborative"
+  ],
+  "author": "Guoda Dirzyte, Justinas Bikulcius",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eustaceb/collab-synth/issues"
+  },
+  "homepage": "https://github.com/eustaceb/collab-synth#readme",
+  "dependencies": {
+    "node": "^14.13.1",
+    "tone": "^14.7.58"
+  },
+  "devDependencies": {
+    "http-server": "^0.12.3",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^4.0.0"
+  }
+}
