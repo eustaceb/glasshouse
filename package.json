@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "server": "http-server ./dist",
-    "start": "npm run build && http-server ./dist -o"
+    "start": "webpack serve"
   },
   "repository": {
     "type": "git",
@@ -30,8 +29,8 @@
     "tone": "^14.7.58"
   },
   "devDependencies": {
-    "http-server": "^0.12.3",
     "webpack": "^5.0.0",
-    "webpack-cli": "^4.0.0"
+    "webpack-cli": "^4.0.0",
+    "webpack-dev-server": "^3.11.0"
   }
 }
