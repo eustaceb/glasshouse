@@ -8,6 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Grid from "@material-ui/core/Grid";
+import {KnobControl} from "./KnobControl.js";
 
 function ListItemLink(props) {
   return <ListItem button component="a" {...props} />;
@@ -89,6 +90,7 @@ export function SamplePlayer(props) {
               onChange={(e) => setDistortionAmount(e.target.value)}
               inputProps={{step: 0.05, type: "number", min: 0.0, max: 1.0}}
             />
+            <KnobControl size={100} mouseController={props.mouseController} />
           </Grid>
           <Grid item xs={3}>
             <LabeledCheckbox
