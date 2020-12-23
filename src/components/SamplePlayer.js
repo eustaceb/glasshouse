@@ -90,7 +90,7 @@ export function SamplePlayer(props) {
               onChange={(e) => setDistortionAmount(e.target.value)}
               inputProps={{step: 0.05, type: "number", min: 0.0, max: 1.0}}
             />
-            <KnobControl size={100} mouseController={props.mouseController} />
+            <KnobControl size={50} mouseController={props.mouseController} callback={(val) => {setDistortionAmount(val / 100.0)}} />
           </Grid>
           <Grid item xs={3}>
             <LabeledCheckbox
