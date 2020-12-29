@@ -84,6 +84,7 @@ export function KnobControl(props) {
 
   return (
     <div style={styles.centeredContainer}>
+    <p style={styles.nonselectable}>{props.label}</p>
     <svg
       onMouseDown={(e) => { trackMouse.current = true; }}
       width={props.size}
@@ -94,8 +95,6 @@ export function KnobControl(props) {
         cx={center}
         cy={center}
         r={r}
-        stroke="black"
-        strokeWidth={strokeWidth}
         fill="blueviolet"
       />
       <line
@@ -105,6 +104,14 @@ export function KnobControl(props) {
         y2={y2}
         stroke="lightgrey"
         strokeWidth={strokeWidth}
+      />
+      <circle
+        cx={center}
+        cy={center}
+        r={r}
+        stroke="black"
+        strokeWidth={strokeWidth}
+        fill-opacity="0"
       />
     </svg>
     <p style={styles.nonselectable}>{Math.round(value)} / {maxValue}</p>
