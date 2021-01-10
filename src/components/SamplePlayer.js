@@ -1,26 +1,31 @@
 import * as Tone from "tone";
-import React, { useState } from "react";
-import { Button } from "@material-ui/core";
+import React, {useState} from "react";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Grid from "@material-ui/core/Grid";
-import { KnobControl } from "./KnobControl.js";
-import { SamplePad } from "./SamplePad.js";
+import {KnobControl} from "./KnobControl.js";
+import {SamplePad} from "./SamplePad.js";
 
 function PadsControl(props) {
   const samples = props.samples.map((sample, index) => {
     const isSelected = index == props.selectedSampleIndex;
     return (
-      <Grid item xs={2} key={index} >
+      <Grid item xs={2} key={index}>
         <SamplePad
           sample={sample}
           onClick={() => props.selectSample(index)}
-          selected={isSelected} />
+          selected={isSelected}
+          playSample={() => props.playSample(index)}
+        />
       </Grid>
     );
   });
 
-  return <Grid container spacing={4}>{samples}</Grid>;
+  return (
+    <Grid container spacing={4}>
+      {samples}
+    </Grid>
+  );
 }
 
 function LabeledCheckbox(props) {
@@ -32,7 +37,6 @@ export function SamplePlayer(props) {
   const [selectedSampleIndex, setSample] = useState(0);
   const [distortionEnabled, enableDistortion] = useState(false);
   const [distortionAmount, setDistortionAmount] = useState(0.0);
-  const [loopSample, enableLoop] = useState(false);
 
   const playSample = (sampleIndex) => {
     const samples = props.samples;
@@ -48,16 +52,16 @@ export function SamplePlayer(props) {
         player.connect(distortion);
       }
 
-      if (loopSample) {
+      if (samples[sampleIndex].isLooping) {
         player.loop = true;
       }
       console.log(
-        "sampleName: %s, sampleIndex: %d, distortionEnabled: %s, distortionAmount: %d, loopSample: %s",
+        "sampleName: %s, sampleIndex: %d, distortionEnabled: %s, distortionAmount: %d, isLooping: %s",
         samples[sampleIndex].name,
         sampleIndex,
         distortionEnabled,
         distortionAmount,
-        loopSample
+        samples[sampleIndex].isLooping
       );
       Tone.loaded().then(() => {
         player.start();
@@ -70,7 +74,9 @@ export function SamplePlayer(props) {
       <PadsControl
         samples={props.samples}
         selectSample={(sampleIndex) => setSample(sampleIndex)}
-        selectedSampleIndex={selectedSampleIndex} />
+        playSample={(sampleIndex) => playSample(sampleIndex)}
+        selectedSampleIndex={selectedSampleIndex}
+      />
       <Grid container item xs={12}>
         <p>Selected sample: {props.samples[selectedSampleIndex].name}</p>
       </Grid>
@@ -80,10 +86,18 @@ export function SamplePlayer(props) {
             label="Distortion Amount"
             size={50}
             mouseController={props.mouseController}
-            callback={(val) => { setDistortionAmount(val / 100.0) }}
+            callback={(val) => {
+              setDistortionAmount(val / 100.0);
+            }}
           />
         </Grid>
-        <Grid container item xs={4} align="center" justify="center" direction="column">
+        <Grid
+          container
+          item
+          xs={4}
+          align="center"
+          justify="center"
+          direction="column">
           <LabeledCheckbox
             label="Enable Distortion"
             onChange={(e) => enableDistortion(e.target.checked)}
@@ -92,21 +106,7 @@ export function SamplePlayer(props) {
         <Grid item xs={4} />
       </Grid>
       <Grid item xs={6} />
-      <Grid item xs={3}>
-        <LabeledCheckbox
-          label="Loop"
-          onChange={(e) => enableLoop(e.target.checked)}
-        />
-      </Grid>
-      <Grid item xs={9} />
-      <Grid container item xs={3} spacing={2}>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => playSample(selectedSampleIndex)}>
-          Play Sample
-        </Button>
-      </Grid>
+      <Grid container item xs={3} spacing={2}></Grid>
     </Grid>
   );
 }

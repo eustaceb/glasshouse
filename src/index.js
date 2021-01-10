@@ -1,5 +1,5 @@
 import * as Tone from "tone";
-import React, {useState} from "react";
+import React, {useRef} from "react";
 import ReactDOM from "react-dom";
 import {SamplePlayer} from "./components/SamplePlayer.js";
 import Grid from "@material-ui/core/Grid";
@@ -12,18 +12,18 @@ const samples = [
     name: "hihats",
     path: "audio/hihats.mp3",
     buffer: new Tone.Buffer("audio/hihats.mp3"),
+    isLooping: false,
   },
   {
     name: "synth",
     path: "audio/synth.mp3",
     buffer: new Tone.Buffer("audio/synth.mp3"),
+    isLooping: false,
   },
 ];
 
 function App(props) {
-  const [mouseController, setMouseController] = useState(
-    new MouseController(window.document)
-  );
+  const mouseController = useRef(new MouseController(window.document));
 
   return (
     <ThemeProvider theme={synthTheme}>
