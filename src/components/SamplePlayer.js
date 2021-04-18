@@ -22,7 +22,7 @@ function PadsControl(props) {
   });
 
   return (
-    <Grid container spacing={4}>
+    <Grid container spacing={4} style={{margin: "0 auto"}}>
       {samples}
     </Grid>
   );
@@ -70,18 +70,25 @@ export function SamplePlayer(props) {
   };
 
   return (
-    <Grid container spacing={2} item xs={12}>
+    <Grid
+      container
+      spacing={2}
+      item
+      xs={12}
+      justify="center"
+      alignItems="center">
       <PadsControl
         samples={props.samples}
         selectSample={(sampleIndex) => setSample(sampleIndex)}
         playSample={(sampleIndex) => playSample(sampleIndex)}
         selectedSampleIndex={selectedSampleIndex}
       />
-      <Grid container item xs={12}>
+      <Grid container item xs={12} justify="center" alignItems="center">
         <p>Selected sample: {props.samples[selectedSampleIndex].name}</p>
       </Grid>
-      <Grid container item xs={6}>
-        <Grid item xs={4}>
+      <Grid container item xs={12} justify="center" alignItems="center">
+        <Grid item xs={12}>
+          <div style={{"textAlign": "center"}}>
           <KnobControl
             label="Distortion Amount"
             size={50}
@@ -90,23 +97,12 @@ export function SamplePlayer(props) {
               setDistortionAmount(val / 100.0);
             }}
           />
+            <LabeledCheckbox
+              label="Enable Distortion"
+              onChange={(e) => enableDistortion(e.target.checked)}
+            /></div>
         </Grid>
-        <Grid
-          container
-          item
-          xs={4}
-          align="center"
-          justify="center"
-          direction="column">
-          <LabeledCheckbox
-            label="Enable Distortion"
-            onChange={(e) => enableDistortion(e.target.checked)}
-          />
-        </Grid>
-        <Grid item xs={4} />
       </Grid>
-      <Grid item xs={6} />
-      <Grid container item xs={3} spacing={2}></Grid>
     </Grid>
   );
 }

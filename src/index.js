@@ -6,6 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import {synthTheme} from "./theme.js";
 import {ThemeProvider} from "@material-ui/core/styles";
 import {MouseController} from "./controllers/MouseController.js";
+import {Sequencer} from "./components/Sequencer.js";
 
 const samples = [
   {
@@ -27,14 +28,15 @@ function App(props) {
 
   return (
     <ThemeProvider theme={synthTheme}>
-      <Grid container justify="center" spacing={2}>
-        <Grid item xs={6}>
-          <Grid container justify="center" spacing={2}>
+      <Grid container justify="center" alignItems="center" spacing={2}>
+        <Grid item xs={12}>
+          <Sequencer/>
+        </Grid>
+        <Grid item xs={12}>
             <SamplePlayer
               samples={props.samples}
               mouseController={mouseController}
             />
-          </Grid>
         </Grid>
       </Grid>
     </ThemeProvider>

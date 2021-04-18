@@ -87,7 +87,6 @@ export function KnobControl(props) {
       UserSelect: "none",
     },
     centeredContainer: {
-      display: "block",
       textAlign: "center",
     },
   };
