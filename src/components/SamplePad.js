@@ -5,6 +5,7 @@ import StopIcon from "@material-ui/icons/Stop";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import IconButton from "@material-ui/core/IconButton";
+import { assert } from "tone/build/esm/core/util/Debug";
 
 function PlaybackControls(props) {
   return (
@@ -48,7 +49,6 @@ export function RepeatControls(props) {
 export function SamplePad(props) {
   const styles = {
     selectableSquare: {
-      backgroundColor: "purple",
       width: 140,
       height: 120,
       cursor: "pointer",
@@ -68,14 +68,21 @@ export function SamplePad(props) {
       MsUserSelect: "none",
       UserSelect: "none",
     },
-    selected: {
-      backgroundColor: "mediumvioletred",
-    },
+  };
+
+  let lighten = function(color, pct) {
+    assert(pct >= 0 && pct <= 1);
+    const hex = parseInt(color.substr(1, 6), 16);
+    const r = Math.round(Math.min(((hex & 0xFF0000) >> 16) * (1 + pct), 255)).toString(16);
+    const g = Math.round(Math.min(((hex & 0x00FF00) >> 8) * (1 + pct), 255)).toString(16);
+    const b = Math.round(Math.min((hex & 0x0000FF) * (1 + pct), 255)).toString(16);
+    return "#" + ("00" + r).slice(-2) + ("00" + g).slice(-2) + ("00" + b).slice(-2)
   };
 
   let containerStyle = {...styles.selectableSquare, ...styles.round};
+  containerStyle["backgroundColor"] = props.sample.color;
   if (props.selected) {
-    containerStyle = {...containerStyle, ...styles.selected};
+    containerStyle["backgroundColor"] = lighten(containerStyle["backgroundColor"], 0.3);
   }
 
   return (

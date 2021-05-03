@@ -1,5 +1,5 @@
 import * as Tone from "tone";
-import React, {useRef} from "react";
+import React, {useRef, useState} from "react";
 import ReactDOM from "react-dom";
 import {SamplePlayer} from "./components/SamplePlayer.js";
 import Grid from "@material-ui/core/Grid";
@@ -14,27 +14,34 @@ const samples = [
     path: "audio/hihats.mp3",
     buffer: new Tone.Buffer("audio/hihats.mp3"),
     isLooping: false,
+    color: "#800080"
   },
   {
     name: "synth",
     path: "audio/synth.mp3",
     buffer: new Tone.Buffer("audio/synth.mp3"),
     isLooping: false,
+    color: "#800020"
   },
 ];
 
+const mouseController = new MouseController(window.document);
+
 function App(props) {
-  const mouseController = useRef(new MouseController(window.document));
+  const mouseController = useRef(props.mouseController);
+  const [selectedSampleIndex, setSample] = useState(0);
 
   return (
     <ThemeProvider theme={synthTheme}>
       <Grid container justify="center" alignItems="center" spacing={2}>
         <Grid item xs={12}>
-          <Sequencer/>
+          <Sequencer samples={props.samples} selectedSampleIndex={selectedSampleIndex}/>
         </Grid>
         <Grid item xs={12}>
             <SamplePlayer
               samples={props.samples}
+              selectedSampleIndex={selectedSampleIndex}
+              setSample={setSample}
               mouseController={mouseController}
             />
         </Grid>
@@ -43,4 +50,4 @@ function App(props) {
   );
 }
 
-ReactDOM.render(<App samples={samples} />, document.getElementById("root"));
+ReactDOM.render(<App samples={samples} mouseController={mouseController} />, document.getElementById("root"));

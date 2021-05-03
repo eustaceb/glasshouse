@@ -34,7 +34,6 @@ function LabeledCheckbox(props) {
 }
 
 export function SamplePlayer(props) {
-  const [selectedSampleIndex, setSample] = useState(0);
   const [distortionEnabled, enableDistortion] = useState(false);
   const [distortionAmount, setDistortionAmount] = useState(0.0);
 
@@ -79,12 +78,12 @@ export function SamplePlayer(props) {
       alignItems="center">
       <PadsControl
         samples={props.samples}
-        selectSample={(sampleIndex) => setSample(sampleIndex)}
+        selectSample={(sampleIndex) => props.setSample(sampleIndex)}
         playSample={(sampleIndex) => playSample(sampleIndex)}
-        selectedSampleIndex={selectedSampleIndex}
+        selectedSampleIndex={props.selectedSampleIndex}
       />
       <Grid container item xs={12} justify="center" alignItems="center">
-        <p>Selected sample: {props.samples[selectedSampleIndex].name}</p>
+        <p>Selected sample: {props.samples[props.selectedSampleIndex].name}</p>
       </Grid>
       <Grid container item xs={12} justify="center" alignItems="center">
         <Grid item xs={12}>
