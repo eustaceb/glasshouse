@@ -24,22 +24,28 @@ export function KnobControl(props) {
   const y2 = center + Math.sin(rads) * r;
   const x2 = center + Math.cos(rads) * r;
 
-  const mouseMove = function (event) {
-    event.preventDefault();
-    if (trackMouse.current && event.isDragging) {
-      const delta =
-        ((event.clientX - event.dragStart[0]) / window.innerWidth) * dragWeight;
-      const constrained = Math.min(maxValue, Math.max(minValue, delta));
+  const mouseMove = React.useCallback(
+    (event) => {
+      event.preventDefault();
+      if (trackMouse.current && event.isDragging) {
+        const delta =
+          ((event.clientX - event.dragStart[0]) / window.innerWidth) *
+          dragWeight;
+        const constrained = Math.min(maxValue, Math.max(minValue, delta));
 
-      // Only update state if value has changed
-      if (Math.abs(constrained - valueRef.current) > 0.0000001) {
-        if (callback.current) callback.current(constrained);
-        setValue(constrained);
+        // Only update state if value has changed
+        if (Math.abs(constrained - valueRef.current) > 0.0000001) {
+          if (callback.current) callback.current(constrained);
+          setValue(constrained);
+        }
       }
-    }
-  };
+    },
+    [maxValue, minValue]
+  );
 
   useEffect(() => {
+    let componentRef = componentId.current;
+
     props.mouseController.current.registerListener(
       componentId.current,
       "mouseMove",
@@ -62,20 +68,11 @@ export function KnobControl(props) {
     callback.current = props.callback;
 
     return () => {
-      props.mouseController.current.removeListener(
-        componentId.current,
-        "mouseMove"
-      );
-      props.mouseController.current.removeListener(
-        componentId.current,
-        "mouseUp"
-      );
-      props.mouseController.current.removeListener(
-        componentId.current,
-        "mouseLeave"
-      );
+      props.mouseController.current.removeListener(componentRef, "mouseMove");
+      props.mouseController.current.removeListener(componentRef, "mouseUp");
+      props.mouseController.current.removeListener(componentRef, "mouseLeave");
     };
-  }, []);
+  }, [componentId, mouseMove, props.callback, props.mouseController]);
 
   const styles = {
     nonselectable: {
