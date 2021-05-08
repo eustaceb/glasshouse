@@ -21,11 +21,7 @@ function PadsControl(props) {
     );
   });
 
-  return (
-    <Grid container spacing={4} style={{margin: "0 auto"}}>
-      {samples}
-    </Grid>
-  );
+  return <Grid container>{samples}</Grid>;
 }
 
 function LabeledCheckbox(props) {
@@ -69,37 +65,34 @@ export function SamplePlayer(props) {
   };
 
   return (
-    <Grid
-      container
-      spacing={2}
-      item
-      xs={12}
-      justify="center"
-      alignItems="center">
-      <PadsControl
-        samples={props.samples}
-        selectSample={(sampleIndex) => props.setSample(sampleIndex)}
-        playSample={(sampleIndex) => playSample(sampleIndex)}
-        selectedSampleIndex={props.selectedSampleIndex}
-      />
+    <Grid container xs={12}>
+      <Grid container item xs={12} spacing={2}>
+        <PadsControl
+          samples={props.samples}
+          selectSample={(sampleIndex) => props.setSample(sampleIndex)}
+          playSample={(sampleIndex) => playSample(sampleIndex)}
+          selectedSampleIndex={props.selectedSampleIndex}
+        />
+      </Grid>
       <Grid container item xs={12} justify="center" alignItems="center">
         <p>Selected sample: {props.samples[props.selectedSampleIndex].name}</p>
       </Grid>
       <Grid container item xs={12} justify="center" alignItems="center">
         <Grid item xs={12}>
-          <div style={{"textAlign": "center"}}>
-          <KnobControl
-            label="Distortion Amount"
-            size={50}
-            mouseController={props.mouseController}
-            callback={(val) => {
-              setDistortionAmount(val / 100.0);
-            }}
-          />
+          <div style={{textAlign: "center"}}>
+            <KnobControl
+              label="Distortion Amount"
+              size={50}
+              mouseController={props.mouseController}
+              callback={(val) => {
+                setDistortionAmount(val / 100.0);
+              }}
+            />
             <LabeledCheckbox
               label="Enable Distortion"
               onChange={(e) => enableDistortion(e.target.checked)}
-            /></div>
+            />
+          </div>
         </Grid>
       </Grid>
     </Grid>

@@ -37,7 +37,7 @@ function App(props) {
         <Grid item xs={12}>
           <Sequencer samples={props.samples} selectedSampleIndex={selectedSampleIndex}/>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={6}>
             <SamplePlayer
               samples={props.samples}
               selectedSampleIndex={selectedSampleIndex}

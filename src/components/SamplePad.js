@@ -49,8 +49,7 @@ export function RepeatControls(props) {
 export function SamplePad(props) {
   const styles = {
     selectableSquare: {
-      width: 140,
-      height: 120,
+      width: "80%",
       cursor: "pointer",
     },
     round: {
