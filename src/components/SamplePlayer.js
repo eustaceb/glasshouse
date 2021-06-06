@@ -65,7 +65,7 @@ export function SamplePlayer(props) {
   };
 
   return (
-    <Grid container xs={12}>
+    <Grid container>
       <Grid container item xs={12} spacing={2}>
         <PadsControl
           samples={props.samples}
