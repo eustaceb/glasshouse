@@ -30,8 +30,7 @@ function App(props) {
       <Grid container justify="center" alignItems="center" spacing={2}>
         <Grid item xs={12}>
           <Sequencer
-            samples={sampler.getSamples()}
-            selectedSample={sampler.getActiveSample()}
+            sampler={sampler}
             playback={playback}
           />
         </Grid>

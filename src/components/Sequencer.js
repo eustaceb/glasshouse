@@ -48,12 +48,12 @@ export function SequencerGrid(props) {
                         props.arrangement.paintCell(
                           i,
                           j,
-                          props.selectedSample
+                          props.sampler.getActiveSample()
                         );
                         setGrid([...props.arrangement.matrix]);
                       }}
                       color={
-                        cell === -1 ? "grey" : props.samples[cell]["color"]
+                        cell === -1 ? "grey" : props.sampler.getSample(cell)["color"]
                       }
                       active={beat === j}
                     />
@@ -72,7 +72,6 @@ export function Sequencer(props) {
   const cols = 16;
   const rows = 2;
   const [arrangement, setArrangement] = useState(new ArrangementController(rows, cols));
-  const synths = useRef(Array(rows).fill(new Tone.Synth().toDestination()));
   const sequencer = useRef(new Tone.Sequence());
 
   useEffect(() => {
@@ -82,7 +81,7 @@ export function Sequencer(props) {
       arrangement.matrix.forEach((row, i) => {
         row.forEach((cell, j) => {
           if (j === column && cell !== -1) {
-            synths.current[i].triggerAttackRelease("C4", "8n", time);
+            props.sampler.getSample(cell).play();
           }
         });
       });
@@ -97,13 +96,12 @@ export function Sequencer(props) {
       console.log("Stopping sequencer");
       seq.stop();
     };
-  }, [synths, arrangement, props.playback]);
+  }, [props.sampler, arrangement, props.playback]);
 
   return (
     <SequencerGrid
       arrangement={arrangement}
-      selectedSample={props.selectedSample}
-      samples={props.samples}
+      sampler={props.sampler}
       playback={props.playback}
     />
   );
