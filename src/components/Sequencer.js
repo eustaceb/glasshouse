@@ -1,18 +1,6 @@
 import * as Tone from "tone";
 import React, {useEffect, useState, useRef} from "react";
-
-class Arrangement {
-  constructor(rows, cols) {
-    this.matrix = Array.from({length: rows}, () =>
-      Array.from({length: cols}, () => -1)
-    );
-  }
-  paintCell(row, col, sampleIndex) {
-    console.log(row, col, sampleIndex);
-    this.matrix[row][col] =
-      this.matrix[row][col] == sampleIndex ? -1 : sampleIndex;
-  }
-}
+import {ArrangementController} from "../controllers/ArrangementController.js"
 
 export function SequencerCell(props) {
   const styles = {
@@ -22,7 +10,7 @@ export function SequencerCell(props) {
       borderRadius: 2,
     },
     active: {
-      border: "5px",
+      padding: "5px",
     },
   };
 
@@ -37,9 +25,14 @@ export function SequencerCell(props) {
   );
 }
 
+
 export function SequencerGrid(props) {
   const [grid, setGrid] = useState(props.arrangement.matrix);
   const [beat, setBeat] = useState(0);
+
+  useEffect(() => {
+    props.playback.setBeatCallback((n) => setBeat(n));
+  }, [beat, props.playback]);
 
   return (
     <table style={{margin: "0 auto"}}>
@@ -52,13 +45,11 @@ export function SequencerGrid(props) {
                   <td key={"row" + i.toString() + "col" + j.toString()}>
                     <SequencerCell
                       paint={() => {
-                        console.log(i, j, props.selectedSampleIndex);
                         props.arrangement.paintCell(
                           i,
                           j,
-                          props.selectedSampleIndex
+                          props.selectedSample
                         );
-                        console.log(props.arrangement.matrix);
                         setGrid([...props.arrangement.matrix]);
                       }}
                       color={
@@ -80,8 +71,7 @@ export function SequencerGrid(props) {
 export function Sequencer(props) {
   const cols = 16;
   const rows = 2;
-  const [beat, setBeat] = useState(0);
-  const [arrangement, setArrangement] = useState(new Arrangement(rows, cols));
+  const [arrangement, setArrangement] = useState(new ArrangementController(rows, cols));
   const synths = useRef(Array(rows).fill(new Tone.Synth().toDestination()));
   const sequencer = useRef(new Tone.Sequence());
 
@@ -96,9 +86,10 @@ export function Sequencer(props) {
           }
         });
       });
+      props.playback.setBeat(column);
     };
-    sequencer.current.events = [0, 1, 2, 3, 4, 5, 6, 7];
-    sequencer.current.time = "8n";
+    sequencer.current.events = Array.from(Array(16).keys()); // 0 to 15
+    sequencer.current.time = "1n";
 
     console.log("Starting sequencer");
     sequencer.current.start(0);
@@ -106,13 +97,14 @@ export function Sequencer(props) {
       console.log("Stopping sequencer");
       seq.stop();
     };
-  }, [synths, arrangement]);
+  }, [synths, arrangement, props.playback]);
 
   return (
     <SequencerGrid
       arrangement={arrangement}
-      selectedSampleIndex={props.selectedSampleIndex}
+      selectedSample={props.selectedSample}
       samples={props.samples}
+      playback={props.playback}
     />
   );
 }

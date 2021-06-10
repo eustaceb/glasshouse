@@ -6,30 +6,16 @@ import Grid from "@material-ui/core/Grid";
 import {synthTheme} from "./theme.js";
 import {ThemeProvider} from "@material-ui/core/styles";
 import {MouseController} from "./controllers/MouseController.js";
+import {SampleController} from "./controllers/SampleController.js";
 import {Sequencer} from "./components/Sequencer.js";
-
-const samples = [
-  {
-    name: "hihats",
-    path: "audio/hihats.mp3",
-    buffer: new Tone.Buffer("audio/hihats.mp3"),
-    isLooping: false,
-    color: "#800080",
-  },
-  {
-    name: "synth",
-    path: "audio/synth.mp3",
-    buffer: new Tone.Buffer("audio/synth.mp3"),
-    isLooping: false,
-    color: "#800020",
-  },
-];
+import {PlaybackController} from "./controllers/PlaybackController.js";
 
 const mouseController = new MouseController(window.document);
 
 function App(props) {
   const mouseController = useRef(props.mouseController);
-  const [selectedSampleIndex, setSample] = useState(0);
+  const [sampler, setSampler] = useState(new SampleController());
+  const [playback, setPlayback] = useState(new PlaybackController());
 
   useEffect(() => {
     Tone.Transport.start();
@@ -44,17 +30,13 @@ function App(props) {
       <Grid container justify="center" alignItems="center" spacing={2}>
         <Grid item xs={12}>
           <Sequencer
-            samples={props.samples}
-            selectedSampleIndex={selectedSampleIndex}
+            samples={sampler.getSamples()}
+            selectedSample={sampler.getActiveSample()}
+            playback={playback}
           />
         </Grid>
         <Grid item xs={6}>
-          <SamplePlayer
-            samples={props.samples}
-            selectedSampleIndex={selectedSampleIndex}
-            setSample={setSample}
-            mouseController={mouseController}
-          />
+          <SamplePlayer sampler={sampler} mouseController={mouseController} />
         </Grid>
       </Grid>
     </ThemeProvider>
@@ -62,6 +44,6 @@ function App(props) {
 }
 
 ReactDOM.render(
-  <App samples={samples} mouseController={mouseController} />,
+  <App mouseController={mouseController} />,
   document.getElementById("root")
 );

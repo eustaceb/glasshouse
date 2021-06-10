@@ -1,5 +1,5 @@
 import * as Tone from "tone";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Grid from "@material-ui/core/Grid";
@@ -8,7 +8,7 @@ import {SamplePad} from "./SamplePad.js";
 
 function PadsControl(props) {
   const samples = props.samples.map((sample, index) => {
-    const isSelected = index == props.selectedSampleIndex;
+    const isSelected = index == props.selectedSample;
     return (
       <Grid item xs={2} key={index}>
         <SamplePad
@@ -32,9 +32,14 @@ function LabeledCheckbox(props) {
 export function SamplePlayer(props) {
   const [distortionEnabled, enableDistortion] = useState(false);
   const [distortionAmount, setDistortionAmount] = useState(0.0);
+  const [selectedSample, setSelectedSample] = useState(0);
+  const samples = props.sampler.getSamples();
+
+  useEffect(() => {
+    props.sampler.setActiveSampleCallback((s) => setSelectedSample(s));
+  }, [selectedSample, props.sampler]);
 
   const playSample = (sampleIndex) => {
-    const samples = props.samples;
     if (sampleIndex != null && sampleIndex < samples.length) {
       console.log("Playing sample " + samples[sampleIndex].name);
 
@@ -68,14 +73,14 @@ export function SamplePlayer(props) {
     <Grid container>
       <Grid container item xs={12} spacing={2}>
         <PadsControl
-          samples={props.samples}
-          selectSample={(sampleIndex) => props.setSample(sampleIndex)}
+          samples={samples}
+          selectSample={(sampleIndex) => props.sampler.setActiveSample(sampleIndex)}
           playSample={(sampleIndex) => playSample(sampleIndex)}
-          selectedSampleIndex={props.selectedSampleIndex}
+          selectedSample={selectedSample}
         />
       </Grid>
       <Grid container item xs={12} justify="center" alignItems="center">
-        <p>Selected sample: {props.samples[props.selectedSampleIndex].name}</p>
+        <p>Selected sample: {samples[selectedSample].name}</p>
       </Grid>
       <Grid container item xs={12} justify="center" alignItems="center">
         <Grid item xs={12}>
