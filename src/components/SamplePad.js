@@ -1,20 +1,10 @@
 import React, {useState} from "react";
 import LoopIcon from "@material-ui/icons/Loop";
-import PlayArrowIcon from "@material-ui/icons/PlayArrow";
-import StopIcon from "@material-ui/icons/Stop";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import IconButton from "@material-ui/core/IconButton";
-import { assert } from "tone/build/esm/core/util/Debug";
-
-function PlaybackControls(props) {
-  return (
-    <div style={{textAlign: "center"}}>
-      <PlayArrowIcon fontSize="large" onClick={() => props.playSample()} />
-      <StopIcon fontSize="large" />
-    </div>
-  );
-}
+import {assert} from "tone/build/esm/core/util/Debug";
+import {PlaybackControls} from "./PlaybackControls";
 
 export function RepeatControls(props) {
   const [bars, setBars] = useState(1);
@@ -69,19 +59,30 @@ export function SamplePad(props) {
     },
   };
 
-  let lighten = function(color, pct) {
+  let lighten = function (color, pct) {
     assert(pct >= 0 && pct <= 1);
     const hex = parseInt(color.substr(1, 6), 16);
-    const r = Math.round(Math.min(((hex & 0xFF0000) >> 16) * (1 + pct), 255)).toString(16);
-    const g = Math.round(Math.min(((hex & 0x00FF00) >> 8) * (1 + pct), 255)).toString(16);
-    const b = Math.round(Math.min((hex & 0x0000FF) * (1 + pct), 255)).toString(16);
-    return "#" + ("00" + r).slice(-2) + ("00" + g).slice(-2) + ("00" + b).slice(-2)
+    const r = Math.round(
+      Math.min(((hex & 0xff0000) >> 16) * (1 + pct), 255)
+    ).toString(16);
+    const g = Math.round(
+      Math.min(((hex & 0x00ff00) >> 8) * (1 + pct), 255)
+    ).toString(16);
+    const b = Math.round(Math.min((hex & 0x0000ff) * (1 + pct), 255)).toString(
+      16
+    );
+    return (
+      "#" + ("00" + r).slice(-2) + ("00" + g).slice(-2) + ("00" + b).slice(-2)
+    );
   };
 
   let containerStyle = {...styles.selectableSquare, ...styles.round};
   containerStyle["backgroundColor"] = props.sample.color;
   if (props.selected) {
-    containerStyle["backgroundColor"] = lighten(containerStyle["backgroundColor"], 0.3);
+    containerStyle["backgroundColor"] = lighten(
+      containerStyle["backgroundColor"],
+      0.3
+    );
   }
 
   return (
@@ -89,7 +90,7 @@ export function SamplePad(props) {
       <p style={{...styles.sampleLabel, ...styles.nonselectable}}>
         {props.sample.name}
       </p>
-      <PlaybackControls playSample={props.playSample} />
+      <PlaybackControls start={props.playSample} stop={() => console.log("Not implemented yet")}/>
       <RepeatControls enableLoop={props.enableLoop} sample={props.sample} />
     </div>
   );

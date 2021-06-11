@@ -9,6 +9,7 @@ import {MouseController} from "./controllers/MouseController.js";
 import {SampleController} from "./controllers/SampleController.js";
 import {Sequencer} from "./components/Sequencer.js";
 import {PlaybackController} from "./controllers/PlaybackController.js";
+import {PlaybackControls} from "./components/PlaybackControls.js";
 
 const mouseController = new MouseController(window.document);
 
@@ -29,10 +30,13 @@ function App(props) {
     <ThemeProvider theme={synthTheme}>
       <Grid container justify="center" alignItems="center" spacing={2}>
         <Grid item xs={12}>
-          <Sequencer
-            sampler={sampler}
-            playback={playback}
+          <PlaybackControls
+            start={() => Tone.Transport.start()}
+            stop={() => Tone.Transport.stop()}
           />
+        </Grid>
+        <Grid item xs={12}>
+          <Sequencer sampler={sampler} playback={playback} />
         </Grid>
         <Grid item xs={6}>
           <SamplePlayer sampler={sampler} mouseController={mouseController} />
