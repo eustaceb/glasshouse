@@ -7,8 +7,6 @@ import {synthTheme} from "./theme.js";
 import {ThemeProvider} from "@material-ui/core/styles";
 import {MouseController} from "./controllers/MouseController.js";
 import {SampleController} from "./controllers/SampleController.js";
-import {Sequencer} from "./components/Sequencer.js";
-import {PlaybackController} from "./controllers/PlaybackController.js";
 import {PlaybackControls} from "./components/PlaybackControls.js";
 
 const mouseController = new MouseController(window.document);
@@ -16,7 +14,6 @@ const mouseController = new MouseController(window.document);
 function App(props) {
   const mouseController = useRef(props.mouseController);
   const [sampler, setSampler] = useState(new SampleController());
-  const [playback, setPlayback] = useState(new PlaybackController());
 
   useEffect(() => {
     Tone.Transport.start();
@@ -28,15 +25,12 @@ function App(props) {
 
   return (
     <ThemeProvider theme={synthTheme}>
-      <Grid container justify="center" alignItems="center" spacing={2}>
+      <Grid container justifyContent="center" alignItems="center" spacing={2}>
         <Grid item xs={12}>
           <PlaybackControls
             start={() => Tone.Transport.start()}
             stop={() => Tone.Transport.stop()}
           />
-        </Grid>
-        <Grid item xs={12}>
-          <Sequencer sampler={sampler} playback={playback} />
         </Grid>
         <Grid item xs={6}>
           <SamplePlayer sampler={sampler} mouseController={mouseController} />

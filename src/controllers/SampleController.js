@@ -6,7 +6,8 @@ class Sample {
     this.path = path;
     this.buffer = new Tone.Buffer(path);
     this.player = new Tone.Player(this.buffer).toDestination();
-    this.isLooping = false;
+    this.isLooping = true;
+    this.isPlaying = false;
     this.color = color;
     this.distortionAmount = 0;
   }
@@ -19,11 +20,14 @@ class Sample {
   }
   setLoop(loop) {
     this.player.loop = loop;
+    this.isLooping = loop;
   }
   play() {
+    this.isPlaying = true;
     this.player.start();
   }
   stop() {
+    this.isPlaying = false;
     this.player.stop();
   }
 }

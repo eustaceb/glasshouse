@@ -1,49 +1,18 @@
 import React, {useState} from "react";
 import LoopIcon from "@material-ui/icons/Loop";
-import AddIcon from "@material-ui/icons/Add";
-import RemoveIcon from "@material-ui/icons/Remove";
-import IconButton from "@material-ui/core/IconButton";
+import TuneIcon from "@material-ui/icons/Tune";
 import {assert} from "tone/build/esm/core/util/Debug";
-import {PlaybackControls} from "./PlaybackControls";
 
-export function RepeatControls(props) {
-  const [bars, setBars] = useState(1);
+export function SamplePad(props) {
   const [isLooping, setLooping] = useState(false);
 
   const styles = {
-    active: {
-      color: "white",
-    },
-  };
-
-  return (
-    <div style={{textAlign: "center"}}>
-      <IconButton onClick={() => setBars(Math.max(1, bars - 1))}>
-        <RemoveIcon fontSize="small" />
-      </IconButton>
-      <span>{bars}</span>
-      <IconButton onClick={() => setBars(bars + 1)}>
-        <AddIcon fontSize="small" />
-      </IconButton>
-      <LoopIcon
-        onClick={() => {
-          props.sample.isLooping = !isLooping;
-          setLooping(!isLooping);
-        }}
-        style={isLooping ? {...styles.active} : {}}
-      />
-    </div>
-  );
-}
-
-export function SamplePad(props) {
-  const styles = {
-    selectableSquare: {
-      width: "80%",
-      cursor: "pointer",
-    },
-    round: {
+    pad: {
       borderRadius: 10,
+      height: "100px",
+      padding: "1%",
+      margin: "5px",
+      cursor: "pointer",
     },
     sampleLabel: {
       textAlign: "center",
@@ -56,6 +25,16 @@ export function SamplePad(props) {
       MozUserSelect: "none",
       MsUserSelect: "none",
       UserSelect: "none",
+    },
+    activeIcon: {
+      color: "white",
+    },
+    paddedIcon: {
+      backgroundColor: "orange",
+      textAlign: "center",
+      padding: "10px",
+      margin: "2px",
+      cursor: "pointer",
     },
   };
 
@@ -76,7 +55,7 @@ export function SamplePad(props) {
     );
   };
 
-  let containerStyle = {...styles.selectableSquare, ...styles.round};
+  let containerStyle = styles.pad;
   containerStyle["backgroundColor"] = props.sample.color;
   if (props.selected) {
     containerStyle["backgroundColor"] = lighten(
@@ -86,12 +65,35 @@ export function SamplePad(props) {
   }
 
   return (
-    <div style={containerStyle} onClick={props.onClick}>
-      <p style={{...styles.sampleLabel, ...styles.nonselectable}}>
-        {props.sample.name}
-      </p>
-      <PlaybackControls start={props.playSample} stop={() => console.log("Not implemented yet")}/>
-      <RepeatControls enableLoop={props.enableLoop} sample={props.sample} />
+    <div>
+      <div style={containerStyle} onClick={props.onClick}>
+        <p style={{...styles.sampleLabel, ...styles.nonselectable}}>
+          {props.sample.name}
+        </p>
+      </div>
+      <div>
+        <LoopIcon
+          onClick={() => {
+            props.sample.isLooping = !isLooping;
+            setLooping(!isLooping);
+          }}
+          style={
+            props.sample.isLooping
+              ? {...styles.paddedIcon, ...styles.activeIcon}
+              : styles.paddedIcon
+          }
+        />
+        <TuneIcon
+          style={
+            props.isFxPanelOpen
+              ? {...styles.paddedIcon, ...styles.activeIcon}
+              : styles.paddedIcon
+          }
+          onClick={() => {
+            props.openFXPanel();
+          }}
+        />
+      </div>
     </div>
   );
 }
