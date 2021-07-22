@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import LoopIcon from "@material-ui/icons/Loop";
 import TuneIcon from "@material-ui/icons/Tune";
+import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 import {assert} from "tone/build/esm/core/util/Debug";
 
 export function SamplePad(props) {
@@ -69,6 +70,9 @@ export function SamplePad(props) {
       <div style={containerStyle} onClick={props.onClick}>
         <p style={{...styles.sampleLabel, ...styles.nonselectable}}>
           {props.sample.name}
+        </p>
+        <p style={{textAlign: "center", color: "white"}}>
+        { props.selected && <VolumeUpIcon/> }
         </p>
       </div>
       <div style={{textAlign: "center"}}>

@@ -33,6 +33,7 @@ export function SamplePlayer(props) {
   const [distortionEnabled, enableDistortion] = useState(false);
   const [distortionAmount, setDistortionAmount] = useState(0.0);
   const [selectedSample, setSelectedSample] = useState(null);
+  const [playing, setPlaying] = useState(new Array(props.sampler.getSamples().size).fill(false));
   const samples = props.sampler.getSamples();
   
   const styles = {
@@ -41,14 +42,13 @@ export function SamplePlayer(props) {
     }
   }
 
-  useEffect(() => {
-    props.sampler.setActiveSampleCallback((s) => setSelectedSample(s));
-  }, [selectedSample, props.sampler]);
-
   const playSample = (sampleIndex) => {
       const sample = samples[sampleIndex];
       if (sample.isPlaying) sample.stop();
       else sample.play();
+
+      // isPlaying will be updated by now so no need to negate
+      setPlaying(playing.splice(sampleIndex, 1, sample.isPlaying));
   };
 
   return (
@@ -56,12 +56,11 @@ export function SamplePlayer(props) {
       <Grid container item xs={12} spacing={2}>
         <PadsControl
           samples={samples}
-          selectSample={(sampleIndex) =>
-            props.sampler.setActiveSample(sampleIndex)
-          }
-          playSample={(sampleIndex) => playSample(sampleIndex)}
+          playSample={playSample}
           selectedSample={selectedSample}
           openFXPanel={(index) => {
+            // TODO: This should select the active sample for FX control
+            props.sampler.setActiveSample(index);
             index != selectedSample
               ? setSelectedSample(index)
               : setSelectedSample(null);

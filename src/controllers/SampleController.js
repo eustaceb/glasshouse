@@ -5,8 +5,8 @@ class Sample {
     this.name = name;
     this.path = path;
     this.buffer = new Tone.Buffer(path);
-    this.player = new Tone.Player(this.buffer).toDestination();
-    this.setLoop(true);
+    this.player = new Tone.Player(this.buffer).toDestination().sync();
+    this.isLooping = true;
     this.isPlaying = false;
     this.color = color;
     this.distortionAmount = 0;
@@ -29,7 +29,9 @@ class Sample {
   }
   play() {
     this.isPlaying = true;
-    Tone.loaded().then(() => this.player.start());
+    this.player = new Tone.Player(this.buffer).toDestination().sync();
+    this.player.loop = this.isLooping;
+    Tone.loaded().then(() => this.player.start(0));
   }
   stop() {
     this.isPlaying = false;
@@ -54,7 +56,7 @@ export class SampleController {
       {
         name: "Clap",
         path: "audio/Clap.mp3",
-        color: "#C0C781",
+        color: "#A0A551",
       },
       {
         name: "Toms",
