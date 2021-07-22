@@ -33,22 +33,26 @@ export function SamplePlayer(props) {
   const [distortionEnabled, enableDistortion] = useState(false);
   const [distortionAmount, setDistortionAmount] = useState(0.0);
   const [selectedSample, setSelectedSample] = useState(null);
-  const [playing, setPlaying] = useState(new Array(props.sampler.getSamples().size).fill(false));
+  const [playing, setPlaying] = useState(
+    new Array(props.sampler.getSamples().size).fill(false)
+  );
   const samples = props.sampler.getSamples();
-  
+
   const styles = {
     fxPanelContainer: {
-      color: "#FFF", margin: "5px", border: "2px grey solid"
-    }
-  }
+      color: "#FFF",
+      margin: "5px",
+      border: "2px grey solid",
+    },
+  };
 
   const playSample = (sampleIndex) => {
-      const sample = samples[sampleIndex];
-      if (sample.isPlaying) sample.stop();
-      else sample.play();
+    const sample = samples[sampleIndex];
+    if (sample.isPlaying) sample.stop();
+    else sample.play();
 
-      // isPlaying will be updated by now so no need to negate
-      setPlaying(playing.splice(sampleIndex, 1, sample.isPlaying));
+    // isPlaying will be updated by now so no need to negate
+    setPlaying(playing.splice(sampleIndex, 1, sample.isPlaying));
   };
 
   return (
@@ -74,7 +78,10 @@ export function SamplePlayer(props) {
           xs={12}
           justifyContent="center"
           alignItems="center"
-          style={{backgroundColor: samples[selectedSample].color, ...styles.fxPanelContainer}}>
+          style={{
+            backgroundColor: samples[selectedSample].color,
+            ...styles.fxPanelContainer,
+          }}>
           <Grid
             container
             item
@@ -90,13 +97,15 @@ export function SamplePlayer(props) {
                 size={50}
                 mouseController={props.mouseController}
                 callback={(val) => {
-                  samples[selectedSample].setDistortionAmount(val / 100.0)
+                  samples[selectedSample].setDistortionAmount(val / 100.0);
                   setDistortionAmount(val / 100.0);
                 }}
               />
               <LabeledCheckbox
                 label="Enable Distortion"
-                onChange={(e) => samples[selectedSample].enableDistortion(e.target.checked)}
+                onChange={(e) =>
+                  samples[selectedSample].enableDistortion(e.target.checked)
+                }
               />
             </div>
           </Grid>

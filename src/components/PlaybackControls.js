@@ -5,8 +5,16 @@ import StopIcon from "@material-ui/icons/Stop";
 export function PlaybackControls(props) {
   return (
     <div style={{textAlign: "center"}}>
-      <PlayArrowIcon fontSize="large" onClick={() => props.start()} />
-      <StopIcon fontSize="large" onClick={() => props.stop()} />
+      <PlayArrowIcon
+        fontSize="large"
+        style={{cursor: "pointer"}}
+        onClick={() => props.start()}
+      />
+      <StopIcon
+        fontSize="large"
+        style={{cursor: "pointer"}}
+        onClick={() => props.stop()}
+      />
     </div>
   );
 }
