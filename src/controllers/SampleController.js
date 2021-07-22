@@ -6,7 +6,7 @@ class Sample {
     this.path = path;
     this.buffer = new Tone.Buffer(path);
     this.player = new Tone.Player(this.buffer).toDestination();
-    this.isLooping = true;
+    this.setLoop(true);
     this.isPlaying = false;
     this.color = color;
     this.distortionAmount = 0;
@@ -14,9 +14,14 @@ class Sample {
   enableDistortion(enable) {
     // @TODO: Add disable functionality
     if (enable) {
-      const distortion = new Tone.Distortion(this.distortionAmount).toDestination();
-      this.player.connect(distortion); 
+      const distortion = new Tone.Distortion(
+        this.distortionAmount
+      ).toDestination();
+      this.player.connect(distortion);
     }
+  }
+  setDistortionAmount(amount) {
+    this.distortionAmount = amount;
   }
   setLoop(loop) {
     this.player.loop = loop;
@@ -24,7 +29,7 @@ class Sample {
   }
   play() {
     this.isPlaying = true;
-    this.player.start();
+    Tone.loaded().then(() => this.player.start());
   }
   stop() {
     this.isPlaying = false;
@@ -37,16 +42,36 @@ export class SampleController {
     // @TODO: Load from JSON
     this.samples = [
       {
-        name: "hihats",
-        path: "audio/hihats.mp3",
-        color: "#800080",
+        name: "Kick",
+        path: "audio/Kick.mp3",
+        color: "#001F54",
       },
       {
-        name: "synth",
-        path: "audio/synth.mp3",
-        color: "#800020",
+        name: "Snare",
+        path: "audio/Snare.mp3",
+        color: "#FF8C42",
       },
-    ].map(sample => new Sample(sample.name, sample.path, sample.color));
+      {
+        name: "Clap",
+        path: "audio/Clap.mp3",
+        color: "#C0C781",
+      },
+      {
+        name: "Toms",
+        path: "audio/Toms.mp3",
+        color: "#427AA1",
+      },
+      {
+        name: "Synth #1",
+        path: "audio/Synth-1.mp3",
+        color: "#820263",
+      },
+      {
+        name: "Synth #2",
+        path: "audio/Synth-2.mp3",
+        color: "#8000A0",
+      },
+    ].map((sample) => new Sample(sample.name, sample.path, sample.color));
 
     this.activeSample = 0;
   }

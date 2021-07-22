@@ -15,6 +15,7 @@ function PadsControl(props) {
           onClick={() => props.playSample(index)}
           openFXPanel={() => props.openFXPanel(index)}
           isFxPanelOpen={props.selectedSample == index}
+          selected={sample.isPlaying}
         />
       </Grid>
     );
@@ -39,33 +40,9 @@ export function SamplePlayer(props) {
   }, [selectedSample, props.sampler]);
 
   const playSample = (sampleIndex) => {
-    if (sampleIndex != null && sampleIndex < samples.length) {
-      console.log("Playing sample " + samples[sampleIndex].name);
-
-      var player = new Tone.Player(samples[sampleIndex].buffer).toDestination();
-
-      if (distortionEnabled) {
-        const distortion = new Tone.Distortion(
-          distortionAmount
-        ).toDestination();
-        player.connect(distortion);
-      }
-
-      if (samples[sampleIndex].isLooping) {
-        player.loop = true;
-      }
-      console.log(
-        "sampleName: %s, sampleIndex: %d, distortionEnabled: %s, distortionAmount: %d, isLooping: %s",
-        samples[sampleIndex].name,
-        sampleIndex,
-        distortionEnabled,
-        distortionAmount,
-        samples[sampleIndex].isLooping
-      );
-      Tone.loaded().then(() => {
-        player.start();
-      });
-    }
+      const sample = samples[sampleIndex];
+      if (sample.isPlaying) sample.stop();
+      else sample.play();
   };
 
   return (
@@ -107,12 +84,13 @@ export function SamplePlayer(props) {
                 size={50}
                 mouseController={props.mouseController}
                 callback={(val) => {
+                  samples[selectedSample].setDistortionAmount(val / 100.0)
                   setDistortionAmount(val / 100.0);
                 }}
               />
               <LabeledCheckbox
                 label="Enable Distortion"
-                onChange={(e) => enableDistortion(e.target.checked)}
+                onChange={(e) => samples[selectedSample].enableDistortion(e.target.checked)}
               />
             </div>
           </Grid>

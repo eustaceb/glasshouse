@@ -4,7 +4,7 @@ import TuneIcon from "@material-ui/icons/Tune";
 import {assert} from "tone/build/esm/core/util/Debug";
 
 export function SamplePad(props) {
-  const [isLooping, setLooping] = useState(false);
+  const [isLooping, setLooping] = useState(true);
 
   const styles = {
     pad: {
@@ -74,7 +74,7 @@ export function SamplePad(props) {
       <div>
         <LoopIcon
           onClick={() => {
-            props.sample.isLooping = !isLooping;
+            props.sample.setLoop(!isLooping);
             setLooping(!isLooping);
           }}
           style={
