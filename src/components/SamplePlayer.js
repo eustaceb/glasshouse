@@ -34,6 +34,12 @@ export function SamplePlayer(props) {
   const [distortionAmount, setDistortionAmount] = useState(0.0);
   const [selectedSample, setSelectedSample] = useState(null);
   const samples = props.sampler.getSamples();
+  
+  const styles = {
+    fxPanelContainer: {
+      color: "#FFF", margin: "5px", border: "2px grey solid"
+    }
+  }
 
   useEffect(() => {
     props.sampler.setActiveSampleCallback((s) => setSelectedSample(s));
@@ -68,7 +74,8 @@ export function SamplePlayer(props) {
           item
           xs={12}
           justifyContent="center"
-          alignItems="center">
+          alignItems="center"
+          style={{backgroundColor: samples[selectedSample].color, ...styles.fxPanelContainer}}>
           <Grid
             container
             item

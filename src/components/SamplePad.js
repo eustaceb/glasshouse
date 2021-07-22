@@ -71,7 +71,7 @@ export function SamplePad(props) {
           {props.sample.name}
         </p>
       </div>
-      <div>
+      <div style={{textAlign: "center"}}>
         <LoopIcon
           onClick={() => {
             props.sample.setLoop(!isLooping);
