@@ -17,12 +17,12 @@
     text-align: center;
     color: white;
 }
-.activePadBackground {
+.beatStrip {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     height: 10px;
-    opacity: 0.8;
-    background-color: green;
+    opacity: 0.2;
+    background-color: black;
     position: absolute;
     top: 0px;
 }

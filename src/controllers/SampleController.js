@@ -46,7 +46,7 @@ export class SampleController {
       {
         name: "Kick",
         path: "audio/Kick.mp3",
-        color: "#001F54",
+        color: "#006FCA",
       },
       {
         name: "Snare",

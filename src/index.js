@@ -21,9 +21,8 @@ function App(props) {
     Tone.Transport.start();
 
     Tone.Transport.scheduleRepeat((time) => {
-      //triggered every eighth note.
       Tone.Draw.schedule(function () {
-        const pads = document.querySelectorAll(".activePadBackground");
+        const pads = document.querySelectorAll(".beatStrip");
         pads.forEach(function (el) {
           const increments = [0, 33, 66, 100];
           el.style.width = increments[beat % 4].toString() + "%";

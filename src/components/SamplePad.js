@@ -22,7 +22,7 @@ export function SamplePad(props) {
         }}
         className="pad">
         <div style={{position: "relative"}}>
-          <div className={isPlaying ? "activePadBackground" : ""} />
+          <div className={isPlaying ? "beatStrip" : ""} />
         </div>
         <div style={{padding: "1%"}}>
           <p className="sampleLabel">{props.sample.name}</p>
