@@ -8,8 +8,10 @@ import {ThemeProvider} from "@material-ui/core/styles";
 import {MouseController} from "./controllers/MouseController.js";
 import {SampleController} from "./controllers/SampleController.js";
 import {PlaybackControls} from "./components/PlaybackControls.js";
+import "./style.css";
 
 const mouseController = new MouseController(window.document);
+let beat = 0;
 
 function App(props) {
   const mouseController = useRef(props.mouseController);
@@ -17,6 +19,19 @@ function App(props) {
 
   useEffect(() => {
     Tone.Transport.start();
+
+    Tone.Transport.scheduleRepeat((time) => {
+      //triggered every eighth note.
+      Tone.Draw.schedule(function () {
+        const pads = document.querySelectorAll(".activePadBackground");
+        pads.forEach(function (el) {
+          const increments = [0, 33, 66, 100];
+          el.style.width = increments[beat % 4].toString() + "%";
+        });
+      }, time);
+
+      beat = beat + 1;
+    }, "4n");
 
     return () => {
       Tone.Transport.stop();

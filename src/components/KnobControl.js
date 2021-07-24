@@ -74,23 +74,9 @@ export function KnobControl(props) {
     };
   }, [componentId, mouseMove, props.callback, props.mouseController]);
 
-  const styles = {
-    nonselectable: {
-      WebkitTouchCallout: "none",
-      WebkitUserSelect: "none",
-      KhtmlUserSelect: "none",
-      MozUserSelect: "none",
-      MsUserSelect: "none",
-      UserSelect: "none",
-    },
-    centeredContainer: {
-      textAlign: "center",
-    },
-  };
-
   return (
-    <div style={styles.centeredContainer}>
-      <p style={styles.nonselectable}>{props.label}</p>
+    <div className="centered">
+      <p className="nonselectable">{props.label}</p>
       <svg
         onMouseDown={(e) => {
           trackMouse.current = true;
@@ -117,7 +103,7 @@ export function KnobControl(props) {
           fillOpacity="0"
         />
       </svg>
-      <p style={styles.nonselectable}>
+      <p className="nonselectable">
         {Math.round(value)} / {maxValue}
       </p>
     </div>

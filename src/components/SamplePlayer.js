@@ -38,14 +38,6 @@ export function SamplePlayer(props) {
   );
   const samples = props.sampler.getSamples();
 
-  const styles = {
-    fxPanelContainer: {
-      color: "#FFF",
-      margin: "5px",
-      border: "2px grey solid",
-    },
-  };
-
   const playSample = (sampleIndex) => {
     const sample = samples[sampleIndex];
     if (sample.isPlaying) sample.stop();
@@ -80,8 +72,8 @@ export function SamplePlayer(props) {
           alignItems="center"
           style={{
             backgroundColor: samples[selectedSample].color,
-            ...styles.fxPanelContainer,
-          }}>
+          }}
+          className="fxPanelContainer">
           <Grid
             container
             item
