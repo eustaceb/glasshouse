@@ -15,7 +15,7 @@ let beat = 0;
 
 function App(props) {
   const mouseController = useRef(props.mouseController);
-  const [sampler, setSampler] = useState(new SampleController());
+  const sampler = useRef(new SampleController());
 
   useEffect(() => {
     Tone.Transport.start();
@@ -23,11 +23,20 @@ function App(props) {
     Tone.Transport.scheduleRepeat((time) => {
       Tone.Draw.schedule(function () {
         const pads = document.querySelectorAll(".beatStrip");
+        const increments = [0, 33, 66, 100];
+
         pads.forEach(function (el) {
-          const increments = [0, 33, 66, 100];
           el.style.width = increments[beat % 4].toString() + "%";
         });
       }, time);
+
+      if (beat % 4 == 0) {
+        sampler.current.getSamples().forEach(function (sample) {
+          if (sample.isPlaying) {
+            sample.play();
+          }
+        });
+      }
 
       beat = beat + 1;
     }, "4n");
@@ -47,7 +56,10 @@ function App(props) {
           />
         </Grid>
         <Grid item xs={6}>
-          <SamplePlayer sampler={sampler} mouseController={mouseController} />
+          <SamplePlayer
+            sampler={sampler.current}
+            mouseController={mouseController}
+          />
         </Grid>
       </Grid>
     </ThemeProvider>

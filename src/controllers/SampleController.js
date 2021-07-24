@@ -5,7 +5,7 @@ class Sample {
     this.name = name;
     this.path = path;
     this.buffer = new Tone.Buffer(path);
-    this.player = new Tone.Player(this.buffer).toDestination().sync();
+    this.player = new Tone.Player(this.buffer).toDestination();
     this.isLooping = true;
     this.isPlaying = false;
     this.color = color;
@@ -24,18 +24,13 @@ class Sample {
     this.distortionAmount = amount;
   }
   setLoop(loop) {
-    this.player.loop = loop;
     this.isLooping = loop;
   }
-  play() {
-    this.isPlaying = true;
-    this.player = new Tone.Player(this.buffer).toDestination().sync();
-    this.player.loop = this.isLooping;
-    Tone.loaded().then(() => this.player.start(0));
+  trigger() {
+    this.isPlaying = !this.isPlaying;
   }
-  stop() {
-    this.isPlaying = false;
-    this.player.stop();
+  play() {
+    this.player.start(0);
   }
 }
 

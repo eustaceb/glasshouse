@@ -12,7 +12,7 @@ function PadsControl(props) {
       <Grid item xs={2} key={index}>
         <SamplePad
           sample={sample}
-          onClick={() => props.playSample(index)}
+          playSample={() => props.playSample(index)}
           openFXPanel={() => props.openFXPanel(index)}
           isFxPanelOpen={props.selectedSample == index}
           selected={sample.isPlaying}
@@ -40,15 +40,14 @@ export function SamplePlayer(props) {
 
   const playSample = (sampleIndex) => {
     const sample = samples[sampleIndex];
-    if (sample.isPlaying) sample.stop();
-    else sample.play();
+    sample.trigger();
 
     // isPlaying will be updated by now so no need to negate
     setPlaying(playing.splice(sampleIndex, 1, sample.isPlaying));
   };
 
   return (
-    <Grid container>
+    <Grid container spacing={2}>
       <Grid container item xs={12} spacing={2}>
         <PadsControl
           samples={samples}

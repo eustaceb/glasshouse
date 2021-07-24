@@ -7,17 +7,12 @@ export function SamplePad(props) {
   const [isLooping, setLooping] = useState(true);
   const [isPlaying, setPlaying] = useState(false);
 
-  let className = "";
-  if (props.selected) {
-    className += "activePad";
-  }
-
   return (
     <div>
       <div
         style={{backgroundColor: props.sample.color, position: "relative"}}
         onClick={() => {
-          props.onClick();
+          props.playSample();
           setPlaying(!isPlaying);
         }}
         className="pad">
