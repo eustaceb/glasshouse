@@ -24,10 +24,12 @@ export function SamplePad(props) {
         <div style={{position: "relative"}}>
           <div className={isPlaying ? "activePadBackground" : ""} />
         </div>
-        <p className="sampleLabel">{props.sample.name}</p>
-        <p style={{textAlign: "center"}}>
-          {props.selected && <VolumeUpIcon />}
-        </p>
+        <div style={{padding: "1%"}}>
+          <p className="sampleLabel">{props.sample.name}</p>
+          <p style={{textAlign: "center"}}>
+            {props.selected && <VolumeUpIcon />}
+          </p>
+        </div>
       </div>
       <div style={{textAlign: "center"}}>
         <LoopIcon
