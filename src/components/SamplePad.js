@@ -22,7 +22,7 @@ export function SamplePad(props) {
         <div style={{padding: "1%"}}>
           <p className="sampleLabel">{props.sample.name}</p>
           <p style={{textAlign: "center"}}>
-            {props.selected && <VolumeUpIcon />}
+            {isPlaying && <VolumeUpIcon />}
           </p>
         </div>
       </div>

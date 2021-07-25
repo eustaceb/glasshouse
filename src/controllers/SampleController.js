@@ -7,9 +7,11 @@ class Sample {
     this.buffer = new Tone.Buffer(path);
     this.player = new Tone.Player(this.buffer).toDestination();
     this.isLooping = true;
+    this.player.loop = this.isLooping;
     this.isPlaying = false;
     this.color = color;
     this.distortionAmount = 0;
+    this.update = true;
   }
   enableDistortion(enable) {
     // @TODO: Add disable functionality
@@ -25,12 +27,17 @@ class Sample {
   }
   setLoop(loop) {
     this.isLooping = loop;
+    this.player.loop = loop;
   }
   trigger() {
     this.isPlaying = !this.isPlaying;
+    this.update = true;
   }
-  play() {
-    this.player.start(0);
+  play(time) {
+    this.player.start(time);
+  }
+  stop(time) {
+    this.player.stop(time);
   }
 }
 
