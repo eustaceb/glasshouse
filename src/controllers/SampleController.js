@@ -1,4 +1,5 @@
 import * as Tone from "tone";
+import {FXController} from "./FXController";
 
 class Sample {
   constructor(name, path, color) {
@@ -12,21 +13,9 @@ class Sample {
     this.isLooping = true;
     this.isPlaying = false;
     this.color = color;
-    this.distortionAmount = 0;
     this.endPlaybackCallback = null;
     this.donePlaying = false;
-  }
-  enableDistortion(enable) {
-    // @TODO: Add disable functionality
-    if (enable) {
-      const distortion = new Tone.Distortion(
-        this.distortionAmount
-      ).toDestination();
-      this.player.connect(distortion);
-    }
-  }
-  setDistortionAmount(amount) {
-    this.distortionAmount = amount;
+    this.fx = new FXController(this.player);
   }
   setLoop(loop) {
     this.isLooping = loop;

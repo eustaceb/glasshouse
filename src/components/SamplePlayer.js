@@ -1,9 +1,6 @@
-import * as Tone from "tone";
-import React, {useState, useEffect} from "react";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import React, {useState} from "react";
 import Grid from "@material-ui/core/Grid";
-import {KnobControl} from "./KnobControl.js";
+import {FXPanel} from "./FXPanel.js";
 import {SamplePad} from "./SamplePad.js";
 
 function PadsControl(props) {
@@ -24,14 +21,7 @@ function PadsControl(props) {
   return <Grid container>{samples}</Grid>;
 }
 
-function LabeledCheckbox(props) {
-  const checkbox = <Checkbox onChange={props.onChange} />;
-  return <FormControlLabel control={checkbox} label={props.label} />;
-}
-
 export function SamplePlayer(props) {
-  const [distortionEnabled, enableDistortion] = useState(false);
-  const [distortionAmount, setDistortionAmount] = useState(0.0);
   const [selectedSample, setSelectedSample] = useState(null);
   const [playing, setPlaying] = useState(
     new Array(props.sampler.getSamples().size).fill(false)
@@ -63,44 +53,10 @@ export function SamplePlayer(props) {
         />
       </Grid>
       {selectedSample != null && (
-        <Grid
-          container
-          item
-          xs={12}
-          justifyContent="center"
-          alignItems="center"
-          style={{
-            backgroundColor: samples[selectedSample].color,
-          }}
-          className="fxPanelContainer">
-          <Grid
-            container
-            item
-            xs={12}
-            justifyContent="center"
-            alignItems="center">
-            <p>Selected sample: {samples[selectedSample].name}</p>
-          </Grid>
-          <Grid item xs={12}>
-            <div style={{textAlign: "center"}}>
-              <KnobControl
-                label="Distortion Amount"
-                size={50}
-                mouseController={props.mouseController}
-                callback={(val) => {
-                  samples[selectedSample].setDistortionAmount(val / 100.0);
-                  setDistortionAmount(val / 100.0);
-                }}
-              />
-              <LabeledCheckbox
-                label="Enable Distortion"
-                onChange={(e) =>
-                  samples[selectedSample].enableDistortion(e.target.checked)
-                }
-              />
-            </div>
-          </Grid>
-        </Grid>
+        <FXPanel
+          sample={samples[selectedSample]}
+          mouseController={props.mouseController}
+        />
       )}
     </Grid>
   );
