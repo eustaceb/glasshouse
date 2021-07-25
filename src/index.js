@@ -21,13 +21,14 @@ function App(props) {
     // TODO: On startup, preschedule the first loop and then start the transport
     Tone.Transport.start();
 
+    console.log("Loading App");
     Tone.Transport.scheduleRepeat((time) => {
       // Update visuals
       if (beat % 8 == 0) {
         Tone.Draw.schedule(function () {
           const pads = document.querySelectorAll(".beatStrip");
           const increments = [0, 33, 66, 100];
-  
+
           pads.forEach(function (el) {
             el.style.width = increments[Math.round(beat / 8)].toString() + "%";
           });
@@ -36,15 +37,22 @@ function App(props) {
 
       // Preschedule 1/32nd early
       if (beat == 31) {
-        console.log("Current time " + time);
         sampler.current.getSamples().forEach(function (sample) {
-          if (sample.update) {
-            if (sample.isPlaying) {
-              sample.play("+32n");
+          if (sample.isPlaying) {
+            // If we're not looping and played the simple once already, stop playback
+            if (!sample.isLooping && sample.donePlaying) {
+              sample.isPlaying = false;
+
+              // Rerender UI
+              sample.endPlaybackCallback();
             } else {
-              sample.stop("+32n");
+              sample.play("+32n");
+
+              // If we're meant to play this sample only once, mark it as played
+              if (!sample.isLooping && !sample.donePlaying) {
+                sample.donePlaying = true;
+              }
             }
-            sample.update = false;
           }
         });
       }
@@ -53,6 +61,7 @@ function App(props) {
     }, "32n");
 
     return () => {
+      console.log("Unloading App");
       Tone.Transport.stop();
     };
   });

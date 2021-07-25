@@ -5,13 +5,16 @@ class Sample {
     this.name = name;
     this.path = path;
     this.buffer = new Tone.Buffer(path);
-    this.player = new Tone.Player(this.buffer).toDestination();
+    this.player = new Tone.Player(this.buffer, () => {
+      console.log("Loaded " + this.name);
+    });
+    this.player.toDestination().sync();
     this.isLooping = true;
-    this.player.loop = this.isLooping;
     this.isPlaying = false;
     this.color = color;
     this.distortionAmount = 0;
-    this.update = true;
+    this.endPlaybackCallback = null;
+    this.donePlaying = false;
   }
   enableDistortion(enable) {
     // @TODO: Add disable functionality
@@ -27,17 +30,19 @@ class Sample {
   }
   setLoop(loop) {
     this.isLooping = loop;
-    this.player.loop = loop;
   }
   trigger() {
     this.isPlaying = !this.isPlaying;
-    this.update = true;
+    if (!this.isLooping) this.donePlaying = false;
   }
   play(time) {
     this.player.start(time);
   }
   stop(time) {
     this.player.stop(time);
+  }
+  setEndPlaybackCallback(callback) {
+    this.endPlaybackCallback = callback;
   }
 }
 

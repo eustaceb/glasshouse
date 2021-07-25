@@ -13,6 +13,11 @@ export function SamplePad(props) {
         style={{backgroundColor: props.sample.color, position: "relative"}}
         onClick={() => {
           props.playSample();
+
+          // Register end playback callback that will rerender this UI if not looping
+          if (!isLooping && !isPlaying)
+            props.sample.setEndPlaybackCallback(() => setPlaying(false));
+
           setPlaying(!isPlaying);
         }}
         className="pad">
@@ -21,9 +26,7 @@ export function SamplePad(props) {
         </div>
         <div style={{padding: "1%"}}>
           <p className="sampleLabel">{props.sample.name}</p>
-          <p style={{textAlign: "center"}}>
-            {isPlaying && <VolumeUpIcon />}
-          </p>
+          <p style={{textAlign: "center"}}>{isPlaying && <VolumeUpIcon />}</p>
         </div>
       </div>
       <div style={{textAlign: "center"}}>
