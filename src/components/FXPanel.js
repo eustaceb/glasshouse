@@ -1,25 +1,76 @@
 import React, {useState} from "react";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Button from "@material-ui/core/Button";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Grid from "@material-ui/core/Grid";
-import {KnobControl} from "./KnobControl.js";
 
-function LabeledCheckbox(props) {
-  const checkbox = <Checkbox onChange={props.onChange} />;
-  return <FormControlLabel control={checkbox} label={props.label} />;
+function FXControls(props) {
+  const [fxLevel, setFxLevel] = useState(0);
+
+  return (
+    <Grid item xs={12} style={{textAlign: "center"}}>
+      <div>
+        <span className="fxLabel">{props.fxName}:</span>
+        <ButtonGroup style={{marginLeft: "5px"}}>
+          <Button
+            variant="contained"
+            color={fxLevel == 0 ? "secondary" : "primary"}
+            onClick={(e) => {
+              props.setFxAmount(0);
+              setFxLevel(0);
+            }}>
+            Off
+          </Button>
+          <Button
+            variant="contained"
+            color={fxLevel == 1 ? "secondary" : "primary"}
+            onClick={(e) => {
+              props.setFxAmount(0.25);
+              setFxLevel(1);
+            }}>
+            Low
+          </Button>
+          <Button
+            variant="contained"
+            color={fxLevel == 2 ? "secondary" : "primary"}
+            onClick={(e) => {
+              props.setFxAmount(0.5);
+              setFxLevel(2);
+            }}>
+            Medium
+          </Button>
+          <Button
+            variant="contained"
+            color={fxLevel == 3 ? "secondary" : "primary"}
+            onClick={(e) => {
+              props.setFxAmount(0.75);
+              setFxLevel(3);
+            }}>
+            High
+          </Button>
+          <Button
+            variant="contained"
+            color={fxLevel == 4 ? "secondary" : "primary"}
+            onClick={(e) => {
+              props.setFxAmount(1.0);
+              setFxLevel(4);
+            }}>
+            Bit too much
+          </Button>
+        </ButtonGroup>
+      </div>
+    </Grid>
+  );
 }
 
 export function FXPanel(props) {
-  const [distortionEnabled, enableDistortion] = useState(false);
-  const [distortionAmount, setDistortionAmount] = useState(0.0);
-
   return (
     <Grid
       container
       item
       xs={12}
       justifyContent="center"
-      alignItems="center"
       style={{
         backgroundColor: props.sample.color,
       }}
@@ -28,24 +79,22 @@ export function FXPanel(props) {
         <p>Selected sample: {props.sample.name}</p>
       </Grid>
       <Grid item xs={12}>
-        <div style={{textAlign: "center"}}>
-          <KnobControl
-            label="Distortion Amount"
-            size={50}
-            mouseController={props.mouseController}
-            callback={(val) => {
-              props.sample.fx.setDistortionAmount(val / 100.0);
-              setDistortionAmount(val / 100.0);
-            }}
-          />
-          <LabeledCheckbox
-            label="Enable Distortion"
-            onChange={(e) => {
-              props.sample.fx.enableDistortion(e.target.checked);
-              enableDistortion(e.target.checked);
-            }}
-          />
-        </div>
+        <FXControls
+          setFxAmount={(val) => props.sample.fx.setDistortionAmount(val)}
+          fxName="Distortion"
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <FXControls
+          setFxAmount={(val) => props.sample.fx.setReverbAmount(val)}
+          fxName="Reverb"
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <FXControls
+          setFxAmount={(val) => props.sample.fx.setDelayAmount(val)}
+          fxName="Delay"
+        />
       </Grid>
     </Grid>
   );
