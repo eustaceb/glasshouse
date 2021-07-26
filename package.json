@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.prod.js",
-    "start": "webpack serve --open --config webpack.dev.js",
+    "start": "http-server ./dist -a 0.0.0.0 -p 8080 -c-1",
+    "dev": "webpack serve --open --config webpack.dev.js",
     "format": "prettier --write src",
     "lint": "eslint src"
   },
@@ -45,6 +46,7 @@
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "http-server": "^0.12.3",
     "prettier": "2.1.2",
     "style-loader": "^3.2.1",
     "webpack": "^5.0.0",
