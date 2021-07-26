@@ -42,6 +42,7 @@
 .fxPanelContainer {
     color: #FFF;
     border: 2px grey solid;
+    padding: 5px;
 }
 .fxLabel {
     font-size: 20px;

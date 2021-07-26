@@ -69,12 +69,12 @@ function App(props) {
   return (
     <ThemeProvider theme={synthTheme}>
       <Grid container justifyContent="center" alignItems="center" spacing={2}>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <PlaybackControls
             start={() => Tone.Transport.start()}
             stop={() => Tone.Transport.stop()}
           />
-        </Grid>
+        </Grid> */}
         <Grid item xs={6}>
           <SamplePlayer
             sampler={sampler.current}
