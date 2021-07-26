@@ -70,24 +70,9 @@ export class SampleController {
         color: "#8000A0",
       },
     ].map((sample) => new Sample(sample.name, sample.path, sample.color));
-
-    this.activeSample = 0;
-  }
-  setActiveSample(sampleIndex) {
-    this.activeSample = sampleIndex;
-    if (this.activeSampleCallback) this.activeSampleCallback(sampleIndex);
-  }
-  getActiveSample() {
-    return this.activeSample;
-  }
-  getSample(sampleIndex) {
-    return this.samples[sampleIndex];
   }
   getSamples() {
     return this.samples;
-  }
-  setActiveSampleCallback(callback) {
-    this.activeSampleCallback = callback;
   }
   playSample(sampleIndex) {
     this.samples[sampleIndex].play();

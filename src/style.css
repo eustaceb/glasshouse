@@ -1,6 +1,9 @@
 .centered {
     text-align: center;
 }
+.hidden {
+    visibility: hidden;
+}
 .nonselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;

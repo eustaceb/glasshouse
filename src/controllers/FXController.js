@@ -44,7 +44,7 @@ export class FXController {
 
   setDelayAmount(amount) {
     this.setFxAmount("delay", amount, (amount) => {
-      return new Tone.PingPongDelay(amount, amount).toDestination();
+      return new Tone.PingPongDelay(amount, 0.2).toDestination();
     });
   }
 }

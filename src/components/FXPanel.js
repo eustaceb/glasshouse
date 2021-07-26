@@ -1,6 +1,4 @@
 import React, {useState} from "react";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Grid from "@material-ui/core/Grid";
@@ -9,9 +7,11 @@ function FXControls(props) {
   const [fxLevel, setFxLevel] = useState(0);
 
   return (
-    <Grid item xs={12} style={{textAlign: "center"}}>
-      <div>
-        <span className="fxLabel">{props.fxName}:</span>
+    <Grid container>
+      <Grid item xs={3} />
+      <Grid item xs={1}>
+        <span className="fxLabel">{props.fxName}</span></Grid>
+      <Grid item xs={6}>
         <ButtonGroup style={{marginLeft: "5px"}}>
           <Button
             variant="contained"
@@ -59,7 +59,8 @@ function FXControls(props) {
             Bit too much
           </Button>
         </ButtonGroup>
-      </div>
+      </Grid>
+      <Grid item xs={2} />
     </Grid>
   );
 }
