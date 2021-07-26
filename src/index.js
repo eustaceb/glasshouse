@@ -7,11 +7,14 @@ import {synthTheme} from "./theme.js";
 import {ThemeProvider} from "@material-ui/core/styles";
 import {MouseController} from "./controllers/MouseController.js";
 import {SampleController} from "./controllers/SampleController.js";
-import {PlaybackControls} from "./components/PlaybackControls.js";
 import "./style.css";
 
 const mouseController = new MouseController(window.document);
 let beat = 0;
+
+if (process.env.NODE_ENV !== 'production') {
+  console.log('Looks like we are in development mode!');
+}
 
 function App(props) {
   const mouseController = useRef(props.mouseController);

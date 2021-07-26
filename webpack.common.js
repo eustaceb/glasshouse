@@ -6,10 +6,6 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
   },
-  mode: "development",
-	optimization: {
-		minimize: false
-	},
   module: {
     rules: [
       {
@@ -27,13 +23,5 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       }
     ]
-  },
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    compress: true,
-    port: 9000
-  },
-  // optimization: {
-  //   minimize: false
-  // }
+  }
 };
