@@ -10,10 +10,9 @@ import {SampleController} from "./controllers/SampleController.js";
 import "./style.css";
 
 const mouseController = new MouseController(window.document);
-let beat = 0;
 
-if (process.env.NODE_ENV !== 'production') {
-  console.log('Looks like we are in development mode!');
+if (process.env.NODE_ENV !== "production") {
+  console.log("Looks like we are in development mode!");
 }
 
 function App(props) {
@@ -21,25 +20,22 @@ function App(props) {
   const sampler = useRef(new SampleController());
 
   useEffect(() => {
-    // TODO: On startup, preschedule the first loop and then start the transport
-    Tone.Transport.start();
-
-    console.log("Loading App");
     Tone.Transport.scheduleRepeat((time) => {
       // Update visuals
-      if (beat % 8 == 0) {
+      if (sampler.current.beat % 8 == 0) {
         Tone.Draw.schedule(function () {
           const pads = document.querySelectorAll(".beatStrip");
           const increments = [0, 33, 66, 100];
 
           pads.forEach(function (el) {
-            el.style.width = increments[Math.round(beat / 8)].toString() + "%";
+            el.style.width =
+              increments[Math.round(sampler.current.beat / 8)].toString() + "%";
           });
         }, time);
       }
 
       // Preschedule 1/32nd early
-      if (beat == 31) {
+      if (sampler.current.beat == 31) {
         sampler.current.getSamples().forEach(function (sample) {
           if (sample.isPlaying) {
             // If we're not looping and played the simple once already, stop playback
@@ -50,17 +46,15 @@ function App(props) {
               sample.endPlaybackCallback();
             } else {
               sample.play("+32n");
-
-              // If we're meant to play this sample only once, mark it as played
-              if (!sample.isLooping && !sample.donePlaying) {
-                sample.donePlaying = true;
-              }
             }
           }
         });
       }
 
-      beat = (beat + 1) % 32;
+      if (sampler.current.beat == 0) {
+        sampler.current.barPassed();
+      }
+      sampler.current.beat = (sampler.current.beat + 1) % 32;
     }, "32n");
 
     return () => {

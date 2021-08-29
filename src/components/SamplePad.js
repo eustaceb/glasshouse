@@ -15,7 +15,7 @@ export function SamplePad(props) {
           props.playSample();
 
           // Register end playback callback that will rerender this UI if not looping
-          if (!isLooping && !isPlaying)
+          if (!isPlaying)
             props.sample.setEndPlaybackCallback(() => setPlaying(false));
 
           setPlaying(!isPlaying);
