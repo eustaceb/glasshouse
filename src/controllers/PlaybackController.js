@@ -33,7 +33,7 @@ class LoopQueue {
     this.lapsingSamples = this.lapsingSamples.filter(ls => {
       if (ls.duration === ls.sample.duration) {
         console.debug(`Ending playback for loop ${ls.sample.name}`);
-        ls.sample.endPlaybackCallback(); // TODO: possibly expensive call, make async or enqueue draw call via Tone.Draw.schedule
+        ls.sample.endPlaybackCallback?.(); // TODO: possibly expensive call, make async or enqueue draw call via Tone.Draw.schedule
         this.endCallbacks[ls.sample.id]();
       }
       return true;
@@ -93,7 +93,7 @@ class OneShotQueue {
     this.lapsingSamples = this.lapsingSamples.filter(ls => {
       if (ls.duration === 0) {
         console.debug(`Ending playback for oneshot ${ls.sample.name}`);
-        ls.sample.endPlaybackCallback(); // TODO: possibly expensive call, make async or enqueue draw call via Tone.Draw.schedule
+        ls.sample.endPlaybackCallback?.(); // TODO: possibly expensive call, make async or enqueue draw call via Tone.Draw.schedule
         this.endCallbacks[ls.sample.id]();
         return false;
       }
@@ -141,12 +141,10 @@ class PlaybackQueue {
     return this.oneShotQueue.size() === 0 && this.loopQueue.size() === 0;
   }
   triggerSamples() {
-    console.debug(`Triggering samples in PlaybackController`);
     this.oneShotQueue.triggerSamples();
     this.loopQueue.triggerSamples();
   }
   tick() {
-    console.debug(`Ticking in PlaybackController`);
     this.oneShotQueue.tick();
     console.log(this.oneShotQueue);
     console.log(this.loopQueue);
