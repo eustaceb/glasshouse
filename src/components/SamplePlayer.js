@@ -11,10 +11,9 @@ export function SamplePlayer(props) {
   const samples = props.sampler.getSamples();
 
   const playSample = (sampleIndex) => {
-    props.sampler.triggerSample(sampleIndex);
-
-    // isPlaying will be updated by now so no need to negate
-    setPlaying(playing.splice(sampleIndex, 1, samples[sampleIndex].isPlaying));
+    props.playback.trigger(samples[sampleIndex]);
+    // // isPlaying will be updated by now so no need to negate
+    // setPlaying(playing.splice(sampleIndex, 1, samples[sampleIndex].isPlaying));
   };
   const openFXPanel = (index) => {
     index != selectedSample
