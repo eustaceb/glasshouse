@@ -7,27 +7,29 @@ class Sample {
     this.name = name;
     this.path = path;
     this.buffer = new Tone.Buffer(path);
+    this.type = type;
     this.player = new Tone.Player(this.buffer, () => {
       console.log("Loaded " + this.name);
     });
+    this.player.loop = this.type === "loop";
     this.player.toDestination().sync();
-    this.isLooping = type === "loop";
-    this.isPlaying = false;
     this.color = color;
-    this.type = type;
     this.duration = duration;
     this.endPlaybackCallback = null;
-    this.donePlaying = false;
     this.fx = new FXController(this.player);
   }
-  play(time = "+32n") {
+  play(time) {
+    console.log(`Playing ${this.name} at ${time}`);
     this.player.start(time);
   }
-  stop(time = "+32n") {
+  stop(time) {
     this.player.stop(time);
   }
   setEndPlaybackCallback(callback) {
     this.endPlaybackCallback = callback;
+  }
+  isPlaying() {
+    return this.player.state === "started";
   }
 }
 
@@ -262,53 +264,4 @@ export class SampleController {
   getSamples() {
     return this.samples;
   }
-  triggerSample(sampleIndex) {
-    const sample = this.samples[sampleIndex];
-    console.log(`Triggering sample ${sample.name}`);
-    console.log(`${this.samplesPlaying} samples are playing`);
-
-    sample.isPlaying = !sample.isPlaying;
-    this.samplesPlaying += sample.isPlaying ? 1 : -1;
-
-    console.log(`Changed to ${this.samplesPlaying}`);
-  }
-  // playSamples(time = "+32n") {
-  //   this.samples
-  //     .filter((s) => s.isPlaying)
-  //     .forEach((sample) => {
-  //       if (sample.type == "oneshot") {
-  //         sample.play(time);
-  //         sample.isPlaying = false;
-  //         sample.donePlaying = true;
-  //       } else if (sample.durationRemaining === sample.duration) { // loop
-  //         sample.play(time);
-  //       }
-  //   });
-  // }
-  // updateSamples() {
-  //   this.samples.forEach((sample) => {
-  //     if (s.donePlaying) {
-  //       sample.endPlaybackCallback();
-  //       s.donePlaying = false;
-  //     } else if (s.isPlaying && s.type == "loop") {
-  //       if (sample.durationRemaining <= 0) {
-  //         sample.durationRemaining = sample.duration;
-  //       } else {
-  //         sample.durationRemaining -= 1;
-  //       }
-  //     }
-  //   });
-
-  //   this.samples
-  //     .filter((s) => s.isPlaying && !s.isLooping)
-  //     .forEach((sample) => {
-  //       console.log(`Checking ${sample.name}, durationRemaining ${sample.durationRemaining}`);
-  //       sample.durationRemaining -= 1;
-  //       if (sample.durationRemaining <= 0) {
-  //         sample.donePlaying = true;
-  //         sample.durationRemaining = sample.duration;
-  //         console.log(`Sample ${sample.name} has ${sample.durationRemaining} remaining`);
-  //       }
-  //     });
-  // }
 }

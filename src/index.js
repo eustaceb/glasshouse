@@ -22,48 +22,6 @@ function App(props) {
   const playback = useRef(new PlaybackController(sampler.current));
 
   useEffect(() => {
-    //   Tone.Transport.scheduleRepeat((time) => {
-    //     const beat = playback.current.beat;
-    //     console.log(beat);
-    //     // Update visuals
-    //     if (beat % 8 == 0) {
-    //       Tone.Draw.schedule(function () {
-    //         const pads = document.querySelectorAll(".beatStrip");
-    //         const increments = [0, 33, 66, 100];
-    //         pads.forEach(function (el) {
-    //           el.style.width =
-    //             increments[Math.round(beat / 8)].toString() + "%";
-    //         });
-    //       }, time);
-    //     }
-    //     // Preschedule 1/32nd early
-    //     if (beat == 31) {
-    //       sampler.current.getSamples().forEach(function (sample) {
-    //         if (sample.isPlaying) {
-    //           // If we're not looping and played the simple once already, stop playback
-    //           if (!sample.isLooping && sample.donePlaying) {
-    //             sample.isPlaying = false;
-    //             // Rerender UI
-    //             sample.endPlaybackCallback();
-    //           } else {
-    //             sample.play("+32n");
-    //           }
-    //         }
-    //       });
-    //     }
-    //     if (beat == 0) {
-    //       // Each bar we update sample state
-    //       sampler.current.updateSamples();
-    //       if (sampler.current.samplesPlaying == 0) {
-    //         playback.current.stop();
-    //       }
-    //     }
-    //     playback.current.beat = (beat + 1) % 32;
-    //   }, "32n");
-    // return () => {
-    //   console.log("Unloading App");
-    //   Tone.Transport.stop();
-    // };
   });
 
   return (
