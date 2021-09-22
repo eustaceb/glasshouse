@@ -4,22 +4,25 @@ import TuneIcon from "@material-ui/icons/Tune";
 import VolumeUpIcon from "@material-ui/icons/VolumeUp";
 
 export function SamplePad(props) {
-  const [isLooping, setLooping] = useState(true);
+  // Rerender this component every bar
   const [isPlaying, setPlaying] = useState(false);
+
+  const triggerSample = () => {
+    if (!props.sample.isPlaying()) {
+      props.playSample();
+    } else {
+      props.stopSample();
+      // Register end playback callback that will rerender this UI if not looping
+      props.sample.setEndPlaybackCallback(() => setPlaying(false));
+    }
+    setPlaying(!isPlaying);
+  }
 
   return (
     <div>
       <div
         style={{backgroundColor: props.sample.color, position: "relative"}}
-        onClick={() => {
-          props.playSample();
-
-          // Register end playback callback that will rerender this UI if not looping
-          if (!isLooping && !isPlaying)
-            props.sample.setEndPlaybackCallback(() => setPlaying(false));
-
-          setPlaying(!isPlaying);
-        }}
+        onClick={() => triggerSample()}
         className="pad">
         <div style={{position: "relative"}}>
           <div className={isPlaying ? "beatStrip" : ""} />
@@ -31,12 +34,8 @@ export function SamplePad(props) {
       </div>
       <div style={{textAlign: "center"}}>
         <LoopIcon
-          onClick={() => {
-            props.sample.setLoop(!isLooping);
-            setLooping(!isLooping);
-          }}
           className={
-            "paddedIcon" + (props.sample.isLooping ? " activeIcon" : "")
+            "paddedIcon" + (props.sample.type == "loop" ? " activeIcon" : "")
           }
         />
         <TuneIcon

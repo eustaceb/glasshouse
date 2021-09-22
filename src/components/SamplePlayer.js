@@ -5,18 +5,21 @@ import {SamplePad} from "./SamplePad.js";
 
 export function SamplePlayer(props) {
   const [selectedSample, setSelectedSample] = useState(null);
-  const [playing, setPlaying] = useState(
-    new Array(props.sampler.getSamples().size).fill(false)
-  );
   const samples = props.sampler.getSamples();
 
   const playSample = (sampleIndex) => {
-    const sample = samples[sampleIndex];
-    sample.trigger();
-
-    // isPlaying will be updated by now so no need to negate
-    setPlaying(playing.splice(sampleIndex, 1, sample.isPlaying));
+    if (!props.playback.started) {
+      props.playback.start(0.1);
+      samples[sampleIndex].play("0:0:0");
+    } else {
+      console.log(props.playback.GetNextBar());
+      samples[sampleIndex].play(props.playback.GetNextBar());
+    }
   };
+  const stopSample = (sampleIndex) => {
+    samples[sampleIndex].stop(props.playback.GetNextBar());
+  }
+
   const openFXPanel = (index) => {
     index != selectedSample
       ? setSelectedSample(index)
@@ -29,9 +32,10 @@ export function SamplePlayer(props) {
         <SamplePad
           sample={sample}
           playSample={() => playSample(index)}
+          stopSample={() => stopSample(index)}
           openFXPanel={() => openFXPanel(index)}
           isFxPanelOpen={selectedSample == index}
-          selected={sample.isPlaying}
+          selected={sample.isPlaying()}
         />
       </Grid>
     );
