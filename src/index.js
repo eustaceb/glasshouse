@@ -7,7 +7,6 @@ import {ThemeProvider} from "@material-ui/core/styles";
 import {MouseController} from "./controllers/MouseController.js";
 import {SampleController} from "./controllers/SampleController.js";
 import {PlaybackController} from "./controllers/PlaybackController.js";
-import * as Tone from "tone";
 import "./style.css";
 
 const mouseController = new MouseController(window.document);
@@ -27,6 +26,9 @@ function App(props) {
   return (
     <ThemeProvider theme={synthTheme}>
       <Grid container justifyContent="center" alignItems="center" spacing={2}>
+      <Grid item xs={12}>
+        <p style={{textAlign: 'center'}} id="timestamp">0:0:0</p>
+      </Grid>
         <Grid item xs={6}>
           <SamplePlayer
             sampler={sampler.current}

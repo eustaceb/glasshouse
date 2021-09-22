@@ -1,20 +1,13 @@
-import * as Tone from "tone";
-import React, {useState, useRef} from "react";
+import React, {useState} from "react";
 import LoopIcon from "@material-ui/icons/Loop";
 import TuneIcon from "@material-ui/icons/Tune";
 import VolumeUpIcon from "@material-ui/icons/VolumeUp";
 
 export function SamplePad(props) {
   // Rerender this component every bar
-
   const [isPlaying, setPlaying] = useState(false);
-  const isToneStarted = useRef(false);
 
   const triggerSample = () => {
-    // if (!isToneStarted.current) {
-    //   Tone.Transport.debug = true;
-    //   isToneStarted.current = true;
-    // }
     if (!props.sample.isPlaying()) {
       props.playSample();
     } else {
