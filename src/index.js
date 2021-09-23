@@ -29,7 +29,7 @@ function App(props) {
       <Grid item xs={12}>
         <p style={{textAlign: 'center'}} id="timestamp">0:0:0</p>
       </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <SamplePlayer
             sampler={sampler.current}
             mouseController={mouseController}
