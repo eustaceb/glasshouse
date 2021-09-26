@@ -16,7 +16,7 @@ export function SamplePad(props) {
       props.sample.setEndPlaybackCallback(() => setPlaying(false));
     }
     setPlaying(!isPlaying);
-  }
+  };
 
   return (
     <div>
