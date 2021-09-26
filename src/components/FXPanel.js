@@ -6,28 +6,41 @@ import Slider from "@material-ui/core/Slider";
 import Checkbox from "@material-ui/core/Checkbox";
 
 function FxParamSlider(props) {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(props.param.value);
+  const [rerender, setRerender] = useState(false);
+
+  const round = (val, digits) =>
+    Math.round((val + Number.EPSILON) * Math.round(Math.pow(10, digits))) /
+    Math.round(Math.pow(10, digits));
+  const valueStep = round((props.param.max - props.param.min) / 100, 2);
+
   return (
     <Grid container>
       <Grid item xs={5}>
-        {props.label}
+        {props.param.displayName}
       </Grid>
       <Grid item xs={6}>
         <Slider
-          aria-label={props.label}
+          aria-label={props.param.displayName}
           value={value}
           valueLabelDisplay="auto"
-          getAriaValueText={(value) => value.toString() + "%"}
+          valueLabelFormat={(val) => round(val / ((props.param.max - props.param.min) / 100), 2).toString()}
+          getAriaValueText={(value) => value.toString()}
           onChange={(event, newValue) => {
             setValue(newValue);
           }}
           onChangeCommitted={(event, newValue) => {
-            props.setFxParamValue(newValue / 100.0);
+            props.setFxParamValue(newValue);
+            setRerender(!rerender);
           }}
+          min={props.param.min}
+          max={props.param.max}
+          step={valueStep}
+          scale={(val) => val * valueStep}
         />
       </Grid>
       <Grid item xs={1}>
-        <b>{value}</b>
+        <b>{round(props.param.value, 2)}</b>
       </Grid>
     </Grid>
   );
@@ -36,14 +49,16 @@ function FxParamSlider(props) {
 function FXControls(props) {
   const [enabled, setEnabled] = useState(false);
 
-  const fxParams = Object.keys(props.fxParams)
+  const fxParams = Object.keys(props.effect.params)
     .filter((name) => !["enabled", "type"].includes(name))
     .map((param, index) => {
       return (
         <Grid item xs={12} xl={4} key={index}>
           <FxParamSlider
-            label={param}
-            setFxParamValue={props.fxParams[param]}
+            setFxParamValue={(val) =>
+              props.setFxParam(props.effect.name, param, val)
+            }
+            param={props.effect.params[param]}
           />
         </Grid>
       );
@@ -51,13 +66,13 @@ function FXControls(props) {
   return (
     <Grid container>
       <Grid item xl={1} xs={6}>
-        <span className="fxLabel">{props.fxName}</span>
+        <span className="fxLabel">{props.effect.displayName}</span>
       </Grid>
       <Grid item xl={1} xs={6}>
         <Checkbox
           checked={enabled}
           onChange={() => {
-            props.fxParams["enabled"](!enabled);
+            props.setFxParam(props.effect.name, "enabled", !enabled);
             setEnabled(!enabled);
           }}
           size="small"
@@ -122,6 +137,17 @@ function FXControls(props) {
 }
 
 export function FXPanel(props) {
+  const effectControls = Object.keys(props.effects).map((effect, index) => {
+    return (
+      <Grid item xs={12} key={index}>
+        <FXControls
+          effect={props.effects[effect]}
+          setFxParam={props.setFxParam}
+        />
+      </Grid>
+    );
+  });
+
   return (
     <Grid
       container
@@ -129,58 +155,10 @@ export function FXPanel(props) {
       xs={12}
       justifyContent="center"
       style={{
-        backgroundColor: props.sample.color,
+        backgroundColor: props.panelColor,
       }}
       className="fxPanelContainer">
-      <Grid item xs={12}>
-        <p>Selected sample: {props.sample.name}</p>
-      </Grid>
-      <Grid item xs={12}>
-        <FXControls
-          fxParams={{
-            amount: (val) =>
-              props.sample.fx.setFxParam("distortion", "amount", val),
-            enabled: (val) =>
-              props.sample.fx.setFxParam("distortion", "enabled", val),
-          }}
-          fxName="Distortion"
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <FXControls
-          fxParams={{
-            amount: (val) =>
-              props.sample.fx.setFxParam("reverb", "amount", val),
-            enabled: (val) =>
-              props.sample.fx.setFxParam("reverb", "enabled", val),
-          }}
-          fxName="Reverb"
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <FXControls
-          fxParams={{
-            amount: (val) => props.sample.fx.setFxParam("delay", "amount", val),
-            enabled: (val) =>
-              props.sample.fx.setFxParam("delay", "enabled", val),
-          }}
-          fxName="Delay"
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <FXControls
-          fxParams={{
-            frequency: (val) =>
-              props.sample.fx.setFxParam("chorus", "frequency", val),
-            delayTime: (val) =>
-              props.sample.fx.setFxParam("chorus", "delayTime", val),
-            depth: (val) => props.sample.fx.setFxParam("chorus", "depth", val),
-            enabled: (val) =>
-              props.sample.fx.setFxParam("chorus", "enabled", val),
-          }}
-          fxName="Chorus"
-        />
-      </Grid>
+      {effectControls}
     </Grid>
   );
 }

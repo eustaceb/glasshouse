@@ -9,7 +9,7 @@ class FxParam {
    * @param {*} initialValue Starting value
    * @param {*} values A range [min, max] if type is "range", set of permitted values otherwise
    */
-  constructor(name, displayName, type, values, initialValue, readonly = false) {
+  constructor(name, displayName, type, values, initialValue) {
     this.name = name;
     this.displayName = displayName;
     this.type = type;
@@ -19,19 +19,29 @@ class FxParam {
       this.values = values;
     }
     this.value = initialValue;
-    this.readonly = readonly;
+  }
+
+  setValue(value) {
+    this.value = value;
   }
 }
 
 class Fx {
-  constructor(name, params, fnEnabledCheck) {
+  constructor(name, displayName, params) {
     this.name = name;
+    this.displayName = displayName;
     this.params = params;
-    this.fnEnabledCheck = fnEnabledCheck;
+    this.params["enabled"] = new FxParam(
+      "enabled",
+      "Enabled",
+      "toggle",
+      [true, false],
+      false
+    );
     this.node = null;
   }
   isEnabled() {
-    return this.fnEnabledCheck(this.params);
+    return this.params["enabled"]["value"];
   }
   setNode(node) {
     this.node = node;
@@ -49,78 +59,62 @@ export class FXController {
       chorus: this.createChorusFx,
     };
 
-    // Some commonly used parameters
-    const createAmountParam = () =>
-      new FxParam("amount", "Amount", "range", [0, 100], 0);
-    const createEnabledParam = () =>
-      new FxParam("enabled", "Enabled", "toggle", [true, false], false);
-
     this.effects = {};
-    this.effects["distortion"] = new Fx(
-      "distortion",
-      {amount: createAmountParam(), enabled: createEnabledParam()},
-      (params) =>
-        params["enabled"]["value"] === true && params["amount"]["value"] > 0
-    );
-    this.effects["reverb"] = new Fx(
-      "reverb",
-      {amount: createAmountParam(), enabled: createEnabledParam()},
-      (params) =>
-        params["enabled"]["value"] === true && params["amount"]["value"] > 0
-    );
-    this.effects["delay"] = new Fx(
-      "delay",
-      {amount: createAmountParam(), enabled: createEnabledParam()},
-      (params) =>
-        params["enabled"]["value"] === true && params["amount"]["value"] > 0
-    );
-    this.effects["chorus"] = new Fx(
-      "chorus",
-      {
-        frequency: new FxParam("frequency", "Frequency", "range", [0, 10], 0, true),
-        delayTime: new FxParam("delayTime", "Delay Time", "range", [0, 100], 0),
-        depth: new FxParam("depth", "Depth", "range", [0, 1], 0),
-        enabled: createEnabledParam(),
-      },
-      (params) => params["enabled"]["value"]
-    );
+    this.effects["distortion"] = new Fx("distortion", "Distortion", {
+      amount: new FxParam("amount", "Amount", "range", [0, 1], 0),
+    });
+    this.effects["reverb"] = new Fx("reverb", "Reverb", {
+      decay: new FxParam("decay", "Decay (s)", "range", [0.001, 10], 0.001),
+    });
+    this.effects["delay"] = new Fx("delay", "Delay", {
+      delayTime: new FxParam(
+        "delayTime",
+        "Delay Time (ms)",
+        "range",
+        [0, 1000],
+        0
+      ),
+      feedback: new FxParam("feedback", "Feedback", "range", [0, 1], 0),
+    });
+    this.effects["chorus"] = new Fx("chorus", "Chorus", {
+      frequency: new FxParam(
+        "frequency",
+        "Frequency",
+        "range",
+        [0.0, 10.0],
+        0
+      ),
+      delayTime: new FxParam(
+        "delayTime",
+        "Delay Time (ms)",
+        "range",
+        [0, 20],
+        0
+      ),
+      depth: new FxParam("depth", "Depth", "range", [0.0, 10.0], 0),
+    });
   }
 
   setFxParam(fxName, parameter, value) {
+    console.log("Setting " + fxName + " param " + parameter + " value " + value.toString());
     const fx = this.effects[fxName];
     const prevEnabled = fx.isEnabled();
 
-    fx.params[parameter]["value"] = value;
-    const enabled = fx.isEnabled();
+    if (fx.params[parameter].value !== value) {
+      fx.params[parameter].value = value;
 
-    // Need to reinstate the node if a param is readonly
-    let reconnect = false;
-    if (fx.params[parameter].readonly) {
-      reconnect = true;
-    }
-
-    // If we're disabling an effect, simply disconnect it and update state
-    if (fx.isEnabled()) {
-      // Modified a readonly property - need to reocnnect
-      if (reconnect) {
-        console.log(`Reconnecting effect ${fxName}`);
+      // First, disconnect the effect so that we can modify parameters
+      if (prevEnabled) {
         this.player.disconnect(fx.node);
       }
 
-      // Effect was disabled previously but is being enabled
-      if (prevEnabled !== enabled || reconnect) {
-        console.log(`Connecting effect ${fxName}`);
+      // Then reconnect with new params if enabled
+      if (fx.isEnabled()) {
         fx.node = this.createFxCallbacks[fxName](fx.params);
         this.player.connect(fx.node);
-      } else {// if (parameter !== "enabled" && !reconnect) {
-        // Only need to write value to node if we've not reconnected
-        fx.node[parameter] = value;
       }
-    } else if (prevEnabled !== enabled && fx.node !== null) {
-      console.log(`Disconnecting effect ${fxName}`);
-      this.player.disconnect(fx.node);
-      fx.node = null;
     }
+
   }
 
   createDistortionFx(params) {
@@ -128,13 +122,14 @@ export class FXController {
   }
 
   createReverbFx(params) {
-    return new Tone.Reverb(params["amount"]["value"]).toDestination();
+    console.log("Creating reverb with " + params.toString());
+    return new Tone.Reverb(params["decay"]["value"]).toDestination();
   }
 
   createDelayFx(params) {
     return new Tone.PingPongDelay(
-      params["amount"]["value"],
-      0.2
+      params["delayTime"]["value"],
+      params["feedback"]["value"]
     ).toDestination();
   }
 

@@ -18,7 +18,7 @@ export function SamplePlayer(props) {
   };
   const stopSample = (sampleIndex) => {
     samples[sampleIndex].stop(props.playback.GetNextBar());
-  }
+  };
 
   const openFXPanel = (index) => {
     index != selectedSample
@@ -51,9 +51,15 @@ export function SamplePlayer(props) {
             position: "absolute",
             top: "0px",
             left: "0px",
-            width: "100%"
+            width: "100%",
           }}>
-          <FXPanel sample={sample} mouseController={props.mouseController} />
+          <FXPanel
+            effects={sample.fx.effects}
+            panelColor={sample.color}
+            setFxParam={(fxName, param, value) =>
+              sample.fx.setFxParam(fxName, param, value)
+            }
+          />
         </div>
       </div>
     );
@@ -61,9 +67,9 @@ export function SamplePlayer(props) {
 
   return (
     <Grid container spacing={2}>
-        <Grid item xs={6}>
-          {fxPanels}
-        </Grid>
+      <Grid item xs={6}>
+        {fxPanels}
+      </Grid>
       <Grid container item xs={6} spacing={2}>
         <Grid container>{samplePads}</Grid>
       </Grid>
