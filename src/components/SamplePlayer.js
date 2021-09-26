@@ -28,7 +28,7 @@ export function SamplePlayer(props) {
 
   const samplePads = samples.map((sample, index) => {
     return (
-      <Grid item xs={2} key={index}>
+      <Grid item xs={6} xl={2} key={index}>
         <SamplePad
           sample={sample}
           playSample={() => playSample(index)}
@@ -51,6 +51,7 @@ export function SamplePlayer(props) {
             position: "absolute",
             top: "0px",
             left: "0px",
+            width: "100%"
           }}>
           <FXPanel sample={sample} mouseController={props.mouseController} />
         </div>
