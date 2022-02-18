@@ -8,16 +8,10 @@ export function SamplePlayer(props) {
   const samples = props.sampler.getSamples();
 
   const playSample = (sampleIndex) => {
-    if (!props.playback.started) {
-      props.playback.start(0.1);
-      samples[sampleIndex].play("0:0:0");
-    } else {
-      console.log(props.playback.GetNextBar());
-      samples[sampleIndex].play(props.playback.GetNextBar());
-    }
+    props.sampler.playSample(sampleIndex);
   };
   const stopSample = (sampleIndex) => {
-    samples[sampleIndex].stop(props.playback.GetNextBar());
+    props.sampler.stopSample(sampleIndex);
   };
 
   const openFXPanel = (index) => {

@@ -24,9 +24,13 @@ export class PlaybackController {
     this.beatCallback = fn;
   }
   tick(time) {
-    const nextSixteenth = Tone.Time(Tone.Time(time) + Tone.Time("16n"))
-    const timestamp = nextSixteenth.toBarsBeatsSixteenths().split(".")[0];
+    const timestamp = Tone.Time(time).toBarsBeatsSixteenths().split(".")[0];
     const [bar, beat, sixteenth] = timestamp.split(":");
+
+    // Trigger next set of samples
+    if (beat === "3" && sixteenth === "3") {
+      this.sampleController.tick(time);
+    }
 
     // Update visuals every quarter note, prescheduling 1/16th ahead
     Tone.Draw.schedule(function () {
@@ -42,10 +46,6 @@ export class PlaybackController {
         // Any other callbacks
         this.beatCallback?.(beat);
       }
-
     }, "+16n");
-  }
-  GetNextBar() {
-    return Tone.Transport.nextSubdivision("1n");
   }
 }
