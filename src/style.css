@@ -47,3 +47,39 @@
 .fxLabel {
     font-size: 20px;
 }
+.startModal {
+    background-color: #FFF;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    font-size: 128px;
+    text-align: center;
+}
+.startModal p {
+    line-height: 1.5;
+    display: inline-block;
+    vertical-align: middle;
+}
+.startModalContent {
+    margin: auto;
+    width: 100%;
+}
+
+.startModal a {
+    text-decoration: none;
+}
+.startModal a:link {
+    color: red;
+}
+.startModal a:visited {
+    color: green;
+}
+.startModal a:hover {
+    color: hotpink;
+}
+.startModal a:active {
+    color: blue;
+}

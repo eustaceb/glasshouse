@@ -11,7 +11,6 @@ class Sample {
     this.player = new Tone.Player(this.buffer, () => {
       console.log("Loaded " + this.name);
     });
-    this.player.loop = this.type === "loop";
     this.player.toDestination().sync();
     this.color = color;
     this.duration = duration;
@@ -30,6 +29,9 @@ class Sample {
   }
   isPlaying() {
     return this.player.state === "started";
+  }
+  isLoop() {
+    return this.type === "loop";
   }
 }
 
@@ -260,8 +262,39 @@ export class SampleController {
           sample.duration
         )
     );
+
+    // The play queue is an array of durations remaining to play
+    this.playQueue = new Array(this.samples.length).fill(0);
   }
+
   getSamples() {
     return this.samples;
+  }
+
+  tick(time) {
+    for (var i = 0; i < this.playQueue.length; i++) {
+      const duration = this.playQueue[i];
+      if (duration == 0) continue;
+
+      // Check if a sample should be triggered
+      if (duration == this.samples[i].duration) {
+        this.samples[i].play(Tone.Time(time) + Tone.Time("16n"));
+      }
+
+      // Reduce remaining duration by 1
+      this.playQueue[i] = Math.max(0, this.playQueue[i] - 1);
+
+      // If the sample is about to stop playing, double check if it needs relooping
+      if (this.playQueue[i] === 0 && this.samples[i].isLoop())
+        this.playQueue[i] = this.samples[i].duration;
+    }
+  }
+
+  playSample(sampleIndex) {
+    this.playQueue[sampleIndex] = this.samples[sampleIndex].duration;
+    console.log(this.playQueue);
+  }
+  stopSample(sampleIndex) {
+    this.playQueue[sampleIndex] = 0;
   }
 }
