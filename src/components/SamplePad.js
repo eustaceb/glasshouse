@@ -20,6 +20,7 @@ export function SamplePad(props) {
       setPadState(padStates.SCHEDULING);
     } else if (props.sample.isPlaying()) {
       props.stopSample();
+      setPadState(padStates.SCHEDULING);
     }
   };
 

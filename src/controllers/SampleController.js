@@ -299,6 +299,9 @@ export class SampleController {
 
     // Sample indices that are about to be triggered for the first time
     this.firstPlayQueue = new Array();
+
+    // Sample indices that are not be relooped
+    this.terminateLoopQueue = new Array();
   }
 
   getSamples() {
@@ -319,15 +322,14 @@ export class SampleController {
       // Reduce remaining duration by 1
       this.playQueue[i] = Math.max(0, this.playQueue[i] - 1);
 
+      const reloop =
+        this.samples[i].isLoop() && !this.terminateLoopQueue.includes(i);
+
       // If the sample is about to stop playing, double check if it needs relooping
-      if (this.playQueue[i] === 0 && this.samples[i].isLoop())
+      if (this.playQueue[i] === 0 && reloop)
         this.playQueue[i] = this.samples[i].duration;
 
-      if (
-        !this.samples[i].isLoop() &&
-        duration === 1 &&
-        this.playQueue[i] === 0
-      )
+      if (!reloop && duration === 1 && this.playQueue[i] === 0)
         this.lapsingQueue.push(i);
     }
   }
@@ -366,6 +368,11 @@ export class SampleController {
       const finishedSampleId = this.finishedQueue[i];
       if (this.playQueue[finishedSampleId] === 0) {
         this.samples[finishedSampleId].setInactive();
+        if (this.samples[finishedSampleId].isLoop()) {
+          this.terminateLoopQueue = this.terminateLoopQueue.filter(
+            (sampleId) => sampleId != finishedSampleId
+          );
+        }
         if (this.samples[finishedSampleId].endPlaybackCallback !== null) {
           this.samples[finishedSampleId].endPlaybackCallback();
         }
@@ -383,11 +390,14 @@ export class SampleController {
     this.firstPlayQueue = new Array();
   }
 
-  playSample(sampleIndex) {
-    this.playQueue[sampleIndex] = this.samples[sampleIndex].duration;
-    this.firstPlayQueue.push(sampleIndex);
+  playSample(sampleId) {
+    this.playQueue[sampleId] = this.samples[sampleId].duration;
+    this.firstPlayQueue.push(sampleId);
   }
-  stopSample(sampleIndex) {
-    this.playQueue[sampleIndex] = 0;
+  stopSample(sampleId) {
+    // For now, only stop loops
+    if (this.samples[sampleId].isLoop()) {
+      this.terminateLoopQueue.push(sampleId);
+    }
   }
 }
