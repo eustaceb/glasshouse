@@ -27,13 +27,12 @@ export class PlaybackController {
     const timestamp = Tone.Time(time).toBarsBeatsSixteenths().split(".")[0];
     const [bar, beat, sixteenth] = timestamp.split(":");
 
-    // Trigger next set of samples
+    // Trigger next set of samples when we're 1/16th away
     if (beat === "3" && sixteenth === "3") {
       this.sampleController.tick(time);
     }
 
-    // Update visuals every quarter note, prescheduling 1/16th ahead
-    Tone.Draw.schedule(function () {
+    const drawLoop = function () {
       document.querySelector("#timestamp").innerHTML = timestamp;
       if (sixteenth === "3") {
         const pads = document.querySelectorAll(".beatStrip");
@@ -42,10 +41,14 @@ export class PlaybackController {
         pads.forEach(function (el) {
           el.style.width = increments[beat].toString() + "%";
         });
-
-        // Any other callbacks
-        this.beatCallback?.(beat);
       }
-    }, "+16n");
+
+      // Since we don't require precision, trigger draw at x:0:0
+      if (beat === "0" && sixteenth === "0")
+        this.sampleController.triggerCallbacks()
+    }
+
+    // Update visuals every quarter note, prescheduling 1/16th ahead
+    Tone.Draw.schedule(drawLoop.bind(this), "+16n");
   }
 }

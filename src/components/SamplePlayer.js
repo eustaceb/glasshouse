@@ -29,7 +29,7 @@ export function SamplePlayer(props) {
           stopSample={() => stopSample(index)}
           openFXPanel={() => openFXPanel(index)}
           isFxPanelOpen={selectedSample == index}
-          selected={sample.isPlaying()}
+          selected={sample.isActive()}
         />
       </Grid>
     );

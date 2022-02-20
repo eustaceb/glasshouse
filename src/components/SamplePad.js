@@ -4,18 +4,23 @@ import TuneIcon from "@material-ui/icons/Tune";
 import VolumeUpIcon from "@material-ui/icons/VolumeUp";
 
 export function SamplePad(props) {
+  const playStates = props.sample.playStates;
+
   // Rerender this component every bar
-  const [isPlaying, setPlaying] = useState(false);
+  const [playState, setPlayState] = useState(playStates.INACTIVE);
+  const isPlaying = props.sample.getPlayState() === playStates.PLAYING;
+  const isScheduled = props.sample.getPlayState() === playStates.SCHEDULED;
 
   const triggerSample = () => {
-    if (!props.sample.isPlaying()) {
-      props.playSample();
-    } else {
-      props.stopSample();
+    if (!props.sample.isActive()) {
       // Register end playback callback that will rerender this UI if not looping
-      props.sample.setEndPlaybackCallback(() => setPlaying(false));
+      props.sample.setEndPlaybackCallback(() => setPlayState(playStates.INACTIVE));
+      props.sample.setStartPlaybackCallback(() => setPlayState(playStates.PLAYING));
+      props.playSample();
+      setPlayState(playStates.SCHEDULED);
+    } else if (props.sample.getPlayState() == playStates.PLAYING) {
+      props.stopSample();
     }
-    setPlaying(!isPlaying);
   };
 
   return (
@@ -28,7 +33,7 @@ export function SamplePad(props) {
           <div className={isPlaying ? "beatStrip" : ""} />
         </div>
         <div style={{padding: "1%"}}>
-          <p className="sampleLabel">{props.sample.name}</p>
+          <p className="sampleLabel">{props.sample.name}{ isScheduled ? "..." : ""}</p>
           <p style={{textAlign: "center"}}>{isPlaying && <VolumeUpIcon />}</p>
         </div>
       </div>

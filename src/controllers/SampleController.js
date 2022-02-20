@@ -14,21 +14,42 @@ class Sample {
     this.player.toDestination().sync();
     this.color = color;
     this.duration = duration;
+    this.startPlaybackCallback = null;
     this.endPlaybackCallback = null;
     this.fx = new FXController(this.player);
+    this.playStates = {
+      INACTIVE: 0,
+      SCHEDULED: 1,
+      PLAYING: 2,
+    }
+    this.playState = this.playStates.INACTIVE;
   }
   play(time) {
-    console.log(`Playing ${this.name} at ${time}`);
     this.player.start(time);
   }
   stop(time) {
     this.player.stop(time);
   }
+  setStartPlaybackCallback(callback) {
+    this.startPlaybackCallback = callback;
+  }
   setEndPlaybackCallback(callback) {
     this.endPlaybackCallback = callback;
   }
-  isPlaying() {
-    return this.player.state === "started";
+  setInactive() {
+    this.playState = this.playStates.INACTIVE;
+  }
+  setScheduled() {
+    this.playState = this.playStates.SCHEDULED;
+  }
+  setPlaying() {
+    this.playState = this.playStates.PLAYING;
+  }
+  isActive() {
+    return this.playState !== this.playStates.INACTIVE;
+  }
+  getPlayState() {
+    return this.playState;
   }
   isLoop() {
     return this.type === "loop";
@@ -265,6 +286,15 @@ export class SampleController {
 
     // The play queue is an array of durations remaining to play
     this.playQueue = new Array(this.samples.length).fill(0);
+
+    // The finished queue is where samples go after they are finished playing
+    this.finishedQueue = new Array();
+
+    // Sample indices that are about to end
+    this.lapsingQueue = new Array();
+
+    // Sample indices that are about to be triggered for the first time
+    this.firstPlayQueue = new Array();
   }
 
   getSamples() {
@@ -272,6 +302,7 @@ export class SampleController {
   }
 
   tick(time) {
+    // Warning: this is intended to run in audio scheduler loop
     for (var i = 0; i < this.playQueue.length; i++) {
       const duration = this.playQueue[i];
       if (duration == 0) continue;
@@ -287,12 +318,69 @@ export class SampleController {
       // If the sample is about to stop playing, double check if it needs relooping
       if (this.playQueue[i] === 0 && this.samples[i].isLoop())
         this.playQueue[i] = this.samples[i].duration;
+
+      if (
+        !this.samples[i].isLoop() &&
+        duration === 1 &&
+        this.playQueue[i] === 0
+      )
+        this.lapsingQueue.push(i);
     }
+  }
+
+  isSampleLapsing(index) {
+    return this.lapsingQueue.find((n) => n === index);
+  }
+
+  isSampleFinished(index) {
+    return this.finishedQueue.find((n) => n === index);
+  }
+
+  isSamplePlaying(index) {
+    //TODO: Simply mark samples as playing and unmark on 0
+    // Lapsed duration is 0 + item not in lapsing or finished queues
+    // OR lapsed duration is equal to loop duration
+    if (this.playQueue[index] === 0) {
+      if (!this.isSampleLapsing(index) && !this.isSampleFinished(index)) {
+        return false;
+      }
+    }
+
+    // Not yet triggered
+    // Edge case: loop
+    if (this.samples[index].duration === this.playQueue[index]) {
+      return false;
+    }
+
+    return true;
+  }
+
+  triggerCallbacks() {
+    // Warning: should be run in draw loop as it's slow
+    for (var i = 0; i < this.finishedQueue.length; i++) {
+      // Make sure that it's not started playing again
+      const finishedSampleId = this.finishedQueue[i];
+      if (this.playQueue[finishedSampleId] === 0) {
+        if (this.samples[finishedSampleId].endPlaybackCallback !== null)
+          this.samples[finishedSampleId].setInactive();
+          this.samples[finishedSampleId].endPlaybackCallback();
+      }
+    }
+    for (var i = 0; i < this.firstPlayQueue.length; i++) {
+      const sampleId = this.firstPlayQueue[i];
+      if (this.samples[sampleId].startPlaybackCallback !== null) {
+        this.samples[sampleId].setPlaying();
+        this.samples[sampleId].startPlaybackCallback();
+      }
+    }
+    this.finishedQueue = this.lapsingQueue;
+    this.lapsingQueue = new Array();
+    this.firstPlayQueue = new Array();
   }
 
   playSample(sampleIndex) {
     this.playQueue[sampleIndex] = this.samples[sampleIndex].duration;
-    console.log(this.playQueue);
+    this.firstPlayQueue.push(sampleIndex);
   }
   stopSample(sampleIndex) {
     this.playQueue[sampleIndex] = 0;
