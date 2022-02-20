@@ -2,8 +2,16 @@ import * as Tone from "tone";
 import {FXController} from "./FXController";
 
 class Sample {
-  constructor(id, name, path, color, type, duration) {
-    this.id = id; // string type
+  static PlayStates = {
+    INACTIVE: 0,
+    SCHEDULED: 1,
+    PLAYING: 2,
+  };
+
+  static idCounter = 0;
+
+  constructor(name, path, color, type, duration) {
+    this.id = (Sample.idCounter++).toString(); // string type
     this.name = name;
     this.path = path;
     this.buffer = new Tone.Buffer(path);
@@ -14,21 +22,40 @@ class Sample {
     this.player.toDestination().sync();
     this.color = color;
     this.duration = duration;
+    this.startPlaybackCallback = null;
     this.endPlaybackCallback = null;
     this.fx = new FXController(this.player);
+    this.playState = Sample.PlayStates.INACTIVE;
   }
   play(time) {
-    console.log(`Playing ${this.name} at ${time}`);
     this.player.start(time);
   }
   stop(time) {
     this.player.stop(time);
   }
+  setStartPlaybackCallback(callback) {
+    this.startPlaybackCallback = callback;
+  }
   setEndPlaybackCallback(callback) {
     this.endPlaybackCallback = callback;
   }
+  isInactive() {
+    return this.playState === Sample.PlayStates.INACTIVE;
+  }
+  setInactive() {
+    this.playState = Sample.PlayStates.INACTIVE;
+  }
+  isScheduled() {
+    return this.playState === Sample.PlayStates.SCHEDULED;
+  }
+  setScheduled() {
+    this.playState = Sample.PlayStates.SCHEDULED;
+  }
   isPlaying() {
-    return this.player.state === "started";
+    return this.playState === Sample.PlayStates.PLAYING;
+  }
+  setPlaying() {
+    this.playState = Sample.PlayStates.PLAYING;
   }
   isLoop() {
     return this.type === "loop";
@@ -38,7 +65,6 @@ class Sample {
 export class SampleController {
   constructor() {
     this.samplesPlaying = 0;
-    this.idCounter = 0;
     // @TODO: Load from JSON
     this.samples = [
       {
@@ -254,7 +280,6 @@ export class SampleController {
     ].map(
       (sample) =>
         new Sample(
-          (this.idCounter++).toString(),
           sample.name,
           sample.path,
           sample.color,
@@ -265,6 +290,18 @@ export class SampleController {
 
     // The play queue is an array of durations remaining to play
     this.playQueue = new Array(this.samples.length).fill(0);
+
+    // The finished queue is where samples go after they are finished playing
+    this.finishedQueue = new Array();
+
+    // Sample indices that are about to end
+    this.lapsingQueue = new Array();
+
+    // Sample indices that are about to be triggered for the first time
+    this.firstPlayQueue = new Array();
+
+    // Sample indices that are not be relooped
+    this.terminateLoopQueue = new Array();
   }
 
   getSamples() {
@@ -272,6 +309,7 @@ export class SampleController {
   }
 
   tick(time) {
+    // Warning: this is intended to run in audio scheduler loop
     for (var i = 0; i < this.playQueue.length; i++) {
       const duration = this.playQueue[i];
       if (duration == 0) continue;
@@ -284,17 +322,82 @@ export class SampleController {
       // Reduce remaining duration by 1
       this.playQueue[i] = Math.max(0, this.playQueue[i] - 1);
 
+      const reloop =
+        this.samples[i].isLoop() && !this.terminateLoopQueue.includes(i);
+
       // If the sample is about to stop playing, double check if it needs relooping
-      if (this.playQueue[i] === 0 && this.samples[i].isLoop())
+      if (this.playQueue[i] === 0 && reloop)
         this.playQueue[i] = this.samples[i].duration;
+
+      if (!reloop && duration === 1 && this.playQueue[i] === 0)
+        this.lapsingQueue.push(i);
     }
   }
 
-  playSample(sampleIndex) {
-    this.playQueue[sampleIndex] = this.samples[sampleIndex].duration;
-    console.log(this.playQueue);
+  isSampleLapsing(index) {
+    return this.lapsingQueue.find((n) => n === index);
   }
-  stopSample(sampleIndex) {
-    this.playQueue[sampleIndex] = 0;
+
+  isSampleFinished(index) {
+    return this.finishedQueue.find((n) => n === index);
+  }
+
+  isSamplePlaying(index) {
+    //TODO: Simply mark samples as playing and unmark on 0
+    // Lapsed duration is 0 + item not in lapsing or finished queues
+    // OR lapsed duration is equal to loop duration
+    if (this.playQueue[index] === 0) {
+      if (!this.isSampleLapsing(index) && !this.isSampleFinished(index)) {
+        return false;
+      }
+    }
+
+    // Not yet triggered
+    // Edge case: loop
+    if (this.samples[index].duration === this.playQueue[index]) {
+      return false;
+    }
+
+    return true;
+  }
+
+  triggerCallbacks() {
+    // Warning: should be run in draw loop as it's slow
+    for (var i = 0; i < this.finishedQueue.length; i++) {
+      // Make sure that it's not started playing again
+      const finishedSampleId = this.finishedQueue[i];
+      if (this.playQueue[finishedSampleId] === 0) {
+        this.samples[finishedSampleId].setInactive();
+        if (this.samples[finishedSampleId].isLoop()) {
+          this.terminateLoopQueue = this.terminateLoopQueue.filter(
+            (sampleId) => sampleId != finishedSampleId
+          );
+        }
+        if (this.samples[finishedSampleId].endPlaybackCallback !== null) {
+          this.samples[finishedSampleId].endPlaybackCallback();
+        }
+      }
+    }
+    for (var i = 0; i < this.firstPlayQueue.length; i++) {
+      const sampleId = this.firstPlayQueue[i];
+      this.samples[sampleId].setPlaying();
+      if (this.samples[sampleId].startPlaybackCallback !== null) {
+        this.samples[sampleId].startPlaybackCallback();
+      }
+    }
+    this.finishedQueue = this.lapsingQueue;
+    this.lapsingQueue = new Array();
+    this.firstPlayQueue = new Array();
+  }
+
+  playSample(sampleId) {
+    this.playQueue[sampleId] = this.samples[sampleId].duration;
+    this.firstPlayQueue.push(sampleId);
+  }
+  stopSample(sampleId) {
+    // For now, only stop loops
+    if (this.samples[sampleId].isLoop()) {
+      this.terminateLoopQueue.push(sampleId);
+    }
   }
 }

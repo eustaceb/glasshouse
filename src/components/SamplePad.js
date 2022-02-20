@@ -4,18 +4,24 @@ import TuneIcon from "@material-ui/icons/Tune";
 import VolumeUpIcon from "@material-ui/icons/VolumeUp";
 
 export function SamplePad(props) {
-  // Rerender this component every bar
-  const [isPlaying, setPlaying] = useState(false);
+  const padStates = {
+    READY: 0,
+    SCHEDULING: 1,
+    PLAYING: 2
+  };
+  const [padState, setPadState] = useState(padStates.READY);
 
   const triggerSample = () => {
-    if (!props.sample.isPlaying()) {
-      props.playSample();
-    } else {
-      props.stopSample();
+    if (props.sample.isInactive()) {
       // Register end playback callback that will rerender this UI if not looping
-      props.sample.setEndPlaybackCallback(() => setPlaying(false));
+      props.sample.setEndPlaybackCallback(() => setPadState(padStates.READY));
+      props.sample.setStartPlaybackCallback(() => setPadState(padStates.PLAYING));
+      props.playSample();
+      setPadState(padStates.SCHEDULING);
+    } else if (props.sample.isPlaying()) {
+      props.stopSample();
+      setPadState(padStates.SCHEDULING);
     }
-    setPlaying(!isPlaying);
   };
 
   return (
@@ -23,13 +29,13 @@ export function SamplePad(props) {
       <div
         style={{backgroundColor: props.sample.color, position: "relative"}}
         onClick={() => triggerSample()}
-        className="pad">
+        className={ padState === padStates.SCHEDULING ? "pad blinking" : "pad"}>
         <div style={{position: "relative"}}>
-          <div className={isPlaying ? "beatStrip" : ""} />
+          <div className={padState === padStates.PLAYING ? "beatStrip" : ""} />
         </div>
         <div style={{padding: "1%"}}>
-          <p className="sampleLabel">{props.sample.name}</p>
-          <p style={{textAlign: "center"}}>{isPlaying && <VolumeUpIcon />}</p>
+          <p className="sampleLabel">{props.sample.name} [{props.sample.duration}]</p>
+          <p style={{textAlign: "center"}}>{padState === padStates.PLAYING && <VolumeUpIcon />}</p>
         </div>
       </div>
       <div style={{textAlign: "center"}}>
