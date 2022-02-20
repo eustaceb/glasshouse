@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useState} from "react";
+import React, {useState} from "react";
 import ReactDOM from "react-dom";
 import {SamplePlayer} from "./components/SamplePlayer.js";
 import Grid from "@material-ui/core/Grid";

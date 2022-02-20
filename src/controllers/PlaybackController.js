@@ -49,6 +49,6 @@ export class PlaybackController {
     }
 
     // Update visuals every quarter note, prescheduling 1/16th ahead
-    Tone.Draw.schedule(drawLoop.bind(this), "+16n");
+    Tone.Draw.schedule(drawLoop.bind(this), Tone.Time(time) + Tone.Time("16n"));
   }
 }

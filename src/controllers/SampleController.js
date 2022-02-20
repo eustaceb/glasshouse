@@ -2,8 +2,16 @@ import * as Tone from "tone";
 import {FXController} from "./FXController";
 
 class Sample {
-  constructor(id, name, path, color, type, duration) {
-    this.id = id; // string type
+  static PlayStates = {
+    INACTIVE: 0,
+    SCHEDULED: 1,
+    PLAYING: 2,
+  };
+
+  static idCounter = 0;
+
+  constructor(name, path, color, type, duration) {
+    this.id = (Sample.idCounter++).toString(); // string type
     this.name = name;
     this.path = path;
     this.buffer = new Tone.Buffer(path);
@@ -17,12 +25,7 @@ class Sample {
     this.startPlaybackCallback = null;
     this.endPlaybackCallback = null;
     this.fx = new FXController(this.player);
-    this.playStates = {
-      INACTIVE: 0,
-      SCHEDULED: 1,
-      PLAYING: 2,
-    }
-    this.playState = this.playStates.INACTIVE;
+    this.playState = Sample.PlayStates.INACTIVE;
   }
   play(time) {
     this.player.start(time);
@@ -36,20 +39,23 @@ class Sample {
   setEndPlaybackCallback(callback) {
     this.endPlaybackCallback = callback;
   }
+  isInactive() {
+    return this.playState === Sample.PlayStates.INACTIVE;
+  }
   setInactive() {
-    this.playState = this.playStates.INACTIVE;
+    this.playState = Sample.PlayStates.INACTIVE;
+  }
+  isScheduled() {
+    return this.playState === Sample.PlayStates.SCHEDULED;
   }
   setScheduled() {
-    this.playState = this.playStates.SCHEDULED;
+    this.playState = Sample.PlayStates.SCHEDULED;
+  }
+  isPlaying() {
+    return this.playState === Sample.PlayStates.PLAYING;
   }
   setPlaying() {
-    this.playState = this.playStates.PLAYING;
-  }
-  isActive() {
-    return this.playState !== this.playStates.INACTIVE;
-  }
-  getPlayState() {
-    return this.playState;
+    this.playState = Sample.PlayStates.PLAYING;
   }
   isLoop() {
     return this.type === "loop";
@@ -59,7 +65,6 @@ class Sample {
 export class SampleController {
   constructor() {
     this.samplesPlaying = 0;
-    this.idCounter = 0;
     // @TODO: Load from JSON
     this.samples = [
       {
@@ -275,7 +280,6 @@ export class SampleController {
     ].map(
       (sample) =>
         new Sample(
-          (this.idCounter++).toString(),
           sample.name,
           sample.path,
           sample.color,
@@ -361,15 +365,16 @@ export class SampleController {
       // Make sure that it's not started playing again
       const finishedSampleId = this.finishedQueue[i];
       if (this.playQueue[finishedSampleId] === 0) {
-        if (this.samples[finishedSampleId].endPlaybackCallback !== null)
-          this.samples[finishedSampleId].setInactive();
+        this.samples[finishedSampleId].setInactive();
+        if (this.samples[finishedSampleId].endPlaybackCallback !== null) {
           this.samples[finishedSampleId].endPlaybackCallback();
+        }
       }
     }
     for (var i = 0; i < this.firstPlayQueue.length; i++) {
       const sampleId = this.firstPlayQueue[i];
+      this.samples[sampleId].setPlaying();
       if (this.samples[sampleId].startPlaybackCallback !== null) {
-        this.samples[sampleId].setPlaying();
         this.samples[sampleId].startPlaybackCallback();
       }
     }

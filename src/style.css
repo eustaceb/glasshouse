@@ -83,3 +83,11 @@
 .startModal a:active {
     color: blue;
 }
+.blinking {
+    animation: blinker 1s linear infinite;
+}
+@keyframes blinker {
+    50% {
+        opacity: 0.5;
+    }
+}
