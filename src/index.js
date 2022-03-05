@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import {SamplePlayer} from "./components/SamplePlayer.js";
 import Grid from "@material-ui/core/Grid";
 import {synthTheme} from "./theme.js";
+import * as Tone from "tone";
 import {ThemeProvider} from "@material-ui/core/styles";
 import {MouseController} from "./controllers/MouseController.js";
 import {SampleController} from "./controllers/SampleController.js";
@@ -33,9 +34,10 @@ function App(props) {
   const [initialised, setInitialised] = useState(false);
 
   const start = function () {
-    props.playback.start(0.1);
-    // Start off with first sample playing
+    Tone.start();
     props.sampler.playSample(0);
+    props.playback.start(0);
+    // Start off with first sample playing
     setInitialised(true);
   };
 
@@ -64,6 +66,10 @@ function App(props) {
 }
 
 ReactDOM.render(
-  <App mouseController={mouseController} sampler={sampler} playback={playback}/>,
+  <App
+    mouseController={mouseController}
+    sampler={sampler}
+    playback={playback}
+  />,
   document.getElementById("root")
 );
