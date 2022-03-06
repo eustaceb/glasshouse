@@ -6,6 +6,7 @@ import {ThemeProvider} from "@material-ui/core/styles";
 import {synthTheme} from "./theme.js";
 import * as Tone from "tone";
 import {MouseController} from "./controllers/MouseController.js";
+import {Composition} from "./controllers/Composition.js";
 import {PlaybackController} from "./controllers/PlaybackController.js";
 import {SampleController} from "./controllers/SampleController.js";
 import "./style.css";
@@ -17,6 +18,7 @@ if (process.env.NODE_ENV !== "production") {
 const mouseController = new MouseController(window.document);
 const sampler = new SampleController();
 const playback = new PlaybackController(sampler);
+const composition = new Composition(sampler, 5, 5);
 
 function StartModal(props) {
   return (
@@ -28,46 +30,6 @@ function StartModal(props) {
       </p>
     </div>
   );
-}
-
-const TileColors = {
-  SAMPLE: ["#CD5C5C", "#F08080", "#FA8072", "#E9967A", "#FFA07A"],
-  FX: ["#9ad7e6", "#9ad7e6", "#b2d1d9", "#5edfff", "#70b7cf"],
-};
-
-function getColor(tileType) {
-  const selection = Math.round(Math.random() * 4);
-  return TileColors[tileType][selection];
-}
-
-function createSampleTile(name, rows, cols, active=false) {
-  const type = "SAMPLE";
-  return {name: name, rows: rows, cols: cols, type: type, active: active, color: getColor(type)};
-}
-function createFxTile(name, rows, cols, active=false) {
-  const type = "FX";
-  return {name: name, rows: rows, cols: cols, type: type, active: active, color: getColor(type)};
-}
-
-function getTiles() {
-  const row1 = [
-    createSampleTile("Vocals", 2, 3, true),
-    createSampleTile("Back Vocals", 1, 2),
-  ];
-  const row10 = [createFxTile("Echo", 1, 1), createFxTile("Pitch Shift", 1, 1)];
-  const row2 = [createSampleTile("Drums", 1, 5, true)];
-  const row3 = [
-    createFxTile("Vibrato", 1, 1),
-    createFxTile("Chorus", 1, 1),
-    createFxTile("Echo", 1, 1),
-    createSampleTile("Sham", 1, 2),
-  ];
-  const row4 = [createSampleTile("Sham", 1, 3), createSampleTile("Pads", 1, 2)];
-  const tiles = [row1, row10, row2, row3, row4];
-
-  // Gen IDs
-  for (var i = 0; i < tiles.length; i++) tiles[i].id = i;
-  return tiles;
 }
 
 function App(props) {
@@ -90,7 +52,7 @@ function App(props) {
               0:0:0
             </p>
           </Grid>
-          <SampleTable tiles={getTiles()}/>
+          <SampleTable composition={composition}/>
         </Grid>
       ) : (
         <StartModal start={() => start()} />

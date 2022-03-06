@@ -93,3 +93,6 @@
         opacity: 0.5;
     }
 }
+.fillHeight {
+    height: 100%;
+}

@@ -4,17 +4,19 @@ import {TableCell} from "@material-ui/core";
 import {AlbumTwoTone} from "@material-ui/icons";
 
 export function SampleTableCell(props) {
+  const cell = props.cell;
+
   return (
-    <TableCell colSpan={props.tile.cols} rowSpan={props.tile.rows}>
+    <TableCell colSpan={cell.cols} rowSpan={cell.rows} className="fillHeight">
       <div
-        style={{backgroundColor: props.tile.color, position: "relative"}}
+        style={{backgroundColor: cell.getColor(), position: "relative"}}
         // onClick={() => triggerSample()}
-        className={"pad"}>
+        className={"pad fillHeight"}>
         <div style={{position: "relative"}}>
-          <div className={props.tile.active ? "beatStrip" : ""} />
+          <div className={cell.getName().length > 5 ? "beatStrip" : ""} />
         </div>
         <div style={{padding: "1%"}}>
-          <p className="sampleLabel">{props.tile.name}</p>
+          <p className="sampleLabel">{cell.getName()}</p>
           <p style={{textAlign: "center"}}>
             <AlbumTwoTone />
           </p>

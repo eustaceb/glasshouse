@@ -27,9 +27,10 @@ class FxParam {
 }
 
 class Fx {
-  constructor(name, displayName, params) {
+  constructor(name, displayName, color, params) {
     this.name = name;
     this.displayName = displayName;
+    this.color = color;
     this.params = params;
     this.params["enabled"] = new FxParam(
       "enabled",
@@ -60,13 +61,20 @@ export class FXController {
     };
 
     this.effects = {};
-    this.effects["distortion"] = new Fx("distortion", "Distortion", {
+    this.effects["distortion"] = new Fx("distortion", "Distortion", "#800f31", {
       amount: new FxParam("amount", "Amount", "range", [0, 1], 0),
     });
-    this.effects["reverb"] = new Fx("reverb", "Reverb", {
+    this.effects["reverb"] = new Fx("reverb", "Reverb", "#099db8", {
       decay: new FxParam("decay", "Decay (s)", "range", [0.001, 10], 0.001),
     });
-    this.effects["delay"] = new Fx("delay", "Delay", {
+
+    // @TODO: remove this dummy fx
+    this.effects["pitchshift"] = new Fx("reverb", "Pitch Shift", "#099db8", {
+      decay: new FxParam("decay", "Decay (s)", "range", [0.001, 10], 0.001),
+    });
+    //
+
+    this.effects["delay"] = new Fx("delay", "Delay", "#6909b8", {
       delayTime: new FxParam(
         "delayTime",
         "Delay Time (ms)",
@@ -76,7 +84,7 @@ export class FXController {
       ),
       feedback: new FxParam("feedback", "Feedback", "range", [0, 1], 0),
     });
-    this.effects["chorus"] = new Fx("chorus", "Chorus", {
+    this.effects["chorus"] = new Fx("chorus", "Chorus", "#8ca831", {
       frequency: new FxParam(
         "frequency",
         "Frequency",
@@ -93,6 +101,11 @@ export class FXController {
       ),
       depth: new FxParam("depth", "Depth", "range", [0.0, 10.0], 0),
     });
+  }
+
+  getFxByName(fxName) {
+    console.log(`looking up ${fxName}`);
+    return this.effects[fxName];
   }
 
   setFxParam(fxName, parameter, value) {

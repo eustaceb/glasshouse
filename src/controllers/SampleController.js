@@ -322,6 +322,12 @@ export class SampleController {
     return this.samples;
   }
 
+  getSampleByName(sampleName) {
+    const sample = this.samples.find((s) => s.name == sampleName);
+    console.assert(sample, `Sample ${sampleName} not found`);
+    return sample;
+  }
+
   tick(time) {
     // Warning: this is intended to run in audio scheduler loop
     for (var i = 0; i < this.playQueue.length; i++) {
