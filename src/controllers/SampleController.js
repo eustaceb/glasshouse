@@ -290,6 +290,22 @@ export class SampleController {
         "type": "loop",
         "duration": 8,
         "category": "Volca_FM"
+      },
+      {
+        "name": "Click 1",
+        "path": "audio/test/click1.mp3",
+        "color": "#F183AC",
+        "type": "loop",
+        "duration": 1,
+        "category": "Test"
+      },
+      {
+        "name": "Click 2",
+        "path": "audio/test/click2.mp3",
+        "color": "#A113AC",
+        "type": "loop",
+        "duration": 1,
+        "category": "Test"
       }
     ].map(
       (sample) =>
