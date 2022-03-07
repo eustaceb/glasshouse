@@ -10,6 +10,7 @@ import {Composition} from "./controllers/Composition.js";
 import {PlaybackController} from "./controllers/PlaybackController.js";
 import {SampleController} from "./controllers/SampleController.js";
 import "./style.css";
+import { FXController } from "./controllers/FXController.js";
 
 if (process.env.NODE_ENV !== "production") {
   console.log("Looks like we are in development mode!");
@@ -18,7 +19,8 @@ if (process.env.NODE_ENV !== "production") {
 const mouseController = new MouseController(window.document);
 const sampler = new SampleController();
 const playback = new PlaybackController(sampler);
-const composition = new Composition(sampler, 5, 5);
+const fx = new FXController();
+const composition = new Composition(sampler, fx, 5, 5);
 
 function StartModal(props) {
   return (
