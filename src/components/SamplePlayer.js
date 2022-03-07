@@ -2,12 +2,13 @@ import React, {useState} from "react";
 import {Table, TableBody, TableCell, TableRow} from "@material-ui/core";
 
 import {FxPad} from "./FxPad.js";
+import {Navigation} from "./Navigation.js";
 import {SamplePad} from "./SamplePad.js";
 
 export function SamplePlayer(props) {
   const [frameNumber, setFrameNumber] = useState(0);
   const frame = props.composition.getFrame(frameNumber);
-
+  const frameName = props.composition.getFrameName(frameNumber);
   const playSample = (sampleIndex) => {
     props.sampler.playSample(sampleIndex);
   };
@@ -17,7 +18,7 @@ export function SamplePlayer(props) {
 
   const generatePad = (cell, index) => (
     <TableCell
-      key={index}
+      key={frameName + index.toString()}
       colSpan={cell.cols}
       rowSpan={cell.rows}
       className="fillHeight">
@@ -36,8 +37,18 @@ export function SamplePlayer(props) {
   return (
     <Table style={{width: "40%"}} className="fillHeight">
       <TableBody>
+        <TableRow>
+          <TableCell colSpan={5}>
+            <Navigation
+              setPage={(frameNumber) => setFrameNumber(frameNumber)}
+              page={frameNumber}
+              pageName={frameName}
+              pageCount={props.composition.getFrameCount()}
+            />
+          </TableCell>
+        </TableRow>
         {frame.map((row, index) => (
-          <TableRow key={index}>{row.map(generatePad)}</TableRow>
+          <TableRow key={frameName + index.toString()}>{row.map(generatePad)}</TableRow>
         ))}
       </TableBody>
     </Table>

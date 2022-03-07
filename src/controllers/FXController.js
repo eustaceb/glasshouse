@@ -98,7 +98,6 @@ export class FXController {
   }
 
   getFxByName(fxName) {
-    console.log(`looking up ${fxName}`);
     return this.effects[fxName];
   }
 
