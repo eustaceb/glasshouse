@@ -12,7 +12,6 @@ export class Composition {
     this.frames.append(frame);
   }
   getFrame(frameNumber) {
-    console.log(frameNumber);
     console.assert(
       frameNumber < this.frames.length,
       `Requested frame ${frameNumber} which is less than current frames ${this.frames.length}`

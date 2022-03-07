@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import ReactDOM from "react-dom";
-import {SampleTable} from "./components/SampleTable.js";
+import {SamplePlayer} from "./components/SamplePlayer.js";
 import {Grid} from "@material-ui/core";
 import {ThemeProvider} from "@material-ui/core/styles";
 import {synthTheme} from "./theme.js";
@@ -52,7 +52,7 @@ function App(props) {
               0:0:0
             </p>
           </Grid>
-          <SampleTable composition={composition}/>
+          <SamplePlayer composition={composition} sampler={props.sampler}/>
         </Grid>
       ) : (
         <StartModal start={() => start()} />
