@@ -157,9 +157,9 @@ export class FxTrigger {
     this.type = data.type;
     this.color = data.color;
     this.node = this.createFxNode(data.type, data.params);
-    //this.params["enabled"] = {"value": false};
   }
   enable(enabled) {
+    console.log(`${enabled?"Enabling":"Disabling"} ${this.type} ${this.displayName}`);
     if (enabled) this.player.connect(this.node);
     else this.player.disconnect(this.node);
   }

@@ -2,10 +2,10 @@ import {FxTrigger} from "./FXController.js";
 import {SampleCell, FxCell} from "./Cells.js";
 
 export class Composition {
-  constructor(sampleController, fxController, rows, cols) {
+  constructor(sampleController, rows, cols) {
     this.rows = rows;
     this.cols = cols;
-    this.frames = this.generateData(sampleController, fxController);
+    this.frames = this.generateData(sampleController);
   }
   addFrame(frame) {
     const validateRow = (row) =>
@@ -25,27 +25,27 @@ export class Composition {
     );
     return this.frames[frameNumber];
   }
-  generateData(sampleController, fxController) {
+  generateData(sampleController) {
     // List of frames
     return [
       this.generateFrame0(
-        sampleController,
-        fxController
-      ) /*this.generateFrame1(sampleController, fxController)*/,
+        sampleController
+      ) /*this.generateFrame1(sampleController)*/,
     ];
   }
-  generateFrame0(sampleController, fxController) {
+
+  generateFrame0(sampleController) {
     // Looks up a sample in the controller
     const vocalsIntro = sampleController.getSampleByName("Vocals Intro");
-    const volcaFirst = sampleController.getSampleByName("Volca FM first");
-    const percFirst = sampleController.getSampleByName("Perc first");
-    const shamHighPluck = sampleController.getSampleByName("Sham HighPluck");
     const bassIntro = sampleController.getSampleByName("Bass Intro");
+    const shamHighPluck = sampleController.getSampleByName("Sham HighPluck");
+    const percFirst = sampleController.getSampleByName("Perc first");
+    const percSecond = sampleController.getSampleByName("Perc second");
     const chiralSynth = sampleController.getSampleByName("Chiral Synth");
 
     const row0 = [
       new SampleCell(vocalsIntro, 2, 3),
-      new SampleCell(volcaFirst, 1, 2),
+      new SampleCell(percFirst, 1, 2),
     ];
     const fxChorus = new FxTrigger({
       player: vocalsIntro.player,
@@ -62,7 +62,7 @@ export class Composition {
       params: {delayTime: "1n", feedback: 0.2},
     });
     const row1 = [new FxCell(fxChorus, 1, 1), new FxCell(fxDelay, 1, 1)];
-    const row2 = [new SampleCell(percFirst, 1, 5)];
+    const row2 = [new SampleCell(percSecond, 1, 5)];
 
     const fxDistortion = new FxTrigger({
       player: chiralSynth.player,
