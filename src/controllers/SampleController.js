@@ -284,13 +284,29 @@ export class SampleController {
         category: "Volca_FM",
       },
       {
-        name: "Volca FM third",
-        path: "audio/Volca_FM/Volca_FM_third_8bar.mp3",
-        color: "#F113AC",
-        type: "loop",
-        duration: 8,
-        category: "Volca_FM",
+        "name": "Volca FM third",
+        "path": "audio/Volca_FM/Volca_FM_third_8bar.mp3",
+        "color": "#F113AC",
+        "type": "loop",
+        "duration": 8,
+        "category": "Volca_FM"
       },
+      {
+        "name": "Click 1",
+        "path": "audio/test/click1.mp3",
+        "color": "#F183AC",
+        "type": "loop",
+        "duration": 1,
+        "category": "Test"
+      },
+      {
+        "name": "Click 2",
+        "path": "audio/test/click2.mp3",
+        "color": "#A113AC",
+        "type": "loop",
+        "duration": 1,
+        "category": "Test"
+      }
     ].map(
       (sample) =>
         new Sample(
