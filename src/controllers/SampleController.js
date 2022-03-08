@@ -415,6 +415,10 @@ export class SampleController {
     this.playQueue[sampleId] = this.samples[sampleId].duration;
     this.firstPlayQueue.push(sampleId);
   }
+  playSampleByName(sampleName) {
+    const sampleId = this.getSampleByName(sampleName).id;
+    this.playSample(sampleId);
+  }
   stopSample(sampleId) {
     // For now, only stop loops
     if (this.samples[sampleId].isLoop()) {

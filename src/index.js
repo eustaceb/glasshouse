@@ -37,7 +37,7 @@ function App(props) {
 
   const start = function () {
     Tone.start();
-    props.sampler.playSample(0);
+    props.sampler.playSampleByName("Bass Chorus");
     props.playback.start(0);
     // Start off with first sample playing
     setInitialised(true);
