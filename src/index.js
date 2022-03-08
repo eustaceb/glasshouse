@@ -1,13 +1,14 @@
 import React, {useState} from "react";
 import ReactDOM from "react-dom";
 import {SamplePlayer} from "./components/SamplePlayer.js";
-import Grid from "@material-ui/core/Grid";
+import {Grid} from "@material-ui/core";
+import {ThemeProvider} from "@material-ui/core/styles";
 import {synthTheme} from "./theme.js";
 import * as Tone from "tone";
-import {ThemeProvider} from "@material-ui/core/styles";
 import {MouseController} from "./controllers/MouseController.js";
-import {SampleController} from "./controllers/SampleController.js";
+import {Composition} from "./controllers/Composition.js";
 import {PlaybackController} from "./controllers/PlaybackController.js";
+import {SampleController} from "./controllers/SampleController.js";
 import "./style.css";
 
 if (process.env.NODE_ENV !== "production") {
@@ -17,6 +18,7 @@ if (process.env.NODE_ENV !== "production") {
 const mouseController = new MouseController(window.document);
 const sampler = new SampleController();
 const playback = new PlaybackController(sampler);
+const composition = new Composition(sampler, 5, 5);
 
 function StartModal(props) {
   return (
@@ -35,7 +37,7 @@ function App(props) {
 
   const start = function () {
     Tone.start();
-    props.sampler.playSample(0);
+    props.sampler.playSampleByName("Bass Chorus");
     props.playback.start(0);
     // Start off with first sample playing
     setInitialised(true);
@@ -50,13 +52,7 @@ function App(props) {
               0:0:0
             </p>
           </Grid>
-          <Grid item xs={12}>
-            <SamplePlayer
-              sampler={props.sampler}
-              mouseController={props.mouseController}
-              playback={props.playback}
-            />
-          </Grid>
+          <SamplePlayer composition={composition} sampler={props.sampler}/>
         </Grid>
       ) : (
         <StartModal start={() => start()} />

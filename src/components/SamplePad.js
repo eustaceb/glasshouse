@@ -1,55 +1,52 @@
 import React, {useState} from "react";
-import LoopIcon from "@material-ui/icons/Loop";
-import TuneIcon from "@material-ui/icons/Tune";
+import VolumeOffIcon from "@material-ui/icons/Volumeoff";
 import VolumeUpIcon from "@material-ui/icons/VolumeUp";
 
 export function SamplePad(props) {
   const padStates = {
     READY: 0,
-    SCHEDULING: 1,
-    PLAYING: 2
+    SCHEDULING_PLAY: 1,
+    PLAYING: 2,
+    SCHEDULING_STOP: 3,
   };
   const [padState, setPadState] = useState(padStates.READY);
+  const cell = props.cell;
+  const sample = props.cell.sample;
+  const scheduling = padState === padStates.SCHEDULING_PLAY || padState === padStates.SCHEDULING_STOP;
+  const playing = padState === padStates.SCHEDULING_STOP || padState === padStates.PLAYING;
 
   const triggerSample = () => {
-    if (props.sample.isInactive()) {
+    if (sample.isInactive()) {
       // Register end playback callback that will rerender this UI if not looping
-      props.sample.setEndPlaybackCallback(() => setPadState(padStates.READY));
-      props.sample.setStartPlaybackCallback(() => setPadState(padStates.PLAYING));
+      sample.setEndPlaybackCallback(() => setPadState(padStates.READY));
+      sample.setStartPlaybackCallback(() => setPadState(padStates.PLAYING));
       props.playSample();
-      setPadState(padStates.SCHEDULING);
-    } else if (props.sample.isPlaying()) {
+      setPadState(padStates.SCHEDULING_PLAY);
+    } else if (sample.isPlaying()) {
       props.stopSample();
-      setPadState(padStates.SCHEDULING);
+      setPadState(padStates.SCHEDULING_STOP);
     }
   };
 
   return (
-    <div>
-      <div
-        style={{backgroundColor: props.sample.color, position: "relative"}}
-        onClick={() => triggerSample()}
-        className={ padState === padStates.SCHEDULING ? "pad blinking" : "pad"}>
-        <div style={{position: "relative"}}>
-          <div className={padState === padStates.PLAYING ? "beatStrip" : ""} />
-        </div>
-        <div style={{padding: "1%"}}>
-          <p className="sampleLabel">{props.sample.name} [{props.sample.duration}]</p>
-          <p style={{textAlign: "center"}}>{padState === padStates.PLAYING && <VolumeUpIcon />}</p>
-        </div>
+    <div
+      style={{backgroundColor: cell.getColor(), position: "relative"}}
+      onClick={() => triggerSample()}
+      className={scheduling  ? "pad blinking" : "pad"}>
+      <div style={{position: "relative"}}>
+        <div className={playing ? "beatStrip" : ""} />
       </div>
-      <div style={{textAlign: "center"}}>
-        <LoopIcon
-          className={
-            "paddedIcon" + (props.sample.type == "loop" ? " activeIcon" : "")
-          }
-        />
-        <TuneIcon
-          className={"paddedIcon" + (props.isFxPanelOpen ? " activeIcon" : "")}
-          onClick={() => {
-            props.openFXPanel();
-          }}
-        />
+      <div style={{padding: "1%"}}>
+        <p className="sampleLabel">
+          {cell.getName() + ` ${sample.duration} bars`}
+        </p>
+        <p style={{textAlign: "center"}}>
+          {playing ? (
+            <VolumeUpIcon />
+          ) : (
+            <VolumeOffIcon />
+          )}
+        </p>
       </div>
     </div>
   );

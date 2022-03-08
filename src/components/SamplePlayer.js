@@ -1,12 +1,14 @@
 import React, {useState} from "react";
-import Grid from "@material-ui/core/Grid";
-import {FXPanel} from "./FXPanel.js";
+import {Table, TableBody, TableCell, TableRow} from "@material-ui/core";
+
+import {FxPad} from "./FxPad.js";
+import {Navigation} from "./Navigation.js";
 import {SamplePad} from "./SamplePad.js";
 
 export function SamplePlayer(props) {
-  const [selectedSample, setSelectedSample] = useState(null);
-  const samples = props.sampler.getSamples();
-
+  const [frameNumber, setFrameNumber] = useState(0);
+  const frame = props.composition.getFrame(frameNumber);
+  const frameName = props.composition.getFrameName(frameNumber);
   const playSample = (sampleIndex) => {
     props.sampler.playSample(sampleIndex);
   };
@@ -14,58 +16,49 @@ export function SamplePlayer(props) {
     props.sampler.stopSample(sampleIndex);
   };
 
-  const openFXPanel = (index) => {
-    index != selectedSample
-      ? setSelectedSample(index)
-      : setSelectedSample(null);
-  };
+  const switchFrame = (frameNumber) => {
+    props.sampler.stopAllSamples();
+    props.composition.getBackgroundSampleNames(frameNumber).forEach((sampleName) => {
+      props.sampler.playSampleByName(sampleName);
+    });
+    setFrameNumber(frameNumber);
+  }
 
-  const samplePads = samples.map((sample, index) => {
-    return (
-      <Grid item xs={6} xl={2} key={index}>
+  const generatePad = (cell, index) => (
+    <TableCell
+      key={frameName + index.toString()}
+      colSpan={cell.cols}
+      rowSpan={cell.rows}
+      className="fillHeight">
+      {cell.isSample() ? (
         <SamplePad
-          sample={sample}
-          playSample={() => playSample(index)}
-          stopSample={() => stopSample(index)}
-          openFXPanel={() => openFXPanel(index)}
-          isFxPanelOpen={selectedSample == index}
+          cell={cell}
+          playSample={() => playSample(cell.sample.id)}
+          stopSample={() => stopSample(cell.sample.id)}
         />
-      </Grid>
-    );
-  });
-
-  const fxPanels = samples.map((sample, index) => {
-    return (
-      <div style={{position: "relative"}} key={index}>
-        <div
-          className={index == selectedSample ? "centered" : "centered hidden"}
-          style={{
-            zIndex: index,
-            position: "absolute",
-            top: "0px",
-            left: "0px",
-            width: "100%",
-          }}>
-          <FXPanel
-            effects={sample.fx.effects}
-            panelColor={sample.color}
-            setFxParam={(fxName, param, value) =>
-              sample.fx.setFxParam(fxName, param, value)
-            }
-          />
-        </div>
-      </div>
-    );
-  });
+      ) : (
+        <FxPad cell={cell} />
+      )}
+    </TableCell>
+  );
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={6}>
-        {fxPanels}
-      </Grid>
-      <Grid container item xs={6} spacing={2}>
-        <Grid container>{samplePads}</Grid>
-      </Grid>
-    </Grid>
+    <Table style={{width: "40%"}} className="fillHeight">
+      <TableBody>
+        <TableRow>
+          <TableCell colSpan={5}>
+            <Navigation
+              setPage={(frameNumber) => switchFrame(frameNumber)}
+              page={frameNumber}
+              pageName={frameName}
+              pageCount={props.composition.getFrameCount()}
+            />
+          </TableCell>
+        </TableRow>
+        {frame.map((row, index) => (
+          <TableRow key={frameName + index.toString()}>{row.map(generatePad)}</TableRow>
+        ))}
+      </TableBody>
+    </Table>
   );
 }

@@ -13,9 +13,11 @@
     user-select: none;
 }
 .pad {
+    display:block;
     border-radius: 10px;
-    height: 100px;
-    margin: 5px;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
     cursor: pointer;
     text-align: center;
     color: white;
@@ -86,8 +88,14 @@
 .blinking {
     animation: blinker 1s linear infinite;
 }
+.blinkingSlow {
+    animation: blinker 2s linear infinite;
+}
 @keyframes blinker {
     50% {
         opacity: 0.5;
     }
+}
+.fillHeight {
+    height: 100%;
 }

@@ -42,10 +42,9 @@ export class PlaybackController {
           el.style.width = increments[beat].toString() + "%";
         });
       }
-
       // Since we don't require precision, trigger draw at x:0:0
       if (beat === "0" && sixteenth === "0")
-        this.sampleController.triggerCallbacks()
+        this.sampleController.triggerCallbacks();
     }
 
     // Update visuals every quarter note, prescheduling 1/16th ahead

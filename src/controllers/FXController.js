@@ -27,9 +27,10 @@ class FxParam {
 }
 
 class Fx {
-  constructor(name, displayName, params) {
+  constructor(name, displayName, color, params) {
     this.name = name;
     this.displayName = displayName;
+    this.color = color;
     this.params = params;
     this.params["enabled"] = new FxParam(
       "enabled",
@@ -60,13 +61,20 @@ export class FXController {
     };
 
     this.effects = {};
-    this.effects["distortion"] = new Fx("distortion", "Distortion", {
+    this.effects["distortion"] = new Fx("distortion", "Distortion", "#800f31", {
       amount: new FxParam("amount", "Amount", "range", [0, 1], 0),
     });
-    this.effects["reverb"] = new Fx("reverb", "Reverb", {
+    this.effects["reverb"] = new Fx("reverb", "Reverb", "#099db8", {
       decay: new FxParam("decay", "Decay (s)", "range", [0.001, 10], 0.001),
     });
-    this.effects["delay"] = new Fx("delay", "Delay", {
+
+    // @TODO: remove this dummy fx
+    this.effects["pitchshift"] = new Fx("reverb", "Pitch Shift", "#099db8", {
+      decay: new FxParam("decay", "Decay (s)", "range", [0.001, 10], 0.001),
+    });
+    //
+
+    this.effects["delay"] = new Fx("delay", "Delay", "#6909b8", {
       delayTime: new FxParam(
         "delayTime",
         "Delay Time (ms)",
@@ -76,14 +84,8 @@ export class FXController {
       ),
       feedback: new FxParam("feedback", "Feedback", "range", [0, 1], 0),
     });
-    this.effects["chorus"] = new Fx("chorus", "Chorus", {
-      frequency: new FxParam(
-        "frequency",
-        "Frequency",
-        "range",
-        [0.0, 10.0],
-        0
-      ),
+    this.effects["chorus"] = new Fx("chorus", "Chorus", "#8ca831", {
+      frequency: new FxParam("frequency", "Frequency", "range", [0.0, 10.0], 0),
       delayTime: new FxParam(
         "delayTime",
         "Delay Time (ms)",
@@ -95,8 +97,14 @@ export class FXController {
     });
   }
 
+  getFxByName(fxName) {
+    return this.effects[fxName];
+  }
+
   setFxParam(fxName, parameter, value) {
-    console.log("Setting " + fxName + " param " + parameter + " value " + value.toString());
+    console.log(
+      "Setting " + fxName + " param " + parameter + " value " + value.toString()
+    );
     const fx = this.effects[fxName];
     const prevEnabled = fx.isEnabled();
 
@@ -114,7 +122,6 @@ export class FXController {
         this.player.connect(fx.node);
       }
     }
-
   }
 
   createDistortionFx(params) {
@@ -139,5 +146,39 @@ export class FXController {
       params["delayTime"]["value"],
       params["depth"]["value"]
     ).toDestination();
+  }
+}
+
+export class FxTrigger {
+  constructor(data) {
+    this.player = data.player;
+    this.displayName = data.displayName;
+    this.type = data.type;
+    this.color = data.color;
+    this.node = this.createFxNode(data.type, data.params);
+  }
+  enable(enabled) {
+    console.log(`${enabled?"Enabling":"Disabling"} ${this.type} ${this.displayName}`);
+    if (enabled) this.player.connect(this.node);
+    else this.player.disconnect(this.node);
+  }
+  createFxNode(type, params) {
+    if (type == "distortion") {
+      return new Tone.Distortion(params["amount"]).toDestination();
+    } else if (type == "reverb") {
+      return new Tone.Reverb(params["decay"]).toDestination();
+    } else if (type == "pingpong") {
+      return new Tone.PingPongDelay(
+        params["delayTime"],
+        params["feedback"]
+      ).toDestination();
+    } else if (type == "chorus") {
+      return new Tone.Chorus(
+        params["frequency"],
+        params["delayTime"],
+        params["depth"]
+      ).toDestination();
+    }
+    console.assert(false, `Unknown fx type: ${type}`);
   }
 }
