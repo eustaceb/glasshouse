@@ -1,6 +1,6 @@
 You can find a deployed instance of the app at [https://web-sampler-sniif.ondigitalocean.app](https://web-sampler-sniif.ondigitalocean.app).
 
-![Screenshot of application](docs/images/screenshot.png?raw=true "Screenshot of application")
+![Screenshot of application](docs/images/sample-table.png?raw=true "Screenshot of application")
 
 The application was built using React, Tone.js, Material-UI and Webpack.
 
