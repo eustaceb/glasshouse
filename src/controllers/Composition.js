@@ -1,11 +1,13 @@
 import {FxTrigger} from "./FXController.js";
 import {SampleCell, FxCell} from "./Cells.js";
+import { ThreeSixtyRounded } from "@material-ui/icons";
 
 export class Composition {
   constructor(sampleController, rows, cols) {
     this.rows = rows;
     this.cols = cols;
     this.frameNames = [];
+    this.backgroundSampleNames = [];
     this.frames = this.generateData(sampleController);
   }
   getFrameCount() {
@@ -36,6 +38,9 @@ export class Composition {
     );
     return this.frameNames[frameNumber];
   }
+  getBackgroundSampleNames(frameNumber) {
+    return this.backgroundSampleNames[frameNumber];
+  }
   generateData(sampleController) {
     this.frameNames = ["Intro", "First Section"];
     return [
@@ -45,6 +50,7 @@ export class Composition {
   }
 
   generateFrame0(sampleController) {
+    this.backgroundSampleNames.push(["Bass Chorus"]);
     const row0 = [
       {
         type: "sample",
@@ -134,8 +140,8 @@ export class Composition {
     const row4 = [
       {
         type: "sample",
-        name: "Bass Intro",
-        displayName: "Bass (intro)",
+        name: "Volca FM first",
+        displayName: "Volca FM (first)",
         rows: 1,
         cols: 3,
       },
@@ -151,6 +157,7 @@ export class Composition {
     return this.generateFrame(frameData, sampleController);
   }
   generateFrame1(sampleController) {
+    this.backgroundSampleNames.push(["Vocals ChorusOne"]);
     const row0 = [
       {
         type: "sample",

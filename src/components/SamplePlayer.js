@@ -16,6 +16,14 @@ export function SamplePlayer(props) {
     props.sampler.stopSample(sampleIndex);
   };
 
+  const switchFrame = (frameNumber) => {
+    props.sampler.stopAllSamples();
+    props.composition.getBackgroundSampleNames(frameNumber).forEach((sampleName) => {
+      props.sampler.playSampleByName(sampleName);
+    });
+    setFrameNumber(frameNumber);
+  }
+
   const generatePad = (cell, index) => (
     <TableCell
       key={frameName + index.toString()}
@@ -40,7 +48,7 @@ export function SamplePlayer(props) {
         <TableRow>
           <TableCell colSpan={5}>
             <Navigation
-              setPage={(frameNumber) => setFrameNumber(frameNumber)}
+              setPage={(frameNumber) => switchFrame(frameNumber)}
               page={frameNumber}
               pageName={frameName}
               pageCount={props.composition.getFrameCount()}

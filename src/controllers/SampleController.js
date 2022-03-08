@@ -11,7 +11,7 @@ class Sample {
   static idCounter = 0;
 
   constructor(name, path, color, type, duration) {
-    this.id = (Sample.idCounter++);
+    this.id = Sample.idCounter++;
     this.name = name;
     this.path = path;
     this.buffer = new Tone.Buffer(path);
@@ -424,5 +424,12 @@ export class SampleController {
     if (this.samples[sampleId].isLoop()) {
       this.terminateLoopQueue.push(sampleId);
     }
+  }
+  stopAllSamples() {
+    this.samples.forEach((sample) =>
+      this.isSamplePlaying(sample.id)
+        ? this.terminateLoopQueue.push(sample.id)
+        : null
+    );
   }
 }
