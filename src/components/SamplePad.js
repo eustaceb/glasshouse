@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import VolumeOffIcon from "@material-ui/icons/Volumeoff";
+import VolumeOffIcon from "@material-ui/icons/VolumeOff";
 import VolumeUpIcon from "@material-ui/icons/VolumeUp";
 
 export function SamplePad(props) {
