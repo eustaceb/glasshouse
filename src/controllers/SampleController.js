@@ -442,10 +442,12 @@ export class SampleController {
     }
   }
   stopAllSamples() {
-    this.samples.forEach((sample) =>
-      this.isSamplePlaying(sample.id)
-        ? this.terminateLoopQueue.push(sample.id)
-        : null
-    );
+    this.samples.forEach((sample) => {
+      if (this.isSamplePlaying(sample.id)) {
+        // Clear callback since it's a React state update for a component that will soon disappear
+        sample.setEndPlaybackCallback(null);
+        this.terminateLoopQueue.push(sample.id);
+      }
+    });
   }
 }
