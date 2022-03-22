@@ -284,29 +284,29 @@ export class SampleController {
         category: "Volca_FM",
       },
       {
-        "name": "Volca FM third",
-        "path": "audio/Volca_FM/Volca_FM_third_8bar.mp3",
-        "color": "#F113AC",
-        "type": "loop",
-        "duration": 8,
-        "category": "Volca_FM"
+        name: "Volca FM third",
+        path: "audio/Volca_FM/Volca_FM_third_8bar.mp3",
+        color: "#F113AC",
+        type: "loop",
+        duration: 8,
+        category: "Volca_FM",
       },
       {
-        "name": "Click 1",
-        "path": "audio/test/click1.mp3",
-        "color": "#F183AC",
-        "type": "loop",
-        "duration": 1,
-        "category": "Test"
+        name: "Click 1",
+        path: "audio/test/click1.mp3",
+        color: "#F183AC",
+        type: "loop",
+        duration: 1,
+        category: "Test",
       },
       {
-        "name": "Click 2",
-        "path": "audio/test/click2.mp3",
-        "color": "#A113AC",
-        "type": "loop",
-        "duration": 1,
-        "category": "Test"
-      }
+        name: "Click 2",
+        path: "audio/test/click2.mp3",
+        color: "#A113AC",
+        type: "loop",
+        duration: 1,
+        category: "Test",
+      },
     ].map(
       (sample) =>
         new Sample(
@@ -379,25 +379,6 @@ export class SampleController {
     return this.finishedQueue.find((n) => n === index);
   }
 
-  isSamplePlaying(index) {
-    //TODO: Simply mark samples as playing and unmark on 0
-    // Lapsed duration is 0 + item not in lapsing or finished queues
-    // OR lapsed duration is equal to loop duration
-    if (this.playQueue[index] === 0) {
-      if (!this.isSampleLapsing(index) && !this.isSampleFinished(index)) {
-        return false;
-      }
-    }
-
-    // Not yet triggered
-    // Edge case: loop
-    if (this.samples[index].duration === this.playQueue[index]) {
-      return false;
-    }
-
-    return true;
-  }
-
   triggerCallbacks() {
     // Warning: should be run in draw loop as it's slow
     for (var i = 0; i < this.finishedQueue.length; i++) {
@@ -407,7 +388,7 @@ export class SampleController {
         this.samples[finishedSampleId].setInactive();
         if (this.samples[finishedSampleId].isLoop()) {
           this.terminateLoopQueue = this.terminateLoopQueue.filter(
-            (sampleId) => sampleId != finishedSampleId
+            (sampleId) => sampleId !== finishedSampleId
           );
         }
         if (this.samples[finishedSampleId].endPlaybackCallback !== null) {
@@ -443,7 +424,7 @@ export class SampleController {
   }
   stopAllSamples() {
     this.samples.forEach((sample) => {
-      if (this.isSamplePlaying(sample.id)) {
+      if (sample.isPlaying()) {
         // Clear callback since it's a React state update for a component that will soon disappear
         sample.setEndPlaybackCallback(null);
         this.terminateLoopQueue.push(sample.id);
