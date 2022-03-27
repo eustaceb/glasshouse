@@ -52,7 +52,11 @@ function App(props) {
               0:0:0
             </p>
           </Grid>
-          <SamplePlayer composition={composition} sampler={props.sampler}/>
+          <SamplePlayer
+            composition={composition}
+            sampler={props.sampler}
+            mouseController={props.mouseController}
+          />
         </Grid>
       ) : (
         <StartModal start={() => start()} />

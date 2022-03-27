@@ -150,15 +150,12 @@ export class FXController {
 }
 
 export class FxTrigger {
-  constructor(data) {
-    this.player = data.player;
-    this.displayName = data.displayName;
-    this.type = data.type;
-    this.color = data.color;
-    this.node = this.createFxNode(data.type, data.params);
+  constructor(type, player, params) {
+    this.player = player;
+    this.node = this.createFxNode(type, params);
   }
   enable(enabled) {
-    console.log(`${enabled?"Enabling":"Disabling"} ${this.type} ${this.displayName}`);
+    console.log(`${enabled ? "Enabling" : "Disabling"} ${this.type}`);
     if (enabled) this.player.connect(this.node);
     else this.player.disconnect(this.node);
   }
