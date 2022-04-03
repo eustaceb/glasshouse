@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import VolumeOffIcon from "@material-ui/icons/VolumeOff";
 import VolumeUpIcon from "@material-ui/icons/VolumeUp";
 
@@ -29,6 +29,11 @@ export function SamplePad(props) {
       setPadState(padStates.SCHEDULING_STOP);
     }
   };
+
+  useEffect(() => {
+    // Reset pad state if sample changes
+    setPadState(padStates.READY);
+  }, [props.sample]);
 
   return (
     <div

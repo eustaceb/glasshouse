@@ -1,23 +1,23 @@
-import React, {useState} from "react";
+import React from "react";
 import {ArrowBack, ArrowForward} from "@material-ui/icons";
 
 export function Navigation(props) {
-  const page = props.page;
+  const sectionIndex = props.sectionIndex;
   return (
     <div style={{width: "100%", textAlign: "center"}}>
-      {page > 0 ? (
+      {sectionIndex > 0 ? (
         <ArrowBack
           style={{float: "left"}}
-          onClick={() => props.setPage(page - 1)}
+          onClick={() => props.setSection(sectionIndex - 1)}
         />
       ) : (
         ""
       )}
-      <span>{props.pageName}</span>
-      {page < props.pageCount - 1 ? (
+      <span>{props.sectionName}</span>
+      {sectionIndex < props.sectionCount - 1 ? (
         <ArrowForward
           style={{float: "right"}}
-          onClick={() => props.setPage(page + 1)}
+          onClick={() => props.setSection(sectionIndex + 1)}
         />
       ) : (
         ""

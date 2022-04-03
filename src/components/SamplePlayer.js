@@ -22,7 +22,7 @@ export function SamplePlayer(props) {
     props.sampler.stopSample(sampleIndex);
   };
 
-  const switchSection = (sectionIndex) => {
+  const setSection = (sectionIndex) => {
     props.sampler.stopAllSamples();
     props.composition
       .getSection(sectionIndex)
@@ -38,10 +38,10 @@ export function SamplePlayer(props) {
         <TableRow>
           <TableCell colSpan={5}>
             <Navigation
-              setPage={(sectionIndex) => switchSection(sectionIndex)}
-              page={sectionIndex}
-              pageName={section.name}
-              pageCount={props.composition.getSectionCount()}
+              setSection={(sectionIndex) => setSection(sectionIndex)}
+              sectionIndex={sectionIndex}
+              sectionName={section.name}
+              sectionCount={props.composition.getSectionCount()}
             />
           </TableCell>
         </TableRow>
