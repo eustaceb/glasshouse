@@ -17,10 +17,9 @@ export function KnobControl(props) {
   const r = props.size - center - strokeWidth * 2;
   const minValue = props.minValue ? props.minValue : 0;
   const maxValue = props.maxValue ? props.maxValue : 100;
-  const dragWeight = 400;
+  const dragWeight = 100;
 
   const rads = -Math.PI * (3 / 2) + value * 1.8 * ((2 * Math.PI) / 180);
-  console.log(rads);
   const y2 = center + Math.sin(rads) * r;
   const x2 = center + Math.cos(rads) * r;
 
@@ -31,8 +30,7 @@ export function KnobControl(props) {
         const delta =
           ((event.clientX - event.dragStart[0]) / window.innerWidth) *
           dragWeight;
-        const constrained = Math.min(maxValue, Math.max(minValue, delta));
-
+        const constrained = Math.min(maxValue, Math.max(minValue, valueRef.current + delta));
         // Only update state if value has changed
         if (Math.abs(constrained - valueRef.current) > 0.0000001) {
           if (callback.current) callback.current(constrained);
@@ -103,9 +101,9 @@ export function KnobControl(props) {
           fillOpacity="0"
         />
       </svg>
-      <p className="nonselectable">
-        {Math.round(value)} / {maxValue}
-      </p>
+      <div className="nonselectable">
+        {Math.round(value).toString().padStart(3, "0")} / {maxValue}
+      </div>
     </div>
   );
 }

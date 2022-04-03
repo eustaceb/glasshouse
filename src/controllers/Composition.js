@@ -59,7 +59,7 @@ export class Composition {
         {
           type: "pingpong",
           sample: "Vocals Intro",
-          params: {delayTime: "4n", feedback: 0.4},
+          params: {delayTime: "4n", feedback: 0.8},
         },
       ],
     };

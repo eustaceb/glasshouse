@@ -7,7 +7,7 @@ export function FxControl(props) {
   const label = props.label;
   return (
     <KnobControl
-      callback={(value) => (fx.wet = value)}
+      callback={(wet) => fx.node.wet.value = wet / 100.0}
       mouseController={mouseController}
       size={50}
       label={label}

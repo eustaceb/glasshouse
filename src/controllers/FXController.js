@@ -153,6 +153,9 @@ export class FxTrigger {
   constructor(type, player, params) {
     this.player = player;
     this.node = this.createFxNode(type, params);
+    this.node.wet.value = 0;
+    this.player.connect(this.node);
+    this.type = type;
   }
   enable(enabled) {
     console.log(`${enabled ? "Enabling" : "Disabling"} ${this.type}`);
