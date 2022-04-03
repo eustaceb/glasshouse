@@ -46,19 +46,19 @@ export function KnobControl(props) {
   useEffect(() => {
     let componentRef = componentId.current;
 
-    props.mouseController.current.registerListener(
+    props.mouseController.registerListener(
       componentId.current,
       "mouseMove",
       mouseMove
     );
-    props.mouseController.current.registerListener(
+    props.mouseController.registerListener(
       componentId.current,
       "mouseUp",
       () => {
         trackMouse.current = false;
       }
     );
-    props.mouseController.current.registerListener(
+    props.mouseController.registerListener(
       componentId.current,
       "mouseLeave",
       () => {
@@ -68,9 +68,9 @@ export function KnobControl(props) {
     callback.current = props.callback;
 
     return () => {
-      props.mouseController.current.removeListener(componentRef, "mouseMove");
-      props.mouseController.current.removeListener(componentRef, "mouseUp");
-      props.mouseController.current.removeListener(componentRef, "mouseLeave");
+      props.mouseController.removeListener(componentRef, "mouseMove");
+      props.mouseController.removeListener(componentRef, "mouseUp");
+      props.mouseController.removeListener(componentRef, "mouseLeave");
     };
   }, [componentId, mouseMove, props.callback, props.mouseController]);
 

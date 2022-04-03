@@ -1,6 +1,31 @@
 import {FxTrigger} from "./FXController.js";
-import {SampleCell, FxCell} from "./Cells.js";
-import { ThreeSixtyRounded } from "@material-ui/icons";
+
+export class Section {
+  /**
+   * Represents a song section
+   * @param {Array} bgSamples Background samples
+   * @param {Array} fgSamples Foreground samples
+   * @param {Array} effects List of FX in section
+   */
+  constructor(name, bgSamples, fgSamples, effects) {
+    this.name = name;
+    this.bgSamples = bgSamples;
+    this.fgSamples = fgSamples;
+    this.effects = effects;
+  }
+  getName() {
+    return this.name;
+  }
+  getBgSamples() {
+    return this.bgSamples;
+  }
+  getFgSamples() {
+    return this.fgSamples;
+  }
+  getEffects() {
+    return this.effects;
+  }
+}
 
 export class Composition {
   constructor(sampleController, rows, cols) {
@@ -8,284 +33,75 @@ export class Composition {
     this.cols = cols;
     this.frameNames = [];
     this.backgroundSampleNames = [];
-    this.frames = this.generateData(sampleController);
+    this.sections = this.generateData(sampleController);
   }
-  getFrameCount() {
-    return this.frames.length;
+  getSectionCount() {
+    return this.sections.length;
   }
-  addFrame(frame) {
-    const validateRow = (row) =>
-      row.reduce((prev, current) => prev.cols + current.cols) == this.cols;
+  getSection(index) {
     console.assert(
-      frame.every(
-        (row) => validateRow(row),
-        `Not enough cols in frame ${this.frames.length}`
-      )
+      index >= 0 && index < this.sections.length,
+      `Requested section ${index} does not exist`
     );
-    this.frames.append(frame);
-  }
-  getFrame(frameNumber) {
-    console.assert(
-      frameNumber < this.frames.length,
-      `Requested frame ${frameNumber} which is less than current frames ${this.frames.length}`
-    );
-    return this.frames[frameNumber];
-  }
-  getFrameName(frameNumber) {
-    console.assert(
-      frameNumber < this.frames.length,
-      `Requested frame ${frameNumber} which is less than current frames ${this.frames.length}`
-    );
-    return this.frameNames[frameNumber];
-  }
-  getBackgroundSampleNames(frameNumber) {
-    return this.backgroundSampleNames[frameNumber];
+    return this.sections[index];
   }
   generateData(sampleController) {
-    this.frameNames = ["Intro", "First Section"];
-    return [
-      this.generateFrame0(sampleController),
-      this.generateFrame1(sampleController),
-    ];
-  }
-
-  generateFrame0(sampleController) {
-    this.backgroundSampleNames.push(["Bass Chorus"]);
-    const row0 = [
-      {
-        type: "sample",
-        name: "Vocals Intro",
-        displayName: "Vocals (intro)",
-        rows: 2,
-        cols: 3,
-      },
-      {
-        type: "sample",
-        name: "Perc first",
-        displayName: "Perc (first)",
-        rows: 1,
-        cols: 2,
-      },
-    ];
-    const row1 = [
-      {
-        type: "fx",
-        fx: "chorus",
-        forSample: "Vocals Intro",
-        displayName: "Chorus",
-        color: "#8ca831",
-        params: {frequency: 1.5, delayTime: 3.5, depth: 0.7},
-        rows: 1,
-        cols: 1,
-      },
-      {
-        type: "fx",
-        fx: "pingpong",
-        forSample: "Vocals Intro",
-        displayName: "Delay",
-        color: "#A99d88",
-        params: {delayTime: "1n", feedback: 0.6},
-        rows: 1,
-        cols: 1,
-      },
-    ];
-    const row2 = [
-      {
-        type: "sample",
-        name: "Perc second",
-        displayName: "Perc (second)",
-        rows: 1,
-        cols: 5,
-      },
-    ];
-    const row3 = [
-      {
-        type: "fx",
-        fx: "distortion",
-        forSample: "Chiral Synth",
-        displayName: "Distortion",
-        color: "#800f31",
-        params: {amount: 0.1},
-        rows: 1,
-        cols: 1,
-      },
-      {
-        type: "fx",
-        fx: "chorus",
-        forSample: "Chiral Synth",
-        displayName: "Chorus",
-        color: "#099db8",
-        params: {amount: 0.1},
-        rows: 1,
-        cols: 1,
-      },
-      {
-        type: "fx",
-        fx: "pingpong",
-        forSample: "Chiral Synth",
-        displayName: "Delay",
-        color: "#6909b8",
-        params: {delayTime: "4n", feedback: 0.4},
-        rows: 1,
-        cols: 1,
-      },
-      {
-        type: "sample",
-        name: "Chiral Synth",
-        displayName: "Chiral synth",
-        rows: 1,
-        cols: 2,
-      },
-    ];
-    const row4 = [
-      {
-        type: "sample",
-        name: "Volca FM first",
-        displayName: "Volca FM (first)",
-        rows: 1,
-        cols: 3,
-      },
-      {
-        type: "sample",
-        name: "Sham HighPluck",
-        displayName: "Chiral synth",
-        rows: 1,
-        cols: 2,
-      },
-    ];
-    const frameData = [row0, row1, row2, row3, row4];
-    return this.generateFrame(frameData, sampleController);
-  }
-  generateFrame1(sampleController) {
-    this.backgroundSampleNames.push(["Vocals ChorusOne"]);
-    const row0 = [
-      {
-        type: "sample",
-        name: "Bass Melodic",
-        displayName: "Bass Melodic",
-        rows: 1,
-        cols: 4,
-      },
-      {
-        type: "fx",
-        fx: "pingpong",
-        forSample: "Bass Melodic",
-        displayName: "Delay",
-        color: "#b86508",
-        params: {delayTime: "4n", feedback: 0.4},
-        rows: 1,
-        cols: 1,
-      },
-    ];
-    const row1 = [
-      {
-        type: "fx",
-        fx: "chorus",
-        forSample: "Vocals VerseOne",
-        displayName: "Chorus",
-        color: "#6909b8",
-        params: {frequency: 6, delayTime: 1, depth: 0.9},
-        rows: 1,
-        cols: 1,
-      },
-      {
-        type: "fx",
-        fx: "pingpong",
-        forSample: "Vocals VerseOne",
-        displayName: "Delay",
-        color: "#e00aa9",
-        params: {delayTime: "1n", feedback: 0.6},
-        rows: 1,
-        cols: 1,
-      },
-      {
-        type: "sample",
-        name: "Vocals VerseOne",
-        displayName: "Vocals (verse 1)",
-        rows: 1,
-        cols: 3,
-      },
-    ];
-    const row2 = [
-      {
-        type: "sample",
-        name: "Sham first",
-        displayName: "Sham (first)",
-        rows: 1,
-        cols: 2,
-      },
-      {
-        type: "sample",
-        name: "Vocals Intro",
-        displayName: "Vocals Intro",
-        rows: 1,
-        cols: 2,
-      },
-      {
-        type: "fx",
-        fx: "chorus",
-        forSample: "Vocals Intro",
-        displayName: "Chorus",
-        color: "#38695e",
-        params: {frequency: 6, delayTime: 1, depth: 0.9},
-        rows: 1,
-        cols: 1,
-      },
-    ];
-    const row3 = [
-      {
-        type: "sample",
-        name: "Perc first",
-        displayName: "Perc (first)",
-        rows: 1,
-        cols: 2,
-      },
-      {
-        type: "sample",
-        name: "Perc second",
-        displayName: "Perc (second)",
-        rows: 1,
-        cols: 3,
-      },
-    ];
-    const row4 = [
-      {
-        type: "sample",
-        name: "Bass LongerNote",
-        displayName: "Bass (longer note)",
-        rows: 1,
-        cols: 3,
-      },
-      {
-        type: "sample",
-        name: "Volca FM third",
-        displayName: "Volca FM (third)",
-        rows: 1,
-        cols: 2,
-      },
-    ];
-    const frameData = [row0, row1, row2, row3, row4];
-    return this.generateFrame(frameData, sampleController);
-  }
-  generateFrame(frameData, sampleController) {
-    const createCell = (data) => {
-      if (data.type === "sample") {
-        return new SampleCell(
-          sampleController.getSampleByName(data.name),
-          data.rows,
-          data.cols
-        );
-      } else if (data.type === "fx") {
-        const fx = new FxTrigger({
-          player: sampleController.getSampleByName(data.forSample).player,
-          displayName: data.displayName,
-          type: data.fx,
-          color: data.color,
-          params: data.params,
-        });
-        return new FxCell(fx, data.rows, data.cols);
-      }
+    const section0 = {
+      name: "Intro",
+      bgSamples: ["Bass Chorus"],
+      fgSamples: ["Vocals Intro", "Chiral Synth", "Perc first", "Sham first"],
+      effects: [
+        {
+          type: "distortion",
+          sample: "Chiral Synth",
+          params: {amount: 0.4},
+        },
+        {
+          type: "pingpong",
+          sample: "Vocals Intro",
+          params: {delayTime: "4n", feedback: 0.4},
+        },
+      ],
     };
-    return frameData.map((row) => row.map(createCell));
+    const section1 = {
+      name: "First Section",
+      bgSamples: ["Bass LongerNote"],
+      fgSamples: [
+        "Vocals VerseOne",
+        "Perc second",
+        "Volca FM third",
+        "Sham HighPluck",
+      ],
+      effects: [
+        {
+          type: "distortion",
+          sample: "Volca FM third",
+          params: {amount: 0.4},
+        },
+        {
+          type: "pingpong",
+          sample: "Vocals VerseOne",
+          params: {delayTime: "4n", feedback: 0.4},
+        },
+      ],
+    };
+    // {frequency: 6, delayTime: 1, depth: 0.9} chorus
+    return [section0, section1].map((s) => {
+      const bgSamples = s.bgSamples.map((name) =>
+        sampleController.getSampleByName(name)
+      );
+      const fgSamples = s.fgSamples.map((name) =>
+        sampleController.getSampleByName(name)
+      );
+      const effects = s.effects.map(
+        (fx) =>
+          new FxTrigger(
+            fx.type,
+            sampleController.getSampleByName(fx.sample).player,
+            fx.params
+          )
+      );
+      return new Section(s.name, bgSamples, fgSamples, effects);
+    });
   }
 }

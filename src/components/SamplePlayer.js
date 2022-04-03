@@ -1,14 +1,20 @@
 import React, {useState} from "react";
 import {Table, TableBody, TableCell, TableRow} from "@material-ui/core";
 
-import {FxPad} from "./FxPad.js";
+import {FxControl} from "./FxControl.js";
 import {Navigation} from "./Navigation.js";
 import {SamplePad} from "./SamplePad.js";
 
 export function SamplePlayer(props) {
-  const [frameNumber, setFrameNumber] = useState(0);
-  const frame = props.composition.getFrame(frameNumber);
-  const frameName = props.composition.getFrameName(frameNumber);
+  const [sectionIndex, setSectionIndex] = useState(0);
+  const section = props.composition.getSection(sectionIndex);
+  const fx1 = section.getEffects()[0];
+  const fx2 = section.getEffects()[1];
+  const sampleTopLeft = section.getFgSamples()[0];
+  const sampleTopRight = section.getFgSamples()[1];
+  const sampleBotLeft = section.getFgSamples()[2];
+  const sampleBotRight = section.getFgSamples()[3];
+
   const playSample = (sampleIndex) => {
     props.sampler.playSample(sampleIndex);
   };
@@ -16,48 +22,79 @@ export function SamplePlayer(props) {
     props.sampler.stopSample(sampleIndex);
   };
 
-  const switchFrame = (frameNumber) => {
+  const setSection = (sectionIndex) => {
     props.sampler.stopAllSamples();
-    props.composition.getBackgroundSampleNames(frameNumber).forEach((sampleName) => {
-      props.sampler.playSampleByName(sampleName);
-    });
-    setFrameNumber(frameNumber);
-  }
-
-  const generatePad = (cell, index) => (
-    <TableCell
-      key={frameName + index.toString()}
-      colSpan={cell.cols}
-      rowSpan={cell.rows}
-      className="fillHeight">
-      {cell.isSample() ? (
-        <SamplePad
-          cell={cell}
-          playSample={() => playSample(cell.sample.id)}
-          stopSample={() => stopSample(cell.sample.id)}
-        />
-      ) : (
-        <FxPad cell={cell} />
-      )}
-    </TableCell>
-  );
-
+    props.composition
+      .getSection(sectionIndex)
+      .getBgSamples()
+      .forEach((s) => {
+        props.sampler.playSample(s.id);
+      });
+    setSectionIndex(sectionIndex);
+  };
   return (
     <Table style={{width: "40%"}} className="fillHeight">
       <TableBody>
         <TableRow>
           <TableCell colSpan={5}>
             <Navigation
-              setPage={(frameNumber) => switchFrame(frameNumber)}
-              page={frameNumber}
-              pageName={frameName}
-              pageCount={props.composition.getFrameCount()}
+              setSection={(sectionIndex) => setSection(sectionIndex)}
+              sectionIndex={sectionIndex}
+              sectionName={section.name}
+              sectionCount={props.composition.getSectionCount()}
             />
           </TableCell>
         </TableRow>
-        {frame.map((row, index) => (
-          <TableRow key={frameName + index.toString()}>{row.map(generatePad)}</TableRow>
-        ))}
+        <TableRow>
+          <TableCell rowSpan={2}>
+            <FxControl
+              label={fx1.type}
+              mouseController={props.mouseController}
+              fx={fx1}
+            />
+          </TableCell>
+          <TableCell rowSpan={2}>
+            <FxControl
+              label={fx2.type}
+              mouseController={props.mouseController}
+              fx={fx2}
+            />
+          </TableCell>
+          <TableCell>
+            <SamplePad
+              className="fillHeight"
+              sample={sampleTopLeft}
+              playSample={() => playSample(sampleTopLeft.id)}
+              stopSample={() => stopSample(sampleTopLeft.id)}
+            />
+          </TableCell>
+          <TableCell>
+            <SamplePad
+              className="fillHeight"
+              sample={sampleTopRight}
+              playSample={() => playSample(sampleTopRight.id)}
+              stopSample={() => stopSample(sampleTopRight.id)}
+            />
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>
+            <SamplePad
+              className="fillHeight"
+              sample={sampleBotLeft}
+              playSample={() => playSample(sampleBotLeft.id)}
+              stopSample={() => stopSample(sampleBotLeft.id)}
+            />
+          </TableCell>
+          <TableCell>
+            <SamplePad
+              className="fillHeight"
+              sample={sampleBotRight}
+              playSample={() => playSample(sampleBotRight.id)}
+              stopSample={() => stopSample(sampleBotRight.id)}
+            />
+          </TableCell>
+        </TableRow>
       </TableBody>
     </Table>
   );

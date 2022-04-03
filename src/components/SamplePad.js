@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import VolumeOffIcon from "@material-ui/icons/VolumeOff";
 import VolumeUpIcon from "@material-ui/icons/VolumeUp";
 
@@ -10,10 +10,12 @@ export function SamplePad(props) {
     SCHEDULING_STOP: 3,
   };
   const [padState, setPadState] = useState(padStates.READY);
-  const cell = props.cell;
-  const sample = props.cell.sample;
-  const scheduling = padState === padStates.SCHEDULING_PLAY || padState === padStates.SCHEDULING_STOP;
-  const playing = padState === padStates.SCHEDULING_STOP || padState === padStates.PLAYING;
+  const sample = props.sample;
+  const scheduling =
+    padState === padStates.SCHEDULING_PLAY ||
+    padState === padStates.SCHEDULING_STOP;
+  const playing =
+    padState === padStates.SCHEDULING_STOP || padState === padStates.PLAYING;
 
   const triggerSample = () => {
     if (sample.isInactive()) {
@@ -28,24 +30,25 @@ export function SamplePad(props) {
     }
   };
 
+  useEffect(() => {
+    // Reset pad state if sample changes
+    setPadState(padStates.READY);
+  }, [props.sample]);
+
   return (
     <div
-      style={{backgroundColor: cell.getColor(), position: "relative"}}
+      style={{backgroundColor: sample.color, position: "relative"}}
       onClick={() => triggerSample()}
-      className={scheduling  ? "pad blinking" : "pad"}>
+      className={scheduling ? "pad blinking" : "pad"}>
       <div style={{position: "relative"}}>
         <div className={playing ? "beatStrip" : ""} />
       </div>
       <div style={{padding: "1%"}}>
         <p className="sampleLabel">
-          {cell.getName() + ` ${sample.duration} bars`}
+          {sample.name + ` ${sample.duration} bars`}
         </p>
         <p style={{textAlign: "center"}}>
-          {playing ? (
-            <VolumeUpIcon />
-          ) : (
-            <VolumeOffIcon />
-          )}
+          {playing ? <VolumeUpIcon /> : <VolumeOffIcon />}
         </p>
       </div>
     </div>
