@@ -1,5 +1,4 @@
 import * as Tone from "tone";
-import {FXController} from "./FXController";
 
 class Sample {
   static PlayStates = {
@@ -24,7 +23,6 @@ class Sample {
     this.duration = duration;
     this.startPlaybackCallback = null;
     this.endPlaybackCallback = null;
-    this.fx = new FXController(this.player);
     this.playState = Sample.PlayStates.INACTIVE;
   }
   play(time) {

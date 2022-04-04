@@ -1,4 +1,4 @@
-import {FxTrigger} from "./FXController.js";
+import {WetControl, XYControl} from "./FxControls.js";
 
 export class Section {
   /**
@@ -7,11 +7,12 @@ export class Section {
    * @param {Array} fgSamples Foreground samples
    * @param {Array} effects List of FX in section
    */
-  constructor(name, bgSamples, fgSamples, effects) {
+  constructor(name, bgSamples, fgSamples, effects, xyEffects) {
     this.name = name;
     this.bgSamples = bgSamples;
     this.fgSamples = fgSamples;
     this.effects = effects;
+    this.xyEffects = xyEffects;
   }
   getName() {
     return this.name;
@@ -24,6 +25,9 @@ export class Section {
   }
   getEffects() {
     return this.effects;
+  }
+  getXyEffects() {
+    return this.xyEffects;
   }
 }
 
@@ -62,6 +66,15 @@ export class Composition {
           params: {delayTime: "4n", feedback: 0.8},
         },
       ],
+      xyEffects: [
+        {
+          type: "vibrato",
+          sample: "Vocals VerseOne",
+          params: {frequency: 2, depth: 0.5},
+          xAxis: {paramName: "depth", range: [0, 1]},
+          yAxis: {paramName: "wet", range: [0, 1]},
+        }
+      ]
     };
     const section1 = {
       name: "First Section",
@@ -84,6 +97,15 @@ export class Composition {
           params: {delayTime: "4n", feedback: 0.4},
         },
       ],
+      xyEffects: [
+        {
+          type: "lowpass",
+          sample: "Vocals VerseOne",
+          params: {frequency: 5000},
+          xAxis: {paramName: "frequency", range: [0, 15000]},
+          yAxis: {paramName: "gain", range: [0, 1]},
+        }
+      ]
     };
     // {frequency: 6, delayTime: 1, depth: 0.9} chorus
     return [section0, section1].map((s) => {
@@ -95,13 +117,23 @@ export class Composition {
       );
       const effects = s.effects.map(
         (fx) =>
-          new FxTrigger(
+          new WetControl(
             fx.type,
             sampleController.getSampleByName(fx.sample).player,
             fx.params
           )
       );
-      return new Section(s.name, bgSamples, fgSamples, effects);
+      const xyEffects = s.xyEffects.map(
+        (fx) =>
+          new XYControl(
+            fx.type,
+            sampleController.getSampleByName(fx.sample).player,
+            fx.params,
+            fx.xAxis,
+            fx.yAxis
+          )
+      );
+      return new Section(s.name, bgSamples, fgSamples, effects, xyEffects);
     });
   }
 }
