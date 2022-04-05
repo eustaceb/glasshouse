@@ -69,7 +69,7 @@ export class Composition {
       xyEffects: [
         {
           type: "vibrato",
-          sample: "Vocals VerseOne",
+          sample: "Perc first",
           params: {frequency: 2, depth: 0.5},
           xAxis: {paramName: "depth", range: [0, 1]},
           yAxis: {paramName: "wet", range: [0, 1]},
@@ -99,11 +99,11 @@ export class Composition {
       ],
       xyEffects: [
         {
-          type: "lowpass",
-          sample: "Vocals VerseOne",
-          params: {frequency: 5000},
-          xAxis: {paramName: "frequency", range: [0, 15000]},
-          yAxis: {paramName: "gain", range: [0, 1]},
+          type: "distortion",
+          sample: "Sham HighPluck",
+          params: {amount: 0.5},
+          xAxis: {paramName: "amount", range: [0, 1]},
+          yAxis: {paramName: "wet", range: [0, 1]},
         }
       ]
     };

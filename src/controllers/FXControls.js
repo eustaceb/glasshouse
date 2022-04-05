@@ -4,6 +4,7 @@ export class FXControl {
   constructor(type, player, params) {
     this.type = type;
     this.player = player;
+    this.params = params;
     this.node = this.createFxNode(type, params);
     // @TODO: defer this?
     this.player.connect(this.node);

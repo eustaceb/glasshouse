@@ -107,12 +107,12 @@ export function SamplePlayer(props) {
         <TableRow>
           <TableCell colSpan={2}>
             <XYPad
-              size={200}
+              size={100}
               label={xyFx.type}
               mouseController={props.mouseController}
               fx={xyFx}
-              callbackX={(val) => xyFx.setX(val)}
-              callbackY={(val) => xyFx.setY(val)}
+              callbackX={(val) => xyFx.setX(val / 100.0)}
+              callbackY={(val) => xyFx.setY(val / 100.0)}
               minValue
             />
           </TableCell>

@@ -17,19 +17,14 @@ export function XYPad(props) {
   const maxValueX = props.maxValueX ? props.maxValueX : 100;
   const minValueY = props.minValueY ? props.minValueY : 0;
   const maxValueY = props.maxValueY ? props.maxValueY : 100;
-  const dragWeight = 100;
 
   const mouseMove = React.useCallback(
     (event) => {
       event.preventDefault();
       if (trackMouse.current && event.isDragging) {
         // Movement deltas
-        const deltaX =
-          ((event.clientX - event.dragStart[0]) / window.innerWidth) *
-          dragWeight;
-        const deltaY =
-          ((event.clientY - event.dragStart[1]) / window.innerHeight) *
-          dragWeight;
+        const deltaX = event.clientX - event.dragStart[0];
+        const deltaY = event.clientY - event.dragStart[1];
 
         // Apply and constrain
         const constrainedX = Math.min(
@@ -37,27 +32,48 @@ export function XYPad(props) {
           Math.max(minValueX, x + deltaX)
         );
         const constrainedY = Math.min(
-            maxValueY,
-            Math.max(minValueY, y + deltaY)
-          );
-        
+          maxValueY,
+          Math.max(minValueY, y + deltaY)
+        );
+
         // Only update state if value has changed
         if (Math.abs(constrainedX - x) > 0.0000001) {
           if (callbackX.current) callbackX.current(constrainedX);
+          console.log(`Delta X: ${deltaX} constrainedX: ${constrainedX}`);
           setX(constrainedX);
         }
         if (Math.abs(constrainedY - y) > 0.0000001) {
-            if (callbackY.current) callbackY.current(constrainedY);
-            setY(constrainedY);
-          }
+          if (callbackY.current) callbackY.current(constrainedY);
+          console.log(`Delta X: ${deltaY} constrainedX: ${constrainedY}`);
+          setY(constrainedY);
+        }
       }
     },
     [minValueX, maxValueX, minValueY, maxValueY]
   );
 
   useEffect(() => {
-    let componentRef = componentId.current;
+    const componentRef = componentId.current;
+    const domElement = document.getElementById(componentId);
+    const rect = domElement.getBoundingClientRect();
 
+    props.mouseController.registerListener(componentRef, "mouseDown", (e) => {
+      if (domElement.contains(e.target)) {
+        console.log(e.target);
+        // Apply and constrain
+        const constrainedX = Math.min(
+          maxValueX,
+          Math.max(minValueX, e.clientX - rect.left)
+        );
+        const constrainedY = Math.min(
+          maxValueY,
+          Math.max(minValueY, e.clientY - rect.top)
+        );
+        setX(constrainedX);
+        setY(constrainedY);
+        console.log("Did it work?");
+      }
+    });
     props.mouseController.registerListener(
       componentId.current,
       "mouseMove",
@@ -81,16 +97,24 @@ export function XYPad(props) {
     callbackY.current = props.callbackY;
 
     return () => {
+      props.mouseController.removeListener(componentRef, "mouseDown");
       props.mouseController.removeListener(componentRef, "mouseMove");
       props.mouseController.removeListener(componentRef, "mouseUp");
       props.mouseController.removeListener(componentRef, "mouseLeave");
     };
-  }, [componentId, mouseMove, props.callbackX, props.callbackY, props.mouseController]);
+  }, [
+    componentId,
+    mouseMove,
+    props.callbackX,
+    props.callbackY,
+    props.mouseController,
+  ]);
 
   return (
     <div className="centered">
       <p className="nonselectable">{props.label}</p>
       <svg
+        id={componentId}
         onMouseDown={(e) => {
           trackMouse.current = true;
         }}
@@ -100,28 +124,14 @@ export function XYPad(props) {
         xmlns="http://www.w3.org/2000/svg">
         <rect width={size} height={size} fill="yellow" stroke="black" />
         <circle cx={x} cy={y} r={5} fill="yellow" stroke="black" />
-        {/* <line
-          x1={center}
-          y1={center}
-          x2={x2}
-          y2={y2}
-          stroke="lightgrey"
-          strokeWidth={strokeWidth}
-        />
-        <circle
-          cx={center}
-          cy={center}
-          r={r}
-          stroke="black"
-          strokeWidth={strokeWidth}
-          fillOpacity="0"
-        /> */}
       </svg>
       <div className="nonselectable">
-        X: {Math.round(x).toString().padStart(3, "0")} / {maxValueX}
+        {props.fx.xAxis.paramName}: {Math.round(x).toString().padStart(3, "0")}{" "}
+        / {maxValueX}
       </div>
       <div className="nonselectable">
-        Y: {Math.round(y).toString().padStart(3, "0")} / {maxValueY}
+        {props.fx.yAxis.paramName}: {Math.round(y).toString().padStart(3, "0")}{" "}
+        / {maxValueY}
       </div>
     </div>
   );
