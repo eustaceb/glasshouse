@@ -1,15 +1,18 @@
 import React, {useState} from "react";
 import {Table, TableBody, TableCell, TableRow} from "@material-ui/core";
 
-import {FxControl} from "./FxControl.js";
+import {KnobControl} from "./KnobControl.js";
 import {Navigation} from "./Navigation.js";
 import {SamplePad} from "./SamplePad.js";
+import {XYPad} from "./XYPad.js";
 
 export function SamplePlayer(props) {
   const [sectionIndex, setSectionIndex] = useState(0);
   const section = props.composition.getSection(sectionIndex);
   const fx1 = section.getEffects()[0];
   const fx2 = section.getEffects()[1];
+  const xyFx = section.getXyEffects()[0];
+
   const sampleTopLeft = section.getFgSamples()[0];
   const sampleTopRight = section.getFgSamples()[1];
   const sampleBotLeft = section.getFgSamples()[2];
@@ -47,17 +50,23 @@ export function SamplePlayer(props) {
         </TableRow>
         <TableRow>
           <TableCell rowSpan={2}>
-            <FxControl
-              label={fx1.type}
+            <KnobControl
+              callback={(wet) => fx1.setWet(wet / 100.0)}
               mouseController={props.mouseController}
-              fx={fx1}
+              size={50}
+              label={fx1.type}
+              minValue={0}
+              maxValue={100}
             />
           </TableCell>
           <TableCell rowSpan={2}>
-            <FxControl
-              label={fx2.type}
+          <KnobControl
+              callback={(wet) => fx2.setWet(wet / 100.0)}
               mouseController={props.mouseController}
-              fx={fx2}
+              size={50}
+              label={fx2.type}
+              minValue={0}
+              maxValue={100}
             />
           </TableCell>
           <TableCell>
@@ -92,6 +101,18 @@ export function SamplePlayer(props) {
               sample={sampleBotRight}
               playSample={() => playSample(sampleBotRight.id)}
               stopSample={() => stopSample(sampleBotRight.id)}
+            />
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell colSpan={2}>
+            <XYPad
+              size={100}
+              label={xyFx.label}
+              mouseController={props.mouseController}
+              fx={xyFx}
+              callbackX={(val) => xyFx.setX(val / 100.0)}
+              callbackY={(val) => xyFx.setY(val / 100.0)}
             />
           </TableCell>
         </TableRow>

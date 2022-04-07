@@ -9,6 +9,7 @@ export class MouseController {
     };
     this.isDragging = false;
     this.dragStart = 0;
+    this.dragOrigin = null;
 
     document.addEventListener("mousemove", (e) => this.mouseMove(e));
     document.addEventListener("mousedown", (e) => this.mouseDown(e));
@@ -35,6 +36,7 @@ export class MouseController {
 
     this.isDragging = true;
     this.dragStart = [event.clientX, event.clientY];
+    this.dragOrigin = event.target;
 
     this.listeners["mouseDown"].forEach((callback) => {
       callback(event);
@@ -47,6 +49,7 @@ export class MouseController {
     this.listeners["mouseMove"].forEach((callback) => {
       event.isDragging = this.isDragging;
       event.dragStart = this.dragStart;
+      event.dragOrigin = this.dragOrigin;
       callback(event);
     });
   }
@@ -57,6 +60,8 @@ export class MouseController {
       callback(event);
     });
     this.isDragging = false;
+    this.dragStart = null;
+    this.dragOrigin = null;
   }
 
   mouseLeave(event) {
@@ -65,5 +70,7 @@ export class MouseController {
       callback(event);
     });
     this.isDragging = false;
+    this.dragStart = null;
+    this.dragOrigin = null;
   }
 }
