@@ -1,4 +1,4 @@
-import {WetControl, XYControl} from "./FxControls.js";
+import {WetControl, XYControl} from "./FXControls.js";
 
 export class Section {
   /**
