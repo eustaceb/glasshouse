@@ -26,7 +26,7 @@ export function XYPad(props) {
           e.dragOrigin.id === componentId ||
           e.dragOrigin.parentElement?.id === componentId;
         if (e.isDragging && thisElement) {
-          const rect = e.dragOrigin.getBoundingClientRect();
+          const rect = document.getElementById(componentId).getBoundingClientRect();
 
           // Movement deltas
           const deltaX = e.clientX - rect.left;
@@ -56,7 +56,7 @@ export function XYPad(props) {
     const thisElement =
       e.target.id === componentId || e.target.parentElement.id === componentId;
     if (thisElement) {
-      const rect = e.target.getBoundingClientRect();
+      const rect = document.getElementById(componentId).getBoundingClientRect();
       // Apply and constrain
       const constrainedX = Math.min(
         maxValueX,
