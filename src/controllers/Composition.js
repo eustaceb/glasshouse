@@ -102,7 +102,7 @@ export class Composition {
           type: "distortion",
           sample: "Sham HighPluck",
           params: {amount: 0.5},
-          xAxis: {paramName: "amount", range: [0, 1]},
+          xAxis: {paramName: "distortion", range: [0, 1]},
           yAxis: {paramName: "wet", range: [0, 1]},
         }
       ]

@@ -12,6 +12,7 @@ export function SamplePlayer(props) {
   const fx1 = section.getEffects()[0];
   const fx2 = section.getEffects()[1];
   const xyFx = section.getXyEffects()[0];
+  console.log(`Section ${section.name} with ${xyFx.type}`);
 
   const sampleTopLeft = section.getFgSamples()[0];
   const sampleTopRight = section.getFgSamples()[1];
@@ -113,7 +114,6 @@ export function SamplePlayer(props) {
               fx={xyFx}
               callbackX={(val) => xyFx.setX(val / 100.0)}
               callbackY={(val) => xyFx.setY(val / 100.0)}
-              minValue
             />
           </TableCell>
         </TableRow>

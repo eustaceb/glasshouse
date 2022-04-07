@@ -11,21 +11,12 @@ export class FXControl {
   }
 
   setParam(parameter, value) {
-    console.log(
-      `Setting ${this.type} parameter ${parameter} to value ${value.toString()}`
-    );
-
-    if (this.node[parameter].value !== value) {
-      this.node[parameter].value = value;
-
-      // // First, disconnect the effect so that we can modify parameters
-      // this.player.disconnect(this.fx.node);
-
-      // // Then reconnect with new params if enabled
-      // if (this.fx.isEnabled()) {
-      //   this.fx.node = this.createFxCallbacks[fxName](this.fx.params);
-      //   this.player.connect(this.fx.node);
-      // }
+    if (this.node[parameter] instanceof Tone.Signal || this.node[parameter] instanceof Tone.Param) {
+      if (this.node[parameter].value !== value) {
+        this.node[parameter].value = value;
+      }
+    } else if (this.node[parameter] !== value) {
+      this.node[parameter] = value;
     }
   }
   enable(enabled) {
