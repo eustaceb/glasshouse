@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect} from "react";
 import {useLocalContext} from "../utils/ReactHelpers.js";
 import {uuidv4} from "../utils/GUID.js";
 
@@ -10,10 +10,9 @@ export function XYPad(props) {
 
   const [componentId, setComponentId] = useState(uuidv4());
 
-  const trackMouse = useRef(false);
   const callbackX = props.callbackX;
   const callbackY = props.callbackY;
-  const ctx = useLocalContext({callbackX, callbackY, x, y});
+  const ctx = useLocalContext({callbackX, callbackY, x, y, componentId});
 
   const minValueX = props.minValueX ? props.minValueX : 0;
   const maxValueX = props.maxValueX ? props.maxValueX : 100;
@@ -21,26 +20,31 @@ export function XYPad(props) {
   const maxValueY = props.maxValueY ? props.maxValueY : 100;
 
   const mouseMove = React.useCallback(
-    (event) => {
-      if (trackMouse.current && event.isDragging) {
-        //const domElement = event.target;
-        const rect = event.rect; //domElement.getBoundingClientRect();
+    (e) => {
+      if (e.dragOrigin != null) {
+        const thisElement =
+          e.dragOrigin.id === componentId ||
+          e.dragOrigin.parentElement?.id === componentId;
+        if (e.isDragging && thisElement) {
+          const rect = e.dragOrigin.getBoundingClientRect();
 
-        // Movement deltas
-        const deltaX = event.clientX - rect.left;
-        const deltaY = event.clientY - rect.top;
-        // Apply and constrain
-        const constrainedX = Math.min(maxValueX, Math.max(minValueX, deltaX));
-        const constrainedY = Math.min(maxValueY, Math.max(minValueY, deltaY));
+          // Movement deltas
+          const deltaX = e.clientX - rect.left;
+          const deltaY = e.clientY - rect.top;
 
-        // Only update state if value has changed
-        if (Math.abs(constrainedX - ctx.x) > 0.0000001) {
-          if (ctx.callbackX) ctx.callbackX(constrainedX);
-          setX(constrainedX);
-        }
-        if (Math.abs(constrainedY - ctx.y) > 0.0000001) {
-          if (ctx.callbackY) ctx.callbackY(constrainedY);
-          setY(constrainedY);
+          // Apply and constrain
+          const constrainedX = Math.min(maxValueX, Math.max(minValueX, deltaX));
+          const constrainedY = Math.min(maxValueY, Math.max(minValueY, deltaY));
+
+          // Only update state if value has changed
+          if (Math.abs(constrainedX - ctx.x) > 0.0000001) {
+            if (ctx.callbackX) ctx.callbackX(constrainedX);
+            setX(constrainedX);
+          }
+          if (Math.abs(constrainedY - ctx.y) > 0.0000001) {
+            if (ctx.callbackY) ctx.callbackY(constrainedY);
+            setY(constrainedY);
+          }
         }
       }
     },
@@ -48,9 +52,11 @@ export function XYPad(props) {
   );
 
   const mouseDown = React.useCallback((e) => {
-    //const domElement = document.getElementById(componentId);
-    const rect = e.rect; //domElement.getBoundingClientRect();
-    if (trackMouse.current /*&& domElement.contains(e.target)*/) {
+    // Check if we clicked on one of the elements in the SVG
+    const thisElement =
+      e.target.id === componentId || e.target.parentElement.id === componentId;
+    if (thisElement) {
+      const rect = e.target.getBoundingClientRect();
       // Apply and constrain
       const constrainedX = Math.min(
         maxValueX,
@@ -68,36 +74,23 @@ export function XYPad(props) {
   });
 
   useEffect(() => {
-    setComponentId(uuidv4());
+    setX(center);
+    setY(center);
 
     props.mouseController.registerListener(componentId, "mouseDown", mouseDown);
     props.mouseController.registerListener(componentId, "mouseMove", mouseMove);
-    props.mouseController.registerListener(componentId, "mouseUp", () => {
-      trackMouse.current = false;
-    });
-    props.mouseController.registerListener(componentId, "mouseLeave", () => {
-      trackMouse.current = false;
-    });
 
     return () => {
       props.mouseController.removeListener(componentId, "mouseDown");
       props.mouseController.removeListener(componentId, "mouseMove");
-      props.mouseController.removeListener(componentId, "mouseUp");
-      props.mouseController.removeListener(componentId, "mouseLeave");
     };
-  }, [
-    props.fx,
-    props.mouseController
-  ]);
+  }, [props.fx, props.mouseController]);
 
   return (
     <div className="centered">
       <p className="nonselectable">{props.label}</p>
       <svg
-        id={props.fx.type}
-        onMouseDown={(e) => {
-          trackMouse.current = true;
-        }}
+        id={componentId}
         width={size}
         height={size}
         version="1.1"

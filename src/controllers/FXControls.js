@@ -1,8 +1,9 @@
 import * as Tone from "tone";
 
 export class FXControl {
-  constructor(type, player, params) {
+  constructor(type, label, player, params) {
     this.type = type;
+    this.label = label;
     this.player = player;
     this.params = params;
     this.node = this.createFxNode(type, params);
@@ -54,8 +55,8 @@ export class FXControl {
 }
 
 class XYControl extends FXControl {
-  constructor(type, player, params, xAxis, yAxis) {
-    super(type, player, params);
+  constructor(type, label, player, params, xAxis, yAxis) {
+    super(type, label, player, params);
     console.assert(
       xAxis.hasOwnProperty("paramName") && xAxis.hasOwnProperty("range")
     );
@@ -81,8 +82,8 @@ class XYControl extends FXControl {
 }
 
 class WetControl extends FXControl {
-  constructor(type, player, params) {
-    super(type, player, params);
+  constructor(type, label, player, params) {
+    super(type, label, player, params);
     this.setWet(0);
   }
   setWet(value) {

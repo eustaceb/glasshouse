@@ -119,6 +119,7 @@ export class Composition {
         (fx) =>
           new WetControl(
             fx.type,
+            `${fx.type} for ${fx.sample}`,
             sampleController.getSampleByName(fx.sample).player,
             fx.params
           )
@@ -127,6 +128,7 @@ export class Composition {
         (fx) =>
           new XYControl(
             fx.type,
+            `${fx.type} for ${fx.sample}`,
             sampleController.getSampleByName(fx.sample).player,
             fx.params,
             fx.xAxis,

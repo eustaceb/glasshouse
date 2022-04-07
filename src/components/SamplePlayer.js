@@ -12,7 +12,6 @@ export function SamplePlayer(props) {
   const fx1 = section.getEffects()[0];
   const fx2 = section.getEffects()[1];
   const xyFx = section.getXyEffects()[0];
-  console.log(`Section ${section.name} with ${xyFx.type}`);
 
   const sampleTopLeft = section.getFgSamples()[0];
   const sampleTopRight = section.getFgSamples()[1];
@@ -109,7 +108,7 @@ export function SamplePlayer(props) {
           <TableCell colSpan={2}>
             <XYPad
               size={100}
-              label={xyFx.type}
+              label={xyFx.label}
               mouseController={props.mouseController}
               fx={xyFx}
               callbackX={(val) => xyFx.setX(val / 100.0)}
