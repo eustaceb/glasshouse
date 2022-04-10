@@ -1,4 +1,5 @@
 import * as Tone from "tone";
+import { scale } from "../utils/Math.js";
 
 export class FXControl {
   constructor(type, label, player, params) {
@@ -7,15 +8,19 @@ export class FXControl {
     this.player = player;
     this.params = params;
     this.node = this.createFxNode(type, params);
-    // @TODO: defer this?
-    this.player.connect(this.node);
+    this.player.chain(this.node, Tone.Destination);
   }
 
   setParam(parameter, value) {
-    if (this.node[parameter] instanceof Tone.Signal || this.node[parameter] instanceof Tone.Param) {
+    if (
+      this.node[parameter] instanceof Tone.Signal ||
+      this.node[parameter] instanceof Tone.Frequency ||
+      this.node[parameter] instanceof Tone.Param
+    ) {
       if (this.node[parameter].value !== value) {
         this.node[parameter].value = value;
       }
+      console.log(`${this.type} ${parameter} is now ${this.node[parameter].value}`);
     } else if (this.node[parameter] !== value) {
       this.node[parameter] = value;
     }
@@ -27,28 +32,32 @@ export class FXControl {
   }
   createFxNode(type, params) {
     if (type == "distortion") {
-      return new Tone.Distortion(params["amount"]).toDestination();
+      return new Tone.Distortion(params["amount"]);
     } else if (type == "reverb") {
-      return new Tone.Reverb(params["decay"]).toDestination();
+      return new Tone.Reverb(params["decay"]);
     } else if (type == "pingpong") {
       return new Tone.PingPongDelay(
         params["delayTime"],
         params["feedback"]
-      ).toDestination();
+      );
     } else if (type == "chorus") {
       return new Tone.Chorus(
         params["frequency"],
         params["delayTime"],
         params["depth"]
-      ).toDestination();
-    } else if (type == "lowpass") {
-      return new Tone.Filter(params["frequency"], "lowpass").toDestination();
+      );
     } else if (type == "vibrato") {
       return new Tone.Vibrato(
         params["frequency"],
         params["delayTime"],
         params["depth"]
-      ).toDestination();
+      );
+    } else if (type == "filter") {
+      return new Tone.Filter(
+        params["frequency"],
+        params["type"],
+        params["rolloff"]
+      );
     }
     console.assert(false, `Unknown fx type: ${type}`);
   }
@@ -65,19 +74,16 @@ class XYControl extends FXControl {
     );
     this.xAxis = xAxis;
     this.yAxis = yAxis;
+
     this.setY(0); // Currently this is always the Dry/Wet control
   }
   setX(value) {
-    this.setParam(this.xAxis.paramName, value);
+    const scaled = scale(value, 0, 1.0, this.xAxis.range[0], this.xAxis.range[1]);
+    this.setParam(this.xAxis.paramName, scaled);
   }
   setY(value) {
-    this.setParam(this.yAxis.paramName, value);
-  }
-  getXRange() {
-    return this.xAxis.range;
-  }
-  getYRange() {
-    return this.yAxis.range;
+    const scaled = scale(value, 0, 1.0, this.yAxis.range[0], this.yAxis.range[1]);
+    this.setParam(this.yAxis.paramName, scaled);
   }
 }
 

@@ -68,6 +68,13 @@ export class Composition {
       ],
       xyEffects: [
         {
+          type: "filter",
+          sample: "Perc first",
+          params: {frequency: 12000, type: "lowpass", rolloff: -48},
+          xAxis: {paramName: "frequency", range: [0, 40000]},
+          yAxis: {paramName: "gain", range: [-90, 90]},
+        },
+        {
           type: "vibrato",
           sample: "Perc first",
           params: {frequency: 2, depth: 0.5},
