@@ -5,6 +5,7 @@ import {KnobControl} from "./KnobControl.js";
 import {Navigation} from "./Navigation.js";
 import {SamplePad} from "./SamplePad.js";
 import {XYPad} from "./XYPad.js";
+import {DownSlider} from "./DownSlider.js";
 
 export function SamplePlayer(props) {
   const [sectionIndex, setSectionIndex] = useState(0);
@@ -107,6 +108,17 @@ export function SamplePlayer(props) {
         <TableRow>
           <TableCell colSpan={2}>
             <XYPad
+              size={100}
+              label={xyFx.label}
+              mouseController={props.mouseController}
+              fx={xyFx}
+              callbackX={(val) => xyFx.setX(val / 100.0)}
+              callbackY={(val) => xyFx.setY(val / 100.0)}
+            />
+          </TableCell>
+
+          <TableCell colSpan={2}>
+            <DownSlider
               size={100}
               label={xyFx.label}
               mouseController={props.mouseController}
