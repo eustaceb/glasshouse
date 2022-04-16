@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import ReactDOM from "react-dom";
 import {SamplePlayer} from "./components/SamplePlayer.js";
 import {Grid} from "@material-ui/core";
@@ -15,18 +15,37 @@ if (process.env.NODE_ENV !== "production") {
   console.log("Looks like we are in development mode!");
 }
 
-const mouseController = new MouseController(window.document);
-const sampler = new SampleController();
-const playback = new PlaybackController(sampler);
-const composition = new Composition(sampler, 5, 5);
-
 function StartModal(props) {
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    fetch("composition.json")
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          props.setup(result);
+          setLoaded(true);
+        },
+        (error) => {
+          console.log(error);
+          setError(true);
+        }
+      );
+  });
+
   return (
     <div className="startModal">
       <p>
-        <a href="#" className="start" onClick={() => props.start()}>
-          Start
-        </a>
+        {loaded ? (
+          <a href="#" className="start" onClick={() => props.start()}>
+            Start
+          </a>
+        ) : error ? (
+          `Error`
+        ) : (
+          "Loading..."
+        )}
       </p>
     </div>
   );
@@ -35,12 +54,24 @@ function StartModal(props) {
 function App(props) {
   const [initialised, setInitialised] = useState(false);
 
+  const mouseController = useRef(null);
+  const sampler = useRef(null);
+  const playback = useRef(null);
+  const composition = useRef(null);
+
   const start = function () {
     Tone.start();
-    props.sampler.playSampleByName("Bass Chorus");
-    props.playback.start(0);
+    sampler.current.playSampleByName("Sham main");
+    playback.start(0);
     // Start off with first sample playing
     setInitialised(true);
+  };
+
+  const setup = (data) => {
+    mouseController.current = new MouseController(window.document);
+    sampler.current = new SampleController(data["samples"]);
+    playback.current = new PlaybackController(sampler.current);
+    composition.current = new Composition(data["sections"], sampler.current);
   };
 
   return (
@@ -53,23 +84,16 @@ function App(props) {
             </p>
           </Grid>
           <SamplePlayer
-            composition={composition}
-            sampler={props.sampler}
-            mouseController={props.mouseController}
+            composition={composition.current}
+            sampler={sampler.current}
+            mouseController={mouseController.current}
           />
         </Grid>
       ) : (
-        <StartModal start={() => start()} />
+        <StartModal start={() => start()} setup={(data) => setup(data)} />
       )}
     </ThemeProvider>
   );
 }
 
-ReactDOM.render(
-  <App
-    mouseController={mouseController}
-    sampler={sampler}
-    playback={playback}
-  />,
-  document.getElementById("root")
-);
+ReactDOM.render(<App />, document.getElementById("root"));
