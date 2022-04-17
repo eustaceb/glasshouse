@@ -32,7 +32,7 @@ function StartModal(props) {
           setError(true);
         }
       );
-  });
+  }, []);
 
   return (
     <div className="startModal">
@@ -61,8 +61,8 @@ function App(props) {
 
   const start = function () {
     Tone.start();
-    sampler.current.playSampleByName("Sham main");
-    playback.start(0);
+    sampler.current.playBackgroundSample();
+    playback.current.start(0);
     // Start off with first sample playing
     setInitialised(true);
   };

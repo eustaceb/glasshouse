@@ -45,8 +45,9 @@ export function SamplePad(props) {
       </div>
       <div style={{padding: "1%"}}>
         <p className="sampleLabel">
-          {sample.name + ` ${sample.duration} bars`}
+          {sample.name}
         </p>
+        <p>{sample.duration} bar {sample.type}</p>
         <p style={{textAlign: "center"}}>
           {playing ? <VolumeUpIcon /> : <VolumeOffIcon />}
         </p>

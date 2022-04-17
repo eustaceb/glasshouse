@@ -10,7 +10,7 @@ export class Section {
   constructor(name, groups, instruments) {
     this.name = name;
     this.groups = {};
-    groups.forEach(group => {
+    groups.forEach((group) => {
       this.groups[group.getName()] = group;
     });
     this.instruments = instruments;
@@ -45,7 +45,7 @@ class SampleGroup {
 export class Composition {
   constructor(data, sampleController) {
     this.bgSample = sampleController.getSampleByName("Sham main");
-    this.sections = data.map((section, _, index) => {
+    this.sections = data.map((section, index, _) => {
       const groups = Object.entries(section["groups"]).map((kvp) => {
         const name = kvp[0];
         const samples = kvp[1]["samples"].map((sampleName) => {
@@ -56,7 +56,11 @@ export class Composition {
       const instruments = section["instruments"].map((sampleName) => {
         return sampleController.getSampleByName(sampleName);
       });
-      return new Section(index.toString(), groups, instruments);
+      return new Section(
+        "Section " + (index + 1).toString(),
+        groups,
+        instruments
+      );
     });
   }
   getSectionCount() {

@@ -68,11 +68,14 @@ export class SampleController {
         new Sample(
           sample.name,
           sample.path,
-          "#" + Math.floor(Math.random()*16777215).toString(16),
+          "#611932",
           sample.type,
           sample.duration
         )
     );
+
+    // The first sample in list is a background sample that will persist throughout the composition
+    this.backgroundSample = this.samples[0];
 
     // The play queue is an array of durations remaining to play
     this.playQueue = new Array(this.samples.length).fill(0);
@@ -168,19 +171,26 @@ export class SampleController {
     this.playQueue[sampleId] = this.samples[sampleId].duration;
     this.firstPlayQueue.push(sampleId);
   }
+
+  playBackgroundSample() {
+    this.playSample(this.backgroundSample.id);
+  }
+
   playSampleByName(sampleName) {
     const sampleId = this.getSampleByName(sampleName).id;
     this.playSample(sampleId);
   }
+
   stopSample(sampleId) {
     // For now, only stop loops
     if (this.samples[sampleId].isLoop()) {
       this.terminateLoopQueue.push(sampleId);
     }
   }
+
   stopAllSamples() {
     this.samples.forEach((sample) => {
-      if (sample.isPlaying()) {
+      if (sample.id !== this.backgroundSample.id && sample.isPlaying()) {
         // Clear callback since it's a React state update for a component that will soon disappear
         sample.setEndPlaybackCallback(null);
         this.terminateLoopQueue.push(sample.id);

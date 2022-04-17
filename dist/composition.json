@@ -87,15 +87,15 @@
   "samples": [
     {
       "id": 0,
-      "name": "EndClip",
-      "path": "audio/EndClip_8bar.mp3",
+      "name": "Sham main",
+      "path": "audio/Sham_main_8bars.mp3",
       "type": "loop",
       "duration": 8
     },
     {
       "id": 1,
-      "name": "Sham main",
-      "path": "audio/Sham_main_8bars.mp3",
+      "name": "EndClip",
+      "path": "audio/EndClip_8bar.mp3",
       "type": "loop",
       "duration": 8
     },
