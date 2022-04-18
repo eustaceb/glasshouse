@@ -18,7 +18,10 @@ export class FXControl {
   }
 
   setParam(parameter, value) {
-    if (this.node[parameter] instanceof Tone.Signal || this.node[parameter] instanceof Tone.Param) {
+    if (
+      this.node[parameter] instanceof Tone.Signal ||
+      this.node[parameter] instanceof Tone.Param
+    ) {
       if (this.node[parameter].value !== value) {
         this.node[parameter].value = value;
       }
@@ -28,31 +31,17 @@ export class FXControl {
   }
 
   createFxNode(type, params) {
-    if (type == "distortion") {
-      return new Tone.Distortion(params["amount"]);
-    } else if (type == "reverb") {
-      return new Tone.Reverb(params["decay"]);
-    } else if (type == "pingpong") {
-      return new Tone.PingPongDelay(
-        params["delayTime"],
-        params["feedback"]
-      );
-    } else if (type == "chorus") {
-      return new Tone.Chorus(
-        params["frequency"],
-        params["delayTime"],
-        params["depth"]
-      );
-    } else if (type == "lowpass") {
-      return new Tone.Filter(params["frequency"], "lowpass");
-    } else if (type == "vibrato") {
-      return new Tone.Vibrato(
-        params["frequency"],
-        params["delayTime"],
-        params["depth"]
-      );
-    }
-    console.assert(false, `Unknown fx type: ${type}`);
+    const fxLookup = {
+      "bitcrusher": Tone.BitCrusher,
+      "chorus": Tone.Chorus,
+      "delay": Tone.FeedbackDelay,
+      "distortion": Tone.Distortion,
+      "filter": Tone.Filter,
+      "pingpong": Tone.PingPongDelay,
+      "reverb": Tone.Reverb,
+      "vibrato": Tone.Vibrato
+    };
+    return new fxLookup[type](params);
   }
 }
 
