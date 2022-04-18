@@ -24,6 +24,7 @@ class Sample {
     this.startPlaybackCallback = null;
     this.endPlaybackCallback = null;
     this.playState = Sample.PlayStates.INACTIVE;
+    this.player.fadeOut = 0.1;
   }
   play(time) {
     this.player.start(time);
@@ -112,6 +113,14 @@ export class SampleController {
       const duration = this.playQueue[i];
       if (duration == 0) continue;
 
+      // Check if a sample should be stopped
+      if (this.terminateLoopQueue.includes(i)) {
+        this.samples[i].stop(Tone.Time(time) + Tone.Time("16n"));
+        this.playQueue[i] = 0;
+        this.finishedQueue.push(i);
+        continue;
+      }
+
       // Check if a sample should be triggered
       if (duration == this.samples[i].duration) {
         this.samples[i].play(Tone.Time(time) + Tone.Time("16n"));
@@ -148,11 +157,9 @@ export class SampleController {
       const finishedSampleId = this.finishedQueue[i];
       if (this.playQueue[finishedSampleId] === 0) {
         this.samples[finishedSampleId].setInactive();
-        if (this.samples[finishedSampleId].isLoop()) {
-          this.terminateLoopQueue = this.terminateLoopQueue.filter(
-            (sampleId) => sampleId !== finishedSampleId
-          );
-        }
+        this.terminateLoopQueue = this.terminateLoopQueue.filter(
+          (sampleId) => sampleId !== finishedSampleId
+        );
         if (this.samples[finishedSampleId].endPlaybackCallback !== null) {
           this.samples[finishedSampleId].endPlaybackCallback();
         }
@@ -186,9 +193,9 @@ export class SampleController {
 
   stopSample(sampleId) {
     // For now, only stop loops
-    if (this.samples[sampleId].isLoop()) {
-      this.terminateLoopQueue.push(sampleId);
-    }
+    //if (this.samples[sampleId].isLoop()) {
+    this.terminateLoopQueue.push(sampleId);
+    //}
   }
 
   stopAllSamples() {
