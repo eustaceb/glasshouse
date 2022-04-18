@@ -72,6 +72,7 @@ function App(props) {
     sampler.current = new SampleController(data["samples"]);
     playback.current = new PlaybackController(sampler.current);
     composition.current = new Composition(data["sections"], sampler.current);
+    Tone.Transport.bpm.value = 100;
   };
 
   return (

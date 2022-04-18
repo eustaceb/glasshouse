@@ -358,7 +358,7 @@
       "name": "Vocals Section3 1",
       "path": "audio/Section_3/Vocals_Section3_1_4,5bar.mp3",
       "type": "oneshot",
-      "duration": 4.5
+      "duration": 5
     },
     {
       "id": 35,
@@ -372,7 +372,7 @@
       "name": "Vocals Section3 3",
       "path": "audio/Section_3/Vocals_Section3_3_4,5bar.mp3",
       "type": "oneshot",
-      "duration": 4.5
+      "duration": 5
     },
     {
       "id": 37,
@@ -391,14 +391,14 @@
     {
       "id": 38,
       "name": "Click1",
-      "path": "audio/test/click1.mp3",
+      "path": "audio/test/click1_100bpm.mp3",
       "type": "loop",
       "duration": 1
     },
     {
       "id": 38,
       "name": "Click2",
-      "path": "audio/test/click2.mp3",
+      "path": "audio/test/click2_100bpm.mp3",
       "type": "loop",
       "duration": 1
     }
