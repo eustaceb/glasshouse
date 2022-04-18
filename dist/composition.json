@@ -6,7 +6,8 @@
           "samples": [
             "Vocals Section1 1",
             "Vocals Section1 2",
-            "Vocals Section1 3"
+            "Vocals Section1 3",
+            "Click1"
           ],
           "fx": {
             "type": "pingpong",
@@ -17,7 +18,8 @@
           "samples": [
             "Percussion Section1 1",
             "Percussion Section1 2",
-            "Percussion Section1 3"
+            "Percussion Section1 3",
+            "Click2"
           ],
           "fx": {
             "type": "distortion",
@@ -385,6 +387,20 @@
       "path": "audio/Section_3/Vocals_Section3_5_4bar.mp3",
       "type": "loop",
       "duration": 4
+    },
+    {
+      "id": 38,
+      "name": "Click1",
+      "path": "audio/test/click1.mp3",
+      "type": "loop",
+      "duration": 1
+    },
+    {
+      "id": 38,
+      "name": "Click2",
+      "path": "audio/test/click2.mp3",
+      "type": "loop",
+      "duration": 1
     }
   ]
 }
