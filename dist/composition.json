@@ -10,8 +10,8 @@
             "Click1"
           ],
           "fx": {
-            "type": "pingpong",
-            "params": { "delayTime": "4n", "feedback": 0.8 }
+            "type": "chorus",
+            "params": { "frequency": 600, "delayTime": 15, "depth": 0.9 }
           }
         },
         "percussion": {
@@ -22,8 +22,8 @@
             "Click2"
           ],
           "fx": {
-            "type": "distortion",
-            "params": { "amount": 0.5 }
+            "type": "delay",
+            "params": { "delayTime": "0.1", "feedback": 0.8 }
           }
         }
       },
@@ -57,8 +57,8 @@
             "Percussion Section2 4"
           ],
           "fx": {
-            "type": "pingpong",
-            "params": { "delayTime": "4n", "feedback": 0.8 }
+            "type": "bitcrusher",
+            "params": { "bits": 3 }
           }
         }
       },
@@ -80,8 +80,8 @@
             "Vocals Section3 5"
           ],
           "fx": {
-            "type": "pingpong",
-            "params": { "delayTime": "4n", "feedback": 0.8 }
+            "type": "vibrato",
+            "params": { "frequency": 120, "depth": 0.5 }
           }
         },
         "percussion": {
