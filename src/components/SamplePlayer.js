@@ -5,17 +5,25 @@ import {KnobControl} from "./KnobControl.js";
 import {Navigation} from "./Navigation.js";
 import {SamplePad} from "./SamplePad.js";
 import {XYPad} from "./XYPad.js";
-import { FXControl } from "../controllers/FXControls.js";
+import {FXControl} from "../controllers/FXControls.js";
 
 function SampleGroup(props) {
   const fx = props.group.getFx();
+
+  const playSample = (sampleIndex) => {
+    // Stop other samples in group
+    props.group.getSamples().forEach((s) => {
+      if (sampleIndex !== s.id && s.isPlaying()) props.stopSample(s.id);
+    });
+    props.playSample(sampleIndex);
+  };
 
   const pads = props.group.getSamples().map((s) => (
     <TableCell key={s.id}>
       <SamplePad
         className="fillHeight"
         sample={s}
-        playSample={() => props.playSample(s.id)}
+        playSample={() => playSample(s.id)}
         stopSample={() => props.stopSample(s.id)}
       />
     </TableCell>
