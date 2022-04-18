@@ -1,0 +1,390 @@
+{
+  "sections": [
+    {
+      "groups": {
+        "vocals": {
+          "samples": [
+            "Vocals Section1 1",
+            "Vocals Section1 2",
+            "Vocals Section1 3"
+          ],
+          "fx": {
+            "type": "pingpong",
+            "params": { "delayTime": "4n", "feedback": 0.8 }
+          }
+        },
+        "percussion": {
+          "samples": [
+            "Percussion Section1 1",
+            "Percussion Section1 2",
+            "Percussion Section1 3"
+          ],
+          "fx": {
+            "type": "distortion",
+            "params": { "amount": 0.5 }
+          }
+        }
+      },
+      "instruments": [
+        "Bass Section1",
+        "StringArp Section1",
+        "Taiko Section1",
+        "Clap Section1"
+      ]
+    },
+    {
+      "groups": {
+        "vocals": {
+          "samples": [
+            "Vocals Section2 1",
+            "Vocals Section2 2",
+            "Vocals Section2 3",
+            "Vocals Section2 4",
+            "Vocals Section2 5"
+          ],
+          "fx": {
+            "type": "pingpong",
+            "params": { "delayTime": "4n", "feedback": 0.8 }
+          }
+        },
+        "percussion": {
+          "samples": [
+            "Percussion Section2 1",
+            "Percussion Section2 2",
+            "Percussion Section2 3",
+            "Percussion Section2 4"
+          ],
+          "fx": {
+            "type": "pingpong",
+            "params": { "delayTime": "4n", "feedback": 0.8 }
+          }
+        }
+      },
+      "instruments": [
+        "Bass Section2",
+        "Guitalele Section2",
+        "ChiralSynth Section2",
+        "ClapFeedback Section2"
+      ]
+    },
+    {
+      "groups": {
+        "vocals": {
+          "samples": [
+            "Vocals Section3 1",
+            "Vocals Section3 2",
+            "Vocals Section3 3",
+            "Vocals Section3 4",
+            "Vocals Section3 5"
+          ],
+          "fx": {
+            "type": "pingpong",
+            "params": { "delayTime": "4n", "feedback": 0.8 }
+          }
+        },
+        "percussion": {
+          "samples": [
+            "Percussion Section3 1",
+            "Percussion Section3 2",
+            "Percussion Section3 3"
+          ],
+          "fx": {
+            "type": "pingpong",
+            "params": { "delayTime": "4n", "feedback": 0.8 }
+          }
+        },
+        "clap": {
+          "samples": [
+            "ClapRegular Section3",
+            "ClapFeedback Section3",
+            "ClapGlitch Section3"
+          ],
+          "fx": {
+            "type": "distortion",
+            "params": { "amount": 0.5 }
+          }
+        }
+      },
+      "instruments": [
+        "Bass Section3",
+        "Glitch Section3",
+        "ChiralSynth Section3"
+      ]
+    }
+  ],
+  "samples": [
+    {
+      "id": 0,
+      "name": "Sham main",
+      "path": "audio/Sham_main_8bars.mp3",
+      "type": "loop",
+      "duration": 8
+    },
+    {
+      "id": 1,
+      "name": "EndClip",
+      "path": "audio/EndClip_8bar.mp3",
+      "type": "loop",
+      "duration": 8
+    },
+    {
+      "id": 2,
+      "name": "Bass Section1",
+      "path": "audio/Section_1/Bass_Section1_2bar.mp3",
+      "type": "loop",
+      "duration": 2
+    },
+    {
+      "id": 3,
+      "name": "Clap Section1",
+      "path": "audio/Section_1/Clap_Section1_1bar.mp3",
+      "type": "loop",
+      "duration": 1
+    },
+    {
+      "id": 4,
+      "name": "Percussion Section1 1",
+      "path": "audio/Section_1/Percussion Section1_1_1bar.mp3",
+      "type": "loop",
+      "duration": 1
+    },
+    {
+      "id": 5,
+      "name": "Percussion Section1 2",
+      "path": "audio/Section_1/Percussion_Section1_2_1bar.mp3",
+      "type": "loop",
+      "duration": 1
+    },
+    {
+      "id": 6,
+      "name": "Percussion Section1 3",
+      "path": "audio/Section_1/Percussion_Section1_3_2bar.mp3",
+      "type": "loop",
+      "duration": 2
+    },
+    {
+      "id": 7,
+      "name": "StringArp Section1",
+      "path": "audio/Section_1/StringArp_Section1_4bar.mp3",
+      "type": "loop",
+      "duration": 4
+    },
+    {
+      "id": 8,
+      "name": "Taiko Section1",
+      "path": "audio/Section_1/Taiko_Section1_2bar.mp3",
+      "type": "loop",
+      "duration": 2
+    },
+    {
+      "id": 9,
+      "name": "Vocals Section1 1",
+      "path": "audio/Section_1/Vocals_Section1_1_4bar.mp3",
+      "type": "oneshot",
+      "duration": 4
+    },
+    {
+      "id": 10,
+      "name": "Vocals Section1 2",
+      "path": "audio/Section_1/Vocals_Section1_2_2bar.mp3",
+      "type": "oneshot",
+      "duration": 2
+    },
+    {
+      "id": 11,
+      "name": "Vocals Section1 3",
+      "path": "audio/Section_1/Vocals_Section1_3_5bar.mp3",
+      "type": "oneshot",
+      "duration": 5
+    },
+    {
+      "id": 12,
+      "name": "Bass Section2",
+      "path": "audio/Section_2/Bass_Section2_2bar.mp3",
+      "type": "loop",
+      "duration": 2
+    },
+    {
+      "id": 13,
+      "name": "ChiralSynth Section2",
+      "path": "audio/Section_2/ChiralSynth_Section2_4bar.mp3",
+      "type": "loop",
+      "duration": 4
+    },
+    {
+      "id": 14,
+      "name": "ClapFeedback Section2",
+      "path": "audio/Section_2/ClapFeedback_Section2_3bar.mp3",
+      "type": "loop",
+      "duration": 3
+    },
+    {
+      "id": 15,
+      "name": "Guitalele Section2",
+      "path": "audio/Section_2/Guitalele_Section2_4bar.mp3",
+      "type": "loop",
+      "duration": 4
+    },
+    {
+      "id": 16,
+      "name": "Percussion Section2 1",
+      "path": "audio/Section_2/Percussion Section2_1_1bar.mp3",
+      "type": "loop",
+      "duration": 1
+    },
+    {
+      "id": 17,
+      "name": "Percussion Section2 2",
+      "path": "audio/Section_2/Percussion Section2_2_1bar.mp3",
+      "type": "loop",
+      "duration": 1
+    },
+    {
+      "id": 18,
+      "name": "Percussion Section2 3",
+      "path": "audio/Section_2/Percussion Section2_3_2bar.mp3",
+      "type": "loop",
+      "duration": 2
+    },
+    {
+      "id": 19,
+      "name": "Percussion Section2 4",
+      "path": "audio/Section_2/Percussion Section2_4_1bar.mp3",
+      "type": "loop",
+      "duration": 1
+    },
+    {
+      "id": 20,
+      "name": "Vocals Section2 1",
+      "path": "audio/Section_2/Vocals_Section2_1_3bar.mp3",
+      "type": "oneshot",
+      "duration": 3
+    },
+    {
+      "id": 21,
+      "name": "Vocals Section2 2",
+      "path": "audio/Section_2/Vocals_Section2_2_3bar.mp3",
+      "type": "oneshot",
+      "duration": 3
+    },
+    {
+      "id": 22,
+      "name": "Vocals Section2 3",
+      "path": "audio/Section_2/Vocals_Section2_3_3bar.mp3",
+      "type": "oneshot",
+      "duration": 3
+    },
+    {
+      "id": 23,
+      "name": "Vocals Section2 4",
+      "path": "audio/Section_2/Vocals_Section2_4_4bar.mp3",
+      "type": "loop",
+      "duration": 4
+    },
+    {
+      "id": 24,
+      "name": "Vocals Section2 5",
+      "path": "audio/Section_2/Vocals_Section2_5_4bar.mp3",
+      "type": "loop",
+      "duration": 4
+    },
+    {
+      "id": 25,
+      "name": "Bass Section3",
+      "path": "audio/Section_3/Bass_Section3_4bar.mp3",
+      "type": "loop",
+      "duration": 4
+    },
+    {
+      "id": 26,
+      "name": "ChiralSynth Section3",
+      "path": "audio/Section_3/ChiralSynth_Section3_4bar.mp3",
+      "type": "loop",
+      "duration": 4
+    },
+    {
+      "id": 27,
+      "name": "ClapFeedback Section3",
+      "path": "audio/Section_3/ClapFeedback_Section3_3bar.mp3",
+      "type": "loop",
+      "duration": 3
+    },
+    {
+      "id": 28,
+      "name": "ClapGlitch Section3",
+      "path": "audio/Section_3/ClapGlitch_Section3_1bar.mp3",
+      "type": "loop",
+      "duration": 1
+    },
+    {
+      "id": 29,
+      "name": "ClapRegular Section3",
+      "path": "audio/Section_3/ClapRegular_Section3_1bar.mp3",
+      "type": "loop",
+      "duration": 1
+    },
+    {
+      "id": 30,
+      "name": "Glitch Section3",
+      "path": "audio/Section_3/Glitch_Section3_3bar.mp3",
+      "type": "loop",
+      "duration": 3
+    },
+    {
+      "id": 31,
+      "name": "Percussion Section3 1",
+      "path": "audio/Section_3/Percussion_Section3_1_1bar.mp3",
+      "type": "loop",
+      "duration": 1
+    },
+    {
+      "id": 32,
+      "name": "Percussion Section3 2",
+      "path": "audio/Section_3/Percussion_Section3_2_2bar.mp3",
+      "type": "loop",
+      "duration": 2
+    },
+    {
+      "id": 33,
+      "name": "Percussion Section3 3",
+      "path": "audio/Section_3/Percussion_Section3_3_2bar.mp3",
+      "type": "loop",
+      "duration": 2
+    },
+    {
+      "id": 34,
+      "name": "Vocals Section3 1",
+      "path": "audio/Section_3/Vocals_Section3_1_4,5bar.mp3",
+      "type": "oneshot",
+      "duration": 4.5
+    },
+    {
+      "id": 35,
+      "name": "Vocals Section3 2",
+      "path": "audio/Section_3/Vocals_Section3_2_5bar.mp3",
+      "type": "oneshot",
+      "duration": 5
+    },
+    {
+      "id": 36,
+      "name": "Vocals Section3 3",
+      "path": "audio/Section_3/Vocals_Section3_3_4,5bar.mp3",
+      "type": "oneshot",
+      "duration": 4.5
+    },
+    {
+      "id": 37,
+      "name": "Vocals Section3 4",
+      "path": "audio/Section_3/Vocals_Section3_4_4bar.mp3",
+      "type": "oneshot",
+      "duration": 4
+    },
+    {
+      "id": 38,
+      "name": "Vocals Section3 5",
+      "path": "audio/Section_3/Vocals_Section3_5_4bar.mp3",
+      "type": "loop",
+      "duration": 4
+    }
+  ]
+}

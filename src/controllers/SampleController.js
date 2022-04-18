@@ -58,263 +58,27 @@ class Sample {
   isLoop() {
     return this.type === "loop";
   }
+  getPlayer() {
+    return this.player;
+  }
 }
 
 export class SampleController {
-  constructor() {
+  constructor(data) {
     this.samplesPlaying = 0;
-    // @TODO: Load from JSON
-    this.samples = [
-      {
-        name: "Bass Chorus",
-        path: "audio/Bass/Bass_Chorus_4bar.mp3",
-        color: "#0D168F",
-        type: "loop",
-        duration: 4,
-        category: "Bass",
-      },
-      {
-        name: "Bass End",
-        path: "audio/Bass/Bass_End_4bar.mp3",
-        color: "#9F0C02",
-        type: "loop",
-        duration: 4,
-        category: "Bass",
-      },
-      {
-        name: "Bass Intro",
-        path: "audio/Bass/Bass_Intro_2bar.mp3",
-        color: "#995FBD",
-        type: "loop",
-        duration: 2,
-        category: "Bass",
-      },
-      {
-        name: "Bass LongerNote",
-        path: "audio/Bass/Bass_LongerNote_2bar.mp3",
-        color: "#75DF54",
-        type: "loop",
-        duration: 2,
-        category: "Bass",
-      },
-      {
-        name: "Bass Melodic",
-        path: "audio/Bass/Bass_Melodic_2bar.mp3",
-        color: "#02D2AF",
-        type: "loop",
-        duration: 2,
-        category: "Bass",
-      },
-      {
-        name: "Chiral Synth",
-        path: "audio/Misc/Chiral_Synth_4bar.mp3",
-        color: "#78FD11",
-        type: "loop",
-        duration: 4,
-        category: "Misc",
-      },
-      {
-        name: "Sham HighPluck",
-        path: "audio/Misc/Sham_HighPluck_4bar.mp3",
-        color: "#1AF1C8",
-        type: "loop",
-        duration: 4,
-        category: "Misc",
-      },
-      {
-        name: "Perc fifth",
-        path: "audio/Percussion/Perc_fifth_2bar.mp3",
-        color: "#4D3152",
-        type: "loop",
-        duration: 2,
-        category: "Percussion",
-      },
-      {
-        name: "Perc first",
-        path: "audio/Percussion/Perc_first_1bar.mp3",
-        color: "#C239A0",
-        type: "loop",
-        duration: 1,
-        category: "Percussion",
-      },
-      {
-        name: "Perc fourth",
-        path: "audio/Percussion/Perc_fourth_2bar.mp3",
-        color: "#A2C7E3",
-        type: "loop",
-        duration: 2,
-        category: "Percussion",
-      },
-      {
-        name: "Perc second",
-        path: "audio/Percussion/Perc_second_1bar.mp3",
-        color: "#55F229",
-        type: "loop",
-        duration: 1,
-        category: "Percussion",
-      },
-      {
-        name: "Perc seventh",
-        path: "audio/Percussion/Perc_seventh_1bar.mp3",
-        color: "#C3C2E3",
-        type: "loop",
-        duration: 1,
-        category: "Percussion",
-      },
-      {
-        name: "Perc sixth",
-        path: "audio/Percussion/Perc_sixth_1bar.mp3",
-        color: "#5D5230",
-        type: "loop",
-        duration: 1,
-        category: "Percussion",
-      },
-      {
-        name: "Perc third",
-        path: "audio/Percussion/Perc_third_2bar.mp3",
-        color: "#3FEF32",
-        type: "loop",
-        duration: 2,
-        category: "Percussion",
-      },
-      {
-        name: "Sham first",
-        path: "audio/Sham_Bass_Pluck/Sham_first_4bar.mp3",
-        color: "#7C203D",
-        type: "loop",
-        duration: 4,
-        category: "Sham_Bass_Pluck",
-      },
-      {
-        name: "Sham Last",
-        path: "audio/Sham_Bass_Pluck/Sham_Last_8bar.mp3",
-        color: "#E0048B",
-        type: "loop",
-        duration: 8,
-        category: "Sham_Bass_Pluck",
-      },
-      {
-        name: "Sham Main",
-        path: "audio/Sham_Bass_Pluck/Sham_Main_8bar.mp3",
-        color: "#ADF7A0",
-        type: "loop",
-        duration: 8,
-        category: "Sham_Bass_Pluck",
-      },
-      {
-        name: "Vocals BRIDGE",
-        path: "audio/Vocals_Sections/Vocals_BRIDGE_18bar.mp3",
-        color: "#145453",
-        type: "loop",
-        duration: 18,
-        category: "Vocals_Sections",
-      },
-      {
-        name: "Vocals ChorusOne",
-        path: "audio/Vocals_Sections/Vocals_ChorusOne_16bar.mp3",
-        color: "#FD5D35",
-        type: "loop",
-        duration: 16,
-        category: "Vocals_Sections",
-      },
-      {
-        name: "Vocals ChorusTWO",
-        path: "audio/Vocals_Sections/Vocals_ChorusTWO_20bar.mp3",
-        color: "#734ECB",
-        type: "loop",
-        duration: 20,
-        category: "Vocals_Sections",
-      },
-      {
-        name: "Vocals Intro",
-        path: "audio/Vocals_Sections/Vocals_Intro_4bar.mp3",
-        color: "#C9124F",
-        type: "loop",
-        duration: 4,
-        category: "Vocals_Sections",
-      },
-      {
-        name: "Vocals Outro",
-        path: "audio/Vocals_Sections/Vocals_Outro_16bar.mp3",
-        color: "#B9880D",
-        type: "loop",
-        duration: 16,
-        category: "Vocals_Sections",
-      },
-      {
-        name: "Vocals VerseOne",
-        path: "audio/Vocals_Sections/Vocals_VerseOne_24bar.mp3",
-        color: "#BFB804",
-        type: "loop",
-        duration: 24,
-        category: "Vocals_Sections",
-      },
-      {
-        name: "Vocals VerseTwo",
-        path: "audio/Vocals_Sections/Vocals_VerseTwo_15bar.mp3",
-        color: "#A80448",
-        type: "loop",
-        duration: 15,
-        category: "Vocals_Sections",
-      },
-      {
-        name: "Volca FM first",
-        path: "audio/Volca_FM/Volca_FM_first_4bar.mp3",
-        color: "#75C26D",
-        type: "loop",
-        duration: 4,
-        category: "Volca_FM",
-      },
-      {
-        name: "Volca FM fourth",
-        path: "audio/Volca_FM/Volca_FM_fourth_4bar.mp3",
-        color: "#CD9D33",
-        type: "loop",
-        duration: 4,
-        category: "Volca_FM",
-      },
-      {
-        name: "Volca FM second",
-        path: "audio/Volca_FM/Volca_FM_second_8bar.mp3",
-        color: "#A8A5B1",
-        type: "loop",
-        duration: 8,
-        category: "Volca_FM",
-      },
-      {
-        name: "Volca FM third",
-        path: "audio/Volca_FM/Volca_FM_third_8bar.mp3",
-        color: "#F113AC",
-        type: "loop",
-        duration: 8,
-        category: "Volca_FM",
-      },
-      {
-        name: "Click 1",
-        path: "audio/test/click1.mp3",
-        color: "#F183AC",
-        type: "loop",
-        duration: 1,
-        category: "Test",
-      },
-      {
-        name: "Click 2",
-        path: "audio/test/click2.mp3",
-        color: "#A113AC",
-        type: "loop",
-        duration: 1,
-        category: "Test",
-      },
-    ].map(
+    this.samples = data.map(
       (sample) =>
         new Sample(
           sample.name,
           sample.path,
-          sample.color,
+          "#611932",
           sample.type,
           sample.duration
         )
     );
+
+    // The first sample in list is a background sample that will persist throughout the composition
+    this.backgroundSample = this.samples[0];
 
     // The play queue is an array of durations remaining to play
     this.playQueue = new Array(this.samples.length).fill(0);
@@ -410,19 +174,26 @@ export class SampleController {
     this.playQueue[sampleId] = this.samples[sampleId].duration;
     this.firstPlayQueue.push(sampleId);
   }
+
+  playBackgroundSample() {
+    this.playSample(this.backgroundSample.id);
+  }
+
   playSampleByName(sampleName) {
     const sampleId = this.getSampleByName(sampleName).id;
     this.playSample(sampleId);
   }
+
   stopSample(sampleId) {
     // For now, only stop loops
     if (this.samples[sampleId].isLoop()) {
       this.terminateLoopQueue.push(sampleId);
     }
   }
+
   stopAllSamples() {
     this.samples.forEach((sample) => {
-      if (sample.isPlaying()) {
+      if (sample.id !== this.backgroundSample.id && sample.isPlaying()) {
         // Clear callback since it's a React state update for a component that will soon disappear
         sample.setEndPlaybackCallback(null);
         this.terminateLoopQueue.push(sample.id);

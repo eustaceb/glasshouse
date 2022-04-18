@@ -1,14 +1,20 @@
 import * as Tone from "tone";
 
 export class FXControl {
-  constructor(type, label, player, params) {
+  constructor(type, label, params) {
     this.type = type;
     this.label = label;
-    this.player = player;
     this.params = params;
     this.node = this.createFxNode(type, params);
-    // @TODO: defer this?
-    this.player.connect(this.node);
+    this.node.toDestination();
+  }
+
+  getNode() {
+    return this.node;
+  }
+
+  getLabel() {
+    return this.label;
   }
 
   setParam(parameter, value) {
@@ -20,35 +26,31 @@ export class FXControl {
       this.node[parameter] = value;
     }
   }
-  enable(enabled) {
-    console.log(`${enabled ? "Enabling" : "Disabling"} ${this.type}`);
-    if (enabled) this.player.connect(this.node);
-    else this.player.disconnect(this.node);
-  }
+
   createFxNode(type, params) {
     if (type == "distortion") {
-      return new Tone.Distortion(params["amount"]).toDestination();
+      return new Tone.Distortion(params["amount"]);
     } else if (type == "reverb") {
-      return new Tone.Reverb(params["decay"]).toDestination();
+      return new Tone.Reverb(params["decay"]);
     } else if (type == "pingpong") {
       return new Tone.PingPongDelay(
         params["delayTime"],
         params["feedback"]
-      ).toDestination();
+      );
     } else if (type == "chorus") {
       return new Tone.Chorus(
         params["frequency"],
         params["delayTime"],
         params["depth"]
-      ).toDestination();
+      );
     } else if (type == "lowpass") {
-      return new Tone.Filter(params["frequency"], "lowpass").toDestination();
+      return new Tone.Filter(params["frequency"], "lowpass");
     } else if (type == "vibrato") {
       return new Tone.Vibrato(
         params["frequency"],
         params["delayTime"],
         params["depth"]
-      ).toDestination();
+      );
     }
     console.assert(false, `Unknown fx type: ${type}`);
   }
@@ -82,8 +84,8 @@ class XYControl extends FXControl {
 }
 
 class WetControl extends FXControl {
-  constructor(type, label, player, params) {
-    super(type, label, player, params);
+  constructor(type, label, params) {
+    super(type, label, params);
     this.setWet(0);
   }
   setWet(value) {
