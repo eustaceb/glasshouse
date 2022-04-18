@@ -58,6 +58,9 @@ class Sample {
   isLoop() {
     return this.type === "loop";
   }
+  getPlayer() {
+    return this.player;
+  }
 }
 
 export class SampleController {

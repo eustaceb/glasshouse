@@ -1,4 +1,5 @@
-import {WetControl, XYControl} from "./FXControls.js";
+import * as Tone from "tone";
+import { WetControl } from "./FXControls";
 
 export class Section {
   /**
@@ -30,15 +31,24 @@ export class Section {
 }
 
 class SampleGroup {
-  constructor(name, samples) {
+  constructor(name, samples, fx) {
     this.name = name;
     this.samples = samples;
+    this.fx = fx;
+    this.channel = new Tone.Channel(0, 0).connect(this.fx.getNode()).toDestination();
+    //this.channel.receive("fx");
+    this.samples.forEach((s) => {
+      s.getPlayer().connect(this.channel);
+    });
   }
   getName() {
     return this.name;
   }
   getSamples() {
     return this.samples;
+  }
+  getFx() {
+    return this.fx;
   }
 }
 
@@ -51,7 +61,10 @@ export class Composition {
         const samples = kvp[1]["samples"].map((sampleName) => {
           return sampleController.getSampleByName(sampleName);
         });
-        return new SampleGroup(name, samples);
+        const fxData = kvp[1]["fx"];
+        const fxLabel = fxData["type"] + " for " + name;
+        const fx = new WetControl(fxData["type"], fxLabel, fxData["params"]);
+        return new SampleGroup(name, samples, fx);
       });
       const instruments = section["instruments"].map((sampleName) => {
         return sampleController.getSampleByName(sampleName);

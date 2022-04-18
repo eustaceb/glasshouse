@@ -7,14 +7,22 @@
             "Vocals Section1 1",
             "Vocals Section1 2",
             "Vocals Section1 3"
-          ]
+          ],
+          "fx": {
+            "type": "pingpong",
+            "params": { "delayTime": "4n", "feedback": 0.8 }
+          }
         },
         "percussion": {
           "samples": [
             "Percussion Section1 1",
             "Percussion Section1 2",
             "Percussion Section1 3"
-          ]
+          ],
+          "fx": {
+            "type": "distortion",
+            "params": { "amount": 0.5 }
+          }
         }
       },
       "instruments": [
@@ -33,7 +41,11 @@
             "Vocals Section2 3",
             "Vocals Section2 4",
             "Vocals Section2 5"
-          ]
+          ],
+          "fx": {
+            "type": "pingpong",
+            "params": { "delayTime": "4n", "feedback": 0.8 }
+          }
         },
         "percussion": {
           "samples": [
@@ -41,7 +53,11 @@
             "Percussion Section2 2",
             "Percussion Section2 3",
             "Percussion Section2 4"
-          ]
+          ],
+          "fx": {
+            "type": "pingpong",
+            "params": { "delayTime": "4n", "feedback": 0.8 }
+          }
         }
       },
       "instruments": [
@@ -60,21 +76,33 @@
             "Vocals Section3 3",
             "Vocals Section3 4",
             "Vocals Section3 5"
-          ]
+          ],
+          "fx": {
+            "type": "pingpong",
+            "params": { "delayTime": "4n", "feedback": 0.8 }
+          }
         },
         "percussion": {
           "samples": [
             "Percussion Section3 1",
             "Percussion Section3 2",
             "Percussion Section3 3"
-          ]
+          ],
+          "fx": {
+            "type": "pingpong",
+            "params": { "delayTime": "4n", "feedback": 0.8 }
+          }
         },
         "clap": {
           "samples": [
             "ClapRegular Section3",
             "ClapFeedback Section3",
             "ClapGlitch Section3"
-          ]
+          ],
+          "fx": {
+            "type": "distortion",
+            "params": { "amount": 0.5 }
+          }
         }
       },
       "instruments": [

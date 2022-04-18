@@ -5,8 +5,11 @@ import {KnobControl} from "./KnobControl.js";
 import {Navigation} from "./Navigation.js";
 import {SamplePad} from "./SamplePad.js";
 import {XYPad} from "./XYPad.js";
+import { FXControl } from "../controllers/FXControls.js";
 
 function SampleGroup(props) {
+  const fx = props.group.getFx();
+
   const pads = props.group.getSamples().map((s) => (
     <TableCell key={s.id}>
       <SamplePad
@@ -21,9 +24,20 @@ function SampleGroup(props) {
     <TableRow>
       <TableCell>{props.group.getName()}</TableCell>
       {pads}
+      <TableCell>
+        <KnobControl
+          size={50}
+          label={fx.getLabel()}
+          minValue={0}
+          maxValue={100}
+          mouseController={props.mouseController}
+          callback={(val) => fx.setWet(val / 100)}
+        />
+      </TableCell>
     </TableRow>
   );
 }
+
 export function SamplePlayer(props) {
   const [sectionIndex, setSectionIndex] = useState(0);
   const section = props.composition.getSection(sectionIndex);
@@ -60,7 +74,7 @@ export function SamplePlayer(props) {
     <Table style={{width: "60%"}} className="fillHeight">
       <TableBody>
         <TableRow>
-          <TableCell colSpan={8}>
+          <TableCell colSpan={9}>
             <Navigation
               setSection={(sectionIndex) => setSection(sectionIndex)}
               sectionIndex={sectionIndex}
@@ -73,17 +87,20 @@ export function SamplePlayer(props) {
           playSample={playSample}
           stopSample={stopSample}
           group={vocals}
+          mouseController={props.mouseController}
         />
         <SampleGroup
           playSample={playSample}
           stopSample={stopSample}
           group={percussion}
+          mouseController={props.mouseController}
         />
         {clap && (
           <SampleGroup
             playSample={playSample}
             stopSample={stopSample}
             group={clap}
+            mouseController={props.mouseController}
           />
         )}
         <TableRow>
