@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
-import {useLocalContext} from "../utils/ReactHelpers.js";
+
 import {uuidv4} from "../utils/GUID.js";
+import {clamp} from "../utils/Math.js";
+import {useLocalContext} from "../utils/ReactHelpers.js";
 
 export function XYPad(props) {
   const size = props.size;
@@ -14,10 +16,8 @@ export function XYPad(props) {
   const callbackY = props.callbackY;
   const ctx = useLocalContext({callbackX, callbackY, x, y, componentId});
 
-  const minValueX = props.minValueX ? props.minValueX : 0;
-  const maxValueX = props.maxValueX ? props.maxValueX : 100;
-  const minValueY = props.minValueY ? props.minValueY : 0;
-  const maxValueY = props.maxValueY ? props.maxValueY : 100;
+  const minValue = 0;
+  const maxValue = 100;
 
   const mouseMove = React.useCallback(
     (e) => {
@@ -26,15 +26,17 @@ export function XYPad(props) {
           e.dragOrigin.id === componentId ||
           e.dragOrigin.parentElement?.id === componentId;
         if (e.isDragging && thisElement) {
-          const rect = document.getElementById(componentId).getBoundingClientRect();
+          const rect = document
+            .getElementById(componentId)
+            .getBoundingClientRect();
 
           // Movement deltas
           const deltaX = e.clientX - rect.left;
           const deltaY = e.clientY - rect.top;
 
           // Apply and constrain
-          const constrainedX = Math.min(maxValueX, Math.max(minValueX, deltaX));
-          const constrainedY = Math.min(maxValueY, Math.max(minValueY, deltaY));
+          const constrainedX = clamp(deltaX, minValue, maxValue);
+          const constrainedY = clamp(deltaY, minValue, maxValue);
 
           // Only update state if value has changed
           if (Math.abs(constrainedX - ctx.x) > 0.0000001) {
@@ -48,7 +50,7 @@ export function XYPad(props) {
         }
       }
     },
-    [minValueX, maxValueX, minValueY, maxValueY]
+    [minValue, maxValue]
   );
 
   const mouseDown = React.useCallback((e) => {
@@ -58,14 +60,8 @@ export function XYPad(props) {
     if (thisElement) {
       const rect = document.getElementById(componentId).getBoundingClientRect();
       // Apply and constrain
-      const constrainedX = Math.min(
-        maxValueX,
-        Math.max(minValueX, e.clientX - rect.left)
-      );
-      const constrainedY = Math.min(
-        maxValueY,
-        Math.max(minValueY, e.clientY - rect.top)
-      );
+      const constrainedX = clamp(e.clientX - rect.left, minValue, maxValue);
+      const constrainedY = clamp(e.clientY - rect.top, minValue, maxValue);
       setX(constrainedX);
       setY(constrainedY);
       if (ctx.callbackX) ctx.callbackX(constrainedX);
@@ -100,11 +96,11 @@ export function XYPad(props) {
       </svg>
       <div className="nonselectable">
         {props.fx.xAxis.paramName}: {Math.round(x).toString().padStart(3, "0")}{" "}
-        / {maxValueX}
+        / {maxValue}
       </div>
       <div className="nonselectable">
         {props.fx.yAxis.paramName}: {Math.round(y).toString().padStart(3, "0")}{" "}
-        / {maxValueY}
+        / {maxValue}
       </div>
     </div>
   );

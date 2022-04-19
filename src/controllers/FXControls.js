@@ -1,4 +1,5 @@
 import * as Tone from "tone";
+import { scale } from "../utils/Math.js";
 
 export class FXControl {
   constructor(type, label, params) {
@@ -24,11 +25,13 @@ export class FXControl {
   setParam(parameter, value) {
     if (
       this.node[parameter] instanceof Tone.Signal ||
+      this.node[parameter] instanceof Tone.Frequency ||
       this.node[parameter] instanceof Tone.Param
     ) {
       if (this.node[parameter].value !== value) {
         this.node[parameter].value = value;
       }
+      console.log(`${this.type} ${parameter} is now ${this.node[parameter].value}`);
     } else if (this.node[parameter] !== value) {
       this.node[parameter] = value;
     }
@@ -52,8 +55,8 @@ export class FXControl {
 }
 
 class XYControl extends FXControl {
-  constructor(type, label, player, params, xAxis, yAxis) {
-    super(type, label, player, params);
+  constructor(type, label, params, xAxis, yAxis) {
+    super(type, label, params);
     console.assert(
       xAxis.hasOwnProperty("paramName") && xAxis.hasOwnProperty("range")
     );
@@ -62,19 +65,14 @@ class XYControl extends FXControl {
     );
     this.xAxis = xAxis;
     this.yAxis = yAxis;
-    this.setY(0); // Currently this is always the Dry/Wet control
   }
   setX(value) {
-    this.setParam(this.xAxis.paramName, value);
+    const scaled = scale(value, 0, 1.0, this.xAxis.range[0], this.xAxis.range[1]);
+    this.setParam(this.xAxis.paramName, scaled);
   }
   setY(value) {
-    this.setParam(this.yAxis.paramName, value);
-  }
-  getXRange() {
-    return this.xAxis.range;
-  }
-  getYRange() {
-    return this.yAxis.range;
+    const scaled = scale(value, 0, 1.0, this.yAxis.range[0], this.yAxis.range[1]);
+    this.setParam(this.yAxis.paramName, scaled);
   }
 }
 

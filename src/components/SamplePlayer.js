@@ -9,6 +9,7 @@ import {FXControl} from "../controllers/FXControls.js";
 
 function SampleGroup(props) {
   const fx = props.group.getFx();
+  const mouseController = props.mouseController;
 
   const playSample = (sampleIndex) => {
     // Stop other samples in group
@@ -28,20 +29,32 @@ function SampleGroup(props) {
       />
     </TableCell>
   ));
+
+  const fxComponent = fx.hasOwnProperty("xAxis") ? (
+    <XYPad
+      size={100}
+      label={fx.getLabel()}
+      mouseController={mouseController}
+      fx={fx}
+      callbackX={(val) => fx.setX(val / 100.0)}
+      callbackY={(val) => fx.setY(val / 100.0)}
+    />
+  ) : (
+    <KnobControl
+      size={50}
+      label={fx.getLabel()}
+      minValue={0}
+      maxValue={100}
+      mouseController={mouseController}
+      callback={(val) => fx.setWet(val / 100)}
+    />
+  );
+
   return (
     <TableRow>
       <TableCell>{props.group.getName()}</TableCell>
       {pads}
-      <TableCell>
-        <KnobControl
-          size={50}
-          label={fx.getLabel()}
-          minValue={0}
-          maxValue={100}
-          mouseController={props.mouseController}
-          callback={(val) => fx.setWet(val / 100)}
-        />
-      </TableCell>
+      <TableCell>{fxComponent}</TableCell>
     </TableRow>
   );
 }

@@ -80,8 +80,10 @@
             "Vocals Section3 5"
           ],
           "fx": {
-            "type": "pitchshift",
-            "params": { "pitch": -2, "windowSize": 0.3, "delayTime": 0.05, "feedback": 0 }
+            "type": "filter",
+            "params": { "frequency": 1000, "type": "lowpass" },
+            "x": {"paramName": "frequency", "range": [300, 2000]},
+            "y": {"paramName": "gain", "range": [-50, 10]}
           }
         },
         "percussion": {
@@ -102,8 +104,8 @@
             "ClapGlitch Section3"
           ],
           "fx": {
-            "type": "distortion",
-            "params": { "amount": 0.5 }
+            "type": "pitchshift",
+            "params": { "pitch": -2, "windowSize": 0.1, "delayTime": 0.05, "feedback": 0.01 }
           }
         }
       },
