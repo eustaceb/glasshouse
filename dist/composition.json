@@ -23,7 +23,8 @@
           ],
           "fx": {
             "type": "delay",
-            "params": { "delayTime": 0.6, "feedback": 0.3 }
+            "params": { "delayTime": 0.6, "feedback": 0.3 },
+            "switch": { "paramName": "delayTime", "options": [0.15, 0.3, 0.6] }
           }
         }
       },
