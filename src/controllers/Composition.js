@@ -1,5 +1,5 @@
 import * as Tone from "tone";
-import { WetControl } from "./FXControls";
+import {WetControl, XYControl} from "./FXControls";
 
 export class Section {
   /**
@@ -65,7 +65,22 @@ export class Composition {
         });
         const fxData = kvp[1]["fx"];
         const fxLabel = fxData["type"] + " for " + name;
-        const fx = new WetControl(fxData["type"], fxLabel, fxData["params"]);
+
+        let fx;
+        // Multiparameter XY control
+        if (Object.keys(fxData).includes("x")) {
+          console.assert(fxData.hasOwnProperty("y"));
+          fx = new XYControl(
+            fxData["type"],
+            fxLabel,
+            fxData["params"],
+            fxData["x"],
+            fxData["y"]
+          );
+        } else {
+          // Dry/wet
+          fx = new WetControl(fxData["type"], fxLabel, fxData["params"]);
+        }
         return new SampleGroup(name, samples, fx);
       });
       const instruments = section["instruments"].map((sampleName) => {

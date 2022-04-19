@@ -55,8 +55,8 @@ export class FXControl {
 }
 
 class XYControl extends FXControl {
-  constructor(type, label, player, params, xAxis, yAxis) {
-    super(type, label, player, params);
+  constructor(type, label, params, xAxis, yAxis) {
+    super(type, label, params);
     console.assert(
       xAxis.hasOwnProperty("paramName") && xAxis.hasOwnProperty("range")
     );
@@ -65,8 +65,6 @@ class XYControl extends FXControl {
     );
     this.xAxis = xAxis;
     this.yAxis = yAxis;
-
-    this.setY(0); // Currently this is always the Dry/Wet control
   }
   setX(value) {
     const scaled = scale(value, 0, 1.0, this.xAxis.range[0], this.xAxis.range[1]);
