@@ -2,13 +2,24 @@ import * as Tone from "tone";
 import { scale } from "../utils/Math.js";
 
 export class FXControl {
-  constructor(type, label, player, params) {
+  constructor(type, label, params) {
     this.type = type;
     this.label = label;
-    this.player = player;
     this.params = params;
     this.node = this.createFxNode(type, params);
-    this.player.chain(this.node, Tone.Destination);
+    if (["chorus", "autopanner"].includes(type)) {
+      console.log(`Starting LFO for ${type}`);
+      this.node.start();
+    }
+    this.node.toDestination();
+  }
+
+  getNode() {
+    return this.node;
+  }
+
+  getLabel() {
+    return this.label;
   }
 
   setParam(parameter, value) {
@@ -25,41 +36,21 @@ export class FXControl {
       this.node[parameter] = value;
     }
   }
-  enable(enabled) {
-    console.log(`${enabled ? "Enabling" : "Disabling"} ${this.type}`);
-    if (enabled) this.player.connect(this.node);
-    else this.player.disconnect(this.node);
-  }
+
   createFxNode(type, params) {
-    if (type == "distortion") {
-      return new Tone.Distortion(params["amount"]);
-    } else if (type == "reverb") {
-      return new Tone.Reverb(params["decay"]);
-    } else if (type == "pingpong") {
-      return new Tone.PingPongDelay(
-        params["delayTime"],
-        params["feedback"]
-      );
-    } else if (type == "chorus") {
-      return new Tone.Chorus(
-        params["frequency"],
-        params["delayTime"],
-        params["depth"]
-      );
-    } else if (type == "vibrato") {
-      return new Tone.Vibrato(
-        params["frequency"],
-        params["delayTime"],
-        params["depth"]
-      );
-    } else if (type == "filter") {
-      return new Tone.Filter(
-        params["frequency"],
-        params["type"],
-        params["rolloff"]
-      );
-    }
-    console.assert(false, `Unknown fx type: ${type}`);
+    const fxLookup = {
+      "bitcrusher": Tone.BitCrusher,
+      "chorus": Tone.Chorus,
+      "delay": Tone.FeedbackDelay,
+      "distortion": Tone.Distortion,
+      "filter": Tone.Filter,
+      "pingpong": Tone.PingPongDelay,
+      "reverb": Tone.Reverb,
+      "vibrato": Tone.Vibrato,
+      "autopanner": Tone.AutoPanner,
+      "pitchshift": Tone.PitchShift
+    };
+    return new fxLookup[type](params);
   }
 }
 
@@ -88,8 +79,8 @@ class XYControl extends FXControl {
 }
 
 class WetControl extends FXControl {
-  constructor(type, label, player, params) {
-    super(type, label, player, params);
+  constructor(type, label, params) {
+    super(type, label, params);
     this.setWet(0);
   }
   setWet(value) {
