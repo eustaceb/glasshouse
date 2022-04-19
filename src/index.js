@@ -65,6 +65,19 @@ function App(props) {
     playback.current.start(0);
     // Start off with first sample playing
     setInitialised(true);
+
+    
+    // Setup meter
+    const meter = new Tone.Meter();
+    Tone.getDestination().connect(meter);
+    setInterval(
+      () =>
+        (document.getElementById("level").innerHTML =
+          (
+            Math.round((meter.getValue() + Number.EPSILON) * 100) / 100
+          ).toString() + " db"),
+      100
+    );
   };
 
   const setup = (data) => {
@@ -73,16 +86,20 @@ function App(props) {
     playback.current = new PlaybackController(sampler.current);
     composition.current = new Composition(data["sections"], sampler.current);
     Tone.Transport.bpm.value = 100;
+
   };
 
   return (
     <ThemeProvider theme={synthTheme}>
       {initialised ? (
         <Grid container justifyContent="center" alignItems="center" spacing={2}>
-          <Grid item xs={12}>
+          <Grid item xs={11}>
             <p style={{textAlign: "center"}} id="timestamp">
               0:0:0
             </p>
+          </Grid>
+          <Grid item xs={1}>
+            <p id="level">0 db</p>
           </Grid>
           <SamplePlayer
             composition={composition.current}
