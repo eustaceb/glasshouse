@@ -5,7 +5,7 @@ import {KnobControl} from "./KnobControl.js";
 import {Navigation} from "./Navigation.js";
 import {SamplePad} from "./SamplePad.js";
 import {XYPad} from "./XYPad.js";
-import {FXControl} from "../controllers/FXControls.js";
+import {MultistateSwitch} from "./MultistateSwitch.js";
 
 function SampleGroup(props) {
   const fx = props.group.getFx();
@@ -55,6 +55,16 @@ function SampleGroup(props) {
       <TableCell>{props.group.getName()}</TableCell>
       {pads}
       <TableCell>{fxComponent}</TableCell>
+      {fx.hasSwitch() && (
+        <TableCell>
+          <MultistateSwitch
+            label={fx.getSwitchParamName()}
+            initialSelection={0}
+            optionLabels={fx.getSwitchLabels()}
+            optionCallbacks={fx.getSwitchCallbacks()}
+          />
+        </TableCell>
+      )}
     </TableRow>
   );
 }

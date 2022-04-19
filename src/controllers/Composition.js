@@ -87,6 +87,15 @@ export class Composition {
           // Dry/wet
           fx = new WetControl(fxData["type"], fxLabel, fxData["params"]);
         }
+
+        // Extra control for controlling one of the params
+        if (Object.keys(fxData).includes("switch")) {
+          fx.addSwitch(
+            fxData["switch"]["paramName"],
+            fxData["switch"]["options"]
+          );
+        }
+
         return new SampleGroup(name, samples, fx);
       });
       const instruments = section["instruments"].map((sampleName) => {
