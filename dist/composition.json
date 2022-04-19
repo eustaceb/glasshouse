@@ -10,8 +10,8 @@
             "Click1"
           ],
           "fx": {
-            "type": "chorus",
-            "params": { "frequency": 600, "delayTime": 15, "depth": 0.9 }
+            "type": "autopanner",
+            "params": { "frequency": 3.33, "depth": 1, "type": "sine", "channelCount": 2 }
           }
         },
         "percussion": {
@@ -23,7 +23,7 @@
           ],
           "fx": {
             "type": "delay",
-            "params": { "delayTime": "0.1", "feedback": 0.8 }
+            "params": { "delayTime": 0.6, "feedback": 0.3 }
           }
         }
       },
@@ -57,8 +57,8 @@
             "Percussion Section2 4"
           ],
           "fx": {
-            "type": "bitcrusher",
-            "params": { "bits": 3 }
+            "type": "reverb",
+            "params": { "decay": 30, "preDelay": 0.01 }
           }
         }
       },
@@ -80,8 +80,8 @@
             "Vocals Section3 5"
           ],
           "fx": {
-            "type": "vibrato",
-            "params": { "frequency": 120, "depth": 0.5 }
+            "type": "pitchshift",
+            "params": { "pitch": -2, "windowSize": 0.3, "delayTime": 0.05, "feedback": 0 }
           }
         },
         "percussion": {

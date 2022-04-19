@@ -18,7 +18,7 @@ class Sample {
     this.player = new Tone.Player(this.buffer, () => {
       console.log("Loaded " + this.name);
     });
-    this.player.toDestination().sync();
+    this.player.sync();
     this.color = color;
     this.duration = duration;
     this.startPlaybackCallback = null;

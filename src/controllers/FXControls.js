@@ -6,6 +6,10 @@ export class FXControl {
     this.label = label;
     this.params = params;
     this.node = this.createFxNode(type, params);
+    if (["chorus", "autopanner"].includes(type)) {
+      console.log(`Starting LFO for ${type}`);
+      this.node.start();
+    }
     this.node.toDestination();
   }
 
@@ -39,7 +43,9 @@ export class FXControl {
       "filter": Tone.Filter,
       "pingpong": Tone.PingPongDelay,
       "reverb": Tone.Reverb,
-      "vibrato": Tone.Vibrato
+      "vibrato": Tone.Vibrato,
+      "autopanner": Tone.AutoPanner,
+      "pitchshift": Tone.PitchShift
     };
     return new fxLookup[type](params);
   }

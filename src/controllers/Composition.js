@@ -35,7 +35,7 @@ class SampleGroup {
     this.name = name;
     this.samples = samples;
     this.fx = fx;
-    this.channel = new Tone.Channel(0, 0).connect(this.fx.getNode()).toDestination();
+    this.channel = new Tone.Channel(0, 0).connect(this.fx.getNode());
     //this.channel.receive("fx");
     this.samples.forEach((s) => {
       s.getPlayer().connect(this.channel);
@@ -55,6 +55,8 @@ class SampleGroup {
 export class Composition {
   constructor(data, sampleController) {
     this.bgSample = sampleController.getSampleByName("Sham main");
+    this.bgSample.player.toDestination();
+
     this.sections = data.map((section, index, _) => {
       const groups = Object.entries(section["groups"]).map((kvp) => {
         const name = kvp[0];
@@ -69,6 +71,10 @@ export class Composition {
       const instruments = section["instruments"].map((sampleName) => {
         return sampleController.getSampleByName(sampleName);
       });
+
+      // Send instruments to master
+      instruments.forEach((sample) => sample.player.toDestination());
+
       return new Section(
         "Section " + (index + 1).toString(),
         groups,
