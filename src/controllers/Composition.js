@@ -65,13 +65,19 @@ export class Composition {
         });
         const fxData = kvp[1]["fx"];
         const fxLabel = fxData["type"] + " for " + name;
+        const fxType = fxData["type"];
+
+        // Send dry signal to master alongside the wet for time based fx
+        if (["reverb", "delay", "pingpong"].includes(fxType)) {
+          samples.forEach((s) => s.player.toDestination());
+        }
 
         let fx;
         // Multiparameter XY control
         if (Object.keys(fxData).includes("x")) {
           console.assert(fxData.hasOwnProperty("y"));
           fx = new XYControl(
-            fxData["type"],
+            fxType,
             fxLabel,
             fxData["params"],
             fxData["x"],
