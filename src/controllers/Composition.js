@@ -1,5 +1,5 @@
 import * as Tone from "tone";
-import {WetControl, XYControl} from "./FXControls";
+import {FXControl, WetControl, XYControl} from "./FXControls";
 
 export class Section {
   /**
@@ -31,15 +31,12 @@ export class Section {
 }
 
 class SampleGroup {
-  constructor(name, samples, fx) {
+  constructor(name, samples, fx, volume) {
     this.name = name;
     this.samples = samples;
     this.fx = fx;
     this.channel = new Tone.Channel(0, 0).connect(this.fx.getNode());
-    //this.channel.receive("fx");
-    this.samples.forEach((s) => {
-      s.getPlayer().connect(this.channel);
-    });
+    this.volume = volume;
   }
   getName() {
     return this.name;
@@ -49,6 +46,9 @@ class SampleGroup {
   }
   getFx() {
     return this.fx;
+  }
+  getVolume() {
+    return this.volume;
   }
 }
 
@@ -67,11 +67,6 @@ export class Composition {
         const fxLabel = fxData["type"] + " for " + name;
         const fxType = fxData["type"];
 
-        // Send dry signal to master alongside the wet for time based fx
-        if (["reverb", "delay", "pingpong"].includes(fxType)) {
-          samples.forEach((s) => s.player.toDestination());
-        }
-
         let fx;
         // Multiparameter XY control
         if (Object.keys(fxData).includes("x")) {
@@ -88,6 +83,9 @@ export class Composition {
           fx = new WetControl(fxData["type"], fxLabel, fxData["params"]);
         }
 
+        // @TODO: Add fx2
+        // which would be under fx2 key
+
         // Extra control for controlling one of the params
         if (Object.keys(fxData).includes("switch")) {
           fx.addSwitch(
@@ -96,7 +94,37 @@ export class Composition {
           );
         }
 
-        return new SampleGroup(name, samples, fx);
+        // Volume control (temporary)
+        const hasVolumeSetting = Object.keys(kvp[1]).includes("volume");
+        const volume = new FXControl(
+          "volume",
+          hasVolumeSetting ? 0 : kvp[1]["volume"]
+        );
+
+        // Do the wiring
+        // Each sample into the volume node
+        samples.forEach((s) => {
+          s.getPlayer().connect(volume.getNode());
+        });
+        // Volume node into the fx node
+        volume.getNode().connect(fx.getNode());
+        // Fx node to master
+        fx.getNode().toDestination();
+
+        // Send dry signal to master alongside the wet for time based fx
+        const dryVolume = new FXControl(
+          "volume",
+          hasVolumeSetting ? 0 : kvp[1]["volume"]
+        );
+        if (["reverb", "delay", "pingpong"].includes(fxType)) {
+          samples.forEach((s) => s.player.connect(dryVolume.getNode()));
+        }
+        dryVolume.getNode().toDestination();
+        volume.registerSideChain((parameter, value) =>
+          dryVolume.setParam(parameter, value)
+        );
+
+        return new SampleGroup(name, samples, fx, volume);
       });
       const instruments = section["instruments"].map((sampleName) => {
         return sampleController.getSampleByName(sampleName);

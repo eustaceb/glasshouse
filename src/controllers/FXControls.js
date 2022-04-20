@@ -11,7 +11,10 @@ export class FXControl {
       console.log(`Starting LFO for ${type}`);
       this.node.start();
     }
-    this.node.toDestination();
+
+    // Callback that will be called when any param changes
+    // the change will be forwarded somewhere else
+    this.sidechain = null;
 
     // Switch settings, @TODO: Abstract
     this.switchOptions = null;
@@ -41,6 +44,18 @@ export class FXControl {
     } else if (this.node[parameter] !== value) {
       this.node[parameter] = value;
     }
+
+    if (this.sidechain !== null) {
+      this.sidechain(parameter, value);
+    }
+  }
+
+  registerSideChain(callback) {
+    this.sidechain = callback;
+  }
+
+  getParam(parameter) {
+    return this.node[parameter].value;
   }
 
   getSwitchParamName() {
@@ -88,6 +103,7 @@ export class FXControl {
       vibrato: Tone.Vibrato,
       autopanner: Tone.AutoPanner,
       pitchshift: Tone.PitchShift,
+      volume: Tone.Volume
     };
     return new fxLookup[type](params);
   }

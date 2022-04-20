@@ -66,18 +66,21 @@ function App(props) {
     // Start off with first sample playing
     setInitialised(true);
 
-    
     // Setup meter
     const meter = new Tone.Meter();
     Tone.getDestination().connect(meter);
-    setInterval(
-      () =>
-        (document.getElementById("level").innerHTML =
-          (
-            Math.round((meter.getValue() + Number.EPSILON) * 100) / 100
-          ).toString() + " db"),
-      100
-    );
+    setInterval(() => {
+      const el = document.getElementById("level");
+      const db = Math.round((meter.getValue() + Number.EPSILON) * 100) / 100;
+      el.innerHTML = db.toString() + " db";
+      if (db >= 0) {
+        el.style.color = "red";
+      } else if (db > -5) {
+        el.style.color = "orange";
+      } else {
+        el.style.color = "black";
+      }
+    }, 100);
   };
 
   const setup = (data) => {
@@ -86,7 +89,6 @@ function App(props) {
     playback.current = new PlaybackController(sampler.current);
     composition.current = new Composition(data["sections"], sampler.current);
     Tone.Transport.bpm.value = 100;
-
   };
 
   return (

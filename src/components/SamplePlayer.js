@@ -1,14 +1,16 @@
 import React, {useState} from "react";
-import {Table, TableBody, TableCell, TableRow} from "@material-ui/core";
+import {Slider, Table, TableBody, TableCell, TableRow} from "@material-ui/core";
 
 import {KnobControl} from "./KnobControl.js";
 import {Navigation} from "./Navigation.js";
 import {SamplePad} from "./SamplePad.js";
 import {XYPad} from "./XYPad.js";
 import {MultistateSwitch} from "./MultistateSwitch.js";
+import {VolumeSlider} from "./VolumeSlider.js";
 
 function SampleGroup(props) {
   const fx = props.group.getFx();
+  const volume = props.group.getVolume();
   const mouseController = props.mouseController;
 
   const playSample = (sampleIndex) => {
@@ -65,6 +67,9 @@ function SampleGroup(props) {
           />
         </TableCell>
       )}
+      <TableCell>
+        <VolumeSlider volume={volume} />
+      </TableCell>
     </TableRow>
   );
 }
@@ -102,7 +107,7 @@ export function SamplePlayer(props) {
   });
 
   return (
-    <Table style={{width: "60%"}} className="fillHeight">
+    <Table style={{width: "80%"}} className="fillHeight">
       <TableBody>
         <TableRow>
           <TableCell colSpan={9}>

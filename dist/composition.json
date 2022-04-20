@@ -6,20 +6,19 @@
           "samples": [
             "Vocals Section1 1",
             "Vocals Section1 2",
-            "Vocals Section1 3",
-            "Click1"
+            "Vocals Section1 3"
           ],
           "fx": {
             "type": "autopanner",
             "params": { "frequency": 3.33, "depth": 1, "type": "sine", "channelCount": 2 }
-          }
+          },
+          "volume": 12
         },
         "percussion": {
           "samples": [
             "Percussion Section1 1",
             "Percussion Section1 2",
-            "Percussion Section1 3",
-            "Click2"
+            "Percussion Section1 3"
           ],
           "fx": {
             "type": "delay",

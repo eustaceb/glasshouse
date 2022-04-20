@@ -12,7 +12,7 @@ export function MultistateSwitch(props) {
   const buttons = props.optionLabels.map((label, i) => (
     <Button
       key={i}
-      color={selection == i ? "secondary" : "success"}
+      color={selection == i ? "secondary" : "default"}
       onClick={() => handleSelection(i)}
       disableElevation>
       {label}
