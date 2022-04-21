@@ -44,13 +44,13 @@
             "Vocals Section2 4",
             "Vocals Section2 5"
           ],
-          "preFx": {
+          "fx": {
             "type": "filter",
             "params": { "frequency": 1000, "type": "lowpass" },
             "x": {"paramName": "frequency", "range": [300, 2000]},
             "y": {"paramName": "gain", "range": [-50, 10]}
           },
-          "fx": {
+          "preFx": {
             "type": "pitchshift",
             "params": { "pitch": -2, "windowSize": 0.1, "delayTime": 0.05, "feedback": 0.01 }
           }
