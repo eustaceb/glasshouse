@@ -28,10 +28,10 @@
         }
       },
       "instruments": [
-        "Bass Section1",
-        "StringArp Section1",
-        "Taiko Section1",
-        "Clap Section1"
+        { "sample": "Bass Section1", "volume": 0 },
+        { "sample": "StringArp Section1", "volume": 0 },
+        { "sample": "Taiko Section1", "volume": 0 },
+        { "sample": "Clap Section1", "volume": 0 }
       ]
     },
     {
@@ -69,10 +69,10 @@
         }
       },
       "instruments": [
-        "Bass Section2",
-        "Guitalele Section2",
-        "ChiralSynth Section2",
-        "ClapFeedback Section2"
+        { "sample": "Bass Section2", "volume": 0 },
+        { "sample": "Guitalele Section2", "volume": 0 },
+        { "sample": "ChiralSynth Section2", "volume": 0 },
+        { "sample": "ClapFeedback Section2", "volume": 0 }
       ]
     },
     {
@@ -116,9 +116,9 @@
         }
       },
       "instruments": [
-        "Bass Section3",
-        "Glitch Section3",
-        "ChiralSynth Section3"
+        { "sample": "Bass Section3", "volume": 0 },
+        { "sample": "Glitch Section3", "volume": 0 },
+        { "sample": "ChiralSynth Section3", "volume": 0 }
       ]
     }
   ],
