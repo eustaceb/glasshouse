@@ -32,30 +32,39 @@ function SampleGroup(props) {
     </TableCell>
   ));
 
-  const fxComponent = fx.hasOwnProperty("xAxis") ? (
-    <XYPad
-      size={100}
-      label={fx.getLabel()}
-      mouseController={mouseController}
-      fx={fx}
-      callbackX={(val) => fx.setX(val / 100.0)}
-      callbackY={(val) => fx.setY(val / 100.0)}
-    />
-  ) : (
-    <KnobControl
-      size={50}
-      label={fx.getLabel()}
-      minValue={0}
-      maxValue={100}
-      mouseController={mouseController}
-      callback={(val) => fx.setWet(val / 100)}
-    />
-  );
+  const createFxComponent = (fx) =>
+    fx.hasOwnProperty("xAxis") ? (
+      <XYPad
+        size={100}
+        label={fx.getLabel()}
+        mouseController={mouseController}
+        fx={fx}
+        callbackX={(val) => fx.setX(val / 100.0)}
+        callbackY={(val) => fx.setY(val / 100.0)}
+      />
+    ) : (
+      <KnobControl
+        size={50}
+        label={fx.getLabel()}
+        minValue={0}
+        maxValue={100}
+        mouseController={mouseController}
+        callback={(val) => fx.setWet(val / 100)}
+      />
+    );
+
+  const fxComponent = createFxComponent(fx);
+
+  // Pre-fx
+  const preFx = props.group.getPreFx();
+  let preFxComponent = null;
+  if (preFx !== null) preFxComponent = createFxComponent(preFx);
 
   return (
     <TableRow>
       <TableCell>{props.group.getName()}</TableCell>
       {pads}
+      {preFxComponent !== null && <TableCell>{preFxComponent}</TableCell>}
       <TableCell>{fxComponent}</TableCell>
       {fx.hasSwitch() && (
         <TableCell>
@@ -110,7 +119,7 @@ export function SamplePlayer(props) {
     <Table style={{width: "80%"}} className="fillHeight">
       <TableBody>
         <TableRow>
-          <TableCell colSpan={9}>
+          <TableCell colSpan={10}>
             <Navigation
               setSection={(sectionIndex) => setSection(sectionIndex)}
               sectionIndex={sectionIndex}

@@ -44,9 +44,15 @@
             "Vocals Section2 4",
             "Vocals Section2 5"
           ],
+          "preFx": {
+            "type": "filter",
+            "params": { "frequency": 1000, "type": "lowpass" },
+            "x": {"paramName": "frequency", "range": [300, 2000]},
+            "y": {"paramName": "gain", "range": [-50, 10]}
+          },
           "fx": {
-            "type": "pingpong",
-            "params": { "delayTime": "4n", "feedback": 0.8 }
+            "type": "pitchshift",
+            "params": { "pitch": -2, "windowSize": 0.1, "delayTime": 0.05, "feedback": 0.01 }
           }
         },
         "percussion": {
