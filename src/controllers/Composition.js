@@ -98,7 +98,15 @@ export class Composition {
         // Pre fx (pre -> main)
         let preFx = null;
         if (Object.keys(kvp[1]).includes("preFx")) {
-          preFx = fxFromData(kvp[1]["preFx"]);
+          const preFxData = kvp[1]["preFx"];
+          preFx = fxFromData(preFxData);
+          // Extra control for controlling one of the params
+          if (Object.keys(preFxData).includes("switch")) {
+            preFx.addSwitch(
+              preFxData["switch"]["paramName"],
+              preFxData["switch"]["options"]
+            );
+          }
         }
 
         // Extra control for controlling one of the params

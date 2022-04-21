@@ -65,6 +65,16 @@ function SampleGroup(props) {
       <TableCell>{props.group.getName()}</TableCell>
       {pads}
       {preFxComponent !== null && <TableCell>{preFxComponent}</TableCell>}
+      {preFx !== null && preFx.hasSwitch() && (
+        <TableCell>
+          <MultistateSwitch
+            label={preFx.getSwitchParamName()}
+            initialSelection={0}
+            optionLabels={preFx.getSwitchLabels()}
+            optionCallbacks={preFx.getSwitchCallbacks()}
+          />
+        </TableCell>
+      )}
       <TableCell>{fxComponent}</TableCell>
       {fx.hasSwitch() && (
         <TableCell>
