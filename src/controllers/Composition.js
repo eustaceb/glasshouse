@@ -148,12 +148,18 @@ export class Composition {
 
         return new SampleGroup(name, samples, preFx, fx, volume);
       });
-      const instruments = section["instruments"].map((sampleName) => {
-        return sampleController.getSampleByName(sampleName);
-      });
 
-      // Send instruments to master
-      instruments.forEach((sample) => sample.player.toDestination());
+      // Construct instruments
+      const instruments = new Array();
+      section["instruments"].forEach((instrumentData) => {
+        const sample = sampleController.getSampleByName(
+          instrumentData["sample"]
+        );
+        const volume = new FXControl("volume", instrumentData["volume"]);
+        sample.getPlayer().connect(volume.getNode());
+        volume.getNode().toDestination();
+        instruments.push({sample: sample, volume: volume});
+      });
 
       return new Section(
         "Section " + (index + 1).toString(),

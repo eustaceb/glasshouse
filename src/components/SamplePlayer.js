@@ -102,7 +102,9 @@ export function SamplePlayer(props) {
     setSectionIndex(sectionIndex);
   };
 
-  const instruments = section.getInstruments().map((s) => {
+  const instruments = section.getInstruments().map((instrument) => {
+    const s = instrument["sample"];
+    const v = instrument["volume"];
     return (
       <TableCell key={s.id}>
         <SamplePad
@@ -111,6 +113,7 @@ export function SamplePlayer(props) {
           playSample={() => playSample(s.id)}
           stopSample={() => stopSample(s.id)}
         />
+        <VolumeSlider volume={v} />
       </TableCell>
     );
   });
