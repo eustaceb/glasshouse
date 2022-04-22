@@ -80,6 +80,11 @@ export class Composition {
           return sampleController.getSampleByName(sampleName);
         });
 
+        // Indicate which group this sample belongs to for transitions
+        samples.forEach((s, i) => {
+          s.setGroupInfo([name, i]);
+        });
+
         const preFxData = "preFx" in groupData ? groupData["preFx"] : null;
         const fxData = groupData["fx"];
 
