@@ -1,54 +1,29 @@
+// Core libs
 import React, {useEffect, useState, useRef} from "react";
 import ReactDOM from "react-dom";
-import {SamplePlayer} from "./components/SamplePlayer.js";
+import * as Tone from "tone";
+
+// MUI
 import {Grid} from "@material-ui/core";
 import {ThemeProvider} from "@material-ui/core/styles";
+
+// Styling
 import {synthTheme} from "./theme.js";
-import * as Tone from "tone";
-import {MouseController} from "./controllers/MouseController.js";
+import "./style.css";
+
+// Controllers
 import {Composition} from "./controllers/Composition.js";
+import {MouseController} from "./controllers/MouseController.js";
 import {PlaybackController} from "./controllers/PlaybackController.js";
 import {SampleController} from "./controllers/SampleController.js";
-import "./style.css";
+
+// Components
+import {LoadingScreen} from "./components/LoadingScreen.js";
+import {SamplePlayer} from "./components/SamplePlayer.js";
+
 
 if (process.env.NODE_ENV !== "production") {
   console.log("Looks like we are in development mode!");
-}
-
-function StartModal(props) {
-  const [loaded, setLoaded] = useState(false);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    fetch("composition.json")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          props.setup(result);
-          setLoaded(true);
-        },
-        (error) => {
-          console.log(error);
-          setError(true);
-        }
-      );
-  }, []);
-
-  return (
-    <div className="startModal">
-      <p>
-        {loaded ? (
-          <a href="#" className="start" onClick={() => props.start()}>
-            Start
-          </a>
-        ) : error ? (
-          `Error`
-        ) : (
-          "Loading..."
-        )}
-      </p>
-    </div>
-  );
 }
 
 function App(props) {
@@ -83,9 +58,9 @@ function App(props) {
     }, 100);
   };
 
-  const setup = (data) => {
+  const setup = (data, players) => {
     mouseController.current = new MouseController(window.document);
-    sampler.current = new SampleController(data["samples"]);
+    sampler.current = new SampleController(data["samples"], players);
     playback.current = new PlaybackController(sampler.current);
     composition.current = new Composition(data["sections"], sampler.current);
     Tone.Transport.bpm.value = 100;
@@ -110,7 +85,7 @@ function App(props) {
           />
         </Grid>
       ) : (
-        <StartModal start={() => start()} setup={(data) => setup(data)} />
+        <LoadingScreen start={() => start()} setup={(jsonData, players) => setup(jsonData, players)} />
       )}
     </ThemeProvider>
   );
