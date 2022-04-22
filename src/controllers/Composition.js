@@ -1,5 +1,5 @@
 import * as Tone from "tone";
-import {FXControl, WetControl, XYControl} from "./FXControls";
+import {DiscreteControl, FXControl, WetControl, XYControl} from "./FXControls";
 
 export class Section {
   /**
@@ -31,11 +31,13 @@ export class Section {
 }
 
 class SampleGroup {
-  constructor(name, samples, preFx, fx, volume) {
+  constructor(name, samples, preFx, preFxControls, fx, fxControls, volume) {
     this.name = name;
     this.samples = samples;
     this.preFx = preFx;
+    this.preFxControls = preFxControls;
     this.fx = fx;
+    this.fxControls = fxControls;
     this.channel = new Tone.Channel(0, 0).connect(this.fx.getNode());
     this.volume = volume;
   }
@@ -48,11 +50,17 @@ class SampleGroup {
   getFx() {
     return this.fx;
   }
+  getFxControls() {
+    return this.fxControls;
+  }
   hasPreFx() {
     return this.preFx !== null;
   }
   getPreFx() {
     return this.preFx;
+  }
+  getPreFxControls() {
+    return this.preFxControls;
   }
   getVolume() {
     return this.volume;
@@ -67,61 +75,67 @@ export class Composition {
     this.sections = data.map((section, index, _) => {
       const groups = Object.entries(section["groups"]).map((kvp) => {
         const name = kvp[0];
-        const samples = kvp[1]["samples"].map((sampleName) => {
+        const groupData = kvp[1];
+        const samples = groupData["samples"].map((sampleName) => {
           return sampleController.getSampleByName(sampleName);
         });
-        const fxData = kvp[1]["fx"];
+
+        const preFxData = "preFx" in groupData ? groupData["preFx"] : null;
+        const fxData = groupData["fx"];
 
         const fxFromData = (fxData) => {
           const fxType = fxData["type"];
           const fxLabel = fxType + " for " + name;
-
-          // Multiparameter XY control
-          if (Object.keys(fxData).includes("x")) {
-            console.assert(fxData.hasOwnProperty("y"));
-            return new XYControl(
-              fxType,
-              fxLabel,
-              fxData["params"],
-              fxData["x"],
-              fxData["y"]
-            );
-          } else {
-            // Dry/wet
-            return new WetControl(fxData["type"], fxLabel, fxData["params"]);
-          }
+          const fxParams = fxData["params"];
+          return new FXControl(fxType, fxLabel, fxParams);
         };
 
-        // Main fx
+        const createControls = (fx, fxData) => {
+          const xyControl =
+            "x" in fxData ? new XYControl(fx, fxData["x"], fxData["y"]) : null;
+
+          // @TODO: There's no real reason for xyControl to be mutually exclusive with xyControl, remove this
+          const wetControl = xyControl ? null : new WetControl(fx);
+
+          const switchControl =
+            "switch" in fxData
+              ? new DiscreteControl(
+                  fx,
+                  fxData["switch"]["paramName"],
+                  fxData["switch"]["options"]
+                )
+              : null;
+          const generateRange = (from, to) =>
+            Array.from({length: to - from + 1}, (_, k) => from + k);
+          const sliderControl =
+            "slider" in fxData
+              ? new DiscreteControl(
+                  fx,
+                  fxData["slider"]["paramName"],
+                  generateRange(
+                    fxData["slider"]["range"][0],
+                    fxData["slider"]["range"][1]
+                  )
+                )
+              : null;
+          return {
+            wet: wetControl,
+            xy: xyControl,
+            switch: switchControl,
+            slider: sliderControl,
+          };
+        };
+
         const fx = fxFromData(fxData);
-
-        // Pre fx (pre -> main)
-        let preFx = null;
-        if (Object.keys(kvp[1]).includes("preFx")) {
-          const preFxData = kvp[1]["preFx"];
-          preFx = fxFromData(preFxData);
-          // Extra control for controlling one of the params
-          if (Object.keys(preFxData).includes("switch")) {
-            preFx.addSwitch(
-              preFxData["switch"]["paramName"],
-              preFxData["switch"]["options"]
-            );
-          }
-        }
-
-        // Extra control for controlling one of the params
-        if (Object.keys(fxData).includes("switch")) {
-          fx.addSwitch(
-            fxData["switch"]["paramName"],
-            fxData["switch"]["options"]
-          );
-        }
+        const fxControls = createControls(fx, fxData);
+        const preFx = preFxData ? fxFromData(preFxData) : null;
+        const preFxControls = preFx ? createControls(preFx, preFxData) : null;
 
         // Volume control (temporary)
-        const hasVolumeSetting = Object.keys(kvp[1]).includes("volume");
         const volume = new FXControl(
           "volume",
-          hasVolumeSetting ? 0 : kvp[1]["volume"]
+          "volume",
+          "volume" in groupData ? 0 : groupData["volume"]
         );
 
         // Do the wiring
@@ -144,7 +158,8 @@ export class Composition {
         // Send dry signal to master alongside the wet for time based fx
         const dryVolume = new FXControl(
           "volume",
-          hasVolumeSetting ? 0 : kvp[1]["volume"]
+          "volume",
+          volume in groupData ? 0 : groupData["volume"]
         );
         if (["reverb", "delay", "pingpong"].includes(fxData["type"])) {
           samples.forEach((s) => s.player.connect(dryVolume.getNode()));
@@ -154,7 +169,15 @@ export class Composition {
           dryVolume.setParam(parameter, value)
         );
 
-        return new SampleGroup(name, samples, preFx, fx, volume);
+        return new SampleGroup(
+          name,
+          samples,
+          preFx,
+          preFxControls,
+          fx,
+          fxControls,
+          volume
+        );
       });
 
       // Construct instruments
@@ -176,9 +199,11 @@ export class Composition {
       );
     });
   }
+
   getSectionCount() {
     return this.sections.length;
   }
+
   getSection(index) {
     console.assert(
       index >= 0 && index < this.sections.length,

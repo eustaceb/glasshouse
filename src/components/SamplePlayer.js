@@ -1,15 +1,15 @@
 import React, {useState} from "react";
-import {Slider, Table, TableBody, TableCell, TableRow} from "@material-ui/core";
+import {Table, TableBody, TableCell, TableRow} from "@material-ui/core";
 
 import {KnobControl} from "./KnobControl.js";
 import {Navigation} from "./Navigation.js";
 import {SamplePad} from "./SamplePad.js";
 import {XYPad} from "./XYPad.js";
 import {MultistateSwitch} from "./MultistateSwitch.js";
+import {DiscreteSlider} from "./DiscreteSlider.js";
 import {VolumeSlider} from "./VolumeSlider.js";
 
 function SampleGroup(props) {
-  const fx = props.group.getFx();
   const volume = props.group.getVolume();
   const mouseController = props.mouseController;
 
@@ -32,60 +32,73 @@ function SampleGroup(props) {
     </TableCell>
   ));
 
-  const createFxComponent = (fx) =>
-    fx.hasOwnProperty("xAxis") ? (
-      <XYPad
-        size={100}
-        label={fx.getLabel()}
-        mouseController={mouseController}
-        fx={fx}
-        callbackX={(val) => fx.setX(val / 100.0)}
-        callbackY={(val) => fx.setY(val / 100.0)}
-      />
-    ) : (
-      <KnobControl
-        size={50}
-        label={fx.getLabel()}
-        minValue={0}
-        maxValue={100}
-        mouseController={mouseController}
-        callback={(val) => fx.setWet(val / 100)}
-      />
-    );
+  const generateFxComponents = (controls) => {
+    if (controls === null) return null;
+    let fxComponents = Array();
+    if (controls["xy"] !== null) {
+      const fx = controls["xy"];
+      fxComponents.push(
+        <XYPad
+          size={100}
+          label={fx.getLabel()}
+          labelX={fx.getLabelX()}
+          labelY={fx.getLabelY()}
+          mouseController={mouseController}
+          fx={fx}
+          callbackX={(val) => fx.setX(val / 100.0)}
+          callbackY={(val) => fx.setY(val / 100.0)}
+        />
+      );
+    }
+    if (controls["wet"] !== null) {
+      const fx = controls["wet"];
+      fxComponents.push(
+        <KnobControl
+          size={50}
+          label={fx.getLabel()}
+          minValue={0}
+          maxValue={100}
+          mouseController={mouseController}
+          callback={(val) => fx.setWet(val / 100)}
+        />
+      );
+    }
+    if (controls["switch"] !== null) {
+      const fx = controls["switch"];
+      fxComponents.push(
+        <MultistateSwitch
+          label={fx.getParamName()}
+          initialSelection={0}
+          optionLabels={fx.getValues().map((v) => v.toString())}
+          optionCallback={(v) => fx.setValue(v)}
+        />
+      );
+    }
+    if (controls["slider"] !== null) {
+      const fx = controls["slider"];
+      fxComponents.push(
+        <DiscreteSlider
+          label={fx.getParamName()}
+          initialValue={0}
+          marks={fx.getValues().map((v) => {
+            return ({value: v, label: v.toString()});
+          })}
+          callback={(v) => fx.setValue(v)}
+        />
+      );
+    }
+    return fxComponents.map((c, i) => <TableCell key={i}>{c}</TableCell>);
+  };
 
-  const fxComponent = createFxComponent(fx);
-
-  // Pre-fx
-  const preFx = props.group.getPreFx();
-  let preFxComponent = null;
-  if (preFx !== null) preFxComponent = createFxComponent(preFx);
+  const preFxComponents = generateFxComponents(props.group.getPreFxControls());
+  const fxComponents = generateFxComponents(props.group.getFxControls());
 
   return (
     <TableRow>
       <TableCell>{props.group.getName()}</TableCell>
       {pads}
-      {preFxComponent !== null && <TableCell>{preFxComponent}</TableCell>}
-      {preFx !== null && preFx.hasSwitch() && (
-        <TableCell>
-          <MultistateSwitch
-            label={preFx.getSwitchParamName()}
-            initialSelection={0}
-            optionLabels={preFx.getSwitchLabels()}
-            optionCallbacks={preFx.getSwitchCallbacks()}
-          />
-        </TableCell>
-      )}
-      <TableCell>{fxComponent}</TableCell>
-      {fx.hasSwitch() && (
-        <TableCell>
-          <MultistateSwitch
-            label={fx.getSwitchParamName()}
-            initialSelection={0}
-            optionLabels={fx.getSwitchLabels()}
-            optionCallbacks={fx.getSwitchCallbacks()}
-          />
-        </TableCell>
-      )}
+      {preFxComponents}
+      {fxComponents}
       <TableCell>
         <VolumeSlider volume={volume} />
       </TableCell>
@@ -129,7 +142,7 @@ export function SamplePlayer(props) {
   });
 
   return (
-    <Table style={{width: "80%"}} className="fillHeight">
+    <Table className="fillHeight">
       <TableBody>
         <TableRow>
           <TableCell colSpan={10}>

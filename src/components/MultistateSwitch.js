@@ -5,7 +5,7 @@ export function MultistateSwitch(props) {
   const [selection, setSelection] = useState(props.initialSelection);
 
   const handleSelection = (sel) => {
-    props.optionCallbacks[sel]();
+    props.optionCallback(sel);
     setSelection(sel);
   };
 

@@ -1,7 +1,7 @@
 import * as Tone from "tone";
 import {scale} from "../utils/Math.js";
 
-export class FXControl {
+class FXControl {
   constructor(type, label, params) {
     this.type = type;
     this.label = label;
@@ -15,10 +15,6 @@ export class FXControl {
     // Callback that will be called when any param changes
     // the change will be forwarded somewhere else
     this.sidechain = null;
-
-    // Switch settings, @TODO: Abstract
-    this.switchOptions = null;
-    this.switchParamName = "";
   }
 
   getNode() {
@@ -58,39 +54,6 @@ export class FXControl {
     return this.node[parameter].value;
   }
 
-  getSwitchParamName() {
-    return this.switchParamName;
-  }
-
-  addSwitch(parameter, options) {
-    // list of dictionaries which each has
-    // - label
-    // - value
-    // - callback
-    this.switchParamName = parameter;
-    this.switchOptions = options.map((opt) => {
-      return {
-        label: opt.toString() + "x",
-        value: opt,
-        callback: (index) => {
-          this.setParam(parameter, opt);
-        },
-      };
-    });
-  }
-
-  hasSwitch() {
-    return this.switchOptions !== null;
-  }
-
-  getSwitchLabels() {
-    return this.switchOptions.map((opt) => opt.label);
-  }
-
-  getSwitchCallbacks() {
-    return this.switchOptions.map((opt) => opt.callback);
-  }
-
   createFxNode(type, params) {
     const fxLookup = {
       bitcrusher: Tone.BitCrusher,
@@ -103,15 +66,15 @@ export class FXControl {
       vibrato: Tone.Vibrato,
       autopanner: Tone.AutoPanner,
       pitchshift: Tone.PitchShift,
-      volume: Tone.Volume
+      volume: Tone.Volume,
     };
     return new fxLookup[type](params);
   }
 }
 
-class XYControl extends FXControl {
-  constructor(type, label, params, xAxis, yAxis) {
-    super(type, label, params);
+class XYControl {
+  constructor(fx, xAxis, yAxis) {
+    this.fx = fx;
     console.assert(
       xAxis.hasOwnProperty("paramName") && xAxis.hasOwnProperty("range")
     );
@@ -121,6 +84,19 @@ class XYControl extends FXControl {
     this.xAxis = xAxis;
     this.yAxis = yAxis;
   }
+
+  getLabel() {
+    return this.fx.getLabel();
+  }
+
+  getLabelX() {
+    return this.xAxis["paramName"];
+  }
+
+  getLabelY() {
+    return this.yAxis["paramName"];
+  }
+
   setX(value) {
     const scaled = scale(
       value,
@@ -129,8 +105,9 @@ class XYControl extends FXControl {
       this.xAxis.range[0],
       this.xAxis.range[1]
     );
-    this.setParam(this.xAxis.paramName, scaled);
+    this.fx.setParam(this.xAxis.paramName, scaled);
   }
+
   setY(value) {
     const scaled = scale(
       value,
@@ -139,18 +116,62 @@ class XYControl extends FXControl {
       this.yAxis.range[0],
       this.yAxis.range[1]
     );
-    this.setParam(this.yAxis.paramName, scaled);
+    this.fx.setParam(this.yAxis.paramName, scaled);
   }
 }
 
-class WetControl extends FXControl {
-  constructor(type, label, params) {
-    super(type, label, params);
-    this.setWet(0);
+class DiscreteControl {
+  constructor(fx, paramName, values) {
+    this.fx = fx;
+    this.paramName = paramName;
+    this.values = values;
   }
+
+  getLabel() {
+    return `${this.paramName} for ${this.fx.getLabel()}`;
+  }
+
+  getParamName() {
+    return this.paramName;
+  }
+
+  getValues() {
+    return this.values;
+  }
+
+  setValue(value) {
+    console.assert(
+      this.values.includes(value),
+      "Illegal value supplied to DiscreteControl"
+    );
+    this.fx.setParam(this.paramName, value);
+  }
+
+  setValueByIndex(index) {
+    console.assert(
+      index < this.values.length,
+      "Discrete value index is out of bounds"
+    );
+    this.fx.setParam(this.paramName, this.values[index]);
+  }
+}
+
+class WetControl {
+  constructor(fx) {
+    this.fx = fx;
+  }
+
+  getLabel() {
+    return `Wet for ${this.fx.getLabel()}`;
+  }
+
+  getFx() {
+    return this.fx;
+  }
+
   setWet(value) {
-    this.node.wet.value = value;
+    this.fx.setParam("wet", value);
   }
 }
 
-export {WetControl, XYControl};
+export {DiscreteControl, FXControl, WetControl, XYControl};
