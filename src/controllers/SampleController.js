@@ -9,15 +9,11 @@ class Sample {
 
   static idCounter = 0;
 
-  constructor(name, path, color, type, duration) {
+  constructor(name, player, color, type, duration) {
     this.id = Sample.idCounter++;
     this.name = name;
-    this.path = path;
-    this.buffer = new Tone.Buffer(path);
     this.type = type;
-    this.player = new Tone.Player(this.buffer, () => {
-      console.log("Loaded " + this.name);
-    });
+    this.player = player;
     this.player.sync();
     this.color = color;
     this.duration = duration;
@@ -65,13 +61,13 @@ class Sample {
 }
 
 export class SampleController {
-  constructor(data) {
+  constructor(data, players) {
     this.samplesPlaying = 0;
     this.samples = data.map(
-      (sample) =>
+      (sample, index) =>
         new Sample(
           sample.name,
-          sample.path,
+          players[index],
           "#611932",
           sample.type,
           sample.duration
