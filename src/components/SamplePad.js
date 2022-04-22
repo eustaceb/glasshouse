@@ -9,7 +9,7 @@ export function SamplePad(props) {
     PLAYING: 2,
     SCHEDULING_STOP: 3,
   };
-  const [padState, setPadState] = useState(props.startState);
+  const [padState, setPadState] = useState(padStates.READY);
   const sample = props.sample;
   const scheduling =
     padState === padStates.SCHEDULING_PLAY ||

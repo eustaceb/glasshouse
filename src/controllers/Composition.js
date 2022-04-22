@@ -80,11 +80,6 @@ export class Composition {
           return sampleController.getSampleByName(sampleName);
         });
 
-        // Indicate which group this sample belongs to for transitions
-        samples.forEach((s, i) => {
-          s.setGroupInfo([name, i]);
-        });
-
         const preFxData = "preFx" in groupData ? groupData["preFx"] : null;
         const fxData = groupData["fx"];
 
@@ -110,20 +105,19 @@ export class Composition {
                   fxData["switch"]["options"]
                 )
               : null;
-
-          const createSlider = (data) => {
-            if (!("slider" in data)) return null;
-            const generateRange = (from, to) =>
-              Array.from({length: to - from + 1}, (_, k) => from + k);
-            const sliderData = data["slider"];
-            const options =
-              "options" in sliderData
-                ? sliderData["options"]
-                : generateRange(sliderData["range"][0], sliderData["range"][1]);
-            return new DiscreteControl(fx, sliderData["paramName"], options);
-          };
-          const sliderControl = createSlider(fxData);
-
+          const generateRange = (from, to) =>
+            Array.from({length: to - from + 1}, (_, k) => from + k);
+          const sliderControl =
+            "slider" in fxData
+              ? new DiscreteControl(
+                  fx,
+                  fxData["slider"]["paramName"],
+                  generateRange(
+                    fxData["slider"]["range"][0],
+                    fxData["slider"]["range"][1]
+                  )
+                )
+              : null;
           return {
             wet: wetControl,
             xy: xyControl,

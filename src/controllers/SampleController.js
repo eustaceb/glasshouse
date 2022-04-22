@@ -25,7 +25,6 @@ class Sample {
     this.endPlaybackCallback = null;
     this.playState = Sample.PlayStates.INACTIVE;
     this.player.fadeOut = 0.1;
-    this.groupInfo = null;
   }
   play(time) {
     this.player.start(time);
@@ -62,12 +61,6 @@ class Sample {
   }
   getPlayer() {
     return this.player;
-  }
-  setGroupInfo(groupInfo) {
-    this.groupInfo = groupInfo;
-  }
-  getGroupInfo() {
-    return this.groupInfo;
   }
 }
 
@@ -205,21 +198,13 @@ export class SampleController {
     //}
   }
 
-  getPlayingSamples() {
-    return this.playQueue.map(index => this.samples[index]);
-  }
-
-  nextSection(nextSamples) {
+  stopAllSamples() {
     this.samples.forEach((sample) => {
       if (sample.id !== this.backgroundSample.id && sample.isPlaying()) {
         // Clear callback since it's a React state update for a component that will soon disappear
         sample.setEndPlaybackCallback(null);
         this.terminateLoopQueue.push(sample.id);
       }
-    });
-    nextSamples.forEach(s => {
-      console.log(`Enqueuing ${s.name}`);
-      this.playSample(s.id);
     });
   }
 }

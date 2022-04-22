@@ -21,19 +21,16 @@ function SampleGroup(props) {
     props.playSample(sampleIndex);
   };
 
-  const pads = props.group.getSamples().map((s) => {
-    console.log(s.isPlaying())
-    return(
+  const pads = props.group.getSamples().map((s) => (
     <TableCell key={s.id}>
       <SamplePad
-        startState={s.isPlaying() ? 2 : s.isScheduled() ? 1 : 0}
         className="fillHeight"
         sample={s}
         playSample={() => playSample(s.id)}
         stopSample={() => props.stopSample(s.id)}
       />
-    </TableCell>);
-  });
+    </TableCell>
+  ));
 
   const generateFxComponents = (controls) => {
     if (controls === null) return null;
@@ -124,16 +121,7 @@ export function SamplePlayer(props) {
   };
 
   const setSection = (sectionIndex) => {
-    const nextSection = props.composition.getSection(sectionIndex);
-    const playingSamples = props.sampler.getPlayingSamples();
-    let nextSamples = new Array();
-    playingSamples.forEach(s => {
-      const [groupName, sampleIndex] = s.getGroupInfo() ? s.getGroupInfo() : [null, null];
-      if (["vocals", "percussion"].includes(groupName)) {
-        nextSamples.push(nextSection.getGroup(groupName).getSamples()[sampleIndex]);
-      }
-    });
-    props.sampler.nextSection(nextSamples);
+    props.sampler.stopAllSamples();
     setSectionIndex(sectionIndex);
   };
 
@@ -143,7 +131,6 @@ export function SamplePlayer(props) {
     return (
       <TableCell key={s.id}>
         <SamplePad
-          startState={0}
           className="fillHeight"
           sample={s}
           playSample={() => playSample(s.id)}
