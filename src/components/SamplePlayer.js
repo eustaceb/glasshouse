@@ -145,7 +145,7 @@ export function SamplePlayer(props) {
     <Table className="fillHeight">
       <TableBody>
         <TableRow>
-          <TableCell colSpan={10}>
+          <TableCell colSpan={11}>
             <Navigation
               setSection={(sectionIndex) => setSection(sectionIndex)}
               sectionIndex={sectionIndex}
