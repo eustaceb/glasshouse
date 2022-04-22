@@ -95,11 +95,11 @@ export function XYPad(props) {
         <circle cx={x} cy={y} r={5} fill="yellow" stroke="black" />
       </svg>
       <div className="nonselectable">
-        {props.fx.xAxis.paramName}: {Math.round(x).toString().padStart(3, "0")}{" "}
+        {props.fx.getLabelX()}: {Math.round(x).toString().padStart(3, "0")}{" "}
         / {maxValue}
       </div>
       <div className="nonselectable">
-        {props.fx.yAxis.paramName}: {Math.round(y).toString().padStart(3, "0")}{" "}
+        {props.fx.getLabelY()}: {Math.round(y).toString().padStart(3, "0")}{" "}
         / {maxValue}
       </div>
     </div>

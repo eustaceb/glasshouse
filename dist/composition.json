@@ -52,8 +52,8 @@
           },
           "preFx": {
             "type": "pitchshift",
-            "params": { "pitch": -2, "windowSize": 0.1, "delayTime": 0.05, "feedback": 0.01 },
-            "switch": { "paramName": "pitch", "options": [-12, -5, -2, 2, 5, 12] }
+            "params": { "pitch": 0, "windowSize": 0.1, "delayTime": 0.05, "feedback": 0.01 },
+            "slider": { "paramName": "pitch", "range": [-5, 5] }
           }
         },
         "percussion": {
