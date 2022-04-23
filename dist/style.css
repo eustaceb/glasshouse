@@ -38,15 +38,16 @@ body {
   width: 125px;
   height: 125px;
   background-repeat: no-repeat;
+  background-position: center;
 }
 .bass {
   background-image: url('images/Section_1/bass.png');
 }
 .bassActive {
-  background-image: url('images/Section_1/bassActive.png');
+  background-image: url('images/Section_1/bass.png'), url('images/Section_1/bassActive.png');
 }
-.bassHover {
-  background-image: url('images/Section_1/bassHover.png');
+.bass:hover {
+  background-image: url('images/Section_1/bass.png'), url('images/Section_1/bassActive.png'), url('images/Section_1/bassHover.png');
 }
 .stringArp {
   background-image: url('images/Section_1/stringArp.png');

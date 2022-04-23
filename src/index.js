@@ -13,6 +13,7 @@ import {SampleController} from "./controllers/SampleController.js";
 import {LoadingScreen} from "./components/LoadingScreen.js";
 import {SamplePlayer} from "./components/SamplePlayer.js";
 import {InstrumentContainer} from "./components/InstrumentContainer.js";
+import {ComponentA} from "./components/ComponentA.js";
 
 if (process.env.NODE_ENV !== "production") {
   console.log("Looks like we are in development mode!");
@@ -63,36 +64,21 @@ function App(props) {
       <div className="padding"></div>
       {initialised ? (
         <div className="componentsContainer">
-          <div className="component componentA"></div>
+          <ComponentA />
           <InstrumentContainer
+            sampler={sampler.current}
             instruments={[
               {
                 name: "bass",
-                graphics: {
-                  base: "images/Section_1/bass.png",
-                  hover: "images/Section_1/clap.png",
-                },
               },
               {
                 name: "stringArp",
-                graphics: {
-                  base: "images/Section_1/bass.png",
-                  hover: "images/Section_1/clap.png",
-                },
               },
               {
                 name: "taiko",
-                graphics: {
-                  base: "images/Section_1/bass.png",
-                  hover: "images/Section_1/clap.png",
-                },
               },
               {
                 name: "clap",
-                graphics: {
-                  base: "images/Section_1/bass.png",
-                  hover: "images/Section_1/clap.png",
-                },
               },
             ]}
           />
