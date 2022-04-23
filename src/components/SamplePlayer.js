@@ -70,7 +70,7 @@ function SampleGroup(props) {
           label={fx.getParamName()}
           initialSelection={0}
           optionLabels={fx.getValues().map((v) => v.toString())}
-          optionCallback={(v) => fx.setValue(v)}
+          optionCallback={(v) => fx.setValue(fx.getValues()[v])}
         />
       );
     }
