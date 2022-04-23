@@ -3,14 +3,6 @@ import React, {useEffect, useState, useRef} from "react";
 import ReactDOM from "react-dom";
 import * as Tone from "tone";
 
-// MUI
-import {Grid} from "@material-ui/core";
-import {ThemeProvider} from "@material-ui/core/styles";
-
-// Styling
-import {synthTheme} from "./theme.js";
-import "./style.css";
-
 // Controllers
 import {Composition} from "./controllers/Composition.js";
 import {MouseController} from "./controllers/MouseController.js";
@@ -20,7 +12,7 @@ import {SampleController} from "./controllers/SampleController.js";
 // Components
 import {LoadingScreen} from "./components/LoadingScreen.js";
 import {SamplePlayer} from "./components/SamplePlayer.js";
-
+import {InstrumentContainer} from "./components/InstrumentContainer.js";
 
 if (process.env.NODE_ENV !== "production") {
   console.log("Looks like we are in development mode!");
@@ -42,20 +34,20 @@ function App(props) {
     setInitialised(true);
 
     // Setup meter
-    const meter = new Tone.Meter();
-    Tone.getDestination().connect(meter);
-    setInterval(() => {
-      const el = document.getElementById("level");
-      const db = Math.round((meter.getValue() + Number.EPSILON) * 100) / 100;
-      el.innerHTML = db.toString() + " db";
-      if (db >= 0) {
-        el.style.color = "red";
-      } else if (db > -5) {
-        el.style.color = "orange";
-      } else {
-        el.style.color = "black";
-      }
-    }, 100);
+    // const meter = new Tone.Meter();
+    // Tone.getDestination().connect(meter);
+    // setInterval(() => {
+    //   const el = document.getElementById("level");
+    //   const db = Math.round((meter.getValue() + Number.EPSILON) * 100) / 100;
+    //   el.innerHTML = db.toString() + " db";
+    //   if (db >= 0) {
+    //     el.style.color = "red";
+    //   } else if (db > -5) {
+    //     el.style.color = "orange";
+    //   } else {
+    //     el.style.color = "black";
+    //   }
+    // }, 100);
   };
 
   const setup = (data, players) => {
@@ -67,27 +59,61 @@ function App(props) {
   };
 
   return (
-    <ThemeProvider theme={synthTheme}>
+    <div className="mainContainer">
+      <div className="padding"></div>
       {initialised ? (
-        <Grid container justifyContent="center" alignItems="center" spacing={2}>
-          <Grid item xs={11}>
-            <p style={{textAlign: "center"}} id="timestamp">
-              0:0:0
-            </p>
-          </Grid>
-          <Grid item xs={1}>
-            <p id="level">0 db</p>
-          </Grid>
-          <SamplePlayer
-            composition={composition.current}
-            sampler={sampler.current}
-            mouseController={mouseController.current}
+        <div className="componentsContainer">
+          <div className="component componentA"></div>
+          <InstrumentContainer
+            instruments={[
+              {
+                name: "bass",
+                graphics: {
+                  base: "images/Section_1/bass.png",
+                  hover: "images/Section_1/clap.png",
+                },
+              },
+              {
+                name: "stringArp",
+                graphics: {
+                  base: "images/Section_1/bass.png",
+                  hover: "images/Section_1/clap.png",
+                },
+              },
+              {
+                name: "taiko",
+                graphics: {
+                  base: "images/Section_1/bass.png",
+                  hover: "images/Section_1/clap.png",
+                },
+              },
+              {
+                name: "clap",
+                graphics: {
+                  base: "images/Section_1/bass.png",
+                  hover: "images/Section_1/clap.png",
+                },
+              },
+            ]}
           />
-        </Grid>
+          <div className="component componentB"></div>
+        </div>
       ) : (
-        <LoadingScreen start={() => start()} setup={(jsonData, players) => setup(jsonData, players)} />
+        // <SamplePlayer
+        //   composition={composition.current}
+        //   sampler={sampler.current}
+        //   mouseController={mouseController.current}
+        // />
+        <LoadingScreen
+          start={() => start()}
+          setup={(jsonData, players) => setup(jsonData, players)}
+        />
       )}
-    </ThemeProvider>
+      <div className="padding"></div>
+      <div className="footerContainer">
+        <div className="navigation"></div>
+      </div>
+    </div>
   );
 }
 
