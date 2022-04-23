@@ -44,10 +44,10 @@ body {
   background-image: url('images/Section_1/bass.png');
 }
 .bassActive {
-  background-image: url('images/Section_1/bass.png'), url('images/Section_1/bassHover.png');
+  background-image: url('images/Section_1/bass.png'), url('images/Section_1/bassActive.png');
 }
 .bass:hover {
-  background-image: url('images/Section_1/bass.png'), url('images/Section_1/bassActive.png');
+  background-image: url('images/Section_1/bass.png'), url('images/Section_1/bassHover.png');
 }
 .stringArp {
   background-image: url('images/Section_1/stringArp.png');
