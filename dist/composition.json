@@ -10,7 +10,7 @@
           ],
           "fx": {
             "type": "autopanner",
-            "params": { "frequency": 3.33, "depth": 1, "type": "sine", "channelCount": 2 }
+            "params": { "frequency": 1.25, "depth": 1, "type": "sine", "channelCount": 2 }
           },
           "volume": 12
         },
@@ -45,23 +45,16 @@
             "Vocals Section2 5"
           ],
           "fx": {
-            "type": "filter",
-            "params": { "frequency": 1000, "type": "lowpass" },
-            "x": {"paramName": "frequency", "range": [300, 2000]},
-            "y": {"paramName": "gain", "range": [-50, 10]}
-          },
-          "preFx": {
-            "type": "pitchshift",
-            "params": { "pitch": 0, "windowSize": 0.1, "delayTime": 0.05, "feedback": 0.01 },
-            "slider": { "paramName": "pitch", "range": [-5, 5] }
+            "type": "pingpong",
+            "params": { "delayTime": 0.15, "feedback": 0.01 },
+            "switch": { "paramName": "delayTime", "options": [ 0.8 , 0.4, 0.6] }
           }
         },
         "percussion": {
           "samples": [
             "Percussion Section2 1",
             "Percussion Section2 2",
-            "Percussion Section2 3",
-            "Percussion Section2 4"
+            "Percussion Section2 3"
           ],
           "fx": {
             "type": "reverb",
@@ -91,6 +84,12 @@
             "params": { "frequency": 1000, "type": "lowpass" },
             "x": {"paramName": "frequency", "range": [300, 2000]},
             "y": {"paramName": "gain", "range": [-50, 10]}
+          },
+          "preFx": {
+            "type": "pitchshift",
+            "params": { "pitch": 0, "windowSize": 0.1, "delayTime": 0.05, "feedback": 0.01 },
+            "x": {"paramName": "pitch", "range": [-6, 6]},
+            "y": {"paramName": "delayTime", "range": [0.05, 1]}
           }
         },
         "percussion": {
@@ -101,25 +100,17 @@
           ],
           "fx": {
             "type": "pingpong",
-            "params": { "delayTime": "4n", "feedback": 0.8 }
-          }
-        },
-        "clap": {
-          "samples": [
-            "ClapRegular Section3",
-            "ClapFeedback Section3",
-            "ClapGlitch Section3"
-          ],
-          "fx": {
-            "type": "pitchshift",
-            "params": { "pitch": -2, "windowSize": 0.1, "delayTime": 0.05, "feedback": 0.01 }
+            "params": { "delayTime": 0.15, "feedback": 0.3 },
+            "switch": { "paramName": "delayTime", "options": [0.15, 0.3, 0.6] }
           }
         }
       },
       "instruments": [
         { "sample": "Bass Section3", "volume": 0 },
         { "sample": "Glitch Section3", "volume": 0 },
-        { "sample": "ChiralSynth Section3", "volume": 0 }
+        { "sample": "ChiralSynth Section3", "volume": 0 },
+        { "sample": "ClapRegular Section3", "volume": 0},
+        { "sample": "ClapFeedback Section3", "volume": 0}
       ]
     }
   ],
@@ -373,7 +364,7 @@
       "id": 35,
       "name": "Vocals Section3 2",
       "path": "audio/Section_3/Vocals_Section3_2_5bar.mp3",
-      "type": "oneshot",
+      "type": "loop",
       "duration": 5
     },
     {
