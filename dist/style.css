@@ -44,37 +44,37 @@ body {
   background-image: url('images/Section_1/bass.png');
 }
 .bassActive {
-  background-image: url('images/Section_1/bass.png'), url('images/Section_1/bassActive.png');
+  background-image: url('images/Section_1/bass.png'), url('images/Section_1/bassHover.png');
 }
 .bass:hover {
-  background-image: url('images/Section_1/bass.png'), url('images/Section_1/bassActive.png'), url('images/Section_1/bassHover.png');
+  background-image: url('images/Section_1/bass.png'), url('images/Section_1/bassActive.png');
 }
 .stringArp {
   background-image: url('images/Section_1/stringArp.png');
 }
 .stringArpActive {
-  background-image: url('images/Section_1/stringArpActive.png');
+  background-image: url('images/Section_1/stringArp.png'), url('images/Section_1/stringArpActive.png');
 }
-.stringArpHover {
-  background-image: url('images/Section_1/stringArpHover.png');
+.stringArp:hover {
+  background-image: url('images/Section_1/stringArp.png'), url('images/Section_1/stringArpHover.png');
 }
 .taiko {
   background-image: url('images/Section_1/taiko.png');
 }
 .taikoActive {
-  background-image: url('images/Section_1/taikoActive.png');
+  background-image: url('images/Section_1/taiko.png'), url('images/Section_1/taikoActive.png');
 }
-.taikoHover {
-  background-image: url('images/Section_1/taikoHover.png');
+.taiko:hover {
+  background-image: url('images/Section_1/taiko.png'), url('images/Section_1/taikoHover.png');
 }
 .clap {
   background-image: url('images/Section_1/clap.png');
 }
 .clapActive {
-  background-image: url('images/Section_1/clapActive.png');
+  background-image: url('images/Section_1/clap.png'), url('images/Section_1/clapActive.png');
 }
-.clapHover {
-  background-image: url('images/Section_1/clapHover.png');
+.clap:hover {
+  background-image: url('images/Section_1/clap.png'), url('images/Section_1/clapHover.png');
 }
 .componentA {
   background-image: url('images/Section_1/componentA.png');

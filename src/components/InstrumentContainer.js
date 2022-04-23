@@ -17,6 +17,7 @@ export function InstrumentContainer(props) {
       playSample={() => playSample(sample.id)}
       stopSample={() => stopSample(sample.id)}
       sample={sample}
+      shape={instrument["shape"]}
     />
   ));
 

@@ -18,6 +18,8 @@ export function Instrument(props) {
   const playing =
     padState === padStates.SCHEDULING_STOP || padState === padStates.PLAYING;
 
+  const shape = props.shape;
+
   const triggerSample = () => {
     if (sample.isInactive()) {
       // Register end playback callback that will rerender this UI if not looping
@@ -47,14 +49,16 @@ export function Instrument(props) {
   return (
     <div
       className={
-        "instrument " + props.name + (hover ? "Hover" : active ? "Active" : "")
+        "instrument " + 
+        // " " + props.name + 
+        " " + (active ? props.name + "Active" : props.name)
       }
       onClick={() => {
         console.log(`We'd be playing ${props.name} now`);
         triggerSample();
         setActive(!active);
       }}
-      style= {{clipPath:"polygon(0% 0%,0% 100%,100% 100%, 100% 0)"}}
+      style= {{clipPath:shape}}
     />
   );
 }

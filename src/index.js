@@ -70,15 +70,19 @@ function App(props) {
             instruments={[
               {
                 name: "bass",
+                shape: "polygon(0% 0%,0% 100%,100% 100%, 100% 0)",
               },
               {
                 name: "stringArp",
+                shape: "circle(50%)",
               },
               {
                 name: "taiko",
+                shape: "polygon(35% 0%, 50% 0%, 65% 0%, 100% 35%, 100% 50%, 100% 65%, 65% 100%, 50% 100%, 35% 100%, 0% 65%, 0% 50%, 0% 35%)",
               },
               {
                 name: "clap",
+                shape: "polygon(48% 0%, 50% 0%, 52% 0%, 100% 80%, 100% 100%,0% 100%, 0% 80% )",
               },
             ]}
           />
