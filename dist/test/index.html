@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="main.css">
+    <title>Collab Synth Design Mockup</title>
+  </head>
+  <body>
+    <div id="base-container">
+      <img src="images/base.png" alt="base" id="base">
+      <img src="images/VOCALS123/VOCAL-1_HOVER.png" id="vocal_1_hover" class="stacked hidden">
+      <img src="images/VOCALS123/VOCAL-1_ACTIVE.png" id="vocal_1_active" class="stacked hidden">
+
+      <img src="images/VOCALS123/VOCAL-3_HOVER.png" id="vocal_3_hover" class="stacked hidden">
+      <img src="images/VOCALS123/VOCAL-3_ACTIVE.png" id="vocal_3_active" class="stacked hidden">
+
+      <img src="images/VOCALS_PING_PONG/VOCALS_PINGPONG-D_01.png" id="vocals_ping_pong_s1" class="stacked hidden">
+      <img src="images/VOCALS_PING_PONG/VOCALS_PINGPONG-D_02.png" id="vocals_ping_pong_s2" class="stacked hidden">
+      <img src="images/VOCALS_PING_PONG/VOCALS_PINGPONG-D_03.png" id="vocals_ping_pong_s3" class="stacked hidden">
+      <img src="images/VOCALS_PING_PONG/VOCALS_PINGPONG-D_04.png" id="vocals_ping_pong_s4" class="stacked hidden">
+      <img src="images/VOCALS_PING_PONG/VOCALS_PINGPONG-D_05.png" id="vocals_ping_pong_s5" class="stacked hidden">
+      <img src="images/VOCALS_PING_PONG/VOCALS_PINGPONG-D_06.png" id="vocals_ping_pong_s6" class="stacked hidden">
+      <img src="images/VOCALS_PING_PONG/VOCALS_PINGPONG-D_07.png" id="vocals_ping_pong_s7" class="stacked hidden">
+
+      <img usemap="#image-map" src="images/empty.png" id="overlay" draggable = "false" class="noselect">
+      <!-- <img usemap="#image-map" src="images/SINGLE_SAMPLE_INSTRUMENTS/A_BASS_ACTIVE.png"> -->
+
+      <map name="image-map">
+            <area
+              shape="poly"
+              coords="420, 150, 420, 200, 470, 200, 470, 150"
+              href="#"
+              id="im_vocal_1"
+              data-type="on-off"
+              data-deactivate="im_vocal_3"
+              data-hover = "vocal_1_hover"
+              data-active = "vocal_1_active">
+
+            <area
+              shape="circle"
+              coords="0, 0, 1"
+              href="#"
+              id="im_vocal_3"
+              data-type="on-off"
+              data-deactivate="im_vocal_1"
+              data-hover = "vocal_3_hover"
+              data-active = "vocal_3_active">
+
+            <area
+              shape="rect"
+              coords="0, 0, 1, 1"
+              href="#"
+              id="vocals_ping_pong"
+              data-type="downSlider"
+              data-steps="vocals_ping_pong_s1,vocals_ping_pong_s2,vocals_ping_pong_s3,vocals_ping_pong_s4,vocals_ping_pong_s5,vocals_ping_pong_s6,vocals_ping_pong_s7">
+      </map>
+    </div>
+
+
+    <!-- <script src="https://unpkg.com/image-map/dist/image-map.js"></script> -->
+    <script type="text/javascript" src="main.js"></script>
+
+    <!-- <script type="text/javascript">
+      ImageMap('img[usemap]');
+    </script> -->
+
+  </body>
+</html>
