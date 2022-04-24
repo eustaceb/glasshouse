@@ -30,8 +30,15 @@ body {
 .component {
   width: 340px;
   height: 640px;
+  background-repeat: no-repeat;
+}
+
+.vocal {
+  width: 84px;
+  height: 84px;
   display: inline-block;
   background-repeat: no-repeat;
+  position:  absolute;
 }
 
 .instrument {
@@ -76,9 +83,22 @@ body {
 .clap:hover {
   background-image: url('images/Section_1/clap.png'), url('images/Section_1/clapHover.png');
 }
+
 .componentA {
   background-image: url('images/Section_1/componentA.png');
+  position: relative;
 }
+
+.vocal1_s1 {
+  top: 45px;
+  left: 127px;
+  clip-path: polygon(40% 0%, 60% 0%, 100% 60%, 100% 75%, 60% 100%, 50% 100%, 40% 100%, 0% 75%, 0% 60%)
+}
+
+.vocal1_s1:hover {
+  background-image: url('images/Section_1/vocal1_hover.png');
+}
+
 .componentB {
   background-image: url('images/Section_1/componentB.png');
 }
