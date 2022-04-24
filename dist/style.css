@@ -99,6 +99,16 @@ body {
   background-image: url('images/Section_1/vocal1_hover.png');
 }
 
+.vocal2_s1 {
+  top: 168px;
+  left: 57px;
+  clip-path: circle(50% at 50% 50%)
+}
+
+.vocal2_s1:hover {
+  background-image: url('images/Section_1/vocal2_hover.png');
+}
+
 .componentB {
   background-image: url('images/Section_1/componentB.png');
 }
