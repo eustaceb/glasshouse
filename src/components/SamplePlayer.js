@@ -60,7 +60,7 @@ export function SamplePlayer(props) {
       </div>
       <div className="padding"></div>
       <div className="footerContainer">
-        <Navigation sectionIndex={0} setSection={setSection} sectionCount={3} />
+        <Navigation sectionIndex={sectionIndex} setSection={setSection} sectionCount={3} />
       </div>
     </div>
     // <Table className="fillHeight">
