@@ -40,6 +40,8 @@ body {
   background-repeat: no-repeat;
   background-position: center;
 }
+
+/* Instruments */
 .bass {
   background-image: url('images/Section_1/bass.png');
 }
@@ -76,18 +78,16 @@ body {
 .clap:hover {
   background-image: url('images/Section_1/clap.png'), url('images/Section_1/clapHover.png');
 }
+
+/* Major components */
 .componentA {
   background-image: url('images/Section_1/componentA.png');
 }
 .componentB {
   background-image: url('images/Section_1/componentB.png');
 }
-.navigation {
-  width: 1262px;
-  height: 60px;
-  background-repeat: no-repeat;
-  background-image: url('images/Section_1/navigation.png');
-}
+
+/* Modal */
 .startModal {
   background-color: #FFF;
   z-index: 1;
@@ -108,7 +108,6 @@ body {
   margin: auto;
   width: 100%;
 }
-
 .startModal a {
   text-decoration: none;
 }
@@ -123,4 +122,34 @@ body {
 }
 .startModal a:active {
   color: blue;
+}
+
+/* Navigation */
+.navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 80%;
+}
+.navigationRepeat {
+  display: flex;
+  flex-grow: 1;
+  height: 60px;
+  background-repeat: repeat-x;
+  background-image: url('images/navigation/lineRepeat.png');
+}
+.navigationArrowRight {
+  background-image: url('images/navigation/arrowRight.png');
+  height: 60px;
+  width: 22px;
+}
+.navigationMarkerLeft {
+  background-image: url('images/navigation/markerLeft.png');
+  height: 60px;
+  width: 3px;
+}
+.navigationMute {
+  background-image: url('images/navigation/mute.png');
+  height: 60px;
+  width: 60px;
 }

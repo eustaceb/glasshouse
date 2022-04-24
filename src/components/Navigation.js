@@ -1,26 +1,27 @@
 import React from "react";
-import {ArrowBack, ArrowForward} from "@material-ui/icons";
 
 export function Navigation(props) {
   const sectionIndex = props.sectionIndex;
   return (
-    <div style={{width: "100%", textAlign: "center"}}>
+    <div className="navigation">
       {sectionIndex > 0 ? (
-        <ArrowBack
-          style={{float: "left"}}
+        <div
+          className="navigationArrowLeft"
           onClick={() => props.setSection(sectionIndex - 1)}
         />
       ) : (
-        ""
+        <div className="navigationMarkerLeft" />
       )}
-      <span>{props.sectionName}</span>
+      <div className="navigationRepeat" />
+      <div className="navigationMute"/>
+      <div className="navigationRepeat" />
       {sectionIndex < props.sectionCount - 1 ? (
-        <ArrowForward
-          style={{float: "right"}}
+        <div
+          className="navigationArrowRight"
           onClick={() => props.setSection(sectionIndex + 1)}
         />
       ) : (
-        ""
+        <div className="navigationMarkerRight" />
       )}
     </div>
   );
