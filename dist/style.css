@@ -273,14 +273,19 @@ body {
 .navigationMarkerRight {
   background-image: url('images/navigation/markerRight.png');
 }
-.navigationMute {
-  background-image: url('images/navigation/mute.png');
+.muteButton {
   height: 60px;
   width: 60px;
 }
-.navigationMute:hover {
-  background-image: url('images/navigation/mute.png'), url('images/navigation/muteHover.png');
+.navigationMute {
+  background-image: url('images/navigation/mute.png');
 }
 .navigationMuteActive {
   background-image: url('images/navigation/mute.png'), url('images/navigation/muteActive.png');
+}
+.navigationMuteHover {
+  background-image: url('images/navigation/mute.png'), url('images/navigation/muteHover.png');
+}
+.navigationMuteActiveHover {
+  background-image: url('images/navigation/mute.png'), url('images/navigation/muteActive.png'), url('images/navigation/muteHover.png');
 }

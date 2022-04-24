@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import * as Tone from "tone";
+import {LayeredButton} from "./LayeredButton.js";
 
 export function Navigation(props) {
   const sectionIndex = props.sectionIndex;
@@ -21,10 +22,7 @@ export function Navigation(props) {
         <div className="navigationMarker navigationMarkerLeft" />
       )}
       <div className="navigationRepeat" />
-      <div
-        className={"navigationMute" + (muted ? " navigationMuteActive" : "")}
-        onClick={mute}
-      />
+      <LayeredButton cssName={"muteButton navigationMute"} callback={mute} />
       <div className="navigationRepeat" />
       {sectionIndex < props.sectionCount - 1 ? (
         <div
