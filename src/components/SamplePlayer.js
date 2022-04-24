@@ -3,6 +3,8 @@ import React, {useState} from "react";
 import {ComponentA} from "./ComponentA.js";
 import {Navigation} from "./Navigation.js";
 import {InstrumentContainer} from "./InstrumentContainer.js";
+import {InstrumentGroup} from "./InstrumentGroup.js";
+
 
 export function SamplePlayer(props) {
   const [sectionIndex, setSectionIndex] = useState(0);
@@ -26,7 +28,31 @@ export function SamplePlayer(props) {
   return (
     <div>
       <div className="componentsContainer">
-        <ComponentA />
+
+        <ComponentA 
+          group={vocals}
+          mouseController={props.mouseController}
+          playSample={playSample}
+          stopSample={stopSample}
+          getSample={(i) => props.sampleController.getSamples()[i]}
+          baseClass="vocal"
+          instruments={[
+            {
+              id: 9,
+              name: "vocal1Position vocal1",
+            },
+            {
+              id: 10,
+              name: "vocal2Position vocal2",
+            },
+            {
+              id: 11,
+              name: "vocal3Position vocal3",
+            },
+          ]}
+          
+        />
+
         <InstrumentContainer
           getSample={(i) => props.sampleController.getSamples()[i]}
           playSample={playSample}

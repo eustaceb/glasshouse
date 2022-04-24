@@ -48,7 +48,7 @@ export function Instrument(props) {
     return (
       <div
         className={
-          "instrument " +
+          (props.baseClass ? props.baseClass + " " : "instrument ") +
           props.name +
           (playing ? "Active" : "") +
           (scheduling ? " blinking" : "")

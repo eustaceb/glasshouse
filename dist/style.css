@@ -131,34 +131,59 @@ body {
   position: relative;
 }
 
-.vocal1_s1 {
+.vocal1Position {
   top: 45px;
   left: 127px;
-  clip-path: polygon(40% 0%, 60% 0%, 100% 60%, 100% 75%, 60% 100%, 50% 100%, 40% 100%, 0% 75%, 0% 60%)
+  clip-path: polygon(40% 0%, 60% 0%, 100% 60%, 100% 75%, 60% 100%, 50% 100%, 40% 100%, 0% 75%, 0% 60%);
 }
 
-.vocal1_s1:hover {
+.vocal1:hover {
   background-image: url('images/Section_1/vocal1_hover.png');
 }
 
-.vocal2_s1 {
-  top: 168px;
-  left: 57px;
-  clip-path: circle(50% at 50% 50%)
+.vocal1Active {
+  background-image: url('images/Section_1/vocal1_active.png');
 }
 
-.vocal2_s1:hover {
+.vocal1Active:hover {
+  background-image: url('images/Section_1/vocal1_hover.png'), url('images/Section_1/vocal1_active.png');
+}
+
+.vocal2Position {
+  top: 168px;
+  left: 57px;
+  clip-path: circle(50% at 50% 50%);
+}
+
+.vocal2:hover {
   background-image: url('images/Section_1/vocal2_hover.png');
 }
 
-.vocal3_s1 {
-  top: 168px;
-  left: 197px;
-  clip-path: circle(50% at 50% 50%)
+.vocal2Active {
+
+  background-image: url('images/Section_1/vocal2_active.png');
 }
 
-.vocal3_s1:hover {
+.vocal2Active:hover {
+  background-image: url('images/Section_1/vocal2_hover.png'), url('images/Section_1/vocal2_active.png');
+}
+
+.vocal3Position {
+  top: 168px;
+  left: 197px;
+  clip-path: circle(50% at 50% 50%);
+}
+
+.vocal3:hover {
   background-image: url('images/Section_1/vocal3_hover.png');
+}
+
+.vocal3Active {
+  background-image: url('images/Section_1/vocal3_active.png');
+}
+
+.vocal3Active:hover {
+  background-image: url('images/Section_1/vocal3_hover.png'), url('images/Section_1/vocal3_active.png');
 }
 
 
