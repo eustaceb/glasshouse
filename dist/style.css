@@ -283,9 +283,19 @@ body {
 .navigationMuteActive {
   background-image: url('images/navigation/mute.png'), url('images/navigation/muteActive.png');
 }
-.navigationMuteHover {
+.navigationMute:hover {
   background-image: url('images/navigation/mute.png'), url('images/navigation/muteHover.png');
 }
-.navigationMuteActiveHover {
+.navigationMuteActive:hover {
   background-image: url('images/navigation/mute.png'), url('images/navigation/muteActive.png'), url('images/navigation/muteHover.png');
+}
+
+/* Animations*/
+.blinking {
+  animation: blinker 1s linear infinite;
+}
+@keyframes blinker {
+  50% {
+      opacity: 0.5;
+  }
 }

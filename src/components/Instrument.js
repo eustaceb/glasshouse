@@ -45,13 +45,18 @@ export function Instrument(props) {
   //     />
   //   </map>
   // );
-  return (
-    <LayeredButton
-      cssName={"instrument " + props.name}
-      shape={shape}
-      callback={() => {
-        triggerSample();
-      }}
-    />
-  );
+    return (
+      <div
+        className={
+          "instrument " +
+          props.name +
+          (playing ? "Active" : "") +
+          (scheduling ? " blinking" : "")
+        }
+        onClick={() => {
+          triggerSample();
+        }}
+        style={shape ? {clipPath: shape} : null}
+      />
+    );
 }
