@@ -22,7 +22,10 @@ export function Navigation(props) {
         <div className="navigationMarker navigationMarkerLeft" />
       )}
       <div className="navigationRepeat" />
-      <LayeredButton cssName={"muteButton navigationMute"} callback={mute} />
+      <LayeredButton
+        cssName={(muted ? "blinking " : "") + "muteButton navigationMute"}
+        callback={mute}
+      />
       <div className="navigationRepeat" />
       {sectionIndex < props.sectionCount - 1 ? (
         <div
