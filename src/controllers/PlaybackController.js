@@ -33,21 +33,12 @@ export class PlaybackController {
     }
 
     const drawLoop = function () {
-      document.querySelector("#timestamp").innerHTML = timestamp;
-      if (sixteenth === "3") {
-        const pads = document.querySelectorAll(".beatStrip");
-        const increments = [0, 33, 66, 100];
-
-        pads.forEach(function (el) {
-          el.style.width = increments[beat].toString() + "%";
-        });
-      }
       // Since we don't require precision, trigger draw at x:0:0
       if (beat === "0" && sixteenth === "0")
         this.sampleController.triggerCallbacks();
     }
 
     // Update visuals every quarter note, prescheduling 1/16th ahead
-    //Tone.Draw.schedule(drawLoop.bind(this), Tone.Time(time) + Tone.Time("16n"));
+    Tone.Draw.schedule(drawLoop.bind(this), Tone.Time(time) + Tone.Time("16n"));
   }
 }

@@ -31,22 +31,6 @@ function App(props) {
     playback.current.start(0);
     // Start off with first sample playing
     setInitialised(true);
-
-    // Setup meter
-    // const meter = new Tone.Meter();
-    // Tone.getDestination().connect(meter);
-    // setInterval(() => {
-    //   const el = document.getElementById("level");
-    //   const db = Math.round((meter.getValue() + Number.EPSILON) * 100) / 100;
-    //   el.innerHTML = db.toString() + " db";
-    //   if (db >= 0) {
-    //     el.style.color = "red";
-    //   } else if (db > -5) {
-    //     el.style.color = "orange";
-    //   } else {
-    //     el.style.color = "black";
-    //   }
-    // }, 100);
   };
 
   const setup = (data, players) => {

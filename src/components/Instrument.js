@@ -2,9 +2,6 @@ import React, {useState, useEffect} from "react";
 import {LayeredButton} from "./LayeredButton.js";
 
 export function Instrument(props) {
-  const [hover, setHover] = useState(false);
-  const [active, setActive] = useState(false);
-
   const padStates = {
     READY: 0,
     SCHEDULING_PLAY: 1,
@@ -53,9 +50,7 @@ export function Instrument(props) {
       cssName={"instrument " + props.name}
       shape={shape}
       callback={() => {
-        console.log(`We'd be playing ${props.name} now`);
         triggerSample();
-        setActive(!active);
       }}
     />
   );
