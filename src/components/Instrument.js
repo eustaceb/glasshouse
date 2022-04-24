@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import {LayeredButton} from "./LayeredButton.js";
 
 export function Instrument(props) {
   const [hover, setHover] = useState(false);
@@ -48,19 +49,14 @@ export function Instrument(props) {
   //   </map>
   // );
   return (
-    <div
-      className={
-        "instrument " + 
-        ((active ? props.name + "Active" : props.name) + (hover ? "Hover" : ""))
-      }
-      onClick={() => {
+    <LayeredButton
+      cssName={"instrument " + props.name}
+      shape={shape}
+      callback={() => {
         console.log(`We'd be playing ${props.name} now`);
         triggerSample();
         setActive(!active);
       }}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      style= {{clipPath:shape}}
     />
   );
 }
