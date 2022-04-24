@@ -82,8 +82,11 @@ body {
 .bassActive {
   background-image: url('images/Section_1/bass.png'), url('images/Section_1/bassActive.png');
 }
-.bass:hover {
+.bassHover {
   background-image: url('images/Section_1/bass.png'), url('images/Section_1/bassHover.png');
+}
+.bassActiveHover {
+  background-image: url('images/Section_1/bass.png'), url('images/Section_1/bassActive.png'), url('images/Section_1/bassHover.png');
 }
 .stringArp {
   background-image: url('images/Section_1/stringArp.png');
@@ -91,8 +94,11 @@ body {
 .stringArpActive {
   background-image: url('images/Section_1/stringArp.png'), url('images/Section_1/stringArpActive.png');
 }
-.stringArp:hover {
+.stringArpHover {
   background-image: url('images/Section_1/stringArp.png'), url('images/Section_1/stringArpHover.png');
+}
+.stringArpActiveHover {
+  background-image: url('images/Section_1/stringArp.png'), url('images/Section_1/stringArpActive.png'), url('images/Section_1/stringArpHover.png');
 }
 .taiko {
   background-image: url('images/Section_1/taiko.png');
@@ -100,8 +106,11 @@ body {
 .taikoActive {
   background-image: url('images/Section_1/taiko.png'), url('images/Section_1/taikoActive.png');
 }
-.taiko:hover {
+.taikoHover {
   background-image: url('images/Section_1/taiko.png'), url('images/Section_1/taikoHover.png');
+}
+.taikoActiveHover {
+  background-image: url('images/Section_1/taiko.png'), url('images/Section_1/taikoActive.png'), url('images/Section_1/taikoHover.png');
 }
 .clap {
   background-image: url('images/Section_1/clap.png');
@@ -109,8 +118,11 @@ body {
 .clapActive {
   background-image: url('images/Section_1/clap.png'), url('images/Section_1/clapActive.png');
 }
-.clap:hover {
+.clapHover {
   background-image: url('images/Section_1/clap.png'), url('images/Section_1/clapHover.png');
+}
+.clapActiveHover {
+  background-image: url('images/Section_1/clap.png'), url('images/Section_1/clapActive.png'), url('images/Section_1/clapHover.png');
 }
 
 /* Major components */

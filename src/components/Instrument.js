@@ -11,6 +11,7 @@ export function Instrument(props) {
     SCHEDULING_STOP: 3,
   };
   const [padState, setPadState] = useState(padStates.READY);
+
   const sample = props.sample;
   const scheduling =
     padState === padStates.SCHEDULING_PLAY ||
@@ -50,14 +51,15 @@ export function Instrument(props) {
     <div
       className={
         "instrument " + 
-        // " " + props.name + 
-        " " + (active ? props.name + "Active" : props.name)
+        ((active ? props.name + "Active" : props.name) + (hover ? "Hover" : ""))
       }
       onClick={() => {
         console.log(`We'd be playing ${props.name} now`);
         triggerSample();
         setActive(!active);
       }}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
       style= {{clipPath:shape}}
     />
   );
