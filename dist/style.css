@@ -74,6 +74,8 @@ body {
   background-repeat: no-repeat;
   background-position: center;
 }
+
+/* Instruments */
 .bass {
   background-image: url('images/Section_1/bass.png');
 }
@@ -111,6 +113,7 @@ body {
   background-image: url('images/Section_1/clap.png'), url('images/Section_1/clapHover.png');
 }
 
+/* Major components */
 .componentA {
   background-image: url('images/Section_1/componentA.png');
   position: relative;
@@ -180,12 +183,8 @@ body {
 .componentB {
   background-image: url('images/Section_1/componentB.png');
 }
-.navigation {
-  width: 1262px;
-  height: 60px;
-  background-repeat: no-repeat;
-  background-image: url('images/Section_1/navigation.png');
-}
+
+/* Modal */
 .startModal {
   background-color: #FFF;
   z-index: 1;
@@ -206,7 +205,6 @@ body {
   margin: auto;
   width: 100%;
 }
-
 .startModal a {
   text-decoration: none;
 }
@@ -221,4 +219,56 @@ body {
 }
 .startModal a:active {
   color: blue;
+}
+
+/* Navigation */
+.navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 80%;
+}
+.navigationRepeat {
+  display: flex;
+  flex-grow: 1;
+  height: 60px;
+  background-repeat: repeat-x;
+  background-image: url('images/navigation/lineRepeat.png');
+}
+.navigationArrow {
+  height: 60px;
+  width: 22px;
+}
+.navigationArrowLeft {
+  background-image: url('images/navigation/arrowLeft.png');
+}
+.navigationArrowLeft:hover {
+  background-image: url('images/navigation/arrowLeft.png'), url('images/navigation/arrowLeftHover.png');
+}
+.navigationArrowRight {
+  background-image: url('images/navigation/arrowRight.png');
+}
+.navigationArrowRight:hover {
+  background-image: url('images/navigation/arrowRight.png'), url('images/navigation/arrowRightHover.png');
+}
+.navigationMarker {
+  height: 60px;
+  width: 3px;
+}
+.navigationMarkerLeft {
+  background-image: url('images/navigation/markerLeft.png');
+}
+.navigationMarkerRight {
+  background-image: url('images/navigation/markerRight.png');
+}
+.navigationMute {
+  background-image: url('images/navigation/mute.png');
+  height: 60px;
+  width: 60px;
+}
+.navigationMute:hover {
+  background-image: url('images/navigation/mute.png'), url('images/navigation/muteHover.png');
+}
+.navigationMuteActive {
+  background-image: url('images/navigation/mute.png'), url('images/navigation/muteActive.png');
 }

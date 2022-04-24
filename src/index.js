@@ -11,7 +11,7 @@ import {SampleController} from "./controllers/SampleController.js";
 
 // Components
 import {LoadingScreen} from "./components/LoadingScreen.js";
-import {SamplePlayer} from "./components/SamplePlayer.js";
+import {Navigation} from "./components/Navigation.js";
 import {InstrumentContainer} from "./components/InstrumentContainer.js";
 import {ComponentA} from "./components/ComponentA.js";
 
@@ -63,30 +63,38 @@ function App(props) {
     <div className="mainContainer">
       <div className="padding"></div>
       {initialised ? (
-        <div className="componentsContainer">
-          <ComponentA />
-          <InstrumentContainer
-            sampler={sampler.current}
-            instruments={[
-              {
-                name: "bass",
-                shape: "polygon(0% 0%,0% 100%,100% 100%, 100% 0)",
-              },
-              {
-                name: "stringArp",
-                shape: "circle(50%)",
-              },
-              {
-                name: "taiko",
-                shape: "polygon(35% 0%, 50% 0%, 65% 0%, 100% 35%, 100% 50%, 100% 65%, 65% 100%, 50% 100%, 35% 100%, 0% 65%, 0% 50%, 0% 35%)",
-              },
-              {
-                name: "clap",
-                shape: "polygon(48% 0%, 50% 0%, 52% 0%, 100% 80%, 100% 100%,0% 100%, 0% 80% )",
-              },
-            ]}
-          />
-          <div className="component componentB"></div>
+        <div>
+          <div className="componentsContainer">
+            <ComponentA />
+            <InstrumentContainer
+              sampler={sampler.current}
+              instruments={[
+                {
+                  name: "bass",
+                  shape: "polygon(0% 0%,0% 100%,100% 100%, 100% 0)",
+                },
+                {
+                  name: "stringArp",
+                  shape: "circle(50%)",
+                },
+                {
+                  name: "taiko",
+                  shape:
+                    "polygon(35% 0%, 50% 0%, 65% 0%, 100% 35%, 100% 50%, 100% 65%, 65% 100%, 50% 100%, 35% 100%, 0% 65%, 0% 50%, 0% 35%)",
+                },
+                {
+                  name: "clap",
+                  shape:
+                    "polygon(48% 0%, 50% 0%, 52% 0%, 100% 80%, 100% 100%,0% 100%, 0% 80% )",
+                },
+              ]}
+            />
+            <div className="component componentB"></div>
+          </div>
+          <div className="padding"></div>
+          <div className="footerContainer">
+            <Navigation sectionIndex={0} setSection={() => {}} sectionCount={3}/>
+          </div>
         </div>
       ) : (
         // <SamplePlayer
@@ -99,10 +107,6 @@ function App(props) {
           setup={(jsonData, players) => setup(jsonData, players)}
         />
       )}
-      <div className="padding"></div>
-      <div className="footerContainer">
-        <div className="navigation"></div>
-      </div>
     </div>
   );
 }
