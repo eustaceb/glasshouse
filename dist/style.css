@@ -36,10 +36,10 @@ body {
 .vocal {
   width: 84px;
   height: 84px;
-  display: inline-block;
   background-repeat: no-repeat;
   position:  absolute;
 }
+
 
 .instrument {
   width: 125px;
@@ -109,6 +109,47 @@ body {
   background-image: url('images/Section_1/vocal2_hover.png');
 }
 
+.vocal3_s1 {
+  top: 168px;
+  left: 197px;
+  clip-path: circle(50% at 50% 50%)
+}
+
+.vocal3_s1:hover {
+  background-image: url('images/Section_1/vocal3_hover.png');
+}
+
+
+.downSlider1 {
+  background-repeat: no-repeat;
+  position:  absolute;
+  top: 421px;
+  left: 115px;
+  width: 107px;
+  height: 214px;
+}
+
+.downSlider1_1 {
+  background-image: url('images/Section_1/vocal_slider_1.png');
+}
+.downSlider1_2 {
+  background-image: url('images/Section_1/vocal_slider_2.png');
+}
+.downSlider1_3 {
+  background-image: url('images/Section_1/vocal_slider_3.png');
+}
+.downSlider1_4 {
+  background-image: url('images/Section_1/vocal_slider_4.png');
+}
+.downSlider1_5 {
+  background-image: url('images/Section_1/vocal_slider_5.png');
+}
+.downSlider1_6 {
+  background-image: url('images/Section_1/vocal_slider_6.png');
+}
+.downSlider1_7 {
+  background-image: url('images/Section_1/vocal_slider_7.png');
+}
 .componentB {
   background-image: url('images/Section_1/componentB.png');
 }
