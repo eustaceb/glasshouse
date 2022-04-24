@@ -9,7 +9,6 @@ import React from "react";
 import {Instrument} from "./Instrument.js";
 
 export function InstrumentGroup(props) {
-    const volume = props.group.getVolume();
     const mouseController = props.mouseController;
   
     const playSample = (sampleIndex) => {
@@ -91,14 +90,9 @@ export function InstrumentGroup(props) {
       // return <div>test</div>
     };
   
-    const preFxComponents = generateFxComponents(props.group.getPreFxControls());
-    const fxComponents = generateFxComponents(props.group.getFxControls());
-  
     return (
       <>
         {instruments}
-        {preFxComponents}
-        {fxComponents}
       </>
     );
   }

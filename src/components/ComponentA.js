@@ -5,7 +5,7 @@ import {InstrumentGroup} from "./InstrumentGroup.js";
 
 
 export function ComponentA(props) {
-
+  const wetControl = props.group.getFxControls()["wet"];
 
   return (
     <div className={"component componentA"}>
@@ -31,7 +31,8 @@ export function ComponentA(props) {
         maxPosition="100"
         initialPosition="40"
         initialStep="2"
-        className="downSlider1" ></DownSlider>
+        className="downSlider1"
+        callback={(val) => wetControl.setWet(val / 100)}></DownSlider>
     </div>
   )
 }

@@ -34,6 +34,7 @@ export function DownSlider(props) {
       let nextPosition = position + event.movementY;
       nextPosition = Math.max(Math.min(maxPosition, nextPosition), minPosition);
 
+      props.callback(nextPosition);
       setPosition(nextPosition);
       setStep(Math.trunc(position / maxPosition * maxStep));
       console.log(position)
