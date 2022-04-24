@@ -1,10 +1,8 @@
 import React, {useState} from "react";
-import {Table, TableBody, TableCell, TableRow} from "@material-ui/core";
 
+import {ComponentA} from "./ComponentA.js";
 import {Navigation} from "./Navigation.js";
-import {SamplePad} from "./SamplePad.js";
-import {VolumeSlider} from "./VolumeSlider.js";
-import {SampleGroup} from "./SampleGroup.js";
+import {InstrumentContainer} from "./InstrumentContainer.js";
 
 export function SamplePlayer(props) {
   const [sectionIndex, setSectionIndex] = useState(0);
@@ -14,71 +12,94 @@ export function SamplePlayer(props) {
   const clap = section.hasGroup("clap") ? section.getGroup("clap") : null;
 
   const playSample = (sampleIndex) => {
-    props.sampler.playSample(sampleIndex);
+    props.sampleController.playSample(sampleIndex);
   };
   const stopSample = (sampleIndex) => {
-    props.sampler.stopSample(sampleIndex);
+    props.sampleController.stopSample(sampleIndex);
   };
 
   const setSection = (sectionIndex) => {
-    props.sampler.stopAllSamples();
+    props.sampleController.stopAllSamples();
     setSectionIndex(sectionIndex);
   };
 
-  const instruments = section.getInstruments().map((instrument) => {
-    const s = instrument["sample"];
-    const v = instrument["volume"];
-    return (
-      <TableCell key={s.id}>
-        <SamplePad
-          className="fillHeight"
-          sample={s}
-          playSample={() => playSample(s.id)}
-          stopSample={() => stopSample(s.id)}
-        />
-        <VolumeSlider volume={v} />
-      </TableCell>
-    );
-  });
-
   return (
-    <Table className="fillHeight">
-      <TableBody>
-        <TableRow>
-          <TableCell colSpan={11}>
-            <Navigation
-              setSection={(sectionIndex) => setSection(sectionIndex)}
-              sectionIndex={sectionIndex}
-              sectionName={section.name}
-              sectionCount={props.composition.getSectionCount()}
-            />
-          </TableCell>
-        </TableRow>
-        <SampleGroup
+    <div>
+      <div className="componentsContainer">
+        <ComponentA />
+        <InstrumentContainer
+          getSample={(i) => props.sampleController.getSamples()[i]}
           playSample={playSample}
           stopSample={stopSample}
-          group={vocals}
-          mouseController={props.mouseController}
+          instruments={[
+            {
+              id: 2,
+              name: "bass",
+              shape: "polygon(0% 0%,0% 100%,100% 100%, 100% 0)",
+            },
+            {
+              id: 7,
+              name: "stringArp",
+              shape: "circle(50%)",
+            },
+            {
+              id: 8,
+              name: "taiko",
+              shape:
+                "polygon(35% 0%, 50% 0%, 65% 0%, 100% 35%, 100% 50%, 100% 65%, 65% 100%, 50% 100%, 35% 100%, 0% 65%, 0% 50%, 0% 35%)",
+            },
+            {
+              id: 3,
+              name: "clap",
+              shape:
+                "polygon(48% 0%, 50% 0%, 52% 0%, 100% 80%, 100% 100%,0% 100%, 0% 80% )",
+            },
+          ]}
         />
-        <SampleGroup
-          playSample={playSample}
-          stopSample={stopSample}
-          group={percussion}
-          mouseController={props.mouseController}
-        />
-        {clap && (
-          <SampleGroup
-            playSample={playSample}
-            stopSample={stopSample}
-            group={clap}
-            mouseController={props.mouseController}
-          />
-        )}
-        <TableRow>
-          <TableCell>instruments</TableCell>
-          {instruments}
-        </TableRow>
-      </TableBody>
-    </Table>
+        <div className="component componentB"></div>
+      </div>
+      <div className="padding"></div>
+      <div className="footerContainer">
+        <Navigation sectionIndex={0} setSection={setSection} sectionCount={3} />
+      </div>
+    </div>
+    // <Table className="fillHeight">
+    //   <TableBody>
+    //     <TableRow>
+    //       <TableCell colSpan={11}>
+    //         <Navigation
+    //           setSection={(sectionIndex) => setSection(sectionIndex)}
+    //           sectionIndex={sectionIndex}
+    //           sectionName={section.name}
+    //           sectionCount={props.composition.getSectionCount()}
+    //         />
+    //       </TableCell>
+    //     </TableRow>
+    //     <SampleGroup
+    //       playSample={playSample}
+    //       stopSample={stopSample}
+    //       group={vocals}
+    //       mouseController={props.mouseController}
+    //     />
+    //     <SampleGroup
+    //       playSample={playSample}
+    //       stopSample={stopSample}
+    //       group={percussion}
+    //       mouseController={props.mouseController}
+    //     />
+    //     {clap && (
+    //       <SampleGroup
+    //         playSample={playSample}
+    //         stopSample={stopSample}
+    //         group={clap}
+    //         mouseController={props.mouseController}
+    //       />
+    //     )}
+    //     <TableRow>
+    //       <TableCell>instruments</TableCell>
+    //       {instruments}
+    //     </TableRow>
+    //   </TableBody>
+    // </Table>
   );
 }

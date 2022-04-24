@@ -11,9 +11,7 @@ import {SampleController} from "./controllers/SampleController.js";
 
 // Components
 import {LoadingScreen} from "./components/LoadingScreen.js";
-import {Navigation} from "./components/Navigation.js";
-import {InstrumentContainer} from "./components/InstrumentContainer.js";
-import {ComponentA} from "./components/ComponentA.js";
+import {SamplePlayer} from "./components/SamplePlayer.js";
 
 if (process.env.NODE_ENV !== "production") {
   console.log("Looks like we are in development mode!");
@@ -23,13 +21,13 @@ function App(props) {
   const [initialised, setInitialised] = useState(false);
 
   const mouseController = useRef(null);
-  const sampler = useRef(null);
+  const sampleController = useRef(null);
   const playback = useRef(null);
   const composition = useRef(null);
 
   const start = function () {
     Tone.start();
-    sampler.current.playBackgroundSample();
+    sampleController.current.playBackgroundSample();
     playback.current.start(0);
     // Start off with first sample playing
     setInitialised(true);
@@ -53,9 +51,9 @@ function App(props) {
 
   const setup = (data, players) => {
     mouseController.current = new MouseController(window.document);
-    sampler.current = new SampleController(data["samples"], players);
-    playback.current = new PlaybackController(sampler.current);
-    composition.current = new Composition(data["sections"], sampler.current);
+    sampleController.current = new SampleController(data["samples"], players);
+    playback.current = new PlaybackController(sampleController.current);
+    composition.current = new Composition(data["sections"], sampleController.current);
     Tone.Transport.bpm.value = 100;
   };
 
@@ -63,45 +61,13 @@ function App(props) {
     <div className="mainContainer">
       <div className="padding"></div>
       {initialised ? (
-        <div>
-          <div className="componentsContainer">
-            <ComponentA />
-            <InstrumentContainer
-              sampler={sampler.current}
-              instruments={[
-                {
-                  name: "bass",
-                  shape: "polygon(0% 0%,0% 100%,100% 100%, 100% 0)",
-                },
-                {
-                  name: "stringArp",
-                  shape: "circle(50%)",
-                },
-                {
-                  name: "taiko",
-                  shape:
-                    "polygon(35% 0%, 50% 0%, 65% 0%, 100% 35%, 100% 50%, 100% 65%, 65% 100%, 50% 100%, 35% 100%, 0% 65%, 0% 50%, 0% 35%)",
-                },
-                {
-                  name: "clap",
-                  shape:
-                    "polygon(48% 0%, 50% 0%, 52% 0%, 100% 80%, 100% 100%,0% 100%, 0% 80% )",
-                },
-              ]}
-            />
-            <div className="component componentB"></div>
-          </div>
-          <div className="padding"></div>
-          <div className="footerContainer">
-            <Navigation sectionIndex={0} setSection={() => {}} sectionCount={3}/>
-          </div>
-        </div>
+        <SamplePlayer
+          mouseController={mouseController.current}
+          sampleController={sampleController.current}
+          playback={playback.current}
+          composition={composition.current}
+        />
       ) : (
-        // <SamplePlayer
-        //   composition={composition.current}
-        //   sampler={sampler.current}
-        //   mouseController={mouseController.current}
-        // />
         <LoadingScreen
           start={() => start()}
           setup={(jsonData, players) => setup(jsonData, players)}
