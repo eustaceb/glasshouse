@@ -1,12 +1,38 @@
 body {
-  background-image: url('./images/Section_1/bg.png');
+/*  background-image: url('./images/Section_1/bg.png');
   background-size: cover;
   background-repeat: no-repeat;
+  background-color: #002f43;*/
   background-color: #002f43;
+  background-image: url('./images/bg.png');
+  background-position: bottom;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  padding: 0;
+  margin: 0;
 }
+
+#loopVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index:  1;
+}
+
+
 .mainContainer {
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index:  2;
+  background-image: url('./images/bg.png');
+  background-position: bottom;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 .padding {
   height: 100px;
@@ -16,6 +42,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+
 }
 .instrumentContainer {
   display: flex;
