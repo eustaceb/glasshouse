@@ -12,7 +12,7 @@ export function LayeredButton(props) {
         props.callback();
         setActive(!active);
       }}
-      style={props.shape ? {clipPath: props.shape} : null}
+      /*style={props.shape ? {clipPath: props.shape} : null}*/
     />
   );
 }

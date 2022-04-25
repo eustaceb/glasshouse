@@ -11,13 +11,14 @@ export function Instrument(props) {
   const [padState, setPadState] = useState(padStates.READY);
 
   const sample = props.sample;
+  const sampleName = sample.getName();
+  console.log(sampleName);
+
   const scheduling =
     padState === padStates.SCHEDULING_PLAY ||
     padState === padStates.SCHEDULING_STOP;
   const playing =
     padState === padStates.SCHEDULING_STOP || padState === padStates.PLAYING;
-
-  const shape = props.shape;
 
   const triggerSample = () => {
     if (sample.isInactive()) {
@@ -45,18 +46,16 @@ export function Instrument(props) {
   //     />
   //   </map>
   // );
-    return (
-      <div
-        className={
-          (props.baseClass ? props.baseClass + " " : "instrument ") +
-          props.name +
-          (playing ? "Active" : "") +
-          (scheduling ? " blinking" : "")
-        }
-        onClick={() => {
-          triggerSample();
-        }}
-        style={shape ? {clipPath: shape} : null}
-      />
-    );
+  return (
+    <div
+      className={
+        props.sample.getName() +
+        (playing ? " " + props.sample.getName() + "Active" : "") +
+        (scheduling ? " blinking" : "")
+      }
+      onClick={() => {
+        triggerSample();
+      }}
+    />
+  );
 }

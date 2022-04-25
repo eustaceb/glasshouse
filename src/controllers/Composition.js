@@ -69,7 +69,7 @@ class SampleGroup {
 
 export class Composition {
   constructor(data, sampleController) {
-    this.bgSample = sampleController.getSampleByName("Sham main");
+    this.bgSample = sampleController.getSampleByName("Sham_main");
     this.bgSample.player.toDestination();
 
     this.sections = data.map((section, index, _) => {
@@ -189,7 +189,7 @@ export class Composition {
         const volume = new FXControl("volume", instrumentData["volume"]);
         sample.getPlayer().connect(volume.getNode());
         volume.getNode().toDestination();
-        instruments.push({sample: sample, volume: volume});
+        instruments.push(sample);
       });
 
       return new Section(

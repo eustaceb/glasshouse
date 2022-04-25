@@ -14,14 +14,11 @@ export function ComponentA(props) {
       <div className={"vocal vocal2_s1"}></div>
       <div className={"vocal vocal3_s1"}></div>
       */}
-
       <InstrumentGroup
         playSample={props.playSample}
         stopSample={props.stopSample}
         group={props.group}
-        instruments={props.instruments}
         baseClass={props.baseClass}
-        getSample={props.getSample}
       />
       <DownSlider
         minStep={0}

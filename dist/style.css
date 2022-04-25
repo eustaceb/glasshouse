@@ -59,14 +59,13 @@ body {
   background-repeat: no-repeat;
 }
 
-.vocal {
+.vocals {
   width: 84px;
   height: 84px;
   background-repeat: no-repeat;
   position: absolute;
   cursor: pointer;
 }
-
 
 .instrument {
   width: 125px;
@@ -76,53 +75,57 @@ body {
   cursor: pointer;
 }
 
-/* Instruments */
-.bass {
+/* Section 1 instruments */
+.Bass_Section1 {
+  clip-path: polygon(0% 0%,0% 100%,100% 100%, 100% 0);
   background-image: url('images/Section_1/bass.png');
 }
-.bassActive {
+.Bass_Section1Active {
   background-image: url('images/Section_1/bass.png'), url('images/Section_1/bassActive.png');
 }
-.bass:hover {
+.Bass_Section1:hover {
   background-image: url('images/Section_1/bass.png'), url('images/Section_1/bassHover.png');
 }
-.bassActive:hover {
+.Bass_Section1Active:hover {
   background-image: url('images/Section_1/bass.png'), url('images/Section_1/bassActive.png'), url('images/Section_1/bassHover.png');
 }
-.stringArp {
+.StringArp_Section1 {
+  clip-path: circle(50%);
   background-image: url('images/Section_1/stringArp.png');
 }
-.stringArpActive {
+.StringArp_Section1Active {
   background-image: url('images/Section_1/stringArp.png'), url('images/Section_1/stringArpActive.png');
 }
-.stringArp:hover {
+.StringArp_Section1:hover {
   background-image: url('images/Section_1/stringArp.png'), url('images/Section_1/stringArpHover.png');
 }
-.stringArpActive:hover {
+.StringArp_Section1:hover {
   background-image: url('images/Section_1/stringArp.png'), url('images/Section_1/stringArpActive.png'), url('images/Section_1/stringArpHover.png');
 }
-.taiko {
+.Taiko_Section1 {
+  clip-path: polygon(35% 0%, 50% 0%, 65% 0%, 100% 35%, 100% 50%, 100% 65%, 65% 100%, 50% 100%, 35% 100%, 0% 65%, 0% 50%, 0% 35%);
   background-image: url('images/Section_1/taiko.png');
 }
-.taikoActive {
+.Taiko_Section1Active {
   background-image: url('images/Section_1/taiko.png'), url('images/Section_1/taikoActive.png');
 }
-.taiko:hover {
+.Taiko_Section1:hover {
   background-image: url('images/Section_1/taiko.png'), url('images/Section_1/taikoHover.png');
 }
-.taikoActive:hover {
+.Taiko_Section1Active:hover {
   background-image: url('images/Section_1/taiko.png'), url('images/Section_1/taikoActive.png'), url('images/Section_1/taikoHover.png');
 }
-.clap {
+.Clap_Section1 {
+  clip-path: polygon(48% 0%, 50% 0%, 52% 0%, 100% 80%, 100% 100%,0% 100%, 0% 80%);
   background-image: url('images/Section_1/clap.png');
 }
-.clapActive {
+.Clap_Section1Active {
   background-image: url('images/Section_1/clap.png'), url('images/Section_1/clapActive.png');
 }
-.clap:hover {
+.Clap_Section1:hover {
   background-image: url('images/Section_1/clap.png'), url('images/Section_1/clapHover.png');
 }
-.clapActive:hover {
+.Clap_Section1Active:hover {
   background-image: url('images/Section_1/clap.png'), url('images/Section_1/clapActive.png'), url('images/Section_1/clapHover.png');
 }
 
@@ -132,58 +135,59 @@ body {
   position: relative;
 }
 
-.vocal1Position {
+/* Section 1 vocals */
+.Vocals_Section1_1 {
   top: 45px;
   left: 127px;
   clip-path: polygon(40% 0%, 60% 0%, 100% 60%, 100% 75%, 60% 100%, 50% 100%, 40% 100%, 0% 75%, 0% 60%);
 }
 
-.vocal1:hover {
+.Vocals_Section1_1:hover {
   background-image: url('images/Section_1/vocal1_hover.png');
 }
 
-.vocal1Active {
+.Vocals_Section1_1Active {
   background-image: url('images/Section_1/vocal1_active.png');
 }
 
-.vocal1Active:hover {
+.Vocals_Section1_1Active:hover {
   background-image: url('images/Section_1/vocal1_hover.png'), url('images/Section_1/vocal1_active.png');
 }
 
-.vocal2Position {
+.Vocals_Section1_2 {
   top: 168px;
   left: 57px;
   clip-path: circle(50% at 50% 50%);
 }
 
-.vocal2:hover {
+.Vocals_Section1_2:hover {
   background-image: url('images/Section_1/vocal2_hover.png');
 }
 
-.vocal2Active {
+.Vocals_Section1_2Active {
 
   background-image: url('images/Section_1/vocal2_active.png');
 }
 
-.vocal2Active:hover {
+.Vocals_Section1_2Active:hover {
   background-image: url('images/Section_1/vocal2_hover.png'), url('images/Section_1/vocal2_active.png');
 }
 
-.vocal3Position {
+.Vocals_Section1_3 {
   top: 168px;
   left: 197px;
   clip-path: circle(50% at 50% 50%);
 }
 
-.vocal3:hover {
+.Vocals_Section1_3:hover {
   background-image: url('images/Section_1/vocal3_hover.png');
 }
 
-.vocal3Active {
+.Vocals_Section1_3Active {
   background-image: url('images/Section_1/vocal3_active.png');
 }
 
-.vocal3Active:hover {
+.Vocals_Section1_3Active:hover {
   background-image: url('images/Section_1/vocal3_hover.png'), url('images/Section_1/vocal3_active.png');
 }
 

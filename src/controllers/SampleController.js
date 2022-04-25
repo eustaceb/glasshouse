@@ -22,6 +22,9 @@ class Sample {
     this.playState = Sample.PlayStates.INACTIVE;
     this.player.fadeOut = 0.1;
   }
+  getName() {
+    return this.name;
+  }
   play(time) {
     this.player.start(time);
   }
