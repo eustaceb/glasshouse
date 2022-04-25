@@ -26,9 +26,8 @@ export function SamplePlayer(props) {
   };
 
   return (
-    <div>
+    <>
       <div className="componentsContainer">
-
         <ComponentA 
           group={vocals}
           mouseController={props.mouseController}
@@ -88,7 +87,7 @@ export function SamplePlayer(props) {
       <div className="footerContainer">
         <Navigation sectionIndex={sectionIndex} setSection={setSection} sectionCount={3} />
       </div>
-    </div>
+    </>
     // <Table className="fillHeight">
     //   <TableBody>
     //     <TableRow>

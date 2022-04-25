@@ -19,7 +19,7 @@ body {
   bottom: 0;
   min-width: 100%;
   min-height: 100%;
-  z-index:  1;
+  z-index: -1;
 }
 
 
@@ -27,7 +27,6 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
-  z-index:  2;
   background-image: url('./images/bg.png');
   background-position: bottom;
   background-size: cover;
@@ -35,7 +34,7 @@ body {
   background-repeat: no-repeat;
 }
 .padding {
-  height: 100px;
+  height: 50px;
   display: inline-block;
 }
 .componentsContainer {

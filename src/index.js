@@ -37,20 +37,26 @@ function App(props) {
     mouseController.current = new MouseController(window.document);
     sampleController.current = new SampleController(data["samples"], players);
     playback.current = new PlaybackController(sampleController.current);
-    composition.current = new Composition(data["sections"], sampleController.current);
+    composition.current = new Composition(
+      data["sections"],
+      sampleController.current
+    );
     Tone.Transport.bpm.value = 100;
   };
 
   return (
     <div className="mainContainer">
-      <div className="padding"></div>
       {initialised ? (
-        <SamplePlayer
-          mouseController={mouseController.current}
-          sampleController={sampleController.current}
-          playback={playback.current}
-          composition={composition.current}
-        />
+        <>
+          <div className="padding"></div>
+          <SamplePlayer
+            mouseController={mouseController.current}
+            sampleController={sampleController.current}
+            playback={playback.current}
+            composition={composition.current}
+          />
+          <div className="padding"></div>
+        </>
       ) : (
         <LoadingScreen
           start={() => start()}
