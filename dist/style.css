@@ -305,10 +305,10 @@ body {
 .muteButton {
   height: 60px;
   width: 60px;
+  cursor: pointer;
 }
 .navigationMute {
   background-image: url('images/navigation/mute.png');
-  cursor: pointer;
 }
 .navigationMuteActive {
   background-image: url('images/navigation/mute.png'), url('images/navigation/muteActive.png');
