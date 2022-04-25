@@ -39,7 +39,6 @@ function App(props) {
     playback.current = new PlaybackController(sampleController.current);
     composition.current = new Composition(data["sections"], sampleController.current);
     Tone.Transport.bpm.value = 100;
-    console.log(sampleController.current)
   };
 
   return (

@@ -19,7 +19,6 @@ export function ComponentA(props) {
         playSample={props.playSample}
         stopSample={props.stopSample}
         group={props.group}
-        mouseController={props.mouseController}
         instruments={props.instruments}
         baseClass={props.baseClass}
         getSample={props.getSample}
@@ -32,7 +31,9 @@ export function ComponentA(props) {
         initialPosition="40"
         initialStep="2"
         className="downSlider1"
-        callback={(val) => wetControl.setWet(val / 100)}></DownSlider>
+        callback={(val) => wetControl.setWet(val / 100)}
+        mouseController={props.mouseController}
+        />
     </div>
   )
 }
