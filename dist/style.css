@@ -64,7 +64,8 @@ body {
   width: 84px;
   height: 84px;
   background-repeat: no-repeat;
-  position:  absolute;
+  position: absolute;
+  cursor: pointer;
 }
 
 
@@ -73,6 +74,7 @@ body {
   height: 125px;
   background-repeat: no-repeat;
   background-position: center;
+  cursor: pointer;
 }
 
 /* Instruments */
@@ -194,6 +196,7 @@ body {
   left: 115px;
   width: 107px;
   height: 214px;
+  cursor: pointer;
 }
 
 .downSlider1_1 {
@@ -275,6 +278,7 @@ body {
 .navigationArrow {
   height: 60px;
   width: 22px;
+  cursor: pointer;
 }
 .navigationArrowLeft {
   background-image: url('images/navigation/arrowLeft.png');
@@ -304,6 +308,7 @@ body {
 }
 .navigationMute {
   background-image: url('images/navigation/mute.png');
+  cursor: pointer;
 }
 .navigationMuteActive {
   background-image: url('images/navigation/mute.png'), url('images/navigation/muteActive.png');
