@@ -1,6 +1,7 @@
 import React, {useEffect, useState, useRef} from "react";
 
 import {uuidv4} from "../utils/GUID.js";
+import {clamp} from "../utils/Math.js";
 
 export function DownSlider(props) {
   // position describes continuous output to control the effect
@@ -25,18 +26,14 @@ export function DownSlider(props) {
 
       if (mouseDown.current) {
         let nextPosition = position + event.movementY;
-        nextPosition = Math.max(
-          Math.min(maxPosition, nextPosition),
-          minPosition
-        );
+        nextPosition = clamp(nextPosition, minPosition, maxPosition);
 
         props.callback(nextPosition);
         setPosition(nextPosition);
-        setStep(Math.trunc((position / maxPosition) * maxStep));
-        console.log(position);
+        setStep(Math.trunc((nextPosition / maxPosition) * maxStep));
       }
     },
-    [position, step]
+    [position]
   );
 
   useEffect(() => {
@@ -53,9 +50,20 @@ export function DownSlider(props) {
     };
   }, [componentId, props.callback, props.mouseController]);
 
-  const handleMouseDown = (_) => {
-    mouseDown.current = true;
-  };
+  const handleMouseDown = React.useCallback(
+    (event) => {
+      mouseDown.current = true;
+      const hitBox = event.target.getBoundingClientRect();
+      let nextPosition = Math.round(
+        (100 * (event.clientY - hitBox.top)) / hitBox.height
+      );
+      nextPosition = clamp(nextPosition, minPosition, maxPosition);
+      props.callback(nextPosition);
+      setPosition(nextPosition);
+      setStep(Math.trunc((nextPosition / maxPosition) * maxStep));
+    },
+    [position]
+  );
 
   return (
     <div

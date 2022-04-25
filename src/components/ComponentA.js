@@ -24,12 +24,12 @@ export function ComponentA(props) {
         getSample={props.getSample}
       />
       <DownSlider
-        minStep="0"
-        maxStep="7"
-        minPosition="0"
-        maxPosition="100"
-        initialPosition="40"
-        initialStep="2"
+        minStep={0}
+        maxStep={7}
+        minPosition={0}
+        maxPosition={100}
+        initialPosition={40}
+        initialStep={2}
         className="downSlider1"
         callback={(val) => wetControl.setWet(val / 100)}
         mouseController={props.mouseController}
