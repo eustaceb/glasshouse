@@ -16,9 +16,9 @@
         },
         "percussion": {
           "samples": [
-            "Percussion_Section1_1",
-            "Percussion_Section1_2",
-            "Percussion_Section1_3"
+            "percussions Percussion_Section1_1",
+            "percussions Percussion_Section1_2",
+            "percussions Percussion_Section1_3"
           ],
           "fx": {
             "type": "delay",
@@ -38,11 +38,11 @@
       "groups": {
         "vocals": {
           "samples": [
-            "Vocals_Section2_1",
-            "Vocals_Section2_2",
-            "Vocals_Section2_3",
-            "Vocals_Section2_4",
-            "Vocals_Section2_5"
+            "vocals Vocals_Section2_1",
+            "vocals Vocals_Section2_2",
+            "vocals Vocals_Section2_3",
+            "vocals Vocals_Section2_4",
+            "vocals Vocals_Section2_5"
           ],
           "fx": {
             "type": "filter",
@@ -58,10 +58,9 @@
         },
         "percussion": {
           "samples": [
-            "Percussion_Section2_1",
-            "Percussion_Section2_2",
-            "Percussion_Section2_3",
-            "Percussion_Section2_4"
+            "percussions Percussion_Section2_1",
+            "percussions Percussion_Section2_2",
+            "percussions Percussion_Section2_3"
           ],
           "fx": {
             "type": "reverb",
@@ -80,11 +79,11 @@
       "groups": {
         "vocals": {
           "samples": [
-            "Vocals_Section3_1",
-            "Vocals_Section3_2",
-            "Vocals_Section3_3",
-            "Vocals_Section3_4",
-            "Vocals_Section3_5"
+            "vocals Vocals_Section3_1",
+            "vocals Vocals_Section3_2",
+            "vocals Vocals_Section3_3",
+            "vocals Vocals_Section3_4",
+            "vocals Vocals_Section3_5"
           ],
           "fx": {
             "type": "filter",
@@ -95,9 +94,9 @@
         },
         "percussion": {
           "samples": [
-            "Percussion_Section3_1",
-            "Percussion_Section3_2",
-            "Percussion_Section3_3"
+            "percussions Percussion_Section3_1",
+            "percussions Percussion_Section3_2",
+            "percussions Percussion_Section3_3"
           ],
           "fx": {
             "type": "pingpong",
@@ -145,21 +144,21 @@
     },
     {
       "id": 4,
-      "name": "Percussion_Section1_1",
+      "name": "percussions Percussion_Section1_1",
       "path": "audio/Section_1/Percussion_Section1_1_1bar.mp3",
       "type": "loop",
       "duration": 1
     },
     {
       "id": 5,
-      "name": "Percussion_Section1_2",
+      "name": "percussions Percussion_Section1_2",
       "path": "audio/Section_1/Percussion_Section1_2_1bar.mp3",
       "type": "loop",
       "duration": 1
     },
     {
       "id": 6,
-      "name": "Percussion_Section1_3",
+      "name": "percussions Percussion_Section1_3",
       "path": "audio/Section_1/Percussion_Section1_3_2bar.mp3",
       "type": "loop",
       "duration": 2
@@ -230,63 +229,63 @@
     },
     {
       "id": 16,
-      "name": "Percussion_Section2_1",
+      "name": "percussions Percussion_Section2_1",
       "path": "audio/Section_2/Percussion_Section2_1_1bar.mp3",
       "type": "loop",
       "duration": 1
     },
     {
       "id": 17,
-      "name": "Percussion_Section2_2",
+      "name": "percussions Percussion_Section2_2",
       "path": "audio/Section_2/Percussion_Section2_2_1bar.mp3",
       "type": "loop",
       "duration": 1
     },
     {
       "id": 18,
-      "name": "Percussion_Section2_3",
+      "name": "percussions Percussion_Section2_3",
       "path": "audio/Section_2/Percussion_Section2_3_2bar.mp3",
       "type": "loop",
       "duration": 2
     },
     {
       "id": 19,
-      "name": "Percussion_Section2_4",
+      "name": "percussions Percussion_Section2_4",
       "path": "audio/Section_2/Percussion_Section2_4_1bar.mp3",
       "type": "loop",
       "duration": 1
     },
     {
       "id": 20,
-      "name": "Vocals_Section2_1",
+      "name": "vocals Vocals_Section2_1",
       "path": "audio/Section_2/Vocals_Section2_1_3bar.mp3",
       "type": "oneshot",
       "duration": 3
     },
     {
       "id": 21,
-      "name": "Vocals_Section2_2",
+      "name": "vocals Vocals_Section2_2",
       "path": "audio/Section_2/Vocals_Section2_2_3bar.mp3",
       "type": "oneshot",
       "duration": 3
     },
     {
       "id": 22,
-      "name": "Vocals_Section2_3",
+      "name": "vocals Vocals_Section2_3",
       "path": "audio/Section_2/Vocals_Section2_3_3bar.mp3",
       "type": "oneshot",
       "duration": 3
     },
     {
       "id": 23,
-      "name": "Vocals_Section2_4",
+      "name": "vocals Vocals_Section2_4",
       "path": "audio/Section_2/Vocals_Section2_4_4bar.mp3",
       "type": "loop",
       "duration": 4
     },
     {
       "id": 24,
-      "name": "Vocals_Section2_5",
+      "name": "vocals Vocals_Section2_5",
       "path": "audio/Section_2/Vocals_Section2_5_4bar.mp3",
       "type": "loop",
       "duration": 4
@@ -335,73 +334,59 @@
     },
     {
       "id": 31,
-      "name": "Percussion_Section3_1",
+      "name": "percussions Percussion_Section3_1",
       "path": "audio/Section_3/Percussion_Section3_1_1bar.mp3",
       "type": "loop",
       "duration": 1
     },
     {
       "id": 32,
-      "name": "Percussion_Section3_2",
+      "name": "percussions Percussion_Section3_2",
       "path": "audio/Section_3/Percussion_Section3_2_2bar.mp3",
       "type": "loop",
       "duration": 2
     },
     {
       "id": 33,
-      "name": "Percussion_Section3_3",
+      "name": "percussions Percussion_Section3_3",
       "path": "audio/Section_3/Percussion_Section3_3_2bar.mp3",
       "type": "loop",
       "duration": 2
     },
     {
       "id": 34,
-      "name": "Vocals_Section3_1",
+      "name": "vocals Vocals_Section3_1",
       "path": "audio/Section_3/Vocals_Section3_1_4,5bar.mp3",
       "type": "oneshot",
       "duration": 5
     },
     {
       "id": 35,
-      "name": "Vocals_Section3_2",
+      "name": "vocals Vocals_Section3_2",
       "path": "audio/Section_3/Vocals_Section3_2_5bar.mp3",
       "type": "oneshot",
       "duration": 5
     },
     {
       "id": 36,
-      "name": "Vocals_Section3_3",
+      "name": "vocals Vocals_Section3_3",
       "path": "audio/Section_3/Vocals_Section3_3_4,5bar.mp3",
       "type": "oneshot",
       "duration": 5
     },
     {
       "id": 37,
-      "name": "Vocals_Section3_4",
+      "name": "vocals Vocals_Section3_4",
       "path": "audio/Section_3/Vocals_Section3_4_4bar.mp3",
       "type": "oneshot",
       "duration": 4
     },
     {
       "id": 38,
-      "name": "Vocals_Section3_5",
+      "name": "vocals Vocals_Section3_5",
       "path": "audio/Section_3/Vocals_Section3_5_4bar.mp3",
       "type": "loop",
       "duration": 4
-    },
-    {
-      "id": 38,
-      "name": "Click1",
-      "path": "audio/test/click1_100bpm.mp3",
-      "type": "loop",
-      "duration": 1
-    },
-    {
-      "id": 38,
-      "name": "Click2",
-      "path": "audio/test/click2_100bpm.mp3",
-      "type": "loop",
-      "duration": 1
     }
   ]
 }
