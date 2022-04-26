@@ -189,7 +189,7 @@ body {
 
 /* Section 3 instruments */
 .ClapRegular_Section3 {
-  clip-path: circle(50%);
+  clip-path: circle(60%);
   background-image: url('images/Section_3/clap.png');
 }
 .ClapRegular_Section3Active {
@@ -228,7 +228,7 @@ body {
   background-image: url('images/Section_3/bass.png'), url('images/Section_3/bassActive.png'), url('images/Section_3/bassHover.png');
 }
 .Glitch_Section3 {
-  clip-path: polygon(35% 0%, 50% 0%, 65% 0%, 100% 35%, 100% 50%, 100% 65%, 65% 100%, 50% 100%, 35% 100%, 0% 65%, 0% 50%, 0% 35%);
+  clip-path: circle(50%);
   background-image: url('images/Section_3/glitch.png');
 }
 .Glitch_Section3Active {
