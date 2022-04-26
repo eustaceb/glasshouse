@@ -188,58 +188,72 @@ body {
 }
 
 /* Section 3 instruments */
+.ClapRegular_Section3 {
+  clip-path: circle(50%);
+  background-image: url('images/Section_3/clap.png');
+}
+.ClapRegular_Section3Active {
+  background-image: url('images/Section_3/clap.png'), url('images/Section_3/clapActive.png');
+}
+.ClapRegular_Section3:hover {
+  background-image: url('images/Section_3/clap.png'), url('images/Section_3/clapHover.png');
+}
+.ClapRegular_Section3Active:hover {
+  background-image: url('images/Section_3/clap.png'), url('images/Section_3/clapActive.png'), url('images/Section_3/clapHover.png');
+}
+.ClapFeedback_Section3 {
+  clip-path: circle(50%);
+  background-image: url('images/Section_3/clapFeedback.png');
+}
+.ClapFeedback_Section3Active {
+  background-image: url('images/Section_3/clapFeedback.png'), url('images/Section_3/clapFeedbackActive.png');
+}
+.ClapFeedback_Section3:hover {
+  background-image: url('images/Section_3/clapFeedback.png'), url('images/Section_3/clapFeedbackHover.png');
+}
+.ClapFeedback_Section3Active:hover {
+  background-image: url('images/Section_3/clapFeedback.png'), url('images/Section_3/clapFeedbackActive.png'), url('images/Section_3/clapFeedbackHover.png');
+}
 .Bass_Section3 {
   clip-path: polygon(0% 0%,0% 100%,100% 100%, 100% 0);
   background-image: url('images/Section_3/bass.png');
 }
-.Bass_Section2Active {
+.Bass_Section3Active {
   background-image: url('images/Section_3/bass.png'), url('images/Section_3/bassActive.png');
 }
-.Bass_Section2:hover {
+.Bass_Section3:hover {
   background-image: url('images/Section_3/bass.png'), url('images/Section_3/bassHover.png');
 }
-.Bass_Section2Active:hover {
+.Bass_Section3Active:hover {
   background-image: url('images/Section_3/bass.png'), url('images/Section_3/bassActive.png'), url('images/Section_3/bassHover.png');
 }
-.ChiralSynth_Section2 {
+.Glitch_Section3 {
+  clip-path: polygon(35% 0%, 50% 0%, 65% 0%, 100% 35%, 100% 50%, 100% 65%, 65% 100%, 50% 100%, 35% 100%, 0% 65%, 0% 50%, 0% 35%);
+  background-image: url('images/Section_3/glitch.png');
+}
+.Glitch_Section3Active {
+  background-image: url('images/Section_3/glitch.png'), url('images/Section_3/glitchActive.png');
+}
+.Glitch_Section3:hover {
+  background-image: url('images/Section_3/glitch.png'), url('images/Section_3/glitchHover.png');
+}
+.Glitch_Section3Active:hover {
+  background-image: url('images/Section_3/glitch.png'), url('images/Section_3/glitchActive.png'), url('images/Section_3/glitchHover.png');
+}
+.ChiralSynth_Section3 {
   clip-path: circle(50%);
   background-image: url('images/Section_3/chiral.png');
 }
-.ChiralSynth_Section2Active {
+.ChiralSynth_Section3Active {
   background-image: url('images/Section_3/chiral.png'), url('images/Section_3/chiralActive.png');
 }
-.ChiralSynth_Section2:hover {
+.ChiralSynth_Section3:hover {
   background-image: url('images/Section_3/chiral.png'), url('images/Section_3/chiralHover.png');
 }
-.ChiralSynth_Section2:hover {
+.ChiralSynth_Section3:hover {
   background-image: url('images/Section_3/chiral.png'), url('images/Section_3/chiralActive.png'), url('images/Section_3/chiralHover.png');
 }
-.Guitalele_Section2 {
-  clip-path: polygon(35% 0%, 50% 0%, 65% 0%, 100% 35%, 100% 50%, 100% 65%, 65% 100%, 50% 100%, 35% 100%, 0% 65%, 0% 50%, 0% 35%);
-  background-image: url('images/Section_3/guitalele.png');
-}
-.Guitalele_Section2Active {
-  background-image: url('images/Section_3/guitalele.png'), url('images/Section_3/guitaleleActive.png');
-}
-.Guitalele_Section2:hover {
-  background-image: url('images/Section_3/guitalele.png'), url('images/Section_3/guitaleleHover.png');
-}
-.Guitalele_Section2Active:hover {
-  background-image: url('images/Section_3/guitalele.png'), url('images/Section_3/guitaleleActive.png'), url('images/Section_3/guitaleleHover.png');
-}
-.ClapFeedback_Section2 {
-  clip-path: circle(50%);
-  background-image: url('images/Section_3/clap.png');
-}
-.ClapFeedback_Section2Active {
-  background-image: url('images/Section_3/clap.png'), url('images/Section_3/clapActive.png');
-}
-.ClapFeedback_Section2:hover {
-  background-image: url('images/Section_3/clap.png'), url('images/Section_3/clapHover.png');
-}
-.ClapFeedback_Section2Active:hover {
-  background-image: url('images/Section_3/clap.png'), url('images/Section_3/clapActive.png'), url('images/Section_3/clapHover.png');
-}
+
 
 /* Major components */
 .componentA {
