@@ -11,5 +11,16 @@ export function InstrumentContainer(props) {
     />
   ));
 
-  return <div className={"instrumentContainer"}>{instruments}</div>;
+  if (instruments.length == 5) {
+    const groupOfTwo = instruments.slice(0, 2);
+    const groupofThree = instruments.slice(2, 5);
+    return (
+      <div className={"instrumentContainer"}>
+        <div className={"instrumentPair"}>{groupOfTwo}</div>
+        <div className={"instrumentContainer"}>{groupofThree}</div>
+      </div>
+    );
+  } else {
+    return <div className={"instrumentContainer"}>{instruments}</div>;
+  }
 }

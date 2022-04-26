@@ -47,6 +47,12 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  align-items: center;
+}
+.instrumentPair {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 .footerContainer {
   display: flex;
@@ -77,6 +83,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
+  margin: 10px;
 }
 
 /* Section 1 instruments */
