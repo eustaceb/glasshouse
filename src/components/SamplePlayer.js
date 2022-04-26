@@ -5,7 +5,6 @@ import {Navigation} from "./Navigation.js";
 import {InstrumentContainer} from "./InstrumentContainer.js";
 import {InstrumentGroup} from "./InstrumentGroup.js";
 
-
 export function SamplePlayer(props) {
   const [sectionIndex, setSectionIndex] = useState(0);
   const section = props.composition.getSection(sectionIndex);
@@ -28,22 +27,33 @@ export function SamplePlayer(props) {
   return (
     <>
       <div className="componentsContainer">
-        <ComponentA 
+        <ComponentA
           group={vocals}
           mouseController={props.mouseController}
           playSample={playSample}
           stopSample={stopSample}
+          className="component componentA"
         />
         <InstrumentContainer
           playSample={playSample}
           stopSample={stopSample}
           instruments={instruments}
         />
-        <div className="component componentB"></div>
+        <ComponentA
+          group={percussion}
+          mouseController={props.mouseController}
+          playSample={playSample}
+          stopSample={stopSample}
+          className="component componentB"
+        />
       </div>
       <div className="padding"></div>
       <div className="footerContainer">
-        <Navigation sectionIndex={sectionIndex} setSection={setSection} sectionCount={3} />
+        <Navigation
+          sectionIndex={sectionIndex}
+          setSection={setSection}
+          sectionCount={3}
+        />
       </div>
     </>
   );

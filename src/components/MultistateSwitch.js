@@ -21,7 +21,6 @@ export function MultistateSwitch(props) {
 
   return (
     <div>
-      {props.label}
       <ButtonGroup>{buttons}</ButtonGroup>
     </div>
   );
