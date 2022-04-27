@@ -13,6 +13,20 @@ body {
   margin: 0;
 }
 
+
+/* preloading downsliders so that there is no lag when changing value */
+/* TODO so far only componentA downslider pre-loaded, add the other */
+body::after{
+   position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
+   content:url('images/Section_1/vocal_slider_1.png')
+           url('images/Section_1/vocal_slider_2.png')
+           url('images/Section_1/vocal_slider_3.png')
+           url('images/Section_1/vocal_slider_4.png')
+           url('images/Section_1/vocal_slider_5.png')
+           url('images/Section_1/vocal_slider_6.png')
+           url('images/Section_1/vocal_slider_7.png');
+}
+
 #loopVideo {
   position: fixed;
   right: 0;
@@ -678,7 +692,7 @@ body {
   background-image: url('images/Section_1/percSlider7.png');
 }
 .downSlider2_8 {
-  background-image: url('images/Section_1/percSlider7.png');
+  background-image: url('images/Section_1/percSlider8.png');
 }
 /* Modal */
 .startModal {
