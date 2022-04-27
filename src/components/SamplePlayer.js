@@ -32,7 +32,8 @@ export function SamplePlayer(props) {
           mouseController={props.mouseController}
           playSample={playSample}
           stopSample={stopSample}
-          className="component componentA"
+          className={vocals.getComponentClass()}
+          downSliderClass ="downSlider1"
         />
         <InstrumentContainer
           playSample={playSample}
@@ -44,7 +45,8 @@ export function SamplePlayer(props) {
           mouseController={props.mouseController}
           playSample={playSample}
           stopSample={stopSample}
-          className="component componentB"
+          className={percussion.getComponentClass()}
+          downSliderClass ="downSlider2"
         />
       </div>
       <div className="padding"></div>

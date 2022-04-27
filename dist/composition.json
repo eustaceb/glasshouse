@@ -12,7 +12,8 @@
             "type": "autopanner",
             "params": { "frequency": 3.33, "depth": 1, "type": "sine", "channelCount": 2 }
           },
-          "volume": 12
+          "volume": 12,
+          "componentClass" : "component componentA"
         },
         "percussion": {
           "samples": [
@@ -24,7 +25,8 @@
             "type": "delay",
             "params": { "delayTime": 0.6, "feedback": 0.3 },
             "switch": { "paramName": "delayTime", "options": [0.15, 0.3, 0.6] }
-          }
+          },
+          "componentClass" : "component componentB"
         }
       },
       "instruments": [
@@ -54,7 +56,8 @@
             "type": "pitchshift",
             "params": { "pitch": 0, "windowSize": 0.1, "delayTime": 0.05, "feedback": 0.01 },
             "slider": { "paramName": "pitch", "range": [-5, 5] }
-          }
+          },
+          "componentClass" : "component componentC"
         },
         "percussion": {
           "samples": [
@@ -65,7 +68,8 @@
           "fx": {
             "type": "reverb",
             "params": { "decay": 30, "preDelay": 0.01 }
-          }
+          },
+          "componentClass" : "component componentD"
         }
       },
       "instruments": [
@@ -90,7 +94,8 @@
             "params": { "frequency": 1000, "type": "lowpass" },
             "x": {"paramName": "frequency", "range": [300, 2000]},
             "y": {"paramName": "gain", "range": [-50, 10]}
-          }
+          },
+          "componentClass" : "component componentE"
         },
         "percussion": {
           "samples": [
@@ -101,7 +106,8 @@
           "fx": {
             "type": "pingpong",
             "params": { "delayTime": "4n", "feedback": 0.8 }
-          }
+          },
+          "componentClass" : "component componentF"
         }
       },
       "instruments": [

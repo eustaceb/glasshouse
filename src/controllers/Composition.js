@@ -31,7 +31,7 @@ export class Section {
 }
 
 class SampleGroup {
-  constructor(name, samples, preFx, preFxControls, fx, fxControls, volume) {
+  constructor(name, samples, preFx, preFxControls, fx, fxControls, volume, componentClass) {
     this.name = name;
     this.samples = samples;
     this.preFx = preFx;
@@ -40,6 +40,7 @@ class SampleGroup {
     this.fxControls = fxControls;
     this.channel = new Tone.Channel(0, 0).connect(this.fx.getNode());
     this.volume = volume;
+    this.componentClass = componentClass;
   }
   getName() {
     return this.name;
@@ -64,6 +65,9 @@ class SampleGroup {
   }
   getVolume() {
     return this.volume;
+  }
+  getComponentClass() {
+    return this.componentClass;
   }
 }
 
@@ -138,6 +142,8 @@ export class Composition {
           "volume" in groupData ? 0 : groupData["volume"]
         );
 
+        const componentClass = "componentClass" in groupData ? groupData["componentClass"] : null
+
         // Do the wiring
         // Each sample into the volume node
         samples.forEach((s) => {
@@ -176,7 +182,8 @@ export class Composition {
           preFxControls,
           fx,
           fxControls,
-          volume
+          volume,
+          componentClass
         );
       });
 

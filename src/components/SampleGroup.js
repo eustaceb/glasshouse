@@ -14,7 +14,7 @@ export function SampleGroup(props) {
       });
       props.playSample(sampleIndex);
     };
-  
+
     const pads = props.group.getSamples().map((s) => (
       <TableCell key={s.id}>
         <SamplePad
@@ -25,7 +25,7 @@ export function SampleGroup(props) {
         />
       </TableCell>
     ));
-  
+
     const generateFxComponents = (controls) => {
       if (controls === null) return null;
       let fxComponents = Array();
@@ -83,10 +83,10 @@ export function SampleGroup(props) {
       }
       return fxComponents.map((c, i) => <TableCell key={i}>{c}</TableCell>);
     };
-  
+
     const preFxComponents = generateFxComponents(props.group.getPreFxControls());
     const fxComponents = generateFxComponents(props.group.getFxControls());
-  
+
     return (
       <TableRow>
         <TableCell>{props.group.getName()}</TableCell>
