@@ -69,15 +69,8 @@
             "vocals Vocals_Section2_5"
           ],
           "fx": {
-            "type": "filter",
-            "params": { "frequency": 1000, "type": "lowpass" },
-            "x": {"paramName": "frequency", "range": [300, 2000]},
-            "y": {"paramName": "gain", "range": [-50, 10]}
-          },
-          "preFx": {
-            "type": "pitchshift",
-            "params": { "pitch": 0, "windowSize": 0.1, "delayTime": 0.05, "feedback": 0.01 },
-            "slider": { "paramName": "pitch", "range": [-5, 5] }
+            "type": "autopanner",
+            "params": { "frequency": 3.33, "depth": 1, "type": "sine", "channelCount": 2 }
           },
           "componentDescription" : {
             "className" : "component componentC",
@@ -149,6 +142,13 @@
               "maxPosition" : 100,
               "initialPosition" : 0,
               "initialStep" : 0
+            },
+            "xyPad" : {
+              "boxClassName" : "xyPad",
+              "trackerClassName" : "tracker",
+              "trackerSize" : 57,
+              "minValue" : 0,
+              "maxValue" : 123
             }
           }
         },

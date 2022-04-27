@@ -694,6 +694,36 @@ body::after{
 .downSlider2_8 {
   background-image: url('images/Section_1/percSlider8.png');
 }
+
+
+
+
+
+
+
+/* XY pad */
+
+.xyPad {
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  top:444px;
+  left:24px;
+}
+
+.tracker {
+  position:absolute;
+  top:67px;
+  left:67px;
+  background-image: url('images/Section_3/filternotch.png');
+  width: 57px;
+  height: 57px;
+}
+
+.tracker:hover {
+  background-image: url('images/Section_3/filternotchActive.png');
+}
+
 /* Modal */
 .startModal {
   background-color: #FFF;

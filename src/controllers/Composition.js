@@ -118,12 +118,42 @@ class DownSliderDescription {
 }
 
 
+class XYPadDescription {
+  constructor(boxClassName, trackerClassName, trackerSize, minValue, maxValue){
+    this.boxClassName = boxClassName;
+    this.trackerClassName = trackerClassName;
+    this.trackerSize = trackerSize;
+    this.minValue = minValue;
+    this.maxValue = maxValue;
+  }
+
+  getBoxClassName() {
+    return this.boxClassName;
+  }
+
+  getTrackerClassName() {
+    return this.trackerClassName;
+  }
+
+  getTrackerSize() {
+    return this.trackerSize;
+  }
+
+  getMinValue() {
+    return this.minValue;
+  }
+
+  getMaxValue() {
+    return this.maxValue;
+  }
+}
+
 class ComponentDescription {
-  constructor(className, downSliderDescription, xyPad, multistateSwitch) {
+  constructor(className, downSliderDescription, xyPadDescription, multistateSwitchDescription) {
     this.className = className;
     this.downSliderDescription = downSliderDescription;
-    this.xyPad = xyPad;
-    this.multistateSwitch = multistateSwitch;
+    this.xyPadDescription = xyPadDescription;
+    this.multistateSwitchDescription = multistateSwitchDescription;
   }
 
   getClassName() {
@@ -134,12 +164,12 @@ class ComponentDescription {
     return this.downSliderDescription;
   }
 
-  getXYPad() {
-    return this.xyPad;
+  getXYPadDescription() {
+    return this.xyPadDescription;
   }
 
-  getMultistateSwitch() {
-    return this.multistateSwitch;
+  getMultistateSwitchDescription() {
+    return this.multistateSwitchDescription;
   }
 
 }
@@ -254,7 +284,7 @@ export class Composition {
         {
           const desc = groupData["componentDescription"];
           let downSliderDescription = null;
-          let xyPad = null;
+          let xyPadDescription = null;
           let multistateSwitch = null;
 
           if ("downSlider" in desc)
@@ -272,11 +302,24 @@ export class Composition {
             )
           }
 
+          if ("xyPad" in desc)
+          {
+            const xyPadDesc = desc["xyPad"]
+            xyPadDescription = new XYPadDescription
+            (
+              xyPadDesc["boxClassName"] ?? "xyPad",
+              xyPadDesc["trackerClassName"] ?? "tracker",
+              xyPadDesc["trackerSize"] ?? 57,
+              xyPadDesc["minValue"] ?? 0,
+              xyPadDesc["maxValue"] ?? 100
+            )
+          }
+
           componentDescription = new ComponentDescription
           (
             desc["className"] ?? "compponent componentA",
             downSliderDescription,
-            xyPad,
+            xyPadDescription,
             multistateSwitch
           )
 
