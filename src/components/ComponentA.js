@@ -2,23 +2,30 @@ import React, {useState, useEffect} from "react";
 import {DownSlider} from "./DownSlider.js";
 import {InstrumentGroup} from "./InstrumentGroup.js";
 import {MultistateSwitch} from "./MultistateSwitch.js";
+import {XYPadStyled} from "./XYPadStyled.js"
 
 export function ComponentA(props) {
   const wetControl = props.group.getFxControls()["wet"];
+  const xyControl = props.group.getFxControls()["xy"];
   const switchControl = props.group.getFxControls()["switch"];
   let fxComponent;
+  let fxXYComponent;
   let fxAppendageComponent = null;
 
+  if (xyControl) {
+    fxXYComponent = (
+      <XYPadStyled
+        description={props.description.getXYPadDescription()}
+        callback={(val) => wetControl.setWet(val / 100)}
+        mouseController={props.mouseController}
+      />
+    );
+  }
   if (wetControl) {
     fxComponent = (
       <DownSlider
-        minStep={0}
-        maxStep={7}
-        minPosition={0}
-        maxPosition={100}
-        initialPosition={40}
-        initialStep={2}
-        className="downSlider1"
+        description={props.description.getDownSliderDescription()}
+        className={props.downSliderClass}
         callback={(val) => wetControl.setWet(val / 100)}
         mouseController={props.mouseController}
       />
@@ -35,13 +42,14 @@ export function ComponentA(props) {
   }
 
   return (
-    <div className={props.className}>
+    <div className={props.description.getClassName()}>
       <InstrumentGroup
         playSample={props.playSample}
         stopSample={props.stopSample}
         group={props.group}
       />
       {fxComponent}
+      {fxXYComponent}
       {fxAppendageComponent !== null ? fxAppendageComponent : null}
     </div>
   );

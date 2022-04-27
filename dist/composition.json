@@ -12,7 +12,19 @@
             "type": "autopanner",
             "params": { "frequency": 3.33, "depth": 1, "type": "sine", "channelCount": 2 }
           },
-          "volume": 12
+          "volume": 12,
+          "componentDescription" : {
+            "className" : "component componentA",
+            "downSlider" : {
+              "className" : "downSlider1",
+              "minStep" : 0,
+              "maxStep" : 7,
+              "minPosition" : 0,
+              "maxPosition" : 100,
+              "initialPosition" : 0,
+              "initialStep" : 0
+            }
+          }
         },
         "percussion": {
           "samples": [
@@ -24,6 +36,18 @@
             "type": "delay",
             "params": { "delayTime": 0.6, "feedback": 0.3 },
             "switch": { "paramName": "delayTime", "options": [0.15, 0.3, 0.6] }
+          },
+          "componentDescription" : {
+            "className" : "component componentB",
+            "downSlider" : {
+              "className" : "downSlider2",
+              "minStep" : 0,
+              "maxStep" : 8,
+              "minPosition" : 0,
+              "maxPosition" : 100,
+              "initialPosition" : 0,
+              "initialStep" : 0
+            }
           }
         }
       },
@@ -45,15 +69,20 @@
             "vocals Vocals_Section2_5"
           ],
           "fx": {
-            "type": "filter",
-            "params": { "frequency": 1000, "type": "lowpass" },
-            "x": {"paramName": "frequency", "range": [300, 2000]},
-            "y": {"paramName": "gain", "range": [-50, 10]}
+            "type": "autopanner",
+            "params": { "frequency": 3.33, "depth": 1, "type": "sine", "channelCount": 2 }
           },
-          "preFx": {
-            "type": "pitchshift",
-            "params": { "pitch": 0, "windowSize": 0.1, "delayTime": 0.05, "feedback": 0.01 },
-            "slider": { "paramName": "pitch", "range": [-5, 5] }
+          "componentDescription" : {
+            "className" : "component componentC",
+            "downSlider" : {
+              "className" : "downSlider3",
+              "minStep" : 0,
+              "maxStep" : 8,
+              "minPosition" : 0,
+              "maxPosition" : 100,
+              "initialPosition" : 0,
+              "initialStep" : 0
+            }
           }
         },
         "percussion": {
@@ -65,6 +94,18 @@
           "fx": {
             "type": "reverb",
             "params": { "decay": 30, "preDelay": 0.01 }
+          },
+          "componentDescription" : {
+            "className" : "component componentD",
+            "downSlider" : {
+              "className" : "downSlider4",
+              "minStep" : 0,
+              "maxStep" : 8,
+              "minPosition" : 0,
+              "maxPosition" : 100,
+              "initialPosition" : 0,
+              "initialStep" : 0
+            }
           }
         }
       },
@@ -90,6 +131,25 @@
             "params": { "frequency": 1000, "type": "lowpass" },
             "x": {"paramName": "frequency", "range": [300, 2000]},
             "y": {"paramName": "gain", "range": [-50, 10]}
+          },
+          "componentDescription" : {
+            "className" : "component componentE",
+            "downSlider" : {
+              "className" : "downSlider2",
+              "minStep" : 0,
+              "maxStep" : 8,
+              "minPosition" : 0,
+              "maxPosition" : 100,
+              "initialPosition" : 0,
+              "initialStep" : 0
+            },
+            "xyPad" : {
+              "boxClassName" : "xyPad",
+              "trackerClassName" : "tracker",
+              "trackerSize" : 57,
+              "minValue" : 0,
+              "maxValue" : 123
+            }
           }
         },
         "percussion": {
@@ -101,6 +161,18 @@
           "fx": {
             "type": "pingpong",
             "params": { "delayTime": "4n", "feedback": 0.8 }
+          },
+          "componentDescription" : {
+            "className" : "component componentF",
+            "downSlider" : {
+              "className" : "downSlider6",
+              "minStep" : 0,
+              "maxStep" : 8,
+              "minPosition" : 0,
+              "maxPosition" : 100,
+              "initialPosition" : 0,
+              "initialStep" : 0
+            }
           }
         }
       },

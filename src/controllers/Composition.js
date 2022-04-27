@@ -31,7 +31,7 @@ export class Section {
 }
 
 class SampleGroup {
-  constructor(name, samples, preFx, preFxControls, fx, fxControls, volume) {
+  constructor(name, samples, preFx, preFxControls, fx, fxControls, volume, componentClass, componentDescription) {
     this.name = name;
     this.samples = samples;
     this.preFx = preFx;
@@ -40,6 +40,8 @@ class SampleGroup {
     this.fxControls = fxControls;
     this.channel = new Tone.Channel(0, 0).connect(this.fx.getNode());
     this.volume = volume;
+    this.componentClass = componentClass;
+    this.componentDescription = componentDescription;
   }
   getName() {
     return this.name;
@@ -65,6 +67,111 @@ class SampleGroup {
   getVolume() {
     return this.volume;
   }
+  getComponentClass() {
+    return this.componentClass;
+  }
+  getComponentDescription() {
+    return this.componentDescription;
+  }
+}
+
+class DownSliderDescription {
+
+  constructor(className, minStep, maxStep, minPosition, maxPosition, initialPosition, initialStep) {
+    this.className = className;
+    this.minStep = minStep;
+    this.maxStep = maxStep;
+    this.minPosition = minPosition;
+    this.maxPosition = maxPosition;
+    this.initialPosition = initialPosition;
+    this.initialStep = initialStep;
+    this.initialStep = initialStep;
+  }
+
+  getClassName() {
+    return this.className;
+  }
+
+  getMinStep() {
+    return this.minStep;
+  }
+
+  getMaxStep() {
+    return this.maxStep;
+  }
+
+  getMinPosition() {
+    return this.minPosition;
+  }
+
+  getMaxPosition() {
+    return this.maxPosition;
+  }
+
+  getInitialPosition() {
+    return this.initialPosition;
+  }
+
+  getInitialStep() {
+    return this.initialStep;
+  }
+}
+
+
+class XYPadDescription {
+  constructor(boxClassName, trackerClassName, trackerSize, minValue, maxValue){
+    this.boxClassName = boxClassName;
+    this.trackerClassName = trackerClassName;
+    this.trackerSize = trackerSize;
+    this.minValue = minValue;
+    this.maxValue = maxValue;
+  }
+
+  getBoxClassName() {
+    return this.boxClassName;
+  }
+
+  getTrackerClassName() {
+    return this.trackerClassName;
+  }
+
+  getTrackerSize() {
+    return this.trackerSize;
+  }
+
+  getMinValue() {
+    return this.minValue;
+  }
+
+  getMaxValue() {
+    return this.maxValue;
+  }
+}
+
+class ComponentDescription {
+  constructor(className, downSliderDescription, xyPadDescription, multistateSwitchDescription) {
+    this.className = className;
+    this.downSliderDescription = downSliderDescription;
+    this.xyPadDescription = xyPadDescription;
+    this.multistateSwitchDescription = multistateSwitchDescription;
+  }
+
+  getClassName() {
+    return this.className;
+  }
+
+  getDownSliderDescription() {
+    return this.downSliderDescription;
+  }
+
+  getXYPadDescription() {
+    return this.xyPadDescription;
+  }
+
+  getMultistateSwitchDescription() {
+    return this.multistateSwitchDescription;
+  }
+
 }
 
 export class Composition {
@@ -138,6 +245,8 @@ export class Composition {
           "volume" in groupData ? 0 : groupData["volume"]
         );
 
+        const componentClass = "componentClass" in groupData ? groupData["componentClass"] : null
+
         // Do the wiring
         // Each sample into the volume node
         samples.forEach((s) => {
@@ -169,6 +278,52 @@ export class Composition {
           dryVolume.setParam(parameter, value)
         );
 
+        let componentDescription = null;
+
+        if ("componentDescription" in groupData)
+        {
+          const desc = groupData["componentDescription"];
+          let downSliderDescription = null;
+          let xyPadDescription = null;
+          let multistateSwitch = null;
+
+          if ("downSlider" in desc)
+          {
+            const downSliderDesc = desc["downSlider"]
+            downSliderDescription = new DownSliderDescription
+            (
+              downSliderDesc["className"] ?? "downSlider1",
+              downSliderDesc["minStep"] ?? 0,
+              downSliderDesc["maxStep"] ?? 7,
+              downSliderDesc["minPosition"] ?? 0,
+              downSliderDesc["maxPosition"] ?? 100,
+              downSliderDesc["initialPosition"] ?? 0,
+              downSliderDesc["initialStep"] ?? 0
+            )
+          }
+
+          if ("xyPad" in desc)
+          {
+            const xyPadDesc = desc["xyPad"]
+            xyPadDescription = new XYPadDescription
+            (
+              xyPadDesc["boxClassName"] ?? "xyPad",
+              xyPadDesc["trackerClassName"] ?? "tracker",
+              xyPadDesc["trackerSize"] ?? 57,
+              xyPadDesc["minValue"] ?? 0,
+              xyPadDesc["maxValue"] ?? 100
+            )
+          }
+
+          componentDescription = new ComponentDescription
+          (
+            desc["className"] ?? "compponent componentA",
+            downSliderDescription,
+            xyPadDescription,
+            multistateSwitch
+          )
+
+        }
         return new SampleGroup(
           name,
           samples,
@@ -176,7 +331,9 @@ export class Composition {
           preFxControls,
           fx,
           fxControls,
-          volume
+          volume,
+          componentClass,
+          componentDescription
         );
       });
 

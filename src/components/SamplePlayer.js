@@ -11,7 +11,7 @@ export function SamplePlayer(props) {
   const vocals = section.getGroup("vocals");
   const percussion = section.getGroup("percussion");
   const instruments = section.getInstruments();
-
+  console.log(vocals);
   const playSample = (sampleIndex) => {
     props.sampleController.playSample(sampleIndex);
   };
@@ -32,7 +32,9 @@ export function SamplePlayer(props) {
           mouseController={props.mouseController}
           playSample={playSample}
           stopSample={stopSample}
-          className="component componentA"
+          className={vocals.getComponentClass()}
+          downSliderClass ="downSlider1"
+          description = {vocals.getComponentDescription()}
         />
         <InstrumentContainer
           playSample={playSample}
@@ -44,7 +46,9 @@ export function SamplePlayer(props) {
           mouseController={props.mouseController}
           playSample={playSample}
           stopSample={stopSample}
-          className="component componentB"
+          className={percussion.getComponentClass()}
+          downSliderClass ="downSlider2"
+          description = {percussion.getComponentDescription()}
         />
       </div>
       <div className="padding"></div>

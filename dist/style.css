@@ -13,6 +13,36 @@ body {
   margin: 0;
 }
 
+
+/* preloading downsliders so that there is no lag when changing value */
+/* TODO preload all */
+body::after{
+   position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
+   content:url('images/Section_1/vocal_slider_1.png')
+           url('images/Section_1/vocal_slider_2.png')
+           url('images/Section_1/vocal_slider_3.png')
+           url('images/Section_1/vocal_slider_4.png')
+           url('images/Section_1/vocal_slider_5.png')
+           url('images/Section_1/vocal_slider_6.png')
+           url('images/Section_1/vocal_slider_7.png')
+           url('images/Section_1/percSlider1.png')
+           url('images/Section_1/percSlider2.png')
+           url('images/Section_1/percSlider3.png')
+           url('images/Section_1/percSlider4.png')
+           url('images/Section_1/percSlider5.png')
+           url('images/Section_1/percSlider6.png')
+           url('images/Section_1/percSlider7.png')
+           url('images/Section_1/percSlider8.png')
+           url('images/Section_2/percSlider1.png')
+           url('images/Section_2/percSlider2.png')
+           url('images/Section_2/percSlider3.png')
+           url('images/Section_2/percSlider4.png')
+           url('images/Section_2/percSlider5.png')
+           url('images/Section_2/percSlider6.png')
+           url('images/Section_2/percSlider7.png')
+           url('images/Section_2/percSlider8.png');
+}
+
 #loopVideo {
   position: fixed;
   right: 0;
@@ -63,6 +93,7 @@ body {
   width: 340px;
   height: 640px;
   background-repeat: no-repeat;
+  position: relative;
 }
 
 .vocals {
@@ -75,6 +106,11 @@ body {
 
 .percussions {
   /* Fill in */
+  width: 84px;
+  height: 84px;
+  background-repeat: no-repeat;
+  position: absolute;
+  cursor: pointer;
 }
 
 .instrument {
@@ -265,8 +301,28 @@ body {
 /* Major components */
 .componentA {
   background-image: url('images/Section_1/componentA.png');
-  position: relative;
 }
+
+.componentB {
+  background-image: url('images/Section_1/componentB.png');
+}
+
+.componentC {
+  background-image: url('images/Section_2/componentC.png');
+}
+
+.componentD {
+  background-image: url('images/Section_2/componentD.png');
+}
+
+.componentE {
+  background-image: url('images/Section_3/componentE.png');
+}
+
+.componentF {
+  background-image: url('images/Section_3/componentF.png');
+}
+
 
 /* Section 1 vocals */
 .Vocals_Section1_1 {
@@ -315,17 +371,17 @@ body {
 /* Section 1 percussion */
 .Percussion_Section1_1 {
   top: 45px;
-  left: 127px;
-  clip-path: polygon(40% 0%, 60% 0%, 100% 60%, 100% 75%, 60% 100%, 50% 100%, 40% 100%, 0% 75%, 0% 60%);
+  left: 126px;
+  clip-path: polygon(35% 0%, 50% 0%, 65% 0%, 100% 35%, 100% 50%, 100% 65%, 65% 100%, 50% 100%, 35% 100%, 0% 65%, 0% 50%, 0% 35%);
 }
 .Percussion_Section1_1:hover {
-  background-image: url('images/Section_1/percussion1Hover.png');
+  background-image: url('images/Section_1/percussionHover.png');
 }
 .Percussion_Section1_1Active {
-  background-image: url('images/Section_1/percussion1Active.png');
+  background-image: url('images/Section_1/percussionActive.png');
 }
 .Percussion_Section1_1Active:hover {
-  background-image: url('images/Section_1/percussion1Hover.png'), url('images/Section_1/percussion1Active.png');
+  background-image: url('images/Section_1/percussionHover.png'), url('images/Section_1/percussionActive.png');
 }
 .Percussion_Section1_2 {
   top: 168px;
@@ -333,13 +389,13 @@ body {
   clip-path: circle(50% at 50% 50%);
 }
 .Percussion_Section1_2:hover {
-  background-image: url('images/Section_1/percussion2Hover.png');
+  background-image: url('images/Section_1/percussionHover.png');
 }
 .Percussion_Section1_2Active {
-  background-image: url('images/Section_1/percussion2Active.png');
+  background-image: url('images/Section_1/percussionActive.png');
 }
 .Percussion_Section1_2Active:hover {
-  background-image: url('images/Section_1/percussion2Hover.png'), url('images/Section_1/percussion2Active.png');
+  background-image: url('images/Section_1/percussionHover.png'), url('images/Section_1/percussionActive.png');
 }
 .Percussion_Section1_3 {
   top: 168px;
@@ -347,13 +403,13 @@ body {
   clip-path: circle(50% at 50% 50%);
 }
 .Percussion_Section1_3:hover {
-  background-image: url('images/Section_1/percussion3Hover.png');
+  background-image: url('images/Section_1/percussionHover.png');
 }
 .Percussion_Section1_3Active {
-  background-image: url('images/Section_1/percussion3Active.png');
+  background-image: url('images/Section_1/percussionActive.png');
 }
 .Percussion_Section1_3Active:hover {
-  background-image: url('images/Section_1/percussion3Hover.png'), url('images/Section_1/percussion3Active.png');
+  background-image: url('images/Section_1/percussionHover.png'), url('images/Section_1/percussionActive.png');
 }
 
 /* Section 2 vocals */
@@ -619,8 +675,170 @@ body {
 .downSlider1_7 {
   background-image: url('images/Section_1/vocal_slider_7.png');
 }
-.componentB {
-  background-image: url('images/Section_1/componentB.png');
+
+
+.downSlider2 {
+  background-repeat: no-repeat;
+  position:  absolute;
+  top: 381px;
+  left: 115px;
+  width: 107px;
+  height: 214px;
+  cursor: pointer;
+}
+.downSlider2_1 {
+  background-image: url('images/Section_1/percSlider1.png');
+}
+.downSlider2_2 {
+  background-image: url('images/Section_1/percSlider2.png');
+}
+.downSlider2_3 {
+  background-image: url('images/Section_1/percSlider3.png');
+}
+.downSlider2_4 {
+  background-image: url('images/Section_1/percSlider4.png');
+}
+.downSlider2_5 {
+  background-image: url('images/Section_1/percSlider5.png');
+}
+.downSlider2_6 {
+  background-image: url('images/Section_1/percSlider6.png');
+}
+.downSlider2_7 {
+  background-image: url('images/Section_1/percSlider7.png');
+}
+.downSlider2_8 {
+  background-image: url('images/Section_1/percSlider8.png');
+}
+
+
+
+.downSlider3 {
+  background-repeat: no-repeat;
+  position:  absolute;
+  top: 390px;
+  left: 120px;
+  width: 107px;
+  height: 214px;
+  cursor: pointer;
+}
+.downSlider3_1 {
+  background-image: url('images/Section_1/percSlider1.png');
+}
+.downSlider3_2 {
+  background-image: url('images/Section_1/percSlider2.png');
+}
+.downSlider3_3 {
+  background-image: url('images/Section_1/percSlider3.png');
+}
+.downSlider3_4 {
+  background-image: url('images/Section_1/percSlider4.png');
+}
+.downSlider3_5 {
+  background-image: url('images/Section_1/percSlider5.png');
+}
+.downSlider3_6 {
+  background-image: url('images/Section_1/percSlider6.png');
+}
+.downSlider3_7 {
+  background-image: url('images/Section_1/percSlider7.png');
+}
+.downSlider3_8 {
+  background-image: url('images/Section_1/percSlider8.png');
+}
+
+.downSlider4 {
+  background-repeat: no-repeat;
+  position:  absolute;
+  top: 427px;
+  left: 120px;
+  width: 107px;
+  height: 214px;
+  cursor: pointer;
+}
+.downSlider4_1 {
+  background-image: url('images/Section_2/percSlider1.png');
+}
+.downSlider4_2 {
+  background-image: url('images/Section_2/percSlider2.png');
+}
+.downSlider4_3 {
+  background-image: url('images/Section_2/percSlider3.png');
+}
+.downSlider4_4 {
+  background-image: url('images/Section_2/percSlider4.png');
+}
+.downSlider4_5 {
+  background-image: url('images/Section_2/percSlider5.png');
+}
+.downSlider4_6 {
+  background-image: url('images/Section_2/percSlider6.png');
+}
+.downSlider4_7 {
+  background-image: url('images/Section_2/percSlider7.png');
+}
+.downSlider4_8 {
+  background-image: url('images/Section_2/percSlider8.png');
+}
+
+
+
+.downSlider6 {
+  background-repeat: no-repeat;
+  position:  absolute;
+  top: 390px;
+  left: 120px;
+  width: 107px;
+  height: 214px;
+  cursor: pointer;
+}
+.downSlider6_1 {
+  background-image: url('images/Section_1/percSlider1.png');
+}
+.downSlider6_2 {
+  background-image: url('images/Section_1/percSlider2.png');
+}
+.downSlider6_3 {
+  background-image: url('images/Section_1/percSlider3.png');
+}
+.downSlider6_4 {
+  background-image: url('images/Section_1/percSlider4.png');
+}
+.downSlider6_5 {
+  background-image: url('images/Section_1/percSlider5.png');
+}
+.downSlider6_6 {
+  background-image: url('images/Section_1/percSlider6.png');
+}
+.downSlider6_7 {
+  background-image: url('images/Section_1/percSlider7.png');
+}
+.downSlider6_8 {
+  background-image: url('images/Section_1/percSlider8.png');
+}
+
+
+/* XY pad */
+
+.xyPad {
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  top:444px;
+  left:24px;
+}
+
+.tracker {
+  position:absolute;
+  top:67px;
+  left:67px;
+  background-image: url('images/Section_3/filternotch.png');
+  width: 57px;
+  height: 57px;
+}
+
+.tracker:hover {
+  background-image: url('images/Section_3/filternotchActive.png');
 }
 
 /* Modal */

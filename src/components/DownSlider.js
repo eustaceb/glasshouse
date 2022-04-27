@@ -6,13 +6,13 @@ import {clamp} from "../utils/Math.js";
 export function DownSlider(props) {
   // position describes continuous output to control the effect
   // step describes discrete state of the slider
-  const minStep = parseInt(props.minStep);
-  const maxStep = parseInt(props.maxStep);
-  const minPosition = parseInt(props.minPosition);
-  const maxPosition = parseInt(props.maxPosition);
-  const initialPosition = parseInt(props.initialPosition);
-  const initialStep = parseInt(props.initialStep);
-  const className = props.className;
+  const minStep = parseInt(props.description.getMinStep());
+  const maxStep = parseInt(props.description.getMaxStep());
+  const minPosition = parseInt(props.description.getMinPosition());
+  const maxPosition = parseInt(props.description.getMaxPosition());
+  const initialPosition = parseInt(props.description.getInitialPosition());
+  const initialStep = parseInt(props.description.getInitialStep());
+  const className = props.description.getClassName();
 
   const [step, setStep] = useState(initialStep);
   const [position, setPosition] = useState(initialPosition);
