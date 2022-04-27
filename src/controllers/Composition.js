@@ -31,7 +31,7 @@ export class Section {
 }
 
 class SampleGroup {
-  constructor(name, samples, preFx, preFxControls, fx, fxControls, volume, componentClass) {
+  constructor(name, samples, preFx, preFxControls, fx, fxControls, volume, componentClass, componentDescription) {
     this.name = name;
     this.samples = samples;
     this.preFx = preFx;
@@ -41,6 +41,7 @@ class SampleGroup {
     this.channel = new Tone.Channel(0, 0).connect(this.fx.getNode());
     this.volume = volume;
     this.componentClass = componentClass;
+    this.componentDescription = componentDescription;
   }
   getName() {
     return this.name;
@@ -69,6 +70,78 @@ class SampleGroup {
   getComponentClass() {
     return this.componentClass;
   }
+  getComponentDescription() {
+    return this.componentDescription;
+  }
+}
+
+class DownSliderDescription {
+
+  constructor(className, minStep, maxStep, minPosition, maxPosition, initialPosition, initialStep) {
+    this.className = className;
+    this.minStep = minStep;
+    this.maxStep = maxStep;
+    this.minPosition = minPosition;
+    this.maxPosition = maxPosition;
+    this.initialPosition = initialPosition;
+    this.initialStep = initialStep;
+    this.initialStep = initialStep;
+  }
+
+  getClassName() {
+    return this.className;
+  }
+
+  getMinStep() {
+    return this.minStep;
+  }
+
+  getMaxStep() {
+    return this.maxStep;
+  }
+
+  getMinPosition() {
+    return this.minPosition;
+  }
+
+  getMaxPosition() {
+    return this.maxPosition;
+  }
+
+  getInitialPosition() {
+    return this.initialPosition;
+  }
+
+  getInitialStep() {
+    return this.initialStep;
+  }
+}
+
+
+class ComponentDescription {
+  constructor(className, downSliderDescription, xyPad, multistateSwitch) {
+    this.className = className;
+    this.downSliderDescription = downSliderDescription;
+    this.xyPad = xyPad;
+    this.multistateSwitch = multistateSwitch;
+  }
+
+  getClassName() {
+    return this.className;
+  }
+
+  getDownSliderDescription() {
+    return this.downSliderDescription;
+  }
+
+  getXYPad() {
+    return this.xyPad;
+  }
+
+  getMultistateSwitch() {
+    return this.multistateSwitch;
+  }
+
 }
 
 export class Composition {
@@ -175,6 +248,39 @@ export class Composition {
           dryVolume.setParam(parameter, value)
         );
 
+        let componentDescription = null;
+
+        if ("componentDescription" in groupData)
+        {
+          const desc = groupData["componentDescription"];
+          let downSliderDescription = null;
+          let xyPad = null;
+          let multistateSwitch = null;
+
+          if ("downSlider" in desc)
+          {
+            const downSliderDesc = desc["downSlider"]
+            downSliderDescription = new DownSliderDescription
+            (
+              downSliderDesc["className"] ?? "downSlider1",
+              downSliderDesc["minStep"] ?? 0,
+              downSliderDesc["maxStep"] ?? 7,
+              downSliderDesc["minPosition"] ?? 0,
+              downSliderDesc["maxPosition"] ?? 100,
+              downSliderDesc["initialPosition"] ?? 0,
+              downSliderDesc["initialStep"] ?? 0
+            )
+          }
+
+          componentDescription = new ComponentDescription
+          (
+            desc["className"] ?? "compponent componentA",
+            downSliderDescription,
+            xyPad,
+            multistateSwitch
+          )
+
+        }
         return new SampleGroup(
           name,
           samples,
@@ -183,7 +289,8 @@ export class Composition {
           fx,
           fxControls,
           volume,
-          componentClass
+          componentClass,
+          componentDescription
         );
       });
 

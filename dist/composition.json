@@ -13,7 +13,18 @@
             "params": { "frequency": 3.33, "depth": 1, "type": "sine", "channelCount": 2 }
           },
           "volume": 12,
-          "componentClass" : "component componentA"
+          "componentDescription" : {
+            "className" : "component componentA",
+            "downSlider" : {
+              "className" : "downSlider1",
+              "minStep" : 0,
+              "maxStep" : 7,
+              "minPosition" : 0,
+              "maxPosition" : 100,
+              "initialPosition" : 0,
+              "initialStep" : 0
+            }
+          }
         },
         "percussion": {
           "samples": [
@@ -26,7 +37,18 @@
             "params": { "delayTime": 0.6, "feedback": 0.3 },
             "switch": { "paramName": "delayTime", "options": [0.15, 0.3, 0.6] }
           },
-          "componentClass" : "component componentB"
+          "componentDescription" : {
+            "className" : "component componentB",
+            "downSlider" : {
+              "className" : "downSlider2",
+              "minStep" : 0,
+              "maxStep" : 8,
+              "minPosition" : 0,
+              "maxPosition" : 100,
+              "initialPosition" : 0,
+              "initialStep" : 0
+            }
+          }
         }
       },
       "instruments": [
@@ -57,7 +79,18 @@
             "params": { "pitch": 0, "windowSize": 0.1, "delayTime": 0.05, "feedback": 0.01 },
             "slider": { "paramName": "pitch", "range": [-5, 5] }
           },
-          "componentClass" : "component componentC"
+          "componentDescription" : {
+            "className" : "component componentC",
+            "downSlider" : {
+              "className" : "downSlider2",
+              "minStep" : 0,
+              "maxStep" : 8,
+              "minPosition" : 0,
+              "maxPosition" : 100,
+              "initialPosition" : 0,
+              "initialStep" : 0
+            }
+          }
         },
         "percussion": {
           "samples": [
@@ -69,7 +102,18 @@
             "type": "reverb",
             "params": { "decay": 30, "preDelay": 0.01 }
           },
-          "componentClass" : "component componentD"
+          "componentDescription" : {
+            "className" : "component componentD",
+            "downSlider" : {
+              "className" : "downSlider2",
+              "minStep" : 0,
+              "maxStep" : 8,
+              "minPosition" : 0,
+              "maxPosition" : 100,
+              "initialPosition" : 0,
+              "initialStep" : 0
+            }
+          }
         }
       },
       "instruments": [
@@ -95,7 +139,18 @@
             "x": {"paramName": "frequency", "range": [300, 2000]},
             "y": {"paramName": "gain", "range": [-50, 10]}
           },
-          "componentClass" : "component componentE"
+          "componentDescription" : {
+            "className" : "component componentE",
+            "downSlider" : {
+              "className" : "downSlider2",
+              "minStep" : 0,
+              "maxStep" : 8,
+              "minPosition" : 0,
+              "maxPosition" : 100,
+              "initialPosition" : 0,
+              "initialStep" : 0
+            }
+          }
         },
         "percussion": {
           "samples": [
@@ -107,7 +162,18 @@
             "type": "pingpong",
             "params": { "delayTime": "4n", "feedback": 0.8 }
           },
-          "componentClass" : "component componentF"
+          "componentDescription" : {
+            "className" : "component componentF",
+            "downSlider" : {
+              "className" : "downSlider2",
+              "minStep" : 0,
+              "maxStep" : 8,
+              "minPosition" : 0,
+              "maxPosition" : 100,
+              "initialPosition" : 0,
+              "initialStep" : 0
+            }
+          }
         }
       },
       "instruments": [

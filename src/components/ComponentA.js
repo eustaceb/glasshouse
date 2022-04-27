@@ -12,12 +12,7 @@ export function ComponentA(props) {
   if (wetControl) {
     fxComponent = (
       <DownSlider
-        minStep={0}
-        maxStep={7}
-        minPosition={0}
-        maxPosition={100}
-        initialPosition={40}
-        initialStep={2}
+        description={props.description.getDownSliderDescription()}
         className={props.downSliderClass}
         callback={(val) => wetControl.setWet(val / 100)}
         mouseController={props.mouseController}
@@ -35,7 +30,7 @@ export function ComponentA(props) {
   }
 
   return (
-    <div className={props.className}>
+    <div className={props.description.getClassName()}>
       <InstrumentGroup
         playSample={props.playSample}
         stopSample={props.stopSample}
