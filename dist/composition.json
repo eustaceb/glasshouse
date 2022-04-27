@@ -75,7 +75,7 @@
           "componentDescription" : {
             "className" : "component componentC",
             "downSlider" : {
-              "className" : "downSlider2",
+              "className" : "downSlider3",
               "minStep" : 0,
               "maxStep" : 8,
               "minPosition" : 0,
@@ -98,7 +98,7 @@
           "componentDescription" : {
             "className" : "component componentD",
             "downSlider" : {
-              "className" : "downSlider2",
+              "className" : "downSlider4",
               "minStep" : 0,
               "maxStep" : 8,
               "minPosition" : 0,
@@ -165,7 +165,7 @@
           "componentDescription" : {
             "className" : "component componentF",
             "downSlider" : {
-              "className" : "downSlider2",
+              "className" : "downSlider6",
               "minStep" : 0,
               "maxStep" : 8,
               "minPosition" : 0,

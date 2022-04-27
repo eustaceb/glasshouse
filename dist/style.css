@@ -15,7 +15,7 @@ body {
 
 
 /* preloading downsliders so that there is no lag when changing value */
-/* TODO so far only componentA downslider pre-loaded, add the other */
+/* TODO preload all */
 body::after{
    position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
    content:url('images/Section_1/vocal_slider_1.png')
@@ -24,7 +24,23 @@ body::after{
            url('images/Section_1/vocal_slider_4.png')
            url('images/Section_1/vocal_slider_5.png')
            url('images/Section_1/vocal_slider_6.png')
-           url('images/Section_1/vocal_slider_7.png');
+           url('images/Section_1/vocal_slider_7.png')
+           url('images/Section_1/percSlider1.png')
+           url('images/Section_1/percSlider2.png')
+           url('images/Section_1/percSlider3.png')
+           url('images/Section_1/percSlider4.png')
+           url('images/Section_1/percSlider5.png')
+           url('images/Section_1/percSlider6.png')
+           url('images/Section_1/percSlider7.png')
+           url('images/Section_1/percSlider8.png')
+           url('images/Section_2/percSlider1.png')
+           url('images/Section_2/percSlider2.png')
+           url('images/Section_2/percSlider3.png')
+           url('images/Section_2/percSlider4.png')
+           url('images/Section_2/percSlider5.png')
+           url('images/Section_2/percSlider6.png')
+           url('images/Section_2/percSlider7.png')
+           url('images/Section_2/percSlider8.png');
 }
 
 #loopVideo {
@@ -697,8 +713,109 @@ body::after{
 
 
 
+.downSlider3 {
+  background-repeat: no-repeat;
+  position:  absolute;
+  top: 390px;
+  left: 120px;
+  width: 107px;
+  height: 214px;
+  cursor: pointer;
+}
+.downSlider3_1 {
+  background-image: url('images/Section_1/percSlider1.png');
+}
+.downSlider3_2 {
+  background-image: url('images/Section_1/percSlider2.png');
+}
+.downSlider3_3 {
+  background-image: url('images/Section_1/percSlider3.png');
+}
+.downSlider3_4 {
+  background-image: url('images/Section_1/percSlider4.png');
+}
+.downSlider3_5 {
+  background-image: url('images/Section_1/percSlider5.png');
+}
+.downSlider3_6 {
+  background-image: url('images/Section_1/percSlider6.png');
+}
+.downSlider3_7 {
+  background-image: url('images/Section_1/percSlider7.png');
+}
+.downSlider3_8 {
+  background-image: url('images/Section_1/percSlider8.png');
+}
+
+.downSlider4 {
+  background-repeat: no-repeat;
+  position:  absolute;
+  top: 427px;
+  left: 120px;
+  width: 107px;
+  height: 214px;
+  cursor: pointer;
+}
+.downSlider4_1 {
+  background-image: url('images/Section_2/percSlider1.png');
+}
+.downSlider4_2 {
+  background-image: url('images/Section_2/percSlider2.png');
+}
+.downSlider4_3 {
+  background-image: url('images/Section_2/percSlider3.png');
+}
+.downSlider4_4 {
+  background-image: url('images/Section_2/percSlider4.png');
+}
+.downSlider4_5 {
+  background-image: url('images/Section_2/percSlider5.png');
+}
+.downSlider4_6 {
+  background-image: url('images/Section_2/percSlider6.png');
+}
+.downSlider4_7 {
+  background-image: url('images/Section_2/percSlider7.png');
+}
+.downSlider4_8 {
+  background-image: url('images/Section_2/percSlider8.png');
+}
 
 
+
+.downSlider6 {
+  background-repeat: no-repeat;
+  position:  absolute;
+  top: 390px;
+  left: 120px;
+  width: 107px;
+  height: 214px;
+  cursor: pointer;
+}
+.downSlider6_1 {
+  background-image: url('images/Section_1/percSlider1.png');
+}
+.downSlider6_2 {
+  background-image: url('images/Section_1/percSlider2.png');
+}
+.downSlider6_3 {
+  background-image: url('images/Section_1/percSlider3.png');
+}
+.downSlider6_4 {
+  background-image: url('images/Section_1/percSlider4.png');
+}
+.downSlider6_5 {
+  background-image: url('images/Section_1/percSlider5.png');
+}
+.downSlider6_6 {
+  background-image: url('images/Section_1/percSlider6.png');
+}
+.downSlider6_7 {
+  background-image: url('images/Section_1/percSlider7.png');
+}
+.downSlider6_8 {
+  background-image: url('images/Section_1/percSlider8.png');
+}
 
 
 /* XY pad */
