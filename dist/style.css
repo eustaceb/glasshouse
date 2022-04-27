@@ -301,26 +301,38 @@ body::after{
 /* Major components */
 .componentA {
   background-image: url('images/Section_1/componentA.png');
+  width: 337px;
+  height: 634px;
 }
 
 .componentB {
   background-image: url('images/Section_1/componentB.png');
+  width: 337px;
+  height: 632px;
 }
 
 .componentC {
   background-image: url('images/Section_2/componentC.png');
+  width: 349px;
+  height: 651px;
 }
 
 .componentD {
   background-image: url('images/Section_2/componentD.png');
+  width: 349px;
+  height: 651px;
 }
 
 .componentE {
   background-image: url('images/Section_3/componentE.png');
+  width: 440px;
+  height: 640px;
 }
 
 .componentF {
   background-image: url('images/Section_3/componentF.png');
+  width: 349px;
+  height: 651px;
 }
 
 
