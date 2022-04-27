@@ -63,6 +63,7 @@ body {
   width: 340px;
   height: 640px;
   background-repeat: no-repeat;
+  position: relative;
 }
 
 .vocals {
@@ -270,12 +271,10 @@ body {
 /* Major components */
 .componentA {
   background-image: url('images/Section_1/componentA.png');
-  position: relative;
 }
 
 .componentB {
   background-image: url('images/Section_1/componentB.png');
-  position: relative;
 }
 
 .componentC {
