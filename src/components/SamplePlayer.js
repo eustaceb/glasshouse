@@ -3,7 +3,6 @@ import React, {useState} from "react";
 import {ComponentA} from "./ComponentA.js";
 import {Navigation} from "./Navigation.js";
 import {InstrumentContainer} from "./InstrumentContainer.js";
-import {InstrumentGroup} from "./InstrumentGroup.js";
 
 export function SamplePlayer(props) {
   const [sectionIndex, setSectionIndex] = useState(0);
@@ -32,8 +31,6 @@ export function SamplePlayer(props) {
           mouseController={props.mouseController}
           playSample={playSample}
           stopSample={stopSample}
-          className={vocals.getComponentClass()}
-          downSliderClass ="downSlider1"
           description = {vocals.getComponentDescription()}
         />
         <InstrumentContainer
@@ -46,8 +43,6 @@ export function SamplePlayer(props) {
           mouseController={props.mouseController}
           playSample={playSample}
           stopSample={stopSample}
-          className={percussion.getComponentClass()}
-          downSliderClass ="downSlider2"
           description = {percussion.getComponentDescription()}
         />
       </div>

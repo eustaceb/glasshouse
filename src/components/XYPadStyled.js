@@ -6,21 +6,16 @@ import {useLocalContext} from "../utils/ReactHelpers.js";
 
 export function XYPadStyled(props) {
 
-  const minValue = props.description.getMinValue();
-  const maxValue = props.description.getMaxValue(); // equivalent to squre size
-  const size = props.description.getTrackerSize();
+  const minValue = props.minValue;
+  const maxValue = props.maxValue; // equivalent to squre size
+  const size = props.trackerSize;
   const trackerMiddle = size / 2;
 
   const [x, setX] = useState(maxValue / 2);
   const [y, setY] = useState(maxValue / 2);
 
-
-
   const [componentId, setComponentId] = useState(uuidv4());
-
   const ctx = useLocalContext({x, y, componentId});
-
-
 
   const mouseMove = React.useCallback(
     (e) => {
@@ -72,7 +67,6 @@ export function XYPadStyled(props) {
     }
   });
 
-
   useEffect(() => {
     setX(maxValue / 2);
     setY(maxValue / 2);
@@ -88,8 +82,8 @@ export function XYPadStyled(props) {
 
 
   return (
-    <div class={props.description.getBoxClassName()} id={componentId}>
-      <div class={props.description.getTrackerClassName()} style = {{top: y, left: x}}></div>
+    <div className={props.boxClassName} id={componentId}>
+      <div className={props.trackerClassName} style = {{top: y, left: x}}></div>
     </div>
   );
 }

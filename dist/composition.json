@@ -17,12 +17,7 @@
             "className" : "component componentA",
             "downSlider" : {
               "className" : "downSlider1",
-              "minStep" : 0,
-              "maxStep" : 7,
-              "minPosition" : 0,
-              "maxPosition" : 100,
-              "initialPosition" : 0,
-              "initialStep" : 0
+              "steps" : 8
             }
           }
         },
@@ -41,12 +36,7 @@
             "className" : "component componentB",
             "downSlider" : {
               "className" : "downSlider2",
-              "minStep" : 0,
-              "maxStep" : 8,
-              "minPosition" : 0,
-              "maxPosition" : 100,
-              "initialPosition" : 0,
-              "initialStep" : 0
+              "steps" : 9
             }
           }
         }
@@ -69,19 +59,14 @@
             "vocals Vocals_Section2_5"
           ],
           "fx": {
-            "type": "autopanner",
-            "params": { "frequency": 3.33, "depth": 1, "type": "sine", "channelCount": 2 }
+            "type": "pingpong",
+            "params": { "delayTime": "4n", "feedback": 0.8 }
           },
           "componentDescription" : {
             "className" : "component componentC",
             "downSlider" : {
               "className" : "downSlider3",
-              "minStep" : 0,
-              "maxStep" : 8,
-              "minPosition" : 0,
-              "maxPosition" : 100,
-              "initialPosition" : 0,
-              "initialStep" : 0
+              "steps" : 9
             }
           }
         },
@@ -99,12 +84,7 @@
             "className" : "component componentD",
             "downSlider" : {
               "className" : "downSlider4",
-              "minStep" : 0,
-              "maxStep" : 8,
-              "minPosition" : 0,
-              "maxPosition" : 100,
-              "initialPosition" : 0,
-              "initialStep" : 0
+              "steps" : 9
             }
           }
         }
@@ -136,19 +116,11 @@
             "className" : "component componentE",
             "downSlider" : {
               "className" : "downSlider2",
-              "minStep" : 0,
-              "maxStep" : 8,
-              "minPosition" : 0,
-              "maxPosition" : 100,
-              "initialPosition" : 0,
-              "initialStep" : 0
+              "steps" : 9
             },
             "xyPad" : {
               "boxClassName" : "xyPad",
-              "trackerClassName" : "tracker",
-              "trackerSize" : 57,
-              "minValue" : 0,
-              "maxValue" : 123
+              "trackerClassName" : "tracker"
             }
           }
         },
@@ -166,12 +138,7 @@
             "className" : "component componentF",
             "downSlider" : {
               "className" : "downSlider6",
-              "minStep" : 0,
-              "maxStep" : 8,
-              "minPosition" : 0,
-              "maxPosition" : 100,
-              "initialPosition" : 0,
-              "initialStep" : 0
+              "steps" : 9
             }
           }
         }

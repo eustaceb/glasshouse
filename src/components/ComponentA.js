@@ -10,23 +10,33 @@ export function ComponentA(props) {
   const switchControl = props.group.getFxControls()["switch"];
   let fxComponent;
   let fxXYComponent;
-  let fxAppendageComponent = null;
+  let fxAppendageComponent;
 
   if (xyControl) {
+    const desc = props.description.getXYPadDescription();
     fxXYComponent = (
       <XYPadStyled
-        description={props.description.getXYPadDescription()}
-        callback={(val) => wetControl.setWet(val / 100)}
+        minValue={0}
+        maxValue={123}
+        trackerSize={57}
+        boxClassName={desc.getBoxClassName()}
+        trackerClassName={desc.getTrackerClassName()}
+        callback={(val) => wetControl.setWet(val)}
         mouseController={props.mouseController}
       />
     );
   }
   if (wetControl) {
+    const desc = props.description.getDownSliderDescription();
     fxComponent = (
       <DownSlider
-        description={props.description.getDownSliderDescription()}
-        className={props.downSliderClass}
-        callback={(val) => wetControl.setWet(val / 100)}
+        className={desc.getClassName()}
+        minStep={0}
+        steps={desc.getSteps()}
+        minPosition={0}
+        maxPosition={1}
+        initialPosition={wetControl.getWet()}
+        callback={(val) => wetControl.setWet(val)}
         mouseController={props.mouseController}
       />
     );
@@ -50,7 +60,7 @@ export function ComponentA(props) {
       />
       {fxComponent}
       {fxXYComponent}
-      {fxAppendageComponent !== null ? fxAppendageComponent : null}
+      {fxAppendageComponent}
     </div>
   );
 }

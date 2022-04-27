@@ -6,16 +6,13 @@ import {clamp} from "../utils/Math.js";
 export function DownSlider(props) {
   // position describes continuous output to control the effect
   // step describes discrete state of the slider
-  const minStep = parseInt(props.description.getMinStep());
-  const maxStep = parseInt(props.description.getMaxStep());
-  const minPosition = parseInt(props.description.getMinPosition());
-  const maxPosition = parseInt(props.description.getMaxPosition());
-  const initialPosition = parseInt(props.description.getInitialPosition());
-  const initialStep = parseInt(props.description.getInitialStep());
-  const className = props.description.getClassName();
+  const steps = props.steps;
+  const minPosition = props.minPosition;
+  const maxPosition = props.maxPosition;
+  const className = props.className;
 
-  const [step, setStep] = useState(initialStep);
-  const [position, setPosition] = useState(initialPosition);
+  const [step, setStep] = useState(props.initialStep);
+  const [position, setPosition] = useState(props.initialPosition);
   const mouseDown = useRef(false);
 
   const componentId = useRef(uuidv4());
@@ -23,14 +20,16 @@ export function DownSlider(props) {
   const handleMouseMove = React.useCallback(
     (event) => {
       event.preventDefault();
-
       if (mouseDown.current) {
-        let nextPosition = position + event.movementY;
+        const hitBox = event.target.getBoundingClientRect();
+
+        // Next position is a proportion of cursorY / element height (so [0,1])
+        let nextPosition = (event.clientY - hitBox.top) / hitBox.height;
         nextPosition = clamp(nextPosition, minPosition, maxPosition);
 
         props.callback(nextPosition);
         setPosition(nextPosition);
-        setStep(Math.trunc((nextPosition / maxPosition) * maxStep));
+        setStep(Math.trunc((nextPosition / maxPosition) * steps));
       }
     },
     [position]
@@ -52,15 +51,18 @@ export function DownSlider(props) {
 
   const handleMouseDown = React.useCallback(
     (event) => {
+      event.preventDefault();
+  
       mouseDown.current = true;
       const hitBox = event.target.getBoundingClientRect();
-      let nextPosition = Math.round(
-        (100 * (event.clientY - hitBox.top)) / hitBox.height
-      );
-      nextPosition = clamp(nextPosition, minPosition, maxPosition);
+
+      // Next position is a proportion of cursorY / element height (so [0,1])
+      let nextPosition = (event.clientY - hitBox.top) / hitBox.height;
+      // No need to clamp - click is always within hit box
+
       props.callback(nextPosition);
       setPosition(nextPosition);
-      setStep(Math.trunc((nextPosition / maxPosition) * maxStep));
+      setStep(Math.trunc((nextPosition / maxPosition) * steps));
     },
     [position]
   );

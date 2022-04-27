@@ -46,12 +46,20 @@ class FXControl {
     }
   }
 
-  registerSideChain(callback) {
-    this.sidechain = callback;
+  getParam(parameter) {
+    if (
+      this.node[parameter] instanceof Tone.Signal ||
+      this.node[parameter] instanceof Tone.Frequency ||
+      this.node[parameter] instanceof Tone.Param
+    ) {
+      return this.node[parameter].value;
+    } else {
+      return this.node[parameter];
+    }
   }
 
-  getParam(parameter) {
-    return this.node[parameter].value;
+  registerSideChain(callback) {
+    this.sidechain = callback;
   }
 
   createFxNode(type, params) {
@@ -98,6 +106,7 @@ class XYControl {
   }
 
   setX(value) {
+    // Scales from [0, 1]
     const scaled = scale(
       value,
       0,
@@ -108,7 +117,19 @@ class XYControl {
     this.fx.setParam(this.xAxis.paramName, scaled);
   }
 
+  getX() {
+    // Scales to [0, 1]
+    return scale(
+      this.fx.getParam(this.xAxis.paramName),
+      this.xAxis.range[0],
+      this.xAxis.range[1],
+      0,
+      1.0
+    );
+  }
+
   setY(value) {
+    // Scales from [0, 1]
     const scaled = scale(
       value,
       0,
@@ -117,6 +138,17 @@ class XYControl {
       this.yAxis.range[1]
     );
     this.fx.setParam(this.yAxis.paramName, scaled);
+  }
+
+  getX() {
+    // Scales to [0, 1]
+    return scale(
+      this.fx.getParam(this.yAxis.paramName),
+      this.yAxis.range[0],
+      this.yAxis.range[1],
+      0,
+      1.0
+    );
   }
 }
 
@@ -147,12 +179,8 @@ class DiscreteControl {
     this.fx.setParam(this.paramName, value);
   }
 
-  setValueByIndex(index) {
-    console.assert(
-      index < this.values.length,
-      "Discrete value index is out of bounds"
-    );
-    this.fx.setParam(this.paramName, this.values[index]);
+  getValue() {
+    this.fx.getParam(this.paramName);
   }
 }
 
@@ -171,6 +199,9 @@ class WetControl {
 
   setWet(value) {
     this.fx.setParam("wet", value);
+  }
+  getWet() {
+    this.fx.getParam("wet");
   }
 }
 
