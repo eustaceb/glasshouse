@@ -18,7 +18,7 @@ export function ComponentA(props) {
         maxPosition={100}
         initialPosition={40}
         initialStep={2}
-        className="downSlider1"
+        className={props.downSliderClass}
         callback={(val) => wetControl.setWet(val / 100)}
         mouseController={props.mouseController}
       />

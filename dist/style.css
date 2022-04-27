@@ -75,6 +75,11 @@ body {
 
 .percussions {
   /* Fill in */
+  width: 84px;
+  height: 84px;
+  background-repeat: no-repeat;
+  position: absolute;
+  cursor: pointer;
 }
 
 .instrument {
@@ -268,6 +273,28 @@ body {
   position: relative;
 }
 
+.componentB {
+  background-image: url('images/Section_1/componentB.png');
+  position: relative;
+}
+
+.componentC {
+  background-image: url('images/Section_2/componentC.png');
+}
+
+.componentD {
+  background-image: url('images/Section_2/componentD.png');
+}
+
+.componentE {
+  background-image: url('images/Section_3/componentE.png');
+}
+
+.componentF {
+  background-image: url('images/Section_3/componentF.png');
+}
+
+
 /* Section 1 vocals */
 .Vocals_Section1_1 {
   top: 45px;
@@ -315,17 +342,17 @@ body {
 /* Section 1 percussion */
 .Percussion_Section1_1 {
   top: 45px;
-  left: 127px;
-  clip-path: polygon(40% 0%, 60% 0%, 100% 60%, 100% 75%, 60% 100%, 50% 100%, 40% 100%, 0% 75%, 0% 60%);
+  left: 126px;
+  clip-path: polygon(35% 0%, 50% 0%, 65% 0%, 100% 35%, 100% 50%, 100% 65%, 65% 100%, 50% 100%, 35% 100%, 0% 65%, 0% 50%, 0% 35%);
 }
 .Percussion_Section1_1:hover {
-  background-image: url('images/Section_1/percussion1Hover.png');
+  background-image: url('images/Section_1/percussionHover.png');
 }
 .Percussion_Section1_1Active {
-  background-image: url('images/Section_1/percussion1Active.png');
+  background-image: url('images/Section_1/percussionActive.png');
 }
 .Percussion_Section1_1Active:hover {
-  background-image: url('images/Section_1/percussion1Hover.png'), url('images/Section_1/percussion1Active.png');
+  background-image: url('images/Section_1/percussionHover.png'), url('images/Section_1/percussionActive.png');
 }
 .Percussion_Section1_2 {
   top: 168px;
@@ -333,13 +360,13 @@ body {
   clip-path: circle(50% at 50% 50%);
 }
 .Percussion_Section1_2:hover {
-  background-image: url('images/Section_1/percussion2Hover.png');
+  background-image: url('images/Section_1/percussionHover.png');
 }
 .Percussion_Section1_2Active {
-  background-image: url('images/Section_1/percussion2Active.png');
+  background-image: url('images/Section_1/percussionActive.png');
 }
 .Percussion_Section1_2Active:hover {
-  background-image: url('images/Section_1/percussion2Hover.png'), url('images/Section_1/percussion2Active.png');
+  background-image: url('images/Section_1/percussionHover.png'), url('images/Section_1/percussionActive.png');
 }
 .Percussion_Section1_3 {
   top: 168px;
@@ -347,13 +374,13 @@ body {
   clip-path: circle(50% at 50% 50%);
 }
 .Percussion_Section1_3:hover {
-  background-image: url('images/Section_1/percussion3Hover.png');
+  background-image: url('images/Section_1/percussionHover.png');
 }
 .Percussion_Section1_3Active {
-  background-image: url('images/Section_1/percussion3Active.png');
+  background-image: url('images/Section_1/percussionActive.png');
 }
 .Percussion_Section1_3Active:hover {
-  background-image: url('images/Section_1/percussion3Hover.png'), url('images/Section_1/percussion3Active.png');
+  background-image: url('images/Section_1/percussionHover.png'), url('images/Section_1/percussionActive.png');
 }
 
 /* Section 2 vocals */
@@ -619,10 +646,41 @@ body {
 .downSlider1_7 {
   background-image: url('images/Section_1/vocal_slider_7.png');
 }
-.componentB {
-  background-image: url('images/Section_1/componentB.png');
-}
 
+
+.downSlider2 {
+  background-repeat: no-repeat;
+  position:  absolute;
+  top: 381px;
+  left: 115px;
+  width: 107px;
+  height: 214px;
+  cursor: pointer;
+}
+.downSlider2_1 {
+  background-image: url('images/Section_1/percSlider1.png');
+}
+.downSlider2_2 {
+  background-image: url('images/Section_1/percSlider2.png');
+}
+.downSlider2_3 {
+  background-image: url('images/Section_1/percSlider3.png');
+}
+.downSlider2_4 {
+  background-image: url('images/Section_1/percSlider4.png');
+}
+.downSlider2_5 {
+  background-image: url('images/Section_1/percSlider5.png');
+}
+.downSlider2_6 {
+  background-image: url('images/Section_1/percSlider6.png');
+}
+.downSlider2_7 {
+  background-image: url('images/Section_1/percSlider7.png');
+}
+.downSlider2_8 {
+  background-image: url('images/Section_1/percSlider7.png');
+}
 /* Modal */
 .startModal {
   background-color: #FFF;
