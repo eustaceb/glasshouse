@@ -20,6 +20,11 @@ export function DownSlider(props) {
     return Math.trunc((pos / maxPosition) * steps);
   }
 
+  function transformPosition(position)
+  {
+    return Math.log10(0.5 * position + 0.07) + 1.2;
+  }
+
   const handleMouseMove = React.useCallback(
     (event) => {
       event.preventDefault();
@@ -29,10 +34,7 @@ export function DownSlider(props) {
         // Next position is a proportion of cursorY / element height (so [0,1])
         let nextPosition = (event.clientY - hitBox.top) / hitBox.height;
         nextPosition = clamp(nextPosition, minPosition, maxPosition);
-        // nextPosition = 1.1/(1+ Math.pow(Math.E, 2.5 - 10 * nextPosition));
-        // nextPosition = Math.log10(nextPosition + 0.02) * 0.6 + 1;
-        // nextPosition = Math.log10(nextPosition + 0.12) + 0.95;
-        nextPosition = Math.log10(0.5 * nextPosition + 0.07) + 1.2;
+        nextPosition = transformPosition(nextPosition)
 
         props.callback(nextPosition);
         setPosition(nextPosition);
@@ -43,7 +45,8 @@ export function DownSlider(props) {
 
   useEffect(() => {
     let componentRef = componentId.current;
-    setPosition(props.initialPosition);
+
+    setPosition(transformPosition(props.initialPosition));
     props.mouseController.registerListener(
       componentId.current,
       "mouseUp",

@@ -10,7 +10,7 @@
           ],
           "fx": {
             "type": "autopanner",
-            "params": { "frequency": 3.33, "depth": 1, "type": "sine", "channelCount": 2, "wet": 0.2 }
+            "params": { "frequency": 3.33, "depth": 1, "type": "sine", "channelCount": 2, "wet": 0.05 }
           },
           "volume": 9,
           "componentDescription" : {
@@ -29,7 +29,7 @@
           ],
           "fx": {
             "type": "delay",
-            "params": { "delayTime": 0.6, "feedback": 0.3, "wet": 0.2 },
+            "params": { "delayTime": 0.6, "feedback": 0.3, "wet": 0.05 },
             "switch": { "paramName": "delayTime", "options": [0.15, 0.3, 0.6] }
           },
           "volume": 2,
@@ -61,7 +61,7 @@
           ],
           "fx": {
             "type": "pingpong",
-            "params": { "delayTime": "4n", "feedback": 0.8, "wet": 0.2 }
+            "params": { "delayTime": "4n", "feedback": 0.8, "wet": 0.05 }
           },
           "volume": 9,
           "componentDescription" : {
@@ -80,7 +80,7 @@
           ],
           "fx": {
             "type": "reverb",
-            "params": { "decay": 30, "preDelay": 0.01, "wet": 0.2 }
+            "params": { "decay": 30, "preDelay": 0.01, "wet": 0.05 }
           },
           "volume": 2,
           "componentDescription" : {
@@ -136,7 +136,7 @@
           ],
           "fx": {
             "type": "pingpong",
-            "params": { "delayTime": "4n", "feedback": 0.8, "wet": 0.2 }
+            "params": { "delayTime": "4n", "feedback": 0.8, "wet": 0.05 }
           },
           "volume": 2,
           "componentDescription" : {
