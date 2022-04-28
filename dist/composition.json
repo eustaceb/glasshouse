@@ -32,7 +32,7 @@
             "params": { "delayTime": 0.6, "feedback": 0.3, "wet": 0.05 },
             "switch": { "paramName": "delayTime", "options": [0.15, 0.3, 0.6] }
           },
-          "volume": 2,
+          "volume": 0,
           "componentDescription" : {
             "className" : "component componentB",
             "downSlider" : {
@@ -64,7 +64,7 @@
             "params": { "delayTime": 0.15, "feedback": 0.01 },
             "switch": { "paramName": "delayTime", "options": [ 0.8 , 0.4, 0.6] }
           },
-          "volume": 9,
+          "volume": 0,
           "componentDescription" : {
             "className" : "component componentC",
             "downSlider" : {
@@ -122,7 +122,7 @@
             "x": {"paramName": "frequency", "range": [300, 2000]},
             "y": {"paramName": "gain", "range": [-50, 10]}
           },
-          "volume": 9,
+          "volume": 11,
           "componentDescription" : {
             "className" : "component componentE",
             "downSlider" : {

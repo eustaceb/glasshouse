@@ -171,7 +171,7 @@ export class Composition {
 
           // @TODO: There's no real reason for xyControl to be mutually exclusive with xyControl, remove this
           const wetControl = xyControl ? null : new WetControl(fx);
-          if (wetControl)wetControl.setWet(0);
+          if (wetControl) wetControl.setWet(0);
 
           const switchControl =
             "switch" in fxData
@@ -181,18 +181,18 @@ export class Composition {
                   fxData["switch"]["options"]
                 )
               : null;
-              const createSlider = (data) => {
-                if (!("slider" in data)) return null;
-                const generateRange = (from, to) =>
-                  Array.from({length: to - from + 1}, (_, k) => from + k);
-                const sliderData = data["slider"];
-                const options =
-                  "options" in sliderData
-                    ? sliderData["options"]
-                    : generateRange(sliderData["range"][0], sliderData["range"][1]);
-                return new DiscreteControl(fx, sliderData["paramName"], options);
-              };
-              const sliderControl = createSlider(fxData);
+          const createSlider = (data) => {
+            if (!("slider" in data)) return null;
+            const generateRange = (from, to) =>
+              Array.from({length: to - from + 1}, (_, k) => from + k);
+            const sliderData = data["slider"];
+            const options =
+              "options" in sliderData
+                ? sliderData["options"]
+                : generateRange(sliderData["range"][0], sliderData["range"][1]);
+            return new DiscreteControl(fx, sliderData["paramName"], options);
+          };
+          const sliderControl = createSlider(fxData);
           return {
             wet: wetControl,
             xy: xyControl,
@@ -206,12 +206,8 @@ export class Composition {
         const preFx = preFxData ? fxFromData(preFxData) : null;
         const preFxControls = preFx ? createControls(preFx, preFxData) : null;
 
-        // Volume control (temporary)
-        const volume = new FXControl(
-          "volume",
-          "volume",
-          "volume" in groupData ? 0 : groupData["volume"]
-        );
+        const groupVolume = "volume" in groupData ? groupData["volume"] : 0;
+        const volume = new FXControl("volume", "volume", groupVolume);
 
         // Do the wiring
         // Each sample into the volume node
@@ -231,11 +227,7 @@ export class Composition {
         fx.getNode().toDestination();
 
         // Send dry signal to master alongside the wet for time based fx
-        const dryVolume = new FXControl(
-          "volume",
-          "volume",
-          volume in groupData ? 0 : groupData["volume"]
-        );
+        const dryVolume = new FXControl("volume", "volume", groupVolume);
         if (["reverb", "delay", "pingpong"].includes(fxData["type"])) {
           samples.forEach((s) => s.player.connect(dryVolume.getNode()));
         }
