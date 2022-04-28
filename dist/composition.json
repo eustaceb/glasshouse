@@ -136,7 +136,7 @@
           "preFx": {
             "type": "pitchshift",
             "params": {
-              "pitch": 0,
+              "pitch": -2,
               "windowSize": 0.1,
               "delayTime": 0.05,
               "feedback": 0.01

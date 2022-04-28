@@ -3,6 +3,7 @@ import {DownSlider} from "./DownSlider.js";
 import {InstrumentGroup} from "./InstrumentGroup.js";
 import {MultistateSwitch} from "./MultistateSwitch.js";
 import {XYPadStyled} from "./XYPadStyled.js";
+import {scale} from "../utils/Math.js";
 
 export function ComponentA(props) {
   const sliderControl = props.group.getFxControls()["slider"];
@@ -21,7 +22,8 @@ export function ComponentA(props) {
         trackerSize={57}
         boxClassName={desc.getBoxClassName()}
         trackerClassName={desc.getTrackerClassName()}
-        callback={(val) => xyControl.setX(val)}
+        callbackX={(val) => xyControl.setX(scale(val, 0, 123, 0, 1))} // Need to scale to [0, 1]
+        callbackY={(val) => xyControl.setY(scale(val, 0, 123, 0, 1))} // Need to scale to [0, 1]
         mouseController={props.mouseController}
       />
     );
