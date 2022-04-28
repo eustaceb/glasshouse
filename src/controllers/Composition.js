@@ -171,6 +171,7 @@ export class Composition {
 
           // @TODO: There's no real reason for xyControl to be mutually exclusive with xyControl, remove this
           const wetControl = xyControl ? null : new WetControl(fx);
+          if (wetControl)wetControl.setWet(0);
 
           const switchControl =
             "switch" in fxData
@@ -180,19 +181,18 @@ export class Composition {
                   fxData["switch"]["options"]
                 )
               : null;
-          const generateRange = (from, to) =>
-            Array.from({length: to - from + 1}, (_, k) => from + k);
-          const sliderControl =
-            "slider" in fxData
-              ? new DiscreteControl(
-                  fx,
-                  fxData["slider"]["paramName"],
-                  generateRange(
-                    fxData["slider"]["range"][0],
-                    fxData["slider"]["range"][1]
-                  )
-                )
-              : null;
+              const createSlider = (data) => {
+                if (!("slider" in data)) return null;
+                const generateRange = (from, to) =>
+                  Array.from({length: to - from + 1}, (_, k) => from + k);
+                const sliderData = data["slider"];
+                const options =
+                  "options" in sliderData
+                    ? sliderData["options"]
+                    : generateRange(sliderData["range"][0], sliderData["range"][1]);
+                return new DiscreteControl(fx, sliderData["paramName"], options);
+              };
+              const sliderControl = createSlider(fxData);
           return {
             wet: wetControl,
             xy: xyControl,
