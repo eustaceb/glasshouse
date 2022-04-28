@@ -139,7 +139,13 @@ class ComponentDescription {
 export class Composition {
   constructor(data, sampleController) {
     this.bgSample = sampleController.getSampleByName("Sham_main");
-    this.bgSample.player.toDestination();
+    const bgVolume = new FXControl(
+      "volume",
+      "volume",
+      2 // +2db to background sample
+    );
+    this.bgSample.getPlayer().connect(bgVolume.getNode());
+    bgVolume.getNode().toDestination();
 
     this.sections = data.map((section, index, _) => {
       const groups = Object.entries(section["groups"]).map((kvp) => {
@@ -249,7 +255,7 @@ export class Composition {
             const downSliderDesc = desc["downSlider"];
             downSliderDescription = new DownSliderDescription(
               downSliderDesc["className"] ?? "downSlider1",
-              downSliderDesc["steps"] ?? 7,
+              downSliderDesc["steps"] ?? 7
             );
           }
 
@@ -257,7 +263,7 @@ export class Composition {
             const xyPadDesc = desc["xyPad"];
             xyPadDescription = new XYPadDescription(
               xyPadDesc["boxClassName"] ?? "xyPad",
-              xyPadDesc["trackerClassName"] ?? "tracker",
+              xyPadDesc["trackerClassName"] ?? "tracker"
             );
           }
 
