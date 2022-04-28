@@ -22,6 +22,9 @@ class Sample {
     this.playState = Sample.PlayStates.INACTIVE;
     this.player.fadeOut = 0.1;
   }
+  getName() {
+    return this.name;
+  }
   play(time) {
     this.player.start(time);
   }
@@ -174,6 +177,7 @@ export class SampleController {
   }
 
   playSample(sampleId) {
+    this.samples[sampleId].setScheduled(true);
     this.playQueue[sampleId] = this.samples[sampleId].duration;
     this.firstPlayQueue.push(sampleId);
   }
@@ -188,10 +192,16 @@ export class SampleController {
   }
 
   stopSample(sampleId) {
-    // For now, only stop loops
-    //if (this.samples[sampleId].isLoop()) {
-    this.terminateLoopQueue.push(sampleId);
-    //}
+    // Cancel if scheduled
+    if (this.firstPlayQueue.includes(sampleId)) {
+      this.firstPlayQueue = this.firstPlayQueue.filter((s) => s !== sampleId);
+      this.playQueue[sampleId] = 0;
+      this.samples[sampleId].setInactive();
+      this.samples[sampleId].endPlaybackCallback();
+    } else {
+      // Otherwise, terminate on next bar
+      this.terminateLoopQueue.push(sampleId);
+    }
   }
 
   stopAllSamples() {

@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import {Button, ButtonGroup} from "@material-ui/core";
 
 export function MultistateSwitch(props) {
   const [selection, setSelection] = useState(props.initialSelection);
@@ -9,20 +8,17 @@ export function MultistateSwitch(props) {
     setSelection(sel);
   };
 
-  const buttons = props.optionLabels.map((label, i) => (
-    <Button
+  const bubbles = props.optionLabels.map((label, i) => (
+    <div
       key={i}
-      color={selection == i ? "secondary" : "default"}
+      className={
+        "switchCircle switchCircle" +
+        (i + 1).toString() +
+        (i == selection ? " switchCircleActive" : "")
+      }
       onClick={() => handleSelection(i)}
-      disableElevation>
-      {label}
-    </Button>
+    />
   ));
 
-  return (
-    <div>
-      {props.label}
-      <ButtonGroup>{buttons}</ButtonGroup>
-    </div>
-  );
+  return <div className={"switchContainer"}>{bubbles}</div>;
 }

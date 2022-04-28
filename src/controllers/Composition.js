@@ -31,7 +31,16 @@ export class Section {
 }
 
 class SampleGroup {
-  constructor(name, samples, preFx, preFxControls, fx, fxControls, volume) {
+  constructor(
+    name,
+    samples,
+    preFx,
+    preFxControls,
+    fx,
+    fxControls,
+    volume,
+    componentDescription
+  ) {
     this.name = name;
     this.samples = samples;
     this.preFx = preFx;
@@ -40,6 +49,7 @@ class SampleGroup {
     this.fxControls = fxControls;
     this.channel = new Tone.Channel(0, 0).connect(this.fx.getNode());
     this.volume = volume;
+    this.componentDescription = componentDescription;
   }
   getName() {
     return this.name;
@@ -65,12 +75,77 @@ class SampleGroup {
   getVolume() {
     return this.volume;
   }
+  getComponentDescription() {
+    return this.componentDescription;
+  }
+}
+
+class DownSliderDescription {
+  constructor(className, steps) {
+    this.className = className;
+    this.steps = steps;
+  }
+  getClassName() {
+    return this.className;
+  }
+  getSteps() {
+    return this.steps;
+  }
+}
+
+class XYPadDescription {
+  constructor(boxClassName, trackerClassName) {
+    this.boxClassName = boxClassName;
+    this.trackerClassName = trackerClassName;
+  }
+  getBoxClassName() {
+    return this.boxClassName;
+  }
+  getTrackerClassName() {
+    return this.trackerClassName;
+  }
+}
+
+class ComponentDescription {
+  constructor(
+    className,
+    downSliderDescription,
+    xyPadDescription,
+    multistateSwitchDescription
+  ) {
+    this.className = className;
+    this.downSliderDescription = downSliderDescription;
+    this.xyPadDescription = xyPadDescription;
+    this.multistateSwitchDescription = multistateSwitchDescription;
+  }
+
+  getClassName() {
+    return this.className;
+  }
+
+  getDownSliderDescription() {
+    return this.downSliderDescription;
+  }
+
+  getXYPadDescription() {
+    return this.xyPadDescription;
+  }
+
+  getMultistateSwitchDescription() {
+    return this.multistateSwitchDescription;
+  }
 }
 
 export class Composition {
   constructor(data, sampleController) {
-    this.bgSample = sampleController.getSampleByName("Sham main");
-    this.bgSample.player.toDestination();
+    this.bgSample = sampleController.getSampleByName("Sham_main");
+    const bgVolume = new FXControl(
+      "volume",
+      "volume",
+      2 // +2db to background sample
+    );
+    this.bgSample.getPlayer().connect(bgVolume.getNode());
+    bgVolume.getNode().toDestination();
 
     this.sections = data.map((section, index, _) => {
       const groups = Object.entries(section["groups"]).map((kvp) => {
@@ -169,6 +244,36 @@ export class Composition {
           dryVolume.setParam(parameter, value)
         );
 
+        let componentDescription = null;
+        if ("componentDescription" in groupData) {
+          const desc = groupData["componentDescription"];
+          let downSliderDescription = null;
+          let xyPadDescription = null;
+          let multistateSwitch = null;
+
+          if ("downSlider" in desc) {
+            const downSliderDesc = desc["downSlider"];
+            downSliderDescription = new DownSliderDescription(
+              downSliderDesc["className"] ?? "downSlider1",
+              downSliderDesc["steps"] ?? 7
+            );
+          }
+
+          if ("xyPad" in desc) {
+            const xyPadDesc = desc["xyPad"];
+            xyPadDescription = new XYPadDescription(
+              xyPadDesc["boxClassName"] ?? "xyPad",
+              xyPadDesc["trackerClassName"] ?? "tracker"
+            );
+          }
+
+          componentDescription = new ComponentDescription(
+            desc["className"] ?? "compponent componentA",
+            downSliderDescription,
+            xyPadDescription,
+            multistateSwitch
+          );
+        }
         return new SampleGroup(
           name,
           samples,
@@ -176,7 +281,8 @@ export class Composition {
           preFxControls,
           fx,
           fxControls,
-          volume
+          volume,
+          componentDescription
         );
       });
 
@@ -189,7 +295,7 @@ export class Composition {
         const volume = new FXControl("volume", instrumentData["volume"]);
         sample.getPlayer().connect(volume.getNode());
         volume.getNode().toDestination();
-        instruments.push({sample: sample, volume: volume});
+        instruments.push(sample);
       });
 
       return new Section(

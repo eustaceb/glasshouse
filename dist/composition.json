@@ -4,120 +4,169 @@
       "groups": {
         "vocals": {
           "samples": [
-            "Vocals Section1 1",
-            "Vocals Section1 2",
-            "Vocals Section1 3"
+            "vocals Vocals_Section1_1",
+            "vocals Vocals_Section1_2",
+            "vocals Vocals_Section1_3"
           ],
           "fx": {
             "type": "autopanner",
-            "params": { "frequency": 1.25, "depth": 1, "type": "sine", "channelCount": 2 }
+            "params": { "frequency": 1.25, "depth": 1, "type": "sine", "channelCount": 2, "wet": 0.05 }
           },
-          "volume": 12
+          "volume": 9,
+          "componentDescription" : {
+            "className" : "component componentA",
+            "downSlider" : {
+              "className" : "downSlider1",
+              "steps" : 8
+            }
+          }
         },
         "percussion": {
           "samples": [
-            "Percussion Section1 1",
-            "Percussion Section1 2",
-            "Percussion Section1 3"
+            "percussions Percussion_Section1_1",
+            "percussions Percussion_Section1_2",
+            "percussions Percussion_Section1_3"
           ],
           "fx": {
             "type": "delay",
-            "params": { "delayTime": 0.6, "feedback": 0.3 },
+            "params": { "delayTime": 0.6, "feedback": 0.3, "wet": 0.05 },
             "switch": { "paramName": "delayTime", "options": [0.15, 0.3, 0.6] }
+          },
+          "volume": 2,
+          "componentDescription" : {
+            "className" : "component componentB",
+            "downSlider" : {
+              "className" : "downSlider2",
+              "steps" : 9
+            }
           }
         }
       },
       "instruments": [
-        { "sample": "Bass Section1", "volume": 0 },
-        { "sample": "StringArp Section1", "volume": 0 },
-        { "sample": "Taiko Section1", "volume": 0 },
-        { "sample": "Clap Section1", "volume": 0 }
+        { "sample": "instrument Bass_Section1", "volume": 3 },
+        { "sample": "instrument StringArp_Section1", "volume": 5 },
+        { "sample": "instrument Taiko_Section1", "volume": 4 },
+        { "sample": "instrument Clap_Section1", "volume": 6 }
       ]
     },
     {
       "groups": {
         "vocals": {
           "samples": [
-            "Vocals Section2 1",
-            "Vocals Section2 2",
-            "Vocals Section2 3",
-            "Vocals Section2 4",
-            "Vocals Section2 5"
+            "vocals Vocals_Section2_1",
+            "vocals Vocals_Section2_2",
+            "vocals Vocals_Section2_3",
+            "vocals Vocals_Section2_4",
+            "vocals Vocals_Section2_5"
           ],
           "fx": {
             "type": "pingpong",
             "params": { "delayTime": 0.15, "feedback": 0.01 },
             "switch": { "paramName": "delayTime", "options": [ 0.8 , 0.4, 0.6] }
+          },
+          "volume": 9,
+          "componentDescription" : {
+            "className" : "component componentC",
+            "downSlider" : {
+              "className" : "downSlider3",
+              "steps" : 9
+            }
           }
         },
         "percussion": {
           "samples": [
-            "Percussion Section2 1",
-            "Percussion Section2 2",
-            "Percussion Section2 3"
+            "percussions Percussion_Section2_1",
+            "percussions Percussion_Section2_2",
+            "percussions Percussion_Section2_3"
           ],
           "fx": {
             "type": "reverb",
-            "params": { "decay": 30, "preDelay": 0.01 }
+            "params": { "decay": 30, "preDelay": 0.01, "wet": 0.05 }
+          },
+          "volume": 2,
+          "componentDescription" : {
+            "className" : "component componentD",
+            "downSlider" : {
+              "className" : "downSlider4",
+              "steps" : 9
+            }
           }
         }
       },
       "instruments": [
-        { "sample": "Bass Section2", "volume": 0 },
-        { "sample": "Guitalele Section2", "volume": 0 },
-        { "sample": "ChiralSynth Section2", "volume": 0 },
-        { "sample": "ClapFeedback Section2", "volume": 0 }
+        { "sample": "instrument Bass_Section2", "volume": 3 },
+        { "sample": "instrument Guitalele_Section2", "volume": 0 },
+        { "sample": "instrument ChiralSynth_Section2", "volume": 4 },
+        { "sample": "instrument ClapFeedback_Section2", "volume": 4 }
       ]
     },
     {
       "groups": {
         "vocals": {
           "samples": [
-            "Vocals Section3 1",
-            "Vocals Section3 2",
-            "Vocals Section3 3",
-            "Vocals Section3 4",
-            "Vocals Section3 5"
+            "vocals Vocals_Section3_1",
+            "vocals Vocals_Section3_2",
+            "vocals Vocals_Section3_3",
+            "vocals Vocals_Section3_4",
+            "vocals Vocals_Section3_5"
           ],
+          "preFx": {
+            "type": "pitchshift",
+            "params": { "pitch": 0, "windowSize": 0.1, "delayTime": 0.05, "feedback": 0.01 },
+            "x": {"paramName": "pitch", "range": [-6, 6]},
+            "y": {"paramName": "delayTime", "range": [0.05, 1]}
+          },
           "fx": {
             "type": "filter",
             "params": { "frequency": 1000, "type": "lowpass" },
             "x": {"paramName": "frequency", "range": [300, 2000]},
             "y": {"paramName": "gain", "range": [-50, 10]}
           },
-          "preFx": {
-            "type": "pitchshift",
-            "params": { "pitch": 0, "windowSize": 0.1, "delayTime": 0.05, "feedback": 0.01 },
-            "x": {"paramName": "pitch", "range": [-6, 6]},
-            "y": {"paramName": "delayTime", "range": [0.05, 1]}
-          }
-        },
+          "volume": 9,
+          "componentDescription" : {
+            "className" : "component componentE",
+            "downSlider" : {
+              "className" : "downSlider2",
+              "steps" : 9
+            },
+            "xyPad" : {
+              "boxClassName" : "xyPad",
+              "trackerClassName" : "tracker"
+            }
+          }},
         "percussion": {
           "samples": [
-            "Percussion Section3 1",
-            "Percussion Section3 2",
-            "Percussion Section3 3"
+            "percussions Percussion_Section3_1",
+            "percussions Percussion_Section3_2",
+            "percussions Percussion_Section3_3"
           ],
           "fx": {
             "type": "pingpong",
             "params": { "delayTime": 0.15, "feedback": 0.3 },
             "switch": { "paramName": "delayTime", "options": [0.15, 0.3, 0.6] }
+          },
+          "volume": 2,
+          "componentDescription" : {
+            "className" : "component componentF",
+            "downSlider" : {
+              "className" : "downSlider6",
+              "steps" : 9
+            }
           }
         }
       },
       "instruments": [
-        { "sample": "Bass Section3", "volume": 0 },
-        { "sample": "Glitch Section3", "volume": 0 },
-        { "sample": "ChiralSynth Section3", "volume": 0 },
-        { "sample": "ClapRegular Section3", "volume": 0},
-        { "sample": "ClapFeedback Section3", "volume": 0}
+        { "sample": "instrument ClapRegular_Section3", "volume": 6},
+        { "sample": "instrument ClapFeedback_Section3", "volume": 1},
+        { "sample": "instrument Bass_Section3", "volume": 4 },
+        { "sample": "instrument Glitch_Section3", "volume": 0 },
+        { "sample": "instrument ChiralSynth_Section3", "volume": 4 }
       ]
-    }
-  ],
+    }],
   "samples": [
     {
       "id": 0,
-      "name": "Sham main",
+      "name": "Sham_main",
       "path": "audio/Sham_main_8bars.mp3",
       "type": "loop",
       "duration": 8
@@ -131,276 +180,263 @@
     },
     {
       "id": 2,
-      "name": "Bass Section1",
+      "name": "instrument Bass_Section1",
       "path": "audio/Section_1/Bass_Section1_2bar.mp3",
       "type": "loop",
       "duration": 2
     },
     {
       "id": 3,
-      "name": "Clap Section1",
+      "name": "instrument Clap_Section1",
       "path": "audio/Section_1/Clap_Section1_1bar.mp3",
       "type": "loop",
       "duration": 1
     },
     {
       "id": 4,
-      "name": "Percussion Section1 1",
-      "path": "audio/Section_1/Percussion Section1_1_1bar.mp3",
+      "name": "percussions Percussion_Section1_1",
+      "path": "audio/Section_1/Percussion_Section1_1_1bar.mp3",
       "type": "loop",
       "duration": 1
     },
     {
       "id": 5,
-      "name": "Percussion Section1 2",
+      "name": "percussions Percussion_Section1_2",
       "path": "audio/Section_1/Percussion_Section1_2_1bar.mp3",
       "type": "loop",
       "duration": 1
     },
     {
       "id": 6,
-      "name": "Percussion Section1 3",
+      "name": "percussions Percussion_Section1_3",
       "path": "audio/Section_1/Percussion_Section1_3_2bar.mp3",
       "type": "loop",
       "duration": 2
     },
     {
       "id": 7,
-      "name": "StringArp Section1",
+      "name": "instrument StringArp_Section1",
       "path": "audio/Section_1/StringArp_Section1_4bar.mp3",
       "type": "loop",
       "duration": 4
     },
     {
       "id": 8,
-      "name": "Taiko Section1",
+      "name": "instrument Taiko_Section1",
       "path": "audio/Section_1/Taiko_Section1_2bar.mp3",
       "type": "loop",
-      "duration": 2
+      "duration": 2,
+      "shape": "polygon(35% 0%, 50% 0%, 65% 0%, 100% 35%, 100% 50%, 100% 65%, 65% 100%, 50% 100%, 35% 100%, 0% 65%, 0% 50%, 0% 35%)"
     },
     {
       "id": 9,
-      "name": "Vocals Section1 1",
+      "name": "vocals Vocals_Section1_1",
       "path": "audio/Section_1/Vocals_Section1_1_4bar.mp3",
       "type": "oneshot",
       "duration": 4
     },
     {
       "id": 10,
-      "name": "Vocals Section1 2",
+      "name": "vocals Vocals_Section1_2",
       "path": "audio/Section_1/Vocals_Section1_2_2bar.mp3",
       "type": "oneshot",
       "duration": 2
     },
     {
       "id": 11,
-      "name": "Vocals Section1 3",
+      "name": "vocals Vocals_Section1_3",
       "path": "audio/Section_1/Vocals_Section1_3_5bar.mp3",
       "type": "oneshot",
       "duration": 5
     },
     {
       "id": 12,
-      "name": "Bass Section2",
+      "name": "instrument Bass_Section2",
       "path": "audio/Section_2/Bass_Section2_2bar.mp3",
       "type": "loop",
       "duration": 2
     },
     {
       "id": 13,
-      "name": "ChiralSynth Section2",
+      "name": "instrument ChiralSynth_Section2",
       "path": "audio/Section_2/ChiralSynth_Section2_4bar.mp3",
       "type": "loop",
       "duration": 4
     },
     {
       "id": 14,
-      "name": "ClapFeedback Section2",
+      "name": "instrument ClapFeedback_Section2",
       "path": "audio/Section_2/ClapFeedback_Section2_3bar.mp3",
       "type": "loop",
       "duration": 3
     },
     {
       "id": 15,
-      "name": "Guitalele Section2",
+      "name": "instrument Guitalele_Section2",
       "path": "audio/Section_2/Guitalele_Section2_4bar.mp3",
       "type": "loop",
       "duration": 4
     },
     {
       "id": 16,
-      "name": "Percussion Section2 1",
-      "path": "audio/Section_2/Percussion Section2_1_1bar.mp3",
+      "name": "percussions Percussion_Section2_1",
+      "path": "audio/Section_2/Percussion_Section2_1_1bar.mp3",
       "type": "loop",
       "duration": 1
     },
     {
       "id": 17,
-      "name": "Percussion Section2 2",
-      "path": "audio/Section_2/Percussion Section2_2_1bar.mp3",
+      "name": "percussions Percussion_Section2_2",
+      "path": "audio/Section_2/Percussion_Section2_2_1bar.mp3",
       "type": "loop",
       "duration": 1
     },
     {
       "id": 18,
-      "name": "Percussion Section2 3",
-      "path": "audio/Section_2/Percussion Section2_3_2bar.mp3",
+      "name": "percussions Percussion_Section2_3",
+      "path": "audio/Section_2/Percussion_Section2_3_2bar.mp3",
       "type": "loop",
       "duration": 2
     },
     {
       "id": 19,
-      "name": "Percussion Section2 4",
-      "path": "audio/Section_2/Percussion Section2_4_1bar.mp3",
+      "name": "percussions Percussion_Section2_4",
+      "path": "audio/Section_2/Percussion_Section2_4_1bar.mp3",
       "type": "loop",
       "duration": 1
     },
     {
       "id": 20,
-      "name": "Vocals Section2 1",
+      "name": "vocals Vocals_Section2_1",
       "path": "audio/Section_2/Vocals_Section2_1_3bar.mp3",
       "type": "oneshot",
       "duration": 3
     },
     {
       "id": 21,
-      "name": "Vocals Section2 2",
+      "name": "vocals Vocals_Section2_2",
       "path": "audio/Section_2/Vocals_Section2_2_3bar.mp3",
       "type": "oneshot",
       "duration": 3
     },
     {
       "id": 22,
-      "name": "Vocals Section2 3",
+      "name": "vocals Vocals_Section2_3",
       "path": "audio/Section_2/Vocals_Section2_3_3bar.mp3",
       "type": "oneshot",
       "duration": 3
     },
     {
       "id": 23,
-      "name": "Vocals Section2 4",
+      "name": "vocals Vocals_Section2_4",
       "path": "audio/Section_2/Vocals_Section2_4_4bar.mp3",
       "type": "loop",
       "duration": 4
     },
     {
       "id": 24,
-      "name": "Vocals Section2 5",
+      "name": "vocals Vocals_Section2_5",
       "path": "audio/Section_2/Vocals_Section2_5_4bar.mp3",
       "type": "loop",
       "duration": 4
     },
     {
       "id": 25,
-      "name": "Bass Section3",
+      "name": "instrument Bass_Section3",
       "path": "audio/Section_3/Bass_Section3_4bar.mp3",
       "type": "loop",
       "duration": 4
     },
     {
       "id": 26,
-      "name": "ChiralSynth Section3",
+      "name": "instrument ChiralSynth_Section3",
       "path": "audio/Section_3/ChiralSynth_Section3_4bar.mp3",
       "type": "loop",
       "duration": 4
     },
     {
       "id": 27,
-      "name": "ClapFeedback Section3",
+      "name": "instrument ClapFeedback_Section3",
       "path": "audio/Section_3/ClapFeedback_Section3_3bar.mp3",
       "type": "loop",
       "duration": 3
     },
     {
       "id": 28,
-      "name": "ClapGlitch Section3",
+      "name": "instrument ClapGlitch_Section3",
       "path": "audio/Section_3/ClapGlitch_Section3_1bar.mp3",
       "type": "loop",
       "duration": 1
     },
     {
       "id": 29,
-      "name": "ClapRegular Section3",
+      "name": "instrument ClapRegular_Section3",
       "path": "audio/Section_3/ClapRegular_Section3_1bar.mp3",
       "type": "loop",
       "duration": 1
     },
     {
       "id": 30,
-      "name": "Glitch Section3",
+      "name": "instrument Glitch_Section3",
       "path": "audio/Section_3/Glitch_Section3_3bar.mp3",
       "type": "loop",
       "duration": 3
     },
     {
       "id": 31,
-      "name": "Percussion Section3 1",
+      "name": "percussions Percussion_Section3_1",
       "path": "audio/Section_3/Percussion_Section3_1_1bar.mp3",
       "type": "loop",
       "duration": 1
     },
     {
       "id": 32,
-      "name": "Percussion Section3 2",
+      "name": "percussions Percussion_Section3_2",
       "path": "audio/Section_3/Percussion_Section3_2_2bar.mp3",
       "type": "loop",
       "duration": 2
     },
     {
       "id": 33,
-      "name": "Percussion Section3 3",
+      "name": "percussions Percussion_Section3_3",
       "path": "audio/Section_3/Percussion_Section3_3_2bar.mp3",
       "type": "loop",
       "duration": 2
     },
     {
       "id": 34,
-      "name": "Vocals Section3 1",
+      "name": "vocals Vocals_Section3_1",
       "path": "audio/Section_3/Vocals_Section3_1_4,5bar.mp3",
       "type": "oneshot",
       "duration": 5
     },
     {
       "id": 35,
-      "name": "Vocals Section3 2",
+      "name": "vocals Vocals_Section3_2",
       "path": "audio/Section_3/Vocals_Section3_2_5bar.mp3",
       "type": "loop",
       "duration": 5
     },
     {
       "id": 36,
-      "name": "Vocals Section3 3",
+      "name": "vocals Vocals_Section3_3",
       "path": "audio/Section_3/Vocals_Section3_3_4,5bar.mp3",
       "type": "oneshot",
       "duration": 5
     },
     {
       "id": 37,
-      "name": "Vocals Section3 4",
+      "name": "vocals Vocals_Section3_4",
       "path": "audio/Section_3/Vocals_Section3_4_4bar.mp3",
       "type": "oneshot",
       "duration": 4
     },
     {
       "id": 38,
-      "name": "Vocals Section3 5",
+      "name": "vocals Vocals_Section3_5",
       "path": "audio/Section_3/Vocals_Section3_5_4bar.mp3",
       "type": "loop",
       "duration": 4
-    },
-    {
-      "id": 38,
-      "name": "Click1",
-      "path": "audio/test/click1_100bpm.mp3",
-      "type": "loop",
-      "duration": 1
-    },
-    {
-      "id": 38,
-      "name": "Click2",
-      "path": "audio/test/click2_100bpm.mp3",
-      "type": "loop",
-      "duration": 1
     }
   ]
 }
