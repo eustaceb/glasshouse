@@ -1,5 +1,10 @@
 import * as Tone from "tone";
-import {DiscreteControl, FXControl, WetControl, XYControl} from "./FXControls";
+import {
+  DiscreteControl,
+  FXControl,
+  ContinuousControl,
+  XYControl,
+} from "./FXControls";
 
 export class Section {
   /**
@@ -35,7 +40,6 @@ class SampleGroup {
     name,
     samples,
     preFx,
-    preFxControls,
     fx,
     fxControls,
     volume,
@@ -44,7 +48,6 @@ class SampleGroup {
     this.name = name;
     this.samples = samples;
     this.preFx = preFx;
-    this.preFxControls = preFxControls;
     this.fx = fx;
     this.fxControls = fxControls;
     this.channel = new Tone.Channel(0, 0).connect(this.fx.getNode());
@@ -62,15 +65,6 @@ class SampleGroup {
   }
   getFxControls() {
     return this.fxControls;
-  }
-  hasPreFx() {
-    return this.preFx !== null;
-  }
-  getPreFx() {
-    return this.preFx;
-  }
-  getPreFxControls() {
-    return this.preFxControls;
   }
   getVolume() {
     return this.volume;
@@ -165,46 +159,85 @@ export class Composition {
           return new FXControl(fxType, fxLabel, fxParams);
         };
 
-        const createControls = (fx, fxData) => {
-          const xyControl =
-            "x" in fxData ? new XYControl(fx, fxData["x"], fxData["y"]) : null;
+        const createControls = (preFx, fx, description) => {
+          let xyControl = null;
+          if ("xyPad" in description) {
+            xyControl = new XYControl(
+              preFx,
+              fx,
+              description["xyPad"]["xAxis"],
+              description["xyPad"]["yAxis"]
+            );
+          }
 
-          // @TODO: There's no real reason for xyControl to be mutually exclusive with xyControl, remove this
-          const wetControl = xyControl ? null : new WetControl(fx);
-          if (wetControl) wetControl.setWet(0);
+          // Only one slider per component
+          let sliderControl = null;
+          if ("downSlider" in description) {
+            const sliderData = description["downSlider"];
+            const source = sliderData["source"] === "fx" ? fx : preFx;
+            if ("options" in sliderData) {
+              sliderControl = new DiscreteControl(
+                source,
+                sliderData["paramName"],
+                sliderData["options"]
+              );
+            } else {
+              sliderControl = new ContinuousControl(
+                source,
+                sliderData["paramName"]
+              );
+            }
+          }
 
-          const switchControl =
-            "switch" in fxData
-              ? new DiscreteControl(
-                  fx,
-                  fxData["switch"]["paramName"],
-                  fxData["switch"]["options"]
-                )
-              : null;
-          const createSlider = (data) => {
-            if (!("slider" in data)) return null;
-            const generateRange = (from, to) =>
-              Array.from({length: to - from + 1}, (_, k) => from + k);
-            const sliderData = data["slider"];
-            const options =
-              "options" in sliderData
-                ? sliderData["options"]
-                : generateRange(sliderData["range"][0], sliderData["range"][1]);
-            return new DiscreteControl(fx, sliderData["paramName"], options);
-          };
-          const sliderControl = createSlider(fxData);
+          let switchControl = null;
+          if ("switch" in description) {
+            const switchData = description["switch"];
+            const source = switchData["source"] === "fx" ? fx : preFx;
+            switchControl = new DiscreteControl(
+              source,
+              switchData["paramName"],
+              switchData["options"]
+            );
+          }
           return {
-            wet: wetControl,
             xy: xyControl,
             switch: switchControl,
             slider: sliderControl,
           };
         };
 
+        // Create FX controls based on component descriptions
+        const desc = groupData["componentDescription"];
+        let downSliderDescription = null;
+        let xyPadDescription = null;
+        let multistateSwitch = null;
+
+        if ("downSlider" in desc) {
+          const downSliderDesc = desc["downSlider"];
+          downSliderDescription = new DownSliderDescription(
+            downSliderDesc["className"] ?? "downSlider1",
+            downSliderDesc["steps"] ?? 7
+          );
+        }
+
+        if ("xyPad" in desc) {
+          const xyPadDesc = desc["xyPad"];
+          xyPadDescription = new XYPadDescription(
+            xyPadDesc["boxClassName"] ?? "xyPad",
+            xyPadDesc["trackerClassName"] ?? "tracker"
+          );
+        }
+
+        const componentDescription = new ComponentDescription(
+          desc["className"] ?? "compponent componentA",
+          downSliderDescription,
+          xyPadDescription,
+          multistateSwitch
+        );
+
         const fx = fxFromData(fxData);
-        const fxControls = createControls(fx, fxData);
         const preFx = preFxData ? fxFromData(preFxData) : null;
-        const preFxControls = preFx ? createControls(preFx, preFxData) : null;
+        const fxControls = createControls(preFx, fx, desc);
 
         const groupVolume = "volume" in groupData ? groupData["volume"] : 0;
         const volume = new FXControl("volume", "volume", groupVolume);
@@ -236,41 +269,10 @@ export class Composition {
           dryVolume.setParam(parameter, value)
         );
 
-        let componentDescription = null;
-        if ("componentDescription" in groupData) {
-          const desc = groupData["componentDescription"];
-          let downSliderDescription = null;
-          let xyPadDescription = null;
-          let multistateSwitch = null;
-
-          if ("downSlider" in desc) {
-            const downSliderDesc = desc["downSlider"];
-            downSliderDescription = new DownSliderDescription(
-              downSliderDesc["className"] ?? "downSlider1",
-              downSliderDesc["steps"] ?? 7
-            );
-          }
-
-          if ("xyPad" in desc) {
-            const xyPadDesc = desc["xyPad"];
-            xyPadDescription = new XYPadDescription(
-              xyPadDesc["boxClassName"] ?? "xyPad",
-              xyPadDesc["trackerClassName"] ?? "tracker"
-            );
-          }
-
-          componentDescription = new ComponentDescription(
-            desc["className"] ?? "compponent componentA",
-            downSliderDescription,
-            xyPadDescription,
-            multistateSwitch
-          );
-        }
         return new SampleGroup(
           name,
           samples,
           preFx,
-          preFxControls,
           fx,
           fxControls,
           volume,

@@ -38,17 +38,17 @@ export function XYPadStyled(props) {
 
           // Only update state if value has changed
           if (Math.abs(constrainedX - ctx.x) > 0.0000001) {
-            if (ctx.callbackX) ctx.callbackX(constrainedX);
+            if (props.callbackX) props.callbackX(constrainedX);
             setX(constrainedX);
           }
           if (Math.abs(constrainedY - ctx.y) > 0.0000001) {
-            if (ctx.callbackY) ctx.callbackY(constrainedY);
+            if (props.callbackY) props.callbackY(constrainedY);
             setY(constrainedY);
           }
         }
       }
     },
-    [minValue, maxValue]
+    [minValue, maxValue, props.callbackX, props.callbackY]
   );
 
   const mouseDown = React.useCallback((e) => {
