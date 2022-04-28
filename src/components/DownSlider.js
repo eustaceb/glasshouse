@@ -26,6 +26,10 @@ export function DownSlider(props) {
         // Next position is a proportion of cursorY / element height (so [0,1])
         let nextPosition = (event.clientY - hitBox.top) / hitBox.height;
         nextPosition = clamp(nextPosition, minPosition, maxPosition);
+        // nextPosition = 1.1/(1+ Math.pow(Math.E, 2.5 - 10 * nextPosition));
+        // nextPosition = Math.log10(nextPosition + 0.02) * 0.6 + 1;
+        // nextPosition = Math.log10(nextPosition + 0.12) + 0.95;
+        nextPosition = Math.log10(0.5 * nextPosition + 0.07) + 1.2;
 
         props.callback(nextPosition);
         setPosition(nextPosition);
@@ -52,7 +56,7 @@ export function DownSlider(props) {
   const handleMouseDown = React.useCallback(
     (event) => {
       event.preventDefault();
-  
+
       mouseDown.current = true;
       const hitBox = event.target.getBoundingClientRect();
 
