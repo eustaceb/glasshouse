@@ -12,7 +12,7 @@
             "type": "autopanner",
             "params": { "frequency": 1.25, "depth": 1, "type": "sine", "channelCount": 2, "wet": 0.05 }
           },
-          "volume": 9,
+          "volume": 5,
           "componentDescription" : {
             "className" : "component componentA",
             "downSlider" : {
@@ -64,7 +64,7 @@
             "params": { "delayTime": 0.15, "feedback": 0.01 },
             "switch": { "paramName": "delayTime", "options": [ 0.8 , 0.4, 0.6] }
           },
-          "volume": 0,
+          "volume": -10,
           "componentDescription" : {
             "className" : "component componentC",
             "downSlider" : {
@@ -83,7 +83,7 @@
             "type": "reverb",
             "params": { "decay": 30, "preDelay": 0.01, "wet": 0.05 }
           },
-          "volume": 2,
+          "volume": 0,
           "componentDescription" : {
             "className" : "component componentD",
             "downSlider" : {
@@ -122,7 +122,7 @@
             "x": {"paramName": "frequency", "range": [300, 2000]},
             "y": {"paramName": "gain", "range": [-50, 10]}
           },
-          "volume": 11,
+          "volume": 6,
           "componentDescription" : {
             "className" : "component componentE",
             "downSlider" : {
