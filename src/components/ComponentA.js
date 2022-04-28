@@ -52,6 +52,7 @@ export function ComponentA(props) {
   }
 
   return (
+    <div className={"componentContainer"}>
     <div className={props.description.getClassName()}>
       <InstrumentGroup
         playSample={props.playSample}
@@ -60,7 +61,8 @@ export function ComponentA(props) {
       />
       {fxComponent}
       {fxXYComponent}
-      {fxAppendageComponent}
+    </div>
+    {fxAppendageComponent}
     </div>
   );
 }

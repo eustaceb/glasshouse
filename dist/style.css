@@ -89,6 +89,10 @@ body::after{
   flex-direction: row;
   justify-content: center;
 }
+.componentContainer {
+  display: flex;
+  flex-direction: column;
+}
 .component {
   width: 340px;
   height: 640px;
@@ -308,7 +312,12 @@ body::after{
 .componentB {
   background-image: url('images/Section_1/componentB.png');
   width: 337px;
-  height: 632px;
+  height: 591px;
+}
+.switchBase {
+  background-image: url('images/Switch/base.png');
+  width: 337px;
+  height: 41px;
 }
 
 .componentC {
@@ -847,10 +856,40 @@ body::after{
   background-image: url('images/Section_3/filternotch.png');
   width: 57px;
   height: 57px;
+  cursor: pointer;
 }
 
 .tracker:hover {
   background-image: url('images/Section_3/filternotchActive.png');
+}
+
+/* Multistate Switch */
+.switchContainer {
+  background-image: url('images/Switch/base.png');
+  width: 337px;
+  height: 41px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 2px;
+  justify-content: center;
+}
+.switchCircle {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  margin-top: 5%;
+  /*
+  clip-path: circle(30%);
+  */
+}
+.switchCircle:hover {
+  background-image: url('images/Switch/circleHover.png');
+}
+.switchCircleActive {
+  background-image: url('images/Switch/circleActive.png');
+}
+.switchCircleActive:hover {
+  background-image: url('images/Switch/circleHover.png'), url('images/Switch/circleActive.png');
 }
 
 /* Modal */
