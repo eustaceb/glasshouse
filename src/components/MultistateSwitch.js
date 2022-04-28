@@ -11,7 +11,11 @@ export function MultistateSwitch(props) {
   const bubbles = props.optionLabels.map((label, i) => (
     <div
       key={i}
-      className={"switchCircle" + (i == selection ? " switchCircleActive" : "")}
+      className={
+        "switchCircle switchCircle" +
+        (i + 1).toString() +
+        (i == selection ? " switchCircleActive" : "")
+      }
       onClick={() => handleSelection(i)}
     />
   ));
