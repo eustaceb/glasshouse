@@ -877,10 +877,17 @@ body::after{
   width: 25px;
   height: 25px;
   cursor: pointer;
-  margin-top: 5%;
-  /*
-  clip-path: circle(30%);
-  */
+  position: relative;
+  top: 38%;
+}
+.switchCircle1 {
+  left: -4%;
+}
+.switchCircle2 {
+  left: 0%;
+}
+.switchCircle3 {
+  left: 4%;
 }
 .switchCircle:hover {
   background-image: url('images/Switch/circleHover.png');
