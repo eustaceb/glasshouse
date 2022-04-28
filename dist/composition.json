@@ -10,14 +10,22 @@
           ],
           "fx": {
             "type": "autopanner",
-            "params": { "frequency": 1.25, "depth": 1, "type": "sine", "channelCount": 2, "wet": 0.05 }
+            "params": {
+              "frequency": 1.25,
+              "depth": 1,
+              "type": "sine",
+              "channelCount": 2,
+              "wet": 0.05
+            }
           },
           "volume": 5,
-          "componentDescription" : {
-            "className" : "component componentA",
-            "downSlider" : {
-              "className" : "downSlider1",
-              "steps" : 8
+          "componentDescription": {
+            "className": "component componentA",
+            "downSlider": {
+              "className": "downSlider1",
+              "steps": 8,
+              "source": "fx",
+              "paramName": "wet"
             }
           }
         },
@@ -29,24 +37,30 @@
           ],
           "fx": {
             "type": "delay",
-            "params": { "delayTime": 0.6, "feedback": 0.3, "wet": 0.05 },
-            "switch": { "paramName": "delayTime", "options": [0.15, 0.3, 0.6] }
+            "params": {"delayTime": 0.6, "feedback": 0.3, "wet": 0.05}
           },
           "volume": 0,
-          "componentDescription" : {
-            "className" : "component componentB",
-            "downSlider" : {
-              "className" : "downSlider2",
-              "steps" : 9
+          "componentDescription": {
+            "className": "component componentB",
+            "downSlider": {
+              "className": "downSlider2",
+              "steps": 9,
+              "source": "fx",
+              "paramName": "wet"
+            },
+            "switch": {
+              "source": "fx",
+              "paramName": "delayTime",
+              "options": [0.15, 0.3, 0.6]
             }
           }
         }
       },
       "instruments": [
-        { "sample": "instrument Bass_Section1", "volume": 3 },
-        { "sample": "instrument StringArp_Section1", "volume": 5 },
-        { "sample": "instrument Taiko_Section1", "volume": 4 },
-        { "sample": "instrument Clap_Section1", "volume": 6 }
+        {"sample": "instrument Bass_Section1", "volume": 3},
+        {"sample": "instrument StringArp_Section1", "volume": 5},
+        {"sample": "instrument Taiko_Section1", "volume": 4},
+        {"sample": "instrument Clap_Section1", "volume": 6}
       ]
     },
     {
@@ -61,15 +75,21 @@
           ],
           "fx": {
             "type": "pingpong",
-            "params": { "delayTime": 0.15, "feedback": 0.01 },
-            "switch": { "paramName": "delayTime", "options": [ 0.8 , 0.4, 0.6] }
+            "params": {"delayTime": 0.15, "feedback": 0.01, "wet": 0.05}
           },
           "volume": -10,
-          "componentDescription" : {
-            "className" : "component componentC",
-            "downSlider" : {
-              "className" : "downSlider3",
-              "steps" : 9
+          "componentDescription": {
+            "className": "component componentC",
+            "downSlider": {
+              "className": "downSlider3",
+              "steps": 9,
+              "source": "fx",
+              "paramName": "wet"
+            },
+            "switch": {
+              "source": "fx",
+              "paramName": "delayTime",
+              "options": [0.8, 0.4, 0.6]
             }
           }
         },
@@ -81,23 +101,25 @@
           ],
           "fx": {
             "type": "reverb",
-            "params": { "decay": 30, "preDelay": 0.01, "wet": 0.05 }
+            "params": {"decay": 30, "preDelay": 0.01, "wet": 0.05}
           },
           "volume": 0,
-          "componentDescription" : {
-            "className" : "component componentD",
-            "downSlider" : {
-              "className" : "downSlider4",
-              "steps" : 9
+          "componentDescription": {
+            "className": "component componentD",
+            "downSlider": {
+              "className": "downSlider4",
+              "steps": 9,
+              "source": "fx",
+              "paramName": "wet"
             }
           }
         }
       },
       "instruments": [
-        { "sample": "instrument Bass_Section2", "volume": 3 },
-        { "sample": "instrument Guitalele_Section2", "volume": 0 },
-        { "sample": "instrument ChiralSynth_Section2", "volume": 4 },
-        { "sample": "instrument ClapFeedback_Section2", "volume": 4 }
+        {"sample": "instrument Bass_Section2", "volume": 3},
+        {"sample": "instrument Guitalele_Section2", "volume": 0},
+        {"sample": "instrument ChiralSynth_Section2", "volume": 4},
+        {"sample": "instrument ClapFeedback_Section2", "volume": 4}
       ]
     },
     {
@@ -110,30 +132,45 @@
             "vocals Vocals_Section3_4",
             "vocals Vocals_Section3_5"
           ],
+          "volume": 6,
           "preFx": {
             "type": "pitchshift",
-            "params": { "pitch": 0, "windowSize": 0.1, "delayTime": 0.05, "feedback": 0.01 },
-            "x": {"paramName": "pitch", "range": [-6, 6]},
-            "y": {"paramName": "delayTime", "range": [0.05, 1]}
+            "params": {
+              "pitch": 0,
+              "windowSize": 0.1,
+              "delayTime": 0.05,
+              "feedback": 0.01
+            }
           },
           "fx": {
             "type": "filter",
-            "params": { "frequency": 1000, "type": "lowpass" },
-            "x": {"paramName": "frequency", "range": [300, 2000]},
-            "y": {"paramName": "gain", "range": [-50, 10]}
+            "params": {"frequency": 1000, "type": "lowpass"}
           },
-          "volume": 6,
-          "componentDescription" : {
-            "className" : "component componentE",
-            "downSlider" : {
-              "className" : "downSlider2",
-              "steps" : 9
+          "componentDescription": {
+            "className": "component componentE",
+            "downSlider": {
+              "className": "downSlider2",
+              "steps": 9,
+              "source": "fx",
+              "paramName": "pitch",
+              "options": [-6, -4, -2, 0, 2, 4, 6]
             },
-            "xyPad" : {
-              "boxClassName" : "xyPad",
-              "trackerClassName" : "tracker"
+            "xyPad": {
+              "boxClassName": "xyPad",
+              "trackerClassName": "tracker",
+              "xAxis": {
+                "source": "fx",
+                "paramName": "frequency",
+                "range": [300, 2000]
+              },
+              "yAxis": {
+                "source": "preFx",
+                "paramName": "delayTime",
+                "range": [0.05, 1]
+              }
             }
-          }},
+          }
+        },
         "percussion": {
           "samples": [
             "percussions Percussion_Section3_1",
@@ -142,27 +179,34 @@
           ],
           "fx": {
             "type": "pingpong",
-            "params": { "delayTime": 0.15, "feedback": 0.3 },
-            "switch": { "paramName": "delayTime", "options": [0.15, 0.3, 0.6] }
+            "params": {"delayTime": 0.15, "feedback": 0.3, "wet": 0.05}
           },
           "volume": 2,
-          "componentDescription" : {
-            "className" : "component componentF",
-            "downSlider" : {
-              "className" : "downSlider6",
-              "steps" : 9
+          "componentDescription": {
+            "className": "component componentF",
+            "downSlider": {
+              "className": "downSlider6",
+              "steps": 9,
+              "source": "fx",
+              "paramName": "wet"
+            },
+            "switch": {
+              "source": "fx",
+              "paramName": "delayTime",
+              "options": [0.15, 0.3, 0.6]
             }
           }
         }
       },
       "instruments": [
-        { "sample": "instrument ClapRegular_Section3", "volume": 6},
-        { "sample": "instrument ClapFeedback_Section3", "volume": 1},
-        { "sample": "instrument Bass_Section3", "volume": 4 },
-        { "sample": "instrument Glitch_Section3", "volume": 0 },
-        { "sample": "instrument ChiralSynth_Section3", "volume": 4 }
+        {"sample": "instrument ClapRegular_Section3", "volume": 6},
+        {"sample": "instrument ClapFeedback_Section3", "volume": 1},
+        {"sample": "instrument Bass_Section3", "volume": 4},
+        {"sample": "instrument Glitch_Section3", "volume": 0},
+        {"sample": "instrument ChiralSynth_Section3", "volume": 4}
       ]
-    }],
+    }
+  ],
   "samples": [
     {
       "id": 0,

@@ -81,20 +81,25 @@ class FXControl {
 }
 
 class XYControl {
-  constructor(fx, xAxis, yAxis) {
-    this.fx = fx;
+  constructor(preFx, fx, xAxis, yAxis) {
     console.assert(
-      xAxis.hasOwnProperty("paramName") && xAxis.hasOwnProperty("range")
+      xAxis.hasOwnProperty("paramName") &&
+        xAxis.hasOwnProperty("range") &&
+        xAxis.hasOwnProperty("source")
     );
     console.assert(
-      yAxis.hasOwnProperty("paramName") && yAxis.hasOwnProperty("range")
+      yAxis.hasOwnProperty("paramName") &&
+        yAxis.hasOwnProperty("range") &&
+        yAxis.hasOwnProperty("source")
     );
+    this.xFx = xAxis.source === "fx" ? fx : preFx;
+    this.yFx = yAxis.source === "fx" ? fx : preFx;
     this.xAxis = xAxis;
     this.yAxis = yAxis;
   }
 
   getLabel() {
-    return this.fx.getLabel();
+    return `${this.xFx.getLabel()} ${this.getLabelX()} and ${this.yFx.getLabel()} ${this.getLabelY()}`;
   }
 
   getLabelX() {
@@ -114,13 +119,13 @@ class XYControl {
       this.xAxis.range[0],
       this.xAxis.range[1]
     );
-    this.fx.setParam(this.xAxis.paramName, scaled);
+    this.xFx.setParam(this.xAxis.paramName, scaled);
   }
 
   getX() {
     // Scales to [0, 1]
     return scale(
-      this.fx.getParam(this.xAxis.paramName),
+      this.xFx.getParam(this.xAxis.paramName),
       this.xAxis.range[0],
       this.xAxis.range[1],
       0,
@@ -137,13 +142,13 @@ class XYControl {
       this.yAxis.range[0],
       this.yAxis.range[1]
     );
-    this.fx.setParam(this.yAxis.paramName, scaled);
+    this.yFx.setParam(this.yAxis.paramName, scaled);
   }
 
   getX() {
     // Scales to [0, 1]
     return scale(
-      this.fx.getParam(this.yAxis.paramName),
+      this.yFx.getParam(this.yAxis.paramName),
       this.yAxis.range[0],
       this.yAxis.range[1],
       0,
@@ -182,27 +187,38 @@ class DiscreteControl {
   getValue() {
     return this.fx.getParam(this.paramName);
   }
+
+  isContinuous() {
+    return false;
+  }
 }
 
-class WetControl {
-  constructor(fx) {
+class ContinuousControl {
+  constructor(fx, paramName, range) {
     this.fx = fx;
+    this.paramName = paramName;
+    this.range = range;
   }
 
   getLabel() {
-    return `Wet for ${this.fx.getLabel()}`;
+    return `${this.paramName} for ${this.fx.getLabel()}`;
   }
 
   getFx() {
     return this.fx;
   }
 
-  setWet(value) {
-    this.fx.setParam("wet", value);
+  setValue(value) {
+    this.fx.setParam(this.paramName, value);
   }
-  getWet() {
-    return this.fx.getParam("wet");
+
+  getValue() {
+    return this.fx.getParam(this.paramName);
+  }
+
+  isContinuous() {
+    return true;
   }
 }
 
-export {DiscreteControl, FXControl, WetControl, XYControl};
+export {DiscreteControl, FXControl, ContinuousControl, XYControl};
