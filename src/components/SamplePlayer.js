@@ -10,7 +10,7 @@ export function SamplePlayer(props) {
   const vocals = section.getGroup("vocals");
   const percussion = section.getGroup("percussion");
   const instruments = section.getInstruments();
-  console.log(vocals);
+
   const playSample = (sampleIndex) => {
     props.sampleController.playSample(sampleIndex);
   };

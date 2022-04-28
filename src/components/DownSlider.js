@@ -11,11 +11,14 @@ export function DownSlider(props) {
   const maxPosition = props.maxPosition;
   const className = props.className;
 
-  const [step, setStep] = useState(props.initialStep);
   const [position, setPosition] = useState(props.initialPosition);
   const mouseDown = useRef(false);
 
   const componentId = useRef(uuidv4());
+
+  const positionToStep = (pos, steps) => {
+    return Math.trunc((pos / maxPosition) * steps);
+  }
 
   const handleMouseMove = React.useCallback(
     (event) => {
@@ -29,7 +32,6 @@ export function DownSlider(props) {
 
         props.callback(nextPosition);
         setPosition(nextPosition);
-        setStep(Math.trunc((nextPosition / maxPosition) * steps));
       }
     },
     [position]
@@ -62,14 +64,13 @@ export function DownSlider(props) {
 
       props.callback(nextPosition);
       setPosition(nextPosition);
-      setStep(Math.trunc((nextPosition / maxPosition) * steps));
     },
     [position]
   );
 
   return (
     <div
-      className={className + " " + className + "_" + step}
+      className={className + " " + className + "_" + positionToStep(position, steps)}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}></div>
   );

@@ -180,7 +180,7 @@ class DiscreteControl {
   }
 
   getValue() {
-    this.fx.getParam(this.paramName);
+    return this.fx.getParam(this.paramName);
   }
 }
 
@@ -201,7 +201,7 @@ class WetControl {
     this.fx.setParam("wet", value);
   }
   getWet() {
-    this.fx.getParam("wet");
+    return this.fx.getParam("wet");
   }
 }
 
