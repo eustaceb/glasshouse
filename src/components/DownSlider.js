@@ -39,6 +39,7 @@ export function DownSlider(props) {
 
   useEffect(() => {
     let componentRef = componentId.current;
+    setPosition(props.initialPosition);
     props.mouseController.registerListener(
       componentId.current,
       "mouseUp",
