@@ -12,7 +12,7 @@
             "type": "autopanner",
             "params": { "frequency": 3.33, "depth": 1, "type": "sine", "channelCount": 2, "wet": 0.2 }
           },
-          "volume": 12,
+          "volume": 9,
           "componentDescription" : {
             "className" : "component componentA",
             "downSlider" : {
@@ -32,6 +32,7 @@
             "params": { "delayTime": 0.6, "feedback": 0.3, "wet": 0.2 },
             "switch": { "paramName": "delayTime", "options": [0.15, 0.3, 0.6] }
           },
+          "volume": 2,
           "componentDescription" : {
             "className" : "component componentB",
             "downSlider" : {
@@ -42,10 +43,10 @@
         }
       },
       "instruments": [
-        { "sample": "instrument Bass_Section1", "volume": 0 },
-        { "sample": "instrument StringArp_Section1", "volume": 0 },
-        { "sample": "instrument Taiko_Section1", "volume": 0 },
-        { "sample": "instrument Clap_Section1", "volume": 0 }
+        { "sample": "instrument Bass_Section1", "volume": 3 },
+        { "sample": "instrument StringArp_Section1", "volume": 5 },
+        { "sample": "instrument Taiko_Section1", "volume": 4 },
+        { "sample": "instrument Clap_Section1", "volume": 6 }
       ]
     },
     {
@@ -62,6 +63,7 @@
             "type": "pingpong",
             "params": { "delayTime": "4n", "feedback": 0.8, "wet": 0.2 }
           },
+          "volume": 9,
           "componentDescription" : {
             "className" : "component componentC",
             "downSlider" : {
@@ -80,6 +82,7 @@
             "type": "reverb",
             "params": { "decay": 30, "preDelay": 0.01, "wet": 0.2 }
           },
+          "volume": 2,
           "componentDescription" : {
             "className" : "component componentD",
             "downSlider" : {
@@ -90,10 +93,10 @@
         }
       },
       "instruments": [
-        { "sample": "instrument Bass_Section2", "volume": 0 },
+        { "sample": "instrument Bass_Section2", "volume": 3 },
         { "sample": "instrument Guitalele_Section2", "volume": 0 },
-        { "sample": "instrument ChiralSynth_Section2", "volume": 0 },
-        { "sample": "instrument ClapFeedback_Section2", "volume": 0 }
+        { "sample": "instrument ChiralSynth_Section2", "volume": 4 },
+        { "sample": "instrument ClapFeedback_Section2", "volume": 4 }
       ]
     },
     {
@@ -112,6 +115,7 @@
             "x": {"paramName": "frequency", "range": [300, 2000]},
             "y": {"paramName": "gain", "range": [-50, 10]}
           },
+          "volume": 9,
           "componentDescription" : {
             "className" : "component componentE",
             "downSlider" : {
@@ -134,6 +138,7 @@
             "type": "pingpong",
             "params": { "delayTime": "4n", "feedback": 0.8, "wet": 0.2 }
           },
+          "volume": 2,
           "componentDescription" : {
             "className" : "component componentF",
             "downSlider" : {
@@ -144,11 +149,11 @@
         }
       },
       "instruments": [
-        { "sample": "instrument ClapRegular_Section3", "volume": 0},
-        { "sample": "instrument ClapFeedback_Section3", "volume": 0},
-        { "sample": "instrument Bass_Section3", "volume": 0 },
+        { "sample": "instrument ClapRegular_Section3", "volume": 6},
+        { "sample": "instrument ClapFeedback_Section3", "volume": 1},
+        { "sample": "instrument Bass_Section3", "volume": 4 },
         { "sample": "instrument Glitch_Section3", "volume": 0 },
-        { "sample": "instrument ChiralSynth_Section3", "volume": 0 }
+        { "sample": "instrument ChiralSynth_Section3", "volume": 4 }
       ]
     }
   ],
