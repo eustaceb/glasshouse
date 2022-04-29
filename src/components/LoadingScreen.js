@@ -34,13 +34,13 @@ export function LoadingScreen(props) {
           }
         );
     }, []);
-  
+
     return (
       <div className="startModal">
         <p>
           {loaded ? (
             <a href="#" className="start" onClick={() => props.start()}>
-              Start
+              MASHANGOK
             </a>
           ) : error ? (
             `Error`
