@@ -298,31 +298,31 @@ body::after{
 /* Major components */
 .componentA {
   background-image: url('images/Section_1/componentA.png');
-  width: 337px;
+  width: 349px;
   height: 634px;
 }
 
 .componentB {
   background-image: url('images/Section_1/componentB.png');
-  width: 337px;
+  width: 349px;
   height: 591px;
 }
 .switchBase {
   background-image: url('images/Switch/base.png');
-  width: 337px;
+  width: 349px;
   height: 41px;
 }
 
 .componentC {
   background-image: url('images/Section_2/componentC.png');
   width: 349px;
-  height: 651px;
+  height: 593px;
 }
 
 .componentD {
   background-image: url('images/Section_2/componentD.png');
   width: 349px;
-  height: 651px;
+  height: 631px;
 }
 
 .componentE {
@@ -334,7 +334,7 @@ body::after{
 .componentF {
   background-image: url('images/Section_3/componentF.png');
   width: 349px;
-  height: 651px;
+  height: 594px;
 }
 
 
@@ -663,7 +663,7 @@ body::after{
   background-repeat: no-repeat;
   position:  absolute;
   top: 421px;
-  left: 115px;
+  left: 121px;
   width: 107px;
   height: 214px;
   cursor: pointer;
@@ -695,7 +695,7 @@ body::after{
   background-repeat: no-repeat;
   position:  absolute;
   top: 381px;
-  left: 115px;
+  left: 121px;
   width: 107px;
   height: 214px;
   cursor: pointer;
@@ -730,7 +730,7 @@ body::after{
 .downSlider3 {
   background-repeat: no-repeat;
   position:  absolute;
-  top: 390px;
+  top: 382px;
   left: 120px;
   width: 107px;
   height: 214px;
@@ -764,7 +764,7 @@ body::after{
 .downSlider4 {
   background-repeat: no-repeat;
   position:  absolute;
-  top: 427px;
+  top: 418px;
   left: 120px;
   width: 107px;
   height: 214px;
@@ -800,8 +800,8 @@ body::after{
 .downSlider6 {
   background-repeat: no-repeat;
   position:  absolute;
-  top: 390px;
-  left: 120px;
+  top: 384px;
+  left: 121px;
   width: 107px;
   height: 214px;
   cursor: pointer;
@@ -874,13 +874,13 @@ body::after{
   top: 38%;
 }
 .switchCircle1 {
-  left: -4%;
+  left: -2%;
 }
 .switchCircle2 {
-  left: 0%;
+  left: 2%;
 }
 .switchCircle3 {
-  left: 4%;
+  left: 6%;
 }
 .switchCircle:hover {
   background-image: url('images/Switch/circleHover.png');
