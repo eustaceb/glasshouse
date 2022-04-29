@@ -85,6 +85,8 @@ body::after{
 .componentContainer {
   display: flex;
   flex-direction: column;
+  width: 421px;
+  height: 640px;
 }
 .component {
   width: 340px;
@@ -327,8 +329,8 @@ body::after{
 
 .componentE {
   background-image: url('images/Section_3/componentE.png');
-  width: 440px;
-  height: 640px;
+  width: 421px;
+  height: 634px;
 }
 
 .componentF {
