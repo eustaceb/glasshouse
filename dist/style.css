@@ -52,12 +52,19 @@ body::after{
   z-index: -1;
 }
 
-
+#bgimg {
+  position: fixed;
+  left: 0;
+  bottom: -20%;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: 0;
+}
 .mainContainer {
   display: flex;
   flex-direction: column;
   position: relative;
-  background-image: url('./images/bg.png');
+  /* background-image: url('./images/bg.png'); */
   background-position: bottom;
   background-size: cover;
   background-attachment: fixed;
