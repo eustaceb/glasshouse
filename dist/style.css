@@ -927,8 +927,9 @@ body::after{
   top: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
-  font-size: min(11vw, 11vh);
+  font-size: min(9vw, 9vh);
   text-align: center;
+  /* margin-top:max(-9vw, -9vh); */
 }
 .startModal p {
   line-height: 1.5;
@@ -941,8 +942,9 @@ body::after{
 }
 .startModal a {
   text-decoration: none;
+  color:#fff;
 }
-.startModal a:link {
+/* .startModal a:link {
   color: #fff;
 }
 .startModal a:visited {
@@ -953,6 +955,25 @@ body::after{
 }
 .startModal a:active {
   color: blue;
+} */
+
+.playButton {
+  width:min(14vw, 14vh);
+  height: min(14vw, 14vh);
+  background-image: url("images/navigation/playbuttonStatic.png");
+  background-size: contain;
+  position:absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin-top:max(10vh, 10vw);
+  cursor: pointer;
+
+}
+
+.playButton:hover {
+  background-image: url("images/navigation/playbuttonStatic.png"), url("images/navigation/playbuttonHover.png");
 }
 
 /* Navigation */

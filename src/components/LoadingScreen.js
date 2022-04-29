@@ -36,18 +36,23 @@ export function LoadingScreen(props) {
     }, []);
 
     return (
+      <>
       <div className="startModal">
         <p>
           {loaded ? (
-            <a href="#" className="start" onClick={() => props.start()}>
-              MASHANGOK
-            </a>
+              <a href="#" className="start" onClick={() => props.start()}>
+                MASHANGOK
+              </a>
           ) : error ? (
             `Error`
           ) : (
-            "Loading..."
+            ""
           )}
         </p>
       </div>
+      {loaded ? (
+        <div class="playButton"  onClick={() => props.start()}> </div>
+      ) : ("")}
+      </>
     );
   }
