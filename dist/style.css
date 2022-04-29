@@ -342,8 +342,8 @@ body::after{
 
 /* Section 1 vocals */
 .Vocals_Section1_1 {
-  top: 45px;
-  left: 127px;
+  top: 46px;
+  left: 134px;
   clip-path: polygon(40% 0%, 60% 0%, 100% 60%, 100% 75%, 60% 100%, 50% 100%, 40% 100%, 0% 75%, 0% 60%);
 }
 .Vocals_Section1_1:hover {
@@ -357,7 +357,7 @@ body::after{
 }
 .Vocals_Section1_2 {
   top: 168px;
-  left: 57px;
+  left: 64px;
   clip-path: circle(50% at 50% 50%);
 }
 .Vocals_Section1_2:hover {
@@ -371,7 +371,7 @@ body::after{
 }
 .Vocals_Section1_3 {
   top: 168px;
-  left: 197px;
+  left: 204px;
   clip-path: circle(50% at 50% 50%);
 }
 .Vocals_Section1_3:hover {
@@ -387,7 +387,7 @@ body::after{
 /* Section 1 percussion */
 .Percussion_Section1_1 {
   top: 45px;
-  left: 126px;
+  left: 132px;
   clip-path: polygon(35% 0%, 50% 0%, 65% 0%, 100% 35%, 100% 50%, 100% 65%, 65% 100%, 50% 100%, 35% 100%, 0% 65%, 0% 50%, 0% 35%);
 }
 .Percussion_Section1_1:hover {
@@ -401,7 +401,7 @@ body::after{
 }
 .Percussion_Section1_2 {
   top: 168px;
-  left: 57px;
+  left: 64px;
   clip-path: circle(50% at 50% 50%);
 }
 .Percussion_Section1_2:hover {
@@ -415,7 +415,7 @@ body::after{
 }
 .Percussion_Section1_3 {
   top: 168px;
-  left: 197px;
+  left: 204px;
   clip-path: circle(50% at 50% 50%);
 }
 .Percussion_Section1_3:hover {
