@@ -45,7 +45,12 @@ function App(props) {
   };
 
   return (
-    <div className="mainContainer">
+    <>
+    <video autoPlay muted loop class={"loopVideo" + (initialised ? "" : "Loading")} playbackRate="0.5">
+      <source src="images/bg_video.mp4" type="video/mp4" />
+    </video>
+    <img src="images/bg.png" class={"bgimg" + (initialised ? "" : "Loading")} />
+    <div className={"mainContainer" + (initialised ? "" : "Loading")}>
       {initialised ? (
         <>
           <div className="padding"></div>
@@ -64,6 +69,7 @@ function App(props) {
         />
       )}
     </div>
+    </>
   );
 }
 

@@ -2,6 +2,7 @@ body {
 
   padding: 0;
   margin: 0;
+  /* changes */
 }
 
 
@@ -34,7 +35,7 @@ body::after{
            url('images/Section_2/percSlider8.png');
 }
 
-#loopVideo {
+.loopVideo {
   position: fixed;
   right: 0;
   bottom: 0;
@@ -43,13 +44,37 @@ body::after{
   z-index: -1;
 }
 
-#bgimg {
+.loopVideoLoading {
+  position: fixed;
+  z-index: -1;
+  clip-path:  circle(min(41vw, 41vh));
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(150vw, 150vh);
+  height: min(150vw, 150vh);
+  margin-top: 2px;
+}
+.bgimg {
   position: fixed;
   left: 0;
   bottom: -20%;
   min-width: 100%;
   min-height: 100%;
   z-index: 0;
+}
+
+.bgimgLoading {
+  position: fixed;
+  clip-path: circle(min(41vw, 41vh));
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(150vw, 150vh);
+  height: min(150vw, 150vh);
+  margin-top: 2px;
+  z-index: 0;
+
 }
 .mainContainer {
   display: flex;
@@ -895,15 +920,14 @@ body::after{
 }
 
 /* Modal */
+
 .startModal {
-  background-color: #FFF;
   z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   position: absolute;
-  font-size: 128px;
+  font-size: min(11vw, 11vh);
   text-align: center;
 }
 .startModal p {
@@ -919,10 +943,10 @@ body::after{
   text-decoration: none;
 }
 .startModal a:link {
-  color: red;
+  color: #fff;
 }
 .startModal a:visited {
-  color: green;
+  color: #fff;
 }
 .startModal a:hover {
   color: hotpink;
