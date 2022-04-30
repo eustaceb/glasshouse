@@ -126,11 +126,11 @@
       "groups": {
         "vocals": {
           "samples": [
-            "vocals Vocals_Section3_1",
-            "vocals Vocals_Section3_2",
-            "vocals Vocals_Section3_3",
-            "vocals Vocals_Section3_4",
-            "vocals Vocals_Section3_5"
+            "vocalsLarge Vocals_Section3_1",
+            "vocalsLarge Vocals_Section3_2",
+            "vocalsLarge Vocals_Section3_3",
+            "vocalsLarge Vocals_Section3_4",
+            "vocalsLarge Vocals_Section3_5"
           ],
           "volume": 6,
           "preFx": {
@@ -449,35 +449,35 @@
     },
     {
       "id": 34,
-      "name": "vocals Vocals_Section3_1",
+      "name": "vocalsLarge Vocals_Section3_1",
       "path": "audio/Section_3/Vocals_Section3_1_4,5bar.mp3",
       "type": "oneshot",
       "duration": 5
     },
     {
       "id": 35,
-      "name": "vocals Vocals_Section3_2",
+      "name": "vocalsLarge Vocals_Section3_2",
       "path": "audio/Section_3/Vocals_Section3_2_5bar.mp3",
       "type": "loop",
       "duration": 5
     },
     {
       "id": 36,
-      "name": "vocals Vocals_Section3_3",
+      "name": "vocalsLarge Vocals_Section3_3",
       "path": "audio/Section_3/Vocals_Section3_3_4,5bar.mp3",
       "type": "oneshot",
       "duration": 5
     },
     {
       "id": 37,
-      "name": "vocals Vocals_Section3_4",
+      "name": "vocalsLarge Vocals_Section3_4",
       "path": "audio/Section_3/Vocals_Section3_4_4bar.mp3",
       "type": "oneshot",
       "duration": 4
     },
     {
       "id": 38,
-      "name": "vocals Vocals_Section3_5",
+      "name": "vocalsLarge Vocals_Section3_5",
       "path": "audio/Section_3/Vocals_Section3_5_4bar.mp3",
       "type": "loop",
       "duration": 4
