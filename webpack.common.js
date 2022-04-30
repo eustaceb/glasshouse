@@ -25,14 +25,9 @@ module.exports = {
         use: ["source-map-loader"],
       },
       {
-        test: /\.(png|mp4)$/i,
-        // More information here https://webpack.js.org/guides/asset-modules/
-        type: 'asset/resource',
-      },
-      {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
-      }
+      },
     ],
   },
 };
