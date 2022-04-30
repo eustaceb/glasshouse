@@ -9,13 +9,13 @@ body {
 /* TODO preload all */
 body::after{
    position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
-   content:url('images/section1/vocal_slider_1.png')
-           url('images/section1/vocal_slider_2.png')
-           url('images/section1/vocal_slider_3.png')
-           url('images/section1/vocal_slider_4.png')
-           url('images/section1/vocal_slider_5.png')
-           url('images/section1/vocal_slider_6.png')
-           url('images/section1/vocal_slider_7.png')
+   content:url('images/section1/vocalSlider1.png')
+           url('images/section1/vocalSlider2.png')
+           url('images/section1/vocalSlider3.png')
+           url('images/section1/vocalSlider4.png')
+           url('images/section1/vocalSlider5.png')
+           url('images/section1/vocalSlider6.png')
+           url('images/section1/vocalSlider7.png')
            url('images/section1/percSlider1.png')
            url('images/section1/percSlider2.png')
            url('images/section1/percSlider3.png')
@@ -703,25 +703,25 @@ body::after{
   cursor: pointer;
 }
 .downSlider1_1 {
-  background-image: url('images/section1/vocal_slider_1.png');
+  background-image: url('images/section1/vocalSlider1.png');
 }
 .downSlider1_2 {
-  background-image: url('images/section1/vocal_slider_2.png');
+  background-image: url('images/section1/vocalSlider2.png');
 }
 .downSlider1_3 {
-  background-image: url('images/section1/vocal_slider_3.png');
+  background-image: url('images/section1/vocalSlider3.png');
 }
 .downSlider1_4 {
-  background-image: url('images/section1/vocal_slider_4.png');
+  background-image: url('images/section1/vocalSlider4.png');
 }
 .downSlider1_5 {
-  background-image: url('images/section1/vocal_slider_5.png');
+  background-image: url('images/section1/vocalSlider5.png');
 }
 .downSlider1_6 {
-  background-image: url('images/section1/vocal_slider_6.png');
+  background-image: url('images/section1/vocalSlider6.png');
 }
 .downSlider1_7 {
-  background-image: url('images/section1/vocal_slider_7.png');
+  background-image: url('images/section1/vocalSlider7.png');
 }
 
 
