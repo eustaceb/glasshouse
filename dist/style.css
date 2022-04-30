@@ -1,9 +1,7 @@
 body {
-
   padding: 0;
   margin: 0;
 }
-
 
 /* preloading downsliders so that there is no lag when changing value */
 /* TODO preload all */
@@ -829,7 +827,36 @@ body::after{
   background-image: url('images/section2/percSlider8.png');
 }
 
-
+.downSlider5 {
+  background-repeat: no-repeat;
+  position:  absolute;
+  top: 420px;
+  left: 317px;
+  width: 107px;
+  height: 214px;
+  cursor: pointer;
+}
+.downSlider5_1 {
+  background-image: url('images/section3/vocalsSlider1.png');
+}
+.downSlider5_2 {
+  background-image: url('images/section3/vocalsSlider2.png');
+}
+.downSlider5_3 {
+  background-image: url('images/section3/vocalsSlider3.png');
+}
+.downSlider5_4 {
+  background-image: url('images/section3/vocalsSlider4.png');
+}
+.downSlider5_5 {
+  background-image: url('images/section3/vocalsSlider5.png');
+}
+.downSlider5_6 {
+  background-image: url('images/section3/vocalsSlider6.png');
+}
+.downSlider5_7 {
+  background-image: url('images/section3/vocalsSlider7.png');
+}
 
 .downSlider6 {
   background-repeat: no-repeat;

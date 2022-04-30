@@ -39,6 +39,9 @@ class FXControl {
       );
     } else if (this.node[parameter] !== value) {
       this.node[parameter] = value;
+      console.log(
+        `${this.type} ${parameter} is now ${this.node[parameter]}`
+      );
     }
 
     if (this.sidechain !== null) {
@@ -162,6 +165,7 @@ class DiscreteControl {
     this.fx = fx;
     this.paramName = paramName;
     this.values = values;
+    this.step = this.values.indexOf(this.getValue());
   }
 
   getLabel() {
@@ -177,15 +181,21 @@ class DiscreteControl {
   }
 
   setValue(value) {
-    console.assert(
-      this.values.includes(value),
-      "Illegal value supplied to DiscreteControl"
-    );
-    this.fx.setParam(this.paramName, value);
+    if (value !== this.getValue()) {
+      this.fx.setParam(this.paramName, value);
+    }
   }
 
   getValue() {
     return this.fx.getParam(this.paramName);
+  }
+
+  setStep(step) {
+    this.setValue(this.values[step]);
+  }
+
+  getStep() {
+    return this.step;
   }
 
   isContinuous() {

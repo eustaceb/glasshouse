@@ -136,7 +136,7 @@
           "preFx": {
             "type": "pitchshift",
             "params": {
-              "pitch": -2,
+              "pitch": 0,
               "windowSize": 0.1,
               "delayTime": 0.05,
               "feedback": 0.01
@@ -149,9 +149,9 @@
           "componentDescription": {
             "className": "component componentE",
             "downSlider": {
-              "className": "downSlider2",
-              "steps": 9,
-              "source": "fx",
+              "className": "downSlider5",
+              "steps": 7,
+              "source": "preFx",
               "paramName": "pitch",
               "options": [-6, -4, -2, 0, 2, 4, 6]
             },

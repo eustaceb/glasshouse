@@ -5,7 +5,7 @@ import {Navigation} from "./Navigation.js";
 import {InstrumentContainer} from "./InstrumentContainer.js";
 
 export function SamplePlayer(props) {
-  const [sectionIndex, setSectionIndex] = useState(0);
+  const [sectionIndex, setSectionIndex] = useState(2);
   const section = props.composition.getSection(sectionIndex);
   const vocals = section.getGroup("vocals");
   const percussion = section.getGroup("percussion");
