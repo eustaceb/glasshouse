@@ -5,7 +5,6 @@ import {clamp} from "../utils/Math.js";
 import {useLocalContext} from "../utils/ReactHelpers.js";
 
 export function XYPadStyled(props) {
-
   const minValue = props.minValue;
   const maxValue = props.maxValue; // equivalent to squre size
   const size = props.trackerSize;
@@ -27,7 +26,6 @@ export function XYPadStyled(props) {
           const rect = document
             .getElementById(componentId)
             .getBoundingClientRect();
-            document.getElementById(componentId).style.cursor = 'none';
 
           // Movement deltas
           const deltaX = e.clientX - rect.left - trackerMiddle;
@@ -57,10 +55,20 @@ export function XYPadStyled(props) {
     const thisElement =
       e.target.id === componentId || e.target.parentElement.id === componentId;
     if (thisElement) {
-      const rect = document.getElementById(componentId).getBoundingClientRect();
+      const componentDom = document.getElementById(componentId);
+      componentDom.style.cursor = "none";
+      const rect = componentDom.getBoundingClientRect();
       // Apply and constrain
-      const constrainedX = clamp(e.clientX - rect.left - trackerMiddle, minValue, maxValue);
-      const constrainedY = clamp(e.clientY - rect.top - trackerMiddle, minValue, maxValue);
+      const constrainedX = clamp(
+        e.clientX - rect.left - trackerMiddle,
+        minValue,
+        maxValue
+      );
+      const constrainedY = clamp(
+        e.clientY - rect.top - trackerMiddle,
+        minValue,
+        maxValue
+      );
       setX(constrainedX);
       setY(constrainedY);
       if (ctx.callbackX) ctx.callbackX(constrainedX);
@@ -68,7 +76,10 @@ export function XYPadStyled(props) {
     }
   });
 
-  const mouseUp = (e) => document.getElementById(componentId).style.cursor = 'default';
+  const mouseUp = (e) => {
+    const componentDom = document.getElementById(componentId);
+    if (componentDom !== null) componentDom.style.cursor = "default";
+  };
 
   useEffect(() => {
     setX(maxValue / 2);
@@ -85,10 +96,9 @@ export function XYPadStyled(props) {
     };
   }, [props.fx, props.mouseController]);
 
-
   return (
     <div className={props.boxClassName} id={componentId}>
-      <div className={props.trackerClassName} style = {{top: y, left: x}}></div>
+      <div className={props.trackerClassName} style={{top: y, left: x}}></div>
     </div>
   );
 }
