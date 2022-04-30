@@ -89,7 +89,6 @@ body::after{
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-
 }
 .instrumentContainer {
   display: flex;
@@ -123,6 +122,14 @@ body::after{
 .vocals {
   width: 84px;
   height: 84px;
+  background-repeat: no-repeat;
+  position: absolute;
+  cursor: pointer;
+}
+
+.vocalsLarge {
+  width: 101px;
+  height: 101px;
   background-repeat: no-repeat;
   position: absolute;
   cursor: pointer;
@@ -455,118 +462,118 @@ body::after{
 
 /* Section 2 vocals */
 .Vocals_Section2_1 {
-  top: 45px;
-  left: 127px;
-  clip-path: polygon(40% 0%, 60% 0%, 100% 60%, 100% 75%, 60% 100%, 50% 100%, 40% 100%, 0% 75%, 0% 60%);
+  top: 20px;
+  left: 123px;
+  clip-path: circle(50%);
 }
 .Vocals_Section2_1:hover {
-  background-image: url('images/Section_2/vocals1Hover.png');
+  background-image: url('images/Section_2/vocalsHover.png');
 }
 .Vocals_Section2_1Active {
-  background-image: url('images/Section_2/vocals1Active.png');
+  background-image: url('images/Section_2/vocalsTopActive.png');
 }
 .Vocals_Section2_1Active:hover {
-  background-image: url('images/Section_2/vocals1Hover.png'), url('images/Section_2/vocals1Active.png');
+  background-image: url('images/Section_2/vocalsHover.png'), url('images/Section_2/vocalsTopActive.png');
 }
 .Vocals_Section2_2 {
-  top: 168px;
-  left: 57px;
-  clip-path: circle(50% at 50% 50%);
+  top: 86px;
+  left: 32px;
+  clip-path: circle(50%);
 }
 .Vocals_Section2_2:hover {
-  background-image: url('images/Section_2/vocals2Hover.png');
+  background-image: url('images/Section_2/vocalsHover.png');
 }
 .Vocals_Section2_2Active {
-  background-image: url('images/Section_2/vocals2Active.png');
+  background-image: url('images/Section_2/vocalsTopActive.png');
 }
 .Vocals_Section2_2Active:hover {
-  background-image: url('images/Section_2/vocals2Hover.png'), url('images/Section_1/vocal2Active.png');
+  background-image: url('images/Section_2/vocalsHover.png'), url('images/Section_1/vocalsTopActive.png');
 }
 .Vocals_Section2_3 {
-  top: 168px;
-  left: 197px;
-  clip-path: circle(50% at 50% 50%);
+  top: 86px;
+  left: 216px;
+  clip-path: circle(50%);
 }
 .Vocals_Section2_3:hover {
-  background-image: url('images/Section_2/vocals3Hover.png');
+  background-image: url('images/Section_2/vocalsHover.png');
 }
 .Vocals_Section2_3Active {
-  background-image: url('images/Section_2/vocals3Active.png');
+  background-image: url('images/Section_2/vocalsTopActive.png');
 }
 .Vocals_Section2_3Active:hover {
-  background-image: url('images/Section_2/vocals3Hover.png'), url('images/Section_2/vocals3Active.png');
+  background-image: url('images/Section_2/vocalsHover.png'), url('images/Section_2/vocalsTopActive.png');
 }
 .Vocals_Section2_4 {
-  top: 168px;
-  left: 197px;
-  clip-path: circle(50% at 50% 50%);
+  top: 194px;
+  left: 68px;
+  clip-path: circle(50%);
 }
 .Vocals_Section2_4:hover {
-  background-image: url('images/Section_2/vocals4Hover.png');
+  background-image: url('images/Section_2/vocalsHover.png');
 }
 .Vocals_Section2_4Active {
   background-image: url('images/Section_2/vocals4Active.png');
 }
 .Vocals_Section2_4Active:hover {
-  background-image: url('images/Section_2/vocals4Hover.png'), url('images/Section_2/vocals4Active.png');
+  background-image: url('images/Section_2/vocalsHover.png'), url('images/Section_2/vocals4Active.png');
 }
 .Vocals_Section2_5 {
-  top: 168px;
-  left: 197px;
-  clip-path: circle(50% at 50% 50%);
+  top: 194px;
+  left: 182px;
+  clip-path: circle(50%);
 }
 .Vocals_Section2_5:hover {
-  background-image: url('images/Section_2/vocals5Hover.png');
+  background-image: url('images/Section_2/vocalsHover.png');
 }
 .Vocals_Section2_5Active {
   background-image: url('images/Section_2/vocals5Active.png');
 }
 .Vocals_Section2_5Active:hover {
-  background-image: url('images/Section_2/vocals5Hover.png'), url('images/Section_2/vocals5Active.png');
+  background-image: url('images/Section_2/vocalsHover.png'), url('images/Section_2/vocals5Active.png');
 }
 
 /* Section 2 percussion */
 .Percussion_Section2_1 {
   top: 45px;
-  left: 127px;
-  clip-path: polygon(40% 0%, 60% 0%, 100% 60%, 100% 75%, 60% 100%, 50% 100%, 40% 100%, 0% 75%, 0% 60%);
+  left: 132px;
+  clip-path: polygon(35% 0%, 50% 0%, 65% 0%, 100% 35%, 100% 50%, 100% 65%, 65% 100%, 50% 100%, 35% 100%, 0% 65%, 0% 50%, 0% 35%);
 }
 .Percussion_Section2_1:hover {
-  background-image: url('images/Section_2/percussion1Hover.png');
+  background-image: url('images/Section_2/percHover.png');
 }
 .Percussion_Section2_1Active {
-  background-image: url('images/Section_2/percussion1Active.png');
+  background-image: url('images/Section_2/percActive.png');
 }
 .Percussion_Section2_1Active:hover {
-  background-image: url('images/Section_2/percussion1Hover.png'), url('images/Section_2/percussion1Active.png');
+  background-image: url('images/Section_2/percHover.png'), url('images/Section_2/percActive.png');
 }
 .Percussion_Section2_2 {
   top: 168px;
-  left: 57px;
-  clip-path: circle(50% at 50% 50%);
+  left: 64px;
+  clip-path: circle(50%);
 }
 .Percussion_Section2_2:hover {
-  background-image: url('images/Section_2/percussion2Hover.png');
+  background-image: url('images/Section_2/percHover.png');
 }
 .Percussion_Section2_2Active {
-  background-image: url('images/Section_2/percussion2Active.png');
+  background-image: url('images/Section_2/percActive.png');
 }
 .Percussion_Section2_2Active:hover {
-  background-image: url('images/Section_2/percussion2Hover.png'), url('images/Section_2/percussion2Active.png');
+  background-image: url('images/Section_2/percHover.png'), url('images/Section_2/percActive.png');
 }
 .Percussion_Section2_3 {
   top: 168px;
-  left: 197px;
-  clip-path: circle(50% at 50% 50%);
+  left: 203px;
+  clip-path: circle(50%);
 }
 .Percussion_Section2_3:hover {
-  background-image: url('images/Section_2/percussion3Hover.png');
+  background-image: url('images/Section_2/percHover.png');
 }
 .Percussion_Section2_3Active {
-  background-image: url('images/Section_2/percussion3Active.png');
+  background-image: url('images/Section_2/percActive.png');
 }
 .Percussion_Section2_3Active:hover {
-  background-image: url('images/Section_2/percussion3Hover.png'), url('images/Section_2/percussion3Active.png');
+  background-image: url('images/Section_2/percHover.png'), url('images/Section_2/percActive.png');
 }
 
 /* Section 3 vocals */
