@@ -967,7 +967,7 @@ body::after{
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  margin-top:max(10vh, 10vw);
+  margin-top:min(20vh, 20vw);
   cursor: pointer;
 
 }
