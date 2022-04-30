@@ -67,11 +67,11 @@
       "groups": {
         "vocals": {
           "samples": [
-            "vocals Vocals_Section2_1",
-            "vocals Vocals_Section2_2",
-            "vocals Vocals_Section2_3",
-            "vocals Vocals_Section2_4",
-            "vocals Vocals_Section2_5"
+            "vocalsLarge Vocals_Section2_1",
+            "vocalsLarge Vocals_Section2_2",
+            "vocalsLarge Vocals_Section2_3",
+            "vocalsLarge Vocals_Section2_4",
+            "vocalsLarge Vocals_Section2_5"
           ],
           "fx": {
             "type": "pingpong",
@@ -351,35 +351,35 @@
     },
     {
       "id": 20,
-      "name": "vocals Vocals_Section2_1",
+      "name": "vocalsLarge Vocals_Section2_1",
       "path": "audio/Section_2/Vocals_Section2_1_3bar.mp3",
       "type": "oneshot",
       "duration": 3
     },
     {
       "id": 21,
-      "name": "vocals Vocals_Section2_2",
+      "name": "vocalsLarge Vocals_Section2_2",
       "path": "audio/Section_2/Vocals_Section2_2_3bar.mp3",
       "type": "oneshot",
       "duration": 3
     },
     {
       "id": 22,
-      "name": "vocals Vocals_Section2_3",
+      "name": "vocalsLarge Vocals_Section2_3",
       "path": "audio/Section_2/Vocals_Section2_3_3bar.mp3",
       "type": "oneshot",
       "duration": 3
     },
     {
       "id": 23,
-      "name": "vocals Vocals_Section2_4",
+      "name": "vocalsLarge Vocals_Section2_4",
       "path": "audio/Section_2/Vocals_Section2_4_4bar.mp3",
       "type": "loop",
       "duration": 4
     },
     {
       "id": 24,
-      "name": "vocals Vocals_Section2_5",
+      "name": "vocalsLarge Vocals_Section2_5",
       "path": "audio/Section_2/Vocals_Section2_5_4bar.mp3",
       "type": "loop",
       "duration": 4
