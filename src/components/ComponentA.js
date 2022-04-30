@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from "react";
+
+import {DiscreteSlider} from "./DiscreteSlider.js";
 import {DownSlider} from "./DownSlider.js";
 import {InstrumentGroup} from "./InstrumentGroup.js";
 import {MultistateSwitch} from "./MultistateSwitch.js";
@@ -30,18 +32,30 @@ export function ComponentA(props) {
   }
   if (sliderControl) {
     const desc = props.description.getDownSliderDescription();
-    fxComponent = (
-      <DownSlider
-        className={desc.getClassName()}
-        minStep={0}
-        steps={desc.getSteps()}
-        minPosition={0}
-        maxPosition={1}
-        initialPosition={sliderControl.getValue()}
-        callback={(val) => sliderControl.setValue(val)}
-        mouseController={props.mouseController}
-      />
-    );
+    if (sliderControl.isContinuous()) {
+      fxComponent = (
+        <DownSlider
+          className={desc.getClassName()}
+          steps={desc.getSteps()}
+          minPosition={0}
+          maxPosition={1}
+          initialPosition={sliderControl.getValue()}
+          callback={(val) => sliderControl.setValue(val)}
+          mouseController={props.mouseController}
+        />
+      );
+    } else {
+      fxComponent = (
+        <DiscreteSlider
+          className={desc.getClassName()}
+          steps={desc.getSteps()}
+          initialStep={sliderControl.getStep()}
+          callback={(step) => sliderControl.setStep(step)}
+          mouseController={props.mouseController}
+        />
+      );
+    }
+
   }
   if (switchControl) {
     fxAppendageComponent = (
@@ -63,8 +77,8 @@ export function ComponentA(props) {
           stopSample={props.stopSample}
           group={props.group}
         />
-        {fxComponent}
         {fxXYComponent}
+        {fxComponent}
       </div>
       {fxAppendageComponent}
     </div>

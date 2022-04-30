@@ -1,27 +1,78 @@
-import React, {useState} from "react";
-import {Slider} from "@material-ui/core";
+import React, {useEffect, useState, useRef} from "react";
+
+import {uuidv4} from "../utils/GUID.js";
+import {clamp} from "../utils/Math.js";
 
 export function DiscreteSlider(props) {
-  // props:
-  // - initialValue
-  // - callback
-  // - marks
-  const [value, setValue] = useState(props.initialValue);
-  const handleChange = (_, newValue) => {
-    props.callback(newValue);
-    setValue(newValue);
-  };
+  const steps = props.steps;
+  const className = props.className;
+
+  const [step, setStep] = useState(props.initialStep);
+  const mouseDown = useRef(false);
+
+  const componentId = useRef(uuidv4());
+
+  function transformPosition(position)
+  {
+    return Math.log10(0.5 * position + 0.07) + 1.2;
+  }
+
+  const handleMouseMove = React.useCallback(
+    (event) => {
+      event.preventDefault();
+      if (mouseDown.current) {
+        const hitBox = event.target.getBoundingClientRect();
+
+        // Next position is a proportion of cursorY / element height (so [0,1])
+        let nextPosition = (event.clientY - hitBox.top) / hitBox.height;
+        nextPosition = transformPosition(clamp(nextPosition, 0, 1));
+        const nextStep = Math.round(nextPosition * (steps - 1));
+        props.callback(nextStep);
+        setStep(nextStep);
+      }
+    },
+    [step]
+  );
+
+  useEffect(() => {
+    let componentRef = componentId.current;
+    props.mouseController.registerListener(
+      componentId.current,
+      "mouseUp",
+      () => {
+        mouseDown.current = false;
+      }
+    );
+
+    setStep(props.initialStep);
+
+    return () => {
+      props.mouseController.removeListener(componentRef, "mouseUp");
+    };
+  }, [componentId, props.callback, props.mouseController]);
+
+  const handleMouseDown = React.useCallback(
+    (event) => {
+      event.preventDefault();
+
+      mouseDown.current = true;
+      const hitBox = event.target.getBoundingClientRect();
+
+      // Next position is a proportion of cursorY / element height (so [0,1])
+      let nextPosition = (event.clientY - hitBox.top) / hitBox.height;
+      nextPosition = transformPosition(clamp(nextPosition, 0, 1));
+      const nextStep = Math.round(nextPosition * (steps - 1));
+      // No need to clamp - click is always within hit box
+      props.callback(nextStep);
+      setStep(nextStep);
+    },
+    [step]
+  );
+
   return (
-    <Slider
-      style={{width: "100px"}}
-      min={props.marks[0].value}
-      max={props.marks[props.marks.length - 1].value}
-      value={value}
-      aria-label="Volume"
-      onChange={handleChange}
-      step={null}
-      valueLabelDisplay="auto"
-      marks={props.marks}
-    />
+    <div
+      className={className + " " + className + "_" + (step + 1)}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}></div>
   );
 }
