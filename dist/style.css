@@ -485,7 +485,7 @@ body::after{
   background-image: url('images/section2/vocalsTopActive.png');
 }
 .Vocals_Section2_2Active:hover {
-  background-image: url('images/section2/vocalsHover.png'), url('images/section1/vocalsTopActive.png');
+  background-image: url('images/section2/vocalsHover.png'), url('images/section2/vocalsTopActive.png');
 }
 .Vocals_Section2_3 {
   top: 86px;
@@ -601,7 +601,7 @@ body::after{
   background-image: url('images/section2/vocalsTopActive.png');
 }
 .Vocals_Section3_2Active:hover {
-  background-image: url('images/section2/vocalsHover.png'), url('images/section1/vocalsTopActive.png');
+  background-image: url('images/section2/vocalsHover.png'), url('images/section2/vocalsTopActive.png');
 }
 .Vocals_Section3_3 {
   top: 86px;
