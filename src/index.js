@@ -46,10 +46,10 @@ function App(props) {
 
   return (
     <>
-    <video autoPlay muted loop class={"loopVideo" + (initialised ? "" : "Loading")} playbackRate="0.5">
+    <video autoPlay muted loop className={"loopVideo" + (initialised ? "" : "Loading")} playbackrate="0.5">
       <source src="images/bg_video.mp4" type="video/mp4" />
     </video>
-    <img src="images/bg.png" class={"bgimg" + (initialised ? "" : "Loading")} />
+    <img src="images/bg.png" className={"bgimg" + (initialised ? "" : "Loading")} />
     <div className={"mainContainer" + (initialised ? "" : "Loading")}>
       {initialised ? (
         <>

@@ -51,7 +51,7 @@ export function LoadingScreen(props) {
         </p>
       </div>
       {loaded ? (
-        <div class="playButton"  onClick={() => props.start()}> </div>
+        <div className="playButton"  onClick={() => props.start()}> </div>
       ) : ("")}
       </>
     );

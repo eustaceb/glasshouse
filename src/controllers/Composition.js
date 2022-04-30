@@ -286,7 +286,7 @@ export class Composition {
         const sample = sampleController.getSampleByName(
           instrumentData["sample"]
         );
-        const volume = new FXControl("volume", instrumentData["volume"]);
+        const volume = new FXControl("volume", "volume", instrumentData["volume"]);
         sample.getPlayer().connect(volume.getNode());
         volume.getNode().toDestination();
         instruments.push(sample);
