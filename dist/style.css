@@ -2,7 +2,6 @@ body {
 
   padding: 0;
   margin: 0;
-  /* changes */
 }
 
 
@@ -48,6 +47,7 @@ body::after{
   position: fixed;
   z-index: -1;
   clip-path:  circle(min(41vw, 41vh));
+  background-color: #72c0b5;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
