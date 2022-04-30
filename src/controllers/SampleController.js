@@ -194,10 +194,11 @@ export class SampleController {
   stopSample(sampleId) {
     // Cancel if scheduled
     if (this.firstPlayQueue.includes(sampleId)) {
+      const sample = this.samples[sampleId];
       this.firstPlayQueue = this.firstPlayQueue.filter((s) => s !== sampleId);
       this.playQueue[sampleId] = 0;
-      this.samples[sampleId].setInactive();
-      this.samples[sampleId].endPlaybackCallback();
+      sample.setInactive();
+      if (sample.endPlaybackCallback !== null) sample.endPlaybackCallback();
     } else {
       // Otherwise, terminate on next bar
       this.terminateLoopQueue.push(sampleId);
@@ -206,10 +207,13 @@ export class SampleController {
 
   stopAllSamples() {
     this.samples.forEach((sample) => {
-      if (sample.id !== this.backgroundSample.id && sample.isPlaying()) {
+      if (
+        sample.id !== this.backgroundSample.id &&
+        (sample.isPlaying() || sample.isScheduled())
+      ) {
         // Clear callback since it's a React state update for a component that will soon disappear
         sample.setEndPlaybackCallback(null);
-        this.terminateLoopQueue.push(sample.id);
+        this.stopSample(sample.id);
       }
     });
   }

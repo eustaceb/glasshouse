@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import {LayeredButton} from "./LayeredButton.js";
 
 export function Instrument(props) {
   const padStates = {
@@ -37,15 +36,6 @@ export function Instrument(props) {
     // Reset pad state if sample changes
     setPadState(padStates.READY);
   }, [props.sample]);
-  // const htmlMap = (
-  //   <map name="image-map">
-  //     <area
-  //       shape="rect"
-  //       coords="0, 0,125, 125"
-  //       href="#"
-  //     />
-  //   </map>
-  // );
   return (
     <div
       className={
