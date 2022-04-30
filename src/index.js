@@ -2,6 +2,9 @@
 import React, {useEffect, useState, useRef} from "react";
 import ReactDOM from "react-dom";
 import * as Tone from "tone";
+import css from "./style.css";
+import BgVideo from "./images/bg_video.mp4";
+import BgImage from "./images/bg.png";
 
 // Controllers
 import {Composition} from "./controllers/Composition.js";
@@ -47,9 +50,9 @@ function App(props) {
   return (
     <>
     <video autoPlay muted loop className={"loopVideo" + (initialised ? "" : "Loading")} playbackrate="0.5">
-      <source src="images/bg_video.mp4" type="video/mp4" />
+      <source src={BgVideo} type="video/mp4" />
     </video>
-    <img src="images/bg.png" className={"bgimg" + (initialised ? "" : "Loading")} />
+    <img src={BgImage} className={"bgimg" + (initialised ? "" : "Loading")} />
     <div className={"mainContainer" + (initialised ? "" : "Loading")}>
       {initialised ? (
         <>

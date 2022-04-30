@@ -2,3 +2,5 @@ node_modules
 .vscode
 dist/main.js
 dist/main.js.LICENSE.txt
+dist/**.png
+dist/**.mp4
