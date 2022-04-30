@@ -899,8 +899,8 @@ body::after{
   position: absolute;
   width: 190px;
   height: 190px;
-  top:444px;
-  left:24px;
+  top:436px;
+  left:18px;
 }
 
 .tracker {
@@ -910,7 +910,6 @@ body::after{
   background-image: url('images/section3/filternotch.png');
   width: 57px;
   height: 57px;
-  cursor: pointer;
 }
 
 .tracker:hover {

@@ -27,6 +27,7 @@ export function XYPadStyled(props) {
           const rect = document
             .getElementById(componentId)
             .getBoundingClientRect();
+            document.getElementById(componentId).style.cursor = 'none';
 
           // Movement deltas
           const deltaX = e.clientX - rect.left - trackerMiddle;
@@ -67,16 +68,20 @@ export function XYPadStyled(props) {
     }
   });
 
+  const mouseUp = (e) => document.getElementById(componentId).style.cursor = 'default';
+
   useEffect(() => {
     setX(maxValue / 2);
     setY(maxValue / 2);
 
     props.mouseController.registerListener(componentId, "mouseDown", mouseDown);
     props.mouseController.registerListener(componentId, "mouseMove", mouseMove);
+    props.mouseController.registerListener(componentId, "mouseUp", mouseUp);
 
     return () => {
       props.mouseController.removeListener(componentId, "mouseDown");
       props.mouseController.removeListener(componentId, "mouseMove");
+      props.mouseController.removeListener(componentId, "mouseUp");
     };
   }, [props.fx, props.mouseController]);
 
