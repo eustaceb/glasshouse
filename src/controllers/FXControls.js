@@ -42,9 +42,7 @@ class FXControl {
       );
     } else if (this.node[parameter] !== value) {
       this.node[parameter] = value;
-      console.log(
-        `${this.type} ${parameter} is now ${this.node[parameter]}`
-      );
+      console.log(`${this.type} ${parameter} is now ${this.node[parameter]}`);
     }
 
     if (this.sidechain !== null) {
@@ -85,7 +83,6 @@ class FXControl {
       pitchshift: Tone.PitchShift,
       volume: Tone.Volume,
     };
-    console.log(type);
     return new fxLookup[type](params);
   }
 }
@@ -106,6 +103,18 @@ class XYControl {
     this.yFx = yFx;
     this.xAxis = xAxis;
     this.yAxis = yAxis;
+
+    // If a param is meant to be inverted, mark it as such
+    this.invertedX = false;
+    this.invertedY = false;
+    if (xAxis.range[0] > xAxis.range[1]) {
+      this.invertedX = true;
+      [xAxis.range[0], xAxis.range[1]] = [xAxis.range[1], xAxis.range[0]];
+    }
+    if (yAxis.range[0] > yAxis.range[1]) {
+      this.invertedY = true;
+      [yAxis.range[0], yAxis.range[1]] = [yAxis.range[1], yAxis.range[0]];
+    }
   }
 
   getLabel() {
@@ -121,6 +130,9 @@ class XYControl {
   }
 
   setX(value) {
+    // Invert value if X param is inverted
+    if (this.invertedX) value = 1.0 - value;
+
     // Scales from [0, 1]
     const scaled = scale(
       value,
@@ -144,6 +156,9 @@ class XYControl {
   }
 
   setY(value) {
+    // Invert value if Y param is inverted
+    if (this.invertedY) value = 1.0 - value;
+
     // Scales from [0, 1]
     const scaled = scale(
       value,
@@ -152,6 +167,7 @@ class XYControl {
       this.yAxis.range[0],
       this.yAxis.range[1]
     );
+
     this.yFx.setParam(this.yAxis.paramName, scaled);
   }
 

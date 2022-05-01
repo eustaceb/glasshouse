@@ -170,7 +170,7 @@
               "yAxis": {
                 "source": "postFx",
                 "paramName": "frequency",
-                "range": [400, 6000]
+                "range": [6000, 400]
               }
             }
           }
