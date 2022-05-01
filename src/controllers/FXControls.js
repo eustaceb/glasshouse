@@ -79,15 +79,19 @@ class FXControl {
       reverb: Tone.Reverb,
       vibrato: Tone.Vibrato,
       autopanner: Tone.AutoPanner,
+      phaser: Tone.Phaser,
+      panner: Tone.Panner,
+      panner3d: Tone.Panner3D,
       pitchshift: Tone.PitchShift,
       volume: Tone.Volume,
     };
+    console.log(type);
     return new fxLookup[type](params);
   }
 }
 
 class XYControl {
-  constructor(preFx, fx, xAxis, yAxis) {
+  constructor(xFx, yFx, xAxis, yAxis) {
     console.assert(
       xAxis.hasOwnProperty("paramName") &&
         xAxis.hasOwnProperty("range") &&
@@ -98,8 +102,8 @@ class XYControl {
         yAxis.hasOwnProperty("range") &&
         yAxis.hasOwnProperty("source")
     );
-    this.xFx = xAxis.source === "fx" ? fx : preFx;
-    this.yFx = yAxis.source === "fx" ? fx : preFx;
+    this.xFx = xFx;
+    this.yFx = yFx;
     this.xAxis = xAxis;
     this.yAxis = yAxis;
   }

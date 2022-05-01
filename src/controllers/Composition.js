@@ -34,7 +34,6 @@ export class Section {
     return this.groups[groupName];
   }
   getGroups() {
-    console.log(this.groups);
     return Object.values(this.groups);
   }
 }
@@ -158,6 +157,7 @@ export class Composition {
 
         const preFxData = "preFx" in groupData ? groupData["preFx"] : null;
         const fxData = groupData["fx"];
+        const postFxData = "postFx" in groupData ? groupData["postFx"] : null;
 
         const fxFromData = (fxData) => {
           const fxType = fxData["type"];
@@ -166,22 +166,26 @@ export class Composition {
           return new FXControl(fxType, fxLabel, fxParams);
         };
 
-        const createControls = (preFx, fx, description) => {
+        const createControls = (preFx, fx, postFx, description) => {
+          const sources = {
+            fx: fx,
+            preFx: preFx,
+            postFx: postFx,
+          };
           let xyControl = null;
           if ("xyPad" in description) {
-            xyControl = new XYControl(
-              preFx,
-              fx,
-              description["xyPad"]["xAxis"],
-              description["xyPad"]["yAxis"]
-            );
+            const xAxisDesc = description["xyPad"]["xAxis"];
+            const yAxisDesc = description["xyPad"]["yAxis"];
+            const xSource = sources[xAxisDesc.source];
+            const ySource = sources[yAxisDesc.source];
+            xyControl = new XYControl(xSource, ySource, xAxisDesc, yAxisDesc);
           }
 
           // Only one slider per component
           let sliderControl = null;
           if ("downSlider" in description) {
             const sliderData = description["downSlider"];
-            const source = sliderData["source"] === "fx" ? fx : preFx;
+            const source = sources[sliderData["source"]];
             if ("options" in sliderData) {
               sliderControl = new DiscreteControl(
                 source,
@@ -199,7 +203,7 @@ export class Composition {
           let switchControl = null;
           if ("switch" in description) {
             const switchData = description["switch"];
-            const source = switchData["source"] === "fx" ? fx : preFx;
+            const source = sources[switchData["source"]];
             switchControl = new DiscreteControl(
               source,
               switchData["paramName"],
@@ -244,7 +248,8 @@ export class Composition {
 
         const fx = fxFromData(fxData);
         const preFx = preFxData ? fxFromData(preFxData) : null;
-        const fxControls = createControls(preFx, fx, desc);
+        const postFx = postFxData ? fxFromData(postFxData) : null;
+        const fxControls = createControls(preFx, fx, postFx, desc);
 
         const groupVolume = "volume" in groupData ? groupData["volume"] : 0;
         const volume = new FXControl("volume", "volume", groupVolume);
@@ -264,17 +269,26 @@ export class Composition {
           volume.getNode().connect(fx.getNode());
         }
         // Fx node to master
-        // Optional filter
-        const filter = new FXControl("filter", "Filter All", {"frequency": 6000, "type": "lowpass"});
-        fx.getNode().connect(filter.getNode());
-        filter.getNode().toDestination();
+        if (postFx !== null) {
+          fx.getNode().connect(postFx.getNode());
+          postFx.getNode().toDestination();
+        } else {
+          fx.getNode().toDestination();
+        }
 
         // Send dry signal to master alongside the wet for time based fx
         const dryVolume = new FXControl("volume", "volume", groupVolume);
         if (["reverb", "delay", "pingpong"].includes(fxData["type"])) {
           samples.forEach((s) => s.player.connect(dryVolume.getNode()));
         }
-        dryVolume.getNode().connect(filter.getNode());
+
+        // Note: Post FX applies to the dry channel as well as it's usually just a filter
+        if (postFx !== null) {
+          dryVolume.getNode().connect(postFx.getNode());
+        } else {
+          dryVolume.getNode().toDestination();
+        }
+
         volume.registerSideChain((parameter, value) =>
           dryVolume.setParam(parameter, value)
         );

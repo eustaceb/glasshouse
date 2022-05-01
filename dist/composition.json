@@ -143,8 +143,12 @@
             }
           },
           "fx": {
-            "type": "chorus",
-            "params": {"frequency": 2, "delayTime": 40, "depth": 0.4}
+            "type": "panner",
+            "params": {"pan": 0}
+          },
+          "postFx": {
+            "type": "filter",
+            "params": {"frequency": 6000, "type": "lowpass"}
           },
           "componentDescription": {
             "className": "component componentE",
@@ -160,13 +164,13 @@
               "trackerClassName": "tracker",
               "xAxis": {
                 "source": "fx",
-                "paramName": "depth",
-                "range": [0.1, 0.7]
+                "paramName": "pan",
+                "range": [-1, 1]
               },
               "yAxis": {
-                "source": "fx",
+                "source": "postFx",
                 "paramName": "frequency",
-                "range": [0.1, 2]
+                "range": [400, 6000]
               }
             }
           }
