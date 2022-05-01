@@ -40,7 +40,7 @@ export function Instrument(props) {
     <div
       className={
         props.sample.getName() +
-        (playing ? " " + props.sample.getName().split(" ")[1] + "Active" : "") +
+        ((playing || scheduling) ? " " + props.sample.getName().split(" ")[1] + "Active" : "") +
         (scheduling ? " blinking" : "")
       }
       onClick={() => {
