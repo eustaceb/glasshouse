@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.prod.js",
-    "start": "http-server ./dist -a 0.0.0.0 -p 8080 -c3600",
+    "start": "http-server ./dist -a 0.0.0.0 -p 8080 -c-1",
     "dev": "webpack serve --open --config webpack.dev.js",
     "format": "prettier --write src",
     "lint": "eslint src"
