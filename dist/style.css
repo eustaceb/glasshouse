@@ -110,6 +110,21 @@ body::after{
   width: 421px;
   height: 640px;
 }
+@media only screen and (max-width: 830px) {
+  .componentsContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+  .componentContainer {
+    width: fit-content;
+    border: 2px white solid;
+  }
+  .instrumentContainer {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border: 2px white solid;
+  }
+}
 .component {
   width: 340px;
   height: 640px;
