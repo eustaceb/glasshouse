@@ -144,7 +144,7 @@
           },
           "fx": {
             "type": "chorus",
-            "params": {"frequency": 1.5, "delayTime": 3.5, "depth": 0.7}
+            "params": {"frequency": 2, "delayTime": 40, "depth": 0.4}
           },
           "componentDescription": {
             "className": "component componentE",
@@ -160,13 +160,13 @@
               "trackerClassName": "tracker",
               "xAxis": {
                 "source": "fx",
-                "paramName": "frequency",
-                "range": [1, 5]
+                "paramName": "depth",
+                "range": [0.1, 0.7]
               },
               "yAxis": {
                 "source": "fx",
-                "paramName": "depth",
-                "range": [0.0, 1]
+                "paramName": "frequency",
+                "range": [0.1, 2]
               }
             }
           }
