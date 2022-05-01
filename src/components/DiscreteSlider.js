@@ -12,11 +12,6 @@ export function DiscreteSlider(props) {
 
   const componentId = useRef(uuidv4());
 
-  function transformPosition(position)
-  {
-    return Math.log10(0.5 * position + 0.07) + 1.2;
-  }
-
   const handleMouseMove = React.useCallback(
     (event) => {
       event.preventDefault();
@@ -25,7 +20,6 @@ export function DiscreteSlider(props) {
 
         // Next position is a proportion of cursorY / element height (so [0,1])
         let nextPosition = (event.clientY - hitBox.top) / hitBox.height;
-        nextPosition = transformPosition(clamp(nextPosition, 0, 1));
         const nextStep = Math.round(nextPosition * (steps - 1));
         props.callback(nextStep);
         setStep(nextStep);
@@ -60,7 +54,6 @@ export function DiscreteSlider(props) {
 
       // Next position is a proportion of cursorY / element height (so [0,1])
       let nextPosition = (event.clientY - hitBox.top) / hitBox.height;
-      nextPosition = transformPosition(clamp(nextPosition, 0, 1));
       const nextStep = Math.round(nextPosition * (steps - 1));
       // No need to clamp - click is always within hit box
       props.callback(nextStep);
