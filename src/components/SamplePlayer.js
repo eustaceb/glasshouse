@@ -18,9 +18,20 @@ export function SamplePlayer(props) {
     props.sampleController.stopSample(sampleIndex);
   };
 
+  const stylesTransition = (from, to) => {
+    const el = document.getElementsByClassName("componentsContainer")[0];
+    el.classList.remove(from);
+    el.classList.add(to);
+  };
+
   const setSection = (sectionIndex) => {
     props.sampleController.stopAllSamples();
-    setSectionIndex(sectionIndex);
+    stylesTransition("fadeIn", "fadeOut");
+
+    setTimeout(() => {
+      stylesTransition("fadeOut", "fadeIn");
+      setSectionIndex(sectionIndex);
+    }, 600);
   };
 
   return (
@@ -31,7 +42,7 @@ export function SamplePlayer(props) {
           mouseController={props.mouseController}
           playSample={playSample}
           stopSample={stopSample}
-          description = {vocals.getComponentDescription()}
+          description={vocals.getComponentDescription()}
         />
         <InstrumentContainer
           playSample={playSample}
@@ -43,7 +54,7 @@ export function SamplePlayer(props) {
           mouseController={props.mouseController}
           playSample={playSample}
           stopSample={stopSample}
-          description = {percussion.getComponentDescription()}
+          description={percussion.getComponentDescription()}
         />
       </div>
       <div className="padding"></div>
