@@ -939,7 +939,6 @@ body {
 }
 
 /* Modal */
-
 .startModal {
   z-index: 1;
   left: 50%;
@@ -959,22 +958,10 @@ body {
   margin: auto;
   width: 100%;
 }
-.startModal a {
+.startModal a, .startModal p {
   text-decoration: none;
   color:#fff;
 }
-/* .startModal a:link {
-  color: #fff;
-}
-.startModal a:visited {
-  color: #fff;
-}
-.startModal a:hover {
-  color: hotpink;
-}
-.startModal a:active {
-  color: blue;
-} */
 
 .playButton {
   width:min(14vw, 14vh);

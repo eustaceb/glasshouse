@@ -1,5 +1,6 @@
 import * as Tone from "tone";
 import React, {useEffect, useState, useRef} from "react";
+import { useLocalContext } from "../utils/ReactHelpers";
 
 const images = [
   "images/bg.png",
@@ -115,8 +116,9 @@ const images = [
 export function LoadingScreen(props) {
   const [error, setError] = useState(false);
   const [loaded, setLoaded] = useState(false);
-  const progress = useRef(0);
+  const [progress, setProgress] = useState(0);
   const progressCap = useRef(1000);
+  const ctx = useLocalContext({progress});
 
   const preloadImage = (src, loadCallback, errorCallback) =>
     new Promise((_) => {
@@ -126,11 +128,11 @@ export function LoadingScreen(props) {
       image.src = src;
     });
 
-  const incrementProgress = () => {
-    progress.current += 1;
-    console.log(`${progress.current}/${progressCap.current}`);
-    if (progress.current == progressCap.current) setLoaded(true);
-  };
+  const incrementProgress = React.useCallback(() => {
+    setProgress(ctx.progress + 1);
+    console.log(`${ctx.progress}/${progressCap.current}`);
+    if (ctx.progress == progressCap.current) setLoaded(true);
+  }, [progress]);
 
   const loadSamples = (sampleData) => {
     progressCap.current = sampleData.length + images.length;
@@ -166,13 +168,13 @@ export function LoadingScreen(props) {
       <div className="startModal">
         <p>
           {loaded ? (
-            <a href="#" className="start" onClick={() => props.start()}>
+            <a href="#" onClick={() => props.start()}>
               MASHANGOK
             </a>
           ) : error ? (
             `Error`
           ) : (
-            ""
+            `${Math.round(ctx.progress * 100 / progressCap.current)}%`
           )}
         </p>
       </div>
