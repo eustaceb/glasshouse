@@ -264,14 +264,17 @@ export class Composition {
           volume.getNode().connect(fx.getNode());
         }
         // Fx node to master
-        fx.getNode().toDestination();
+        // Optional filter
+        const filter = new FXControl("filter", "Filter All", {"frequency": 6000, "type": "lowpass"});
+        fx.getNode().connect(filter.getNode());
+        filter.getNode().toDestination();
 
         // Send dry signal to master alongside the wet for time based fx
         const dryVolume = new FXControl("volume", "volume", groupVolume);
         if (["reverb", "delay", "pingpong"].includes(fxData["type"])) {
           samples.forEach((s) => s.player.connect(dryVolume.getNode()));
         }
-        dryVolume.getNode().toDestination();
+        dryVolume.getNode().connect(filter.getNode());
         volume.registerSideChain((parameter, value) =>
           dryVolume.setParam(parameter, value)
         );

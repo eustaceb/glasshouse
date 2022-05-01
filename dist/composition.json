@@ -143,8 +143,8 @@
             }
           },
           "fx": {
-            "type": "filter",
-            "params": {"frequency": 1000, "type": "lowpass"}
+            "type": "chorus",
+            "params": {"frequency": 1.5, "delayTime": 3.5, "depth": 0.7}
           },
           "componentDescription": {
             "className": "component componentE",
@@ -161,12 +161,12 @@
               "xAxis": {
                 "source": "fx",
                 "paramName": "frequency",
-                "range": [300, 2000]
+                "range": [1, 5]
               },
               "yAxis": {
-                "source": "preFx",
-                "paramName": "delayTime",
-                "range": [0.05, 1]
+                "source": "fx",
+                "paramName": "depth",
+                "range": [0.0, 1]
               }
             }
           }
