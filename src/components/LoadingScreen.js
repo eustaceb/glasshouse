@@ -126,6 +126,9 @@ export function LoadingScreen(props) {
       image.onload = loadCallback;
       image.onerror = errorCallback;
       image.src = src;
+      image.style = "display:none;";
+      const el =  document.getElementsByTagName("body")[0];
+      el.appendChild(image);
     });
 
   const incrementProgress = React.useCallback(() => {
@@ -134,7 +137,7 @@ export function LoadingScreen(props) {
     if (ctx.progress == progressCap.current) setLoaded(true);
   }, [progress]);
 
-  const loadSamples = (sampleData) => {
+  const loadAssets = (sampleData) => {
     progressCap.current = sampleData.length + images.length;
     Promise.all(
       images.map((x) => {
@@ -153,7 +156,7 @@ export function LoadingScreen(props) {
       .then((res) => res.json())
       .then(
         (result) => {
-          const players = loadSamples(result["samples"]);
+          const players = loadAssets(result["samples"]);
           props.setup(result, players);
         },
         (error) => {
