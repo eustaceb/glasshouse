@@ -3,35 +3,6 @@ body {
   margin: 0;
 }
 
-/* preloading downsliders so that there is no lag when changing value */
-/* TODO preload all */
-body::after{
-   position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
-   content:url('images/section1/vocalSlider1.png')
-           url('images/section1/vocalSlider2.png')
-           url('images/section1/vocalSlider3.png')
-           url('images/section1/vocalSlider4.png')
-           url('images/section1/vocalSlider5.png')
-           url('images/section1/vocalSlider6.png')
-           url('images/section1/vocalSlider7.png')
-           url('images/section1/percSlider1.png')
-           url('images/section1/percSlider2.png')
-           url('images/section1/percSlider3.png')
-           url('images/section1/percSlider4.png')
-           url('images/section1/percSlider5.png')
-           url('images/section1/percSlider6.png')
-           url('images/section1/percSlider7.png')
-           url('images/section1/percSlider8.png')
-           url('images/section2/percSlider1.png')
-           url('images/section2/percSlider2.png')
-           url('images/section2/percSlider3.png')
-           url('images/section2/percSlider4.png')
-           url('images/section2/percSlider5.png')
-           url('images/section2/percSlider6.png')
-           url('images/section2/percSlider7.png')
-           url('images/section2/percSlider8.png');
-}
-
 .loopVideo {
   position: fixed;
   right: 0;
