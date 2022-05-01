@@ -29,6 +29,7 @@ function App(props) {
     Tone.start();
     sampleController.current.playBackgroundSample();
     playback.current.start(0);
+    composition.current.startFx();
     // Start off with first sample playing
     setInitialised(true);
   };

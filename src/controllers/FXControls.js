@@ -7,14 +7,17 @@ class FXControl {
     this.label = label;
     this.params = params;
     this.node = this.createFxNode(type, params);
-    if (["chorus", "autopanner"].includes(type)) {
-      console.log(`Starting LFO for ${type}`);
-      this.node.start();
-    }
 
     // Callback that will be called when any param changes
     // the change will be forwarded somewhere else
     this.sidechain = null;
+  }
+
+  start() {
+    if (["chorus", "autopanner"].includes(this.type)) {
+      console.log(`Starting LFO for ${this.type}`);
+      this.node.start();
+    }
   }
 
   getNode() {

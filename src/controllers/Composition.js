@@ -33,6 +33,10 @@ export class Section {
   getGroup(groupName) {
     return this.groups[groupName];
   }
+  getGroups() {
+    console.log(this.groups);
+    return Object.values(this.groups);
+  }
 }
 
 class SampleGroup {
@@ -59,6 +63,9 @@ class SampleGroup {
   }
   getSamples() {
     return this.samples;
+  }
+  getPreFx() {
+    return this.preFx;
   }
   getFx() {
     return this.fx;
@@ -286,7 +293,11 @@ export class Composition {
         const sample = sampleController.getSampleByName(
           instrumentData["sample"]
         );
-        const volume = new FXControl("volume", "volume", instrumentData["volume"]);
+        const volume = new FXControl(
+          "volume",
+          "volume",
+          instrumentData["volume"]
+        );
         sample.getPlayer().connect(volume.getNode());
         volume.getNode().toDestination();
         instruments.push(sample);
@@ -297,6 +308,16 @@ export class Composition {
         groups,
         instruments
       );
+    });
+  }
+
+  startFx() {
+    /** Run after AudioContext is running */
+    this.sections.forEach((s) => {
+      s.getGroups().forEach((g) => {
+        g.getPreFx() ? g.getPreFx().start() : null;
+        g.getFx() ? g.getFx().start() : null;
+      });
     });
   }
 
