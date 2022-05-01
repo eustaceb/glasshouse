@@ -81,22 +81,6 @@ body {
   width: 421px;
   height: 640px;
 }
-@media only screen and (max-width: 830px) {
-  .componentsContainer {
-    flex-direction: column;
-    align-items: center;
-  }
-  .componentContainer {
-    width: fit-content;
-    border: 2px white solid;
-    padding: 5px;
-  }
-  .instrumentContainer {
-    margin-top: 5%;
-    margin-bottom: 5%;
-    border: 2px white solid;
-  }
-}
 .component {
   width: 340px;
   height: 640px;
@@ -1060,4 +1044,24 @@ body {
   opacity: 0;
   transition: transform 0.5s linear, opacity 0.5s linear;
   transform: scale(0.9);
+}
+
+@media only screen and (max-width: 830px) {
+  .componentsContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+  .componentContainer {
+    width: fit-content;
+    border: 2px white solid;
+    padding: 5px;
+  }
+  .instrumentContainer {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border: 2px white solid;
+  }
+  .fadeOut {
+    transform: scale(1);
+  }
 }
