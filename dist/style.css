@@ -122,6 +122,19 @@ body {
   margin: 10px;
 }
 
+/* Active instrument animation */
+@keyframes pulse {
+	0% {
+		transform: scale(0.95);
+	}
+	70% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(0.95);
+	}
+}
+
 /* Section 1 instruments */
 .Bass_Section1 {
   clip-path: polygon(0% 0%,0% 100%,100% 100%, 100% 0);
@@ -129,6 +142,7 @@ body {
 }
 .Bass_Section1Active {
   background-image: url('images/section1/bass.png'), url('images/section1/bassActive.png');
+  animation: pulse 2s infinite;
 }
 .Bass_Section1:hover {
   background-image: url('images/section1/bass.png'), url('images/section1/bassHover.png');
@@ -142,6 +156,7 @@ body {
 }
 .StringArp_Section1Active {
   background-image: url('images/section1/stringArp.png'), url('images/section1/stringArpActive.png');
+  animation: pulse 2s infinite;
 }
 .StringArp_Section1:hover {
   background-image: url('images/section1/stringArp.png'), url('images/section1/stringArpHover.png');
@@ -155,6 +170,7 @@ body {
 }
 .Taiko_Section1Active {
   background-image: url('images/section1/taiko.png'), url('images/section1/taikoActive.png');
+  animation: pulse 2s infinite;
 }
 .Taiko_Section1:hover {
   background-image: url('images/section1/taiko.png'), url('images/section1/taikoHover.png');
@@ -168,6 +184,7 @@ body {
 }
 .Clap_Section1Active {
   background-image: url('images/section1/clap.png'), url('images/section1/clapActive.png');
+  animation: pulse 2s infinite;
 }
 .Clap_Section1:hover {
   background-image: url('images/section1/clap.png'), url('images/section1/clapHover.png');
@@ -183,6 +200,7 @@ body {
 }
 .Bass_Section2Active {
   background-image: url('images/section2/bass.png'), url('images/section2/bassActive.png');
+  animation: pulse 2s infinite;
 }
 .Bass_Section2:hover {
   background-image: url('images/section2/bass.png'), url('images/section2/bassHover.png');
@@ -196,6 +214,7 @@ body {
 }
 .ChiralSynth_Section2Active {
   background-image: url('images/section2/chiral.png'), url('images/section2/chiralActive.png');
+  animation: pulse 2s infinite;
 }
 .ChiralSynth_Section2:hover {
   background-image: url('images/section2/chiral.png'), url('images/section2/chiralHover.png');
@@ -209,6 +228,7 @@ body {
 }
 .Guitalele_Section2Active {
   background-image: url('images/section2/guitalele.png'), url('images/section2/guitaleleActive.png');
+  animation: pulse 2s infinite;
 }
 .Guitalele_Section2:hover {
   background-image: url('images/section2/guitalele.png'), url('images/section2/guitaleleHover.png');
@@ -222,6 +242,7 @@ body {
 }
 .ClapFeedback_Section2Active {
   background-image: url('images/section2/clap.png'), url('images/section2/clapActive.png');
+  animation: pulse 2s infinite;
 }
 .ClapFeedback_Section2:hover {
   background-image: url('images/section2/clap.png'), url('images/section2/clapHover.png');
@@ -237,6 +258,7 @@ body {
 }
 .ClapRegular_Section3Active {
   background-image: url('images/section3/clap.png'), url('images/section3/clapActive.png');
+  animation: pulse 2s infinite;
 }
 .ClapRegular_Section3:hover {
   background-image: url('images/section3/clap.png'), url('images/section3/clapHover.png');
@@ -250,6 +272,7 @@ body {
 }
 .ClapFeedback_Section3Active {
   background-image: url('images/section3/clapFeedback.png'), url('images/section3/clapFeedbackActive.png');
+  animation: pulse 2s infinite;
 }
 .ClapFeedback_Section3:hover {
   background-image: url('images/section3/clapFeedback.png'), url('images/section3/clapFeedbackHover.png');
@@ -263,6 +286,7 @@ body {
 }
 .Bass_Section3Active {
   background-image: url('images/section3/bass.png'), url('images/section3/bassActive.png');
+  animation: pulse 2s infinite;
 }
 .Bass_Section3:hover {
   background-image: url('images/section3/bass.png'), url('images/section3/bassHover.png');
@@ -276,6 +300,7 @@ body {
 }
 .Glitch_Section3Active {
   background-image: url('images/section3/glitch.png'), url('images/section3/glitchActive.png');
+  animation: pulse 2s infinite;
 }
 .Glitch_Section3:hover {
   background-image: url('images/section3/glitch.png'), url('images/section3/glitchHover.png');
@@ -289,6 +314,7 @@ body {
 }
 .ChiralSynth_Section3Active {
   background-image: url('images/section3/chiral.png'), url('images/section3/chiralActive.png');
+  animation: pulse 2s infinite;
 }
 .ChiralSynth_Section3:hover {
   background-image: url('images/section3/chiral.png'), url('images/section3/chiralHover.png');
