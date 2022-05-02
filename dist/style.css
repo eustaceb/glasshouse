@@ -75,7 +75,6 @@ body {
   position: relative;
 }
 .padding {
-  /* height: 50px; */
   height:10vh;
   display: inline-block;
   position: relative;
@@ -93,7 +92,6 @@ body {
 }
 
 .popup {
-  /* display:none; */
   position:fixed;
   top: 10vh;
   left: 2vw;
