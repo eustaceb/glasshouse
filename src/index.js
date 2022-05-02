@@ -54,6 +54,9 @@ function App(props) {
   const popup = (
     <>
     <div className={"darkBackground" + (popupOpen ? "" : " hidden")} onClick= { () => togglePopup() } />
+    <div className={"popupClose"  + (popupOpen ? "" : " hidden")}>
+        <div className="xButton"  onClick= { () => togglePopup() }></div>
+      </div>
       <div className = {"popup" + (popupOpen ? "" : " hidden")}>
         <div className="colContainer">
           <div className="col">
@@ -75,7 +78,7 @@ function App(props) {
           </div>
           <div className="col">
             <div className="textContainer">
-              <p><strong>Credits:</strong></p>
+              <p class="heading">Credits</p>
               <p><strong>Composition, production, mixing and sample selection:</strong> <br/> Guoda Diržytė</p>
               <p><strong>Vocals and lyrics:</strong> <br/> Maja Mihalik</p>
               <p><strong>Design and artwork:</strong> <br/> Gustav Freij</p>
@@ -92,10 +95,6 @@ function App(props) {
             </div>
           </div>
         </div>
-      </div>
-      <div className={"popupClose"  + (popupOpen ? "" : " hidden")}>
-        <div className="xButton"  onClick= { () => togglePopup() }></div>
-        <div className="stick"></div>
       </div>
     </>
   )

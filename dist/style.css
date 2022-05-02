@@ -169,24 +169,21 @@ body {
   opacity: 80%;
 }
 .popupClose {
-  position:fixed;
-  top: 4vh;
-  right: 20%;
-  transform: translateX(-20%);
-  height: calc(2 * 3vh);
-  width: 5vh;
+  left: 80%;
+  top: 5%;
+  position: fixed;
+  right: 0px;
+  margin: 5px;
   line-height: 0;
   z-index: 100;
 }
-
-.stick {
-  width: 32px;
-  height: 3vh;
-  margin:0;
-  background-image: url("images/popup/stickShort.png");
-  background-size:contain;
+.heading {
+  font-size: large;
+  font-weight: bold;
 }
-
+p {
+  margin: 0.8em;
+}
 .xButton {
   width: 32px;
   height: 32px;
