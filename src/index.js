@@ -54,10 +54,12 @@ function App(props) {
   const popup = (
     <>
       <div className = {"popup" + (popupOpen ? "" : " hidden")}>
-      <div className="label">
-            <p><strong>About</strong></p>
-        </div>
-        <div className="row">
+        <div class="popupContainer">
+          <div class="section">
+            <div className="label">
+              <p><strong>About</strong></p>
+            </div>
+            <div className="row">
               <p>
                 Five friends from different backgrounds decided to make their lives just that one bit harder, challenge their friendship and combine their knowledge in sound, graphic design and programming in order to create this platform of sonic exploration.
               </p>
@@ -72,27 +74,33 @@ function App(props) {
                 You can listen to more of Más Hangok music on all major streaming platforms.
               </p>
             </div>
-        <div className="label">
-            <p><strong>Credits</strong></p>
-        </div>
-        <div className="row">
-          <div className="twoParagraphs">
-            <p class="credit"><strong>Composition, production, mixing and sample selection</strong></p><p class="fullName">Guoda Diržytė</p>
-            <p class="credit"><strong>Vocals and lyrics</strong></p><p class="fullName">Maja Mihalik</p>
           </div>
-          <div className="twoParagraphs">
-            <p class="credit"><strong>Design and artwork</strong></p><p class="fullName">Gustav Freij</p>
-            <p class="credit"><strong>Software development</strong></p><p class="fullName">Justas Bikulčius<br />Danielius Šukys</p>
+          <div class="section">
+            <div className="label">
+                <p><strong>Credits</strong></p>
+            </div>
+            <div className="row">
+              <div className="twoParagraphs">
+                <p class="credit"><strong>Composition, production, mixing and sample selection</strong></p><p class="fullName">Guoda Diržytė</p>
+                <p class="credit"><strong>Vocals and lyrics</strong></p><p class="fullName">Maja Mihalik</p>
+              </div>
+              <div className="twoParagraphs">
+                <p class="credit"><strong>Design and artwork</strong></p><p class="fullName">Gustav Freij</p>
+                <p class="credit"><strong>Software development</strong></p><p class="fullName">Justas Bikulčius<br />Danielius Šukys</p>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="row logoContainer">
-          <p class="label">Supported by</p>
-        <a href = "https://www.helpmusicians.org.uk/" target="_blank" className="link">
-          <img src="images/popup/help_musicians_white.png" className="supporterLogo"/>
-        </a>
-        <a href = "https://www.artscouncil.org.uk/" target="_blank" className="link">
-          <img src="images/popup/grant_white.png" className="supporterLogo"/>
-        </a>
+          <div class="section">
+            <div className="row logoContainer">
+              <p class="label">Supported by</p>
+              <a href = "https://www.helpmusicians.org.uk/" target="_blank" className="link">
+                <img src="images/popup/help_musicians_white.png" className="supporterLogo"/>
+              </a>
+              <a href = "https://www.artscouncil.org.uk/" target="_blank" className="link">
+                <img src="images/popup/grant_white.png" className="supporterLogo"/>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
       <div className={"xButton"  + (popupOpen ? "" : " hidden")} onClick= { () => togglePopup() } />

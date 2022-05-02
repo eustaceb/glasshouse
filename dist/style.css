@@ -149,6 +149,7 @@ body {
   position:fixed;
   left: 50%;
   top: 50%;
+  height: 80%;
   transform: translate(-50%, -50%);
   background-color: #05455E;
   z-index: 100;
@@ -158,6 +159,18 @@ body {
   box-sizing: border-box;
   max-width: 96%;
   padding: 15px;
+}
+
+.popupContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
 }
 
 .popupClose {
