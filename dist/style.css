@@ -96,34 +96,62 @@ body {
   /* display:none; */
   position:fixed;
   top: 10vh;
-  left: 10vw;
-  width:80vw;
+  left: 2vw;
+  width:96vw;
   height: 80vh;
   background-color: #05455E;
   z-index: 100;
   border: 2px solid #fff;
   color: #fff;
   overflow: auto;
+  box-sizing: border-box;
+  max-width: 96%;
 }
+
+.popupClose {
+  position:fixed;
+  top: 90vh;
+  left: 50%;
+  transform: translateX(-50%);
+  height: calc(2 * 3vh);
+  width: 5vh;
+  line-height: 0;
+  z-index: 100;
+}
+
+.stick {
+  width: 5vh;
+  height: 3vh;
+  margin:0;
+  background-image: url("images/popup/stickShort.png");
+  background-size:contain;
+}
+
+.xButton {
+  width: 5vh;
+  height: 5vh;
+  margin:0;
+  background-image: url("images/popup/x_button.png");
+  background-size:cover;
+}
+
+.xButton:hover {
+  background-image: url("images/popup/x_button.png"), url("images/popup/x_buttonHover.png");
+}
+
+
 .colContainer {
   display:flex;
-  /* flex-direction: column; */
-  /* flex-wrap: wrap; */
-  /* height: 100%; */
   width:100%;
-  /* align-content: space-evenly; */
   min-height: min-content;
   overflow: auto;
-  /* height:100%; */
 }
 .col {
 
     flex: 1 1 0px;
     align-items: center;
-    /* height:100%; */
     margin-left:5%;
     margin-right:5%;
-    /* min-height: min-content; */
     min-height: 0;
 }
 
@@ -135,10 +163,7 @@ body {
   height:100%;
   display:flex;
   flex-direction: column;
-  /* align-content: space-evenly; */
   justify-content: space-evenly;
-
-  /* overflow: auto; */
 }
 
 
