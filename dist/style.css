@@ -129,9 +129,9 @@ body {
   }
 
   #links {
-    left: 50%;
     bottom: 2vh;
-    transform: translateX(-50%);
+    width:100%;
+    text-align: center;
   }
 
 }
