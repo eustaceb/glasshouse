@@ -18,7 +18,7 @@
               "wet": 0.05
             }
           },
-          "volume": 5,
+          "volume": 9,
           "componentDescription": {
             "className": "component componentA",
             "downSlider": {
@@ -39,7 +39,7 @@
             "type": "delay",
             "params": {"delayTime": 0.6, "feedback": 0.3, "wet": 0.05}
           },
-          "volume": 0,
+          "volume": 3,
           "componentDescription": {
             "className": "component componentB",
             "downSlider": {
@@ -57,10 +57,10 @@
         }
       },
       "instruments": [
-        {"sample": "instrument Bass_Section1", "volume": 3},
-        {"sample": "instrument StringArp_Section1", "volume": 5},
-        {"sample": "instrument Taiko_Section1", "volume": 4},
-        {"sample": "instrument Clap_Section1", "volume": 6}
+        {"sample": "instrument Bass_Section1", "volume": 9},
+        {"sample": "instrument StringArp_Section1", "volume": 10},
+        {"sample": "instrument Taiko_Section1", "volume": 9},
+        {"sample": "instrument Clap_Section1", "volume": 11}
       ]
     },
     {
@@ -75,9 +75,9 @@
           ],
           "fx": {
             "type": "pingpong",
-            "params": {"delayTime": 0.15, "feedback": 0.01, "wet": 0.05}
+            "params": {"delayTime": 0.15, "feedback": 0.6, "wet": 0.05}
           },
-          "volume": -10,
+          "volume": -2,
           "componentDescription": {
             "className": "component componentC",
             "downSlider": {
@@ -89,7 +89,7 @@
             "switch": {
               "source": "fx",
               "paramName": "delayTime",
-              "options": [0.8, 0.4, 0.6]
+              "options": [0.15, 0.6, 2.4]
             }
           }
         },
@@ -103,7 +103,7 @@
             "type": "reverb",
             "params": {"decay": 30, "preDelay": 0.01, "wet": 0.05}
           },
-          "volume": 0,
+          "volume": -2,
           "componentDescription": {
             "className": "component componentD",
             "downSlider": {
@@ -116,10 +116,10 @@
         }
       },
       "instruments": [
-        {"sample": "instrument Bass_Section2", "volume": 3},
-        {"sample": "instrument Guitalele_Section2", "volume": 0},
-        {"sample": "instrument ChiralSynth_Section2", "volume": 4},
-        {"sample": "instrument ClapFeedback_Section2", "volume": 4}
+        {"sample": "instrument Bass_Section2", "volume": 7},
+        {"sample": "instrument Guitalele_Section2", "volume": 2},
+        {"sample": "instrument ChiralSynth_Section2", "volume": 8},
+        {"sample": "instrument ClapFeedback_Section2", "volume": 8}
       ]
     },
     {
@@ -132,7 +132,7 @@
             "vocalsLarge Vocals_Section3_4",
             "vocalsLarge Vocals_Section3_5"
           ],
-          "volume": 6,
+          "volume": 10,
           "preFx": {
             "type": "pitchshift",
             "params": {
@@ -157,7 +157,7 @@
               "steps": 7,
               "source": "preFx",
               "paramName": "pitch",
-              "options": [-6, -4, -2, 0, 2, 4, 6]
+              "options": [-7, -5, -3, 0, 3, 5, 7]
             },
             "xyPad": {
               "boxClassName": "xyPad",
@@ -185,7 +185,7 @@
             "type": "pingpong",
             "params": {"delayTime": 0.15, "feedback": 0.3, "wet": 0.05}
           },
-          "volume": 2,
+          "volume": 1,
           "componentDescription": {
             "className": "component componentF",
             "downSlider": {
@@ -203,11 +203,11 @@
         }
       },
       "instruments": [
-        {"sample": "instrument ClapRegular_Section3", "volume": 6},
-        {"sample": "instrument ClapFeedback_Section3", "volume": 1},
-        {"sample": "instrument Bass_Section3", "volume": 4},
-        {"sample": "instrument Glitch_Section3", "volume": 0},
-        {"sample": "instrument ChiralSynth_Section3", "volume": 4}
+        {"sample": "instrument ClapRegular_Section3", "volume": 9},
+        {"sample": "instrument ClapFeedback_Section3", "volume": 4},
+        {"sample": "instrument Bass_Section3", "volume": 7},
+        {"sample": "instrument Glitch_Section3", "volume": -1},
+        {"sample": "instrument ChiralSynth_Section3", "volume": 6}
       ]
     }
   ],
