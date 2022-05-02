@@ -53,7 +53,7 @@ function App(props) {
 
   const popup = (
     <>
-    <div className={"darkBackground" + (popupOpen ? "" : " hidden")} />
+    <div className={"darkBackground" + (popupOpen ? "" : " hidden")} onClick= { () => togglePopup() } />
       <div className = {"popup" + (popupOpen ? "" : " hidden")}>
         <div className="colContainer">
           <div className="col">
@@ -79,8 +79,7 @@ function App(props) {
               <p><strong>Composition, production, mixing and sample selection:</strong> <br/> Guoda Diržytė</p>
               <p><strong>Vocals and lyrics:</strong> <br/> Maja Mihalik</p>
               <p><strong>Design and artwork:</strong> <br/> Gustav Freij</p>
-              <p><strong>Back end software development:</strong> <br/> Justas Bikulčius</p>
-              <p><strong>Front end software development:</strong> <br/> Danielius Šukys</p>
+              <p><strong>Software development:</strong><br/>Justas Bikulčius<br/>Danielius Šukys</p>
               <p><strong>Supported by:</strong></p>
               <div className='logoContainer'>
                 <a href = "https://www.helpmusicians.org.uk/" target="_blank" className="link">

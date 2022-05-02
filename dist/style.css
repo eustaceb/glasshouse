@@ -151,7 +151,7 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
   width:60vw;
-  height: 70%;
+  height: 80%;
   background-color: #05455E;
   z-index: 100;
   border: 2px solid #fff;
@@ -166,11 +166,11 @@ body {
   width: 100%;
   background-color: #000;
   z-index: 99;
-  opacity: 70%;
+  opacity: 80%;
 }
 .popupClose {
   position:fixed;
-  top: 10vh;
+  top: 4vh;
   right: 20%;
   transform: translateX(-20%);
   height: calc(2 * 3vh);
@@ -193,6 +193,7 @@ body {
   margin:0;
   background-image: url("images/popup/x_button.png");
   background-size:cover;
+  cursor: pointer;
 }
 
 .xButton:hover {
