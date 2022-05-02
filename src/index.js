@@ -53,6 +53,7 @@ function App(props) {
 
   const popup = (
     <>
+    <div className={"darkBackground" + (popupOpen ? "" : " hidden")} />
       <div className = {"popup" + (popupOpen ? "" : " hidden")}>
         <div className="colContainer">
           <div className="col">
