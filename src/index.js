@@ -54,8 +54,8 @@ function App(props) {
   const popup = (
     <>
       <div className = {"popup" + (popupOpen ? "" : " hidden")}>
-        <div class="popupContainer">
-          <div class="section">
+        <div className="popupContainer">
+          <div className="section">
             <div className="label">
               <p><strong>About</strong></p>
             </div>
@@ -75,24 +75,24 @@ function App(props) {
               </p>
             </div>
           </div>
-          <div class="section">
+          <div className="section">
             <div className="label">
                 <p><strong>Credits</strong></p>
             </div>
             <div className="row">
               <div className="twoParagraphs">
-                <p class="credit"><strong>Composition, production, mixing and sample selection</strong></p><p class="fullName">Guoda Diržytė</p>
-                <p class="credit"><strong>Vocals and lyrics</strong></p><p class="fullName">Maja Mihalik</p>
+                <p className="credit"><strong>Composition, production, mixing and sample selection</strong></p><p className="fullName">Guoda Diržytė</p>
+                <p className="credit"><strong>Vocals and lyrics</strong></p><p className="fullName">Maja Mihalik</p>
               </div>
               <div className="twoParagraphs">
-                <p class="credit"><strong>Design and artwork</strong></p><p class="fullName">Gustav Freij</p>
-                <p class="credit"><strong>Software development</strong></p><p class="fullName">Justas Bikulčius<br />Danielius Šukys</p>
+                <p className="credit"><strong>Design and artwork</strong></p><p className="fullName">Gustav Freij</p>
+                <p className="credit"><strong>Software development</strong></p><p className="fullName">Justas Bikulčius<br />Danielius Šukys</p>
               </div>
             </div>
           </div>
-          <div class="section">
+          <div className="section">
             <div className="row logoContainer">
-              <p class="label">Supported by</p>
+              <p className="label">Supported by</p>
               <a href = "https://www.helpmusicians.org.uk/" target="_blank" className="link">
                 <img src="images/popup/help_musicians_white.png" className="supporterLogo"/>
               </a>

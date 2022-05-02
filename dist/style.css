@@ -164,8 +164,9 @@ body {
 .popupContainer {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   height: 100%;
+  width: 100%;
 }
 
 .section {
