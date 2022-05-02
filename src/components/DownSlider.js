@@ -78,7 +78,7 @@ export function DownSlider(props) {
 
   return (
     <div
-      className={className + " " + className + "_" + positionToStep(position, steps)}
+      className={"nonselectable " + className + " " + className + "_" + positionToStep(position, steps)}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}></div>
   );

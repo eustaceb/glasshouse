@@ -48,15 +48,16 @@ function App(props) {
   };
 
   const togglePopup = function() {
-    setPopupOpen(true ^ popupOpen)
+    setPopupOpen(!popupOpen);
   }
 
   const popup = (
     <>
       <div className = {"popup" + (popupOpen ? "" : " hidden")}>
-        <div className="colContainer">
-          <div className="col">
-            <div className="textContainer">
+      <div className="label">
+            <p><strong>About</strong></p>
+        </div>
+        <div className="row">
               <p>
                 Five friends from different backgrounds decided to make their lives just that one bit harder, challenge their friendship and combine their knowledge in sound, graphic design and programming in order to create this platform of sonic exploration.
               </p>
@@ -71,32 +72,30 @@ function App(props) {
                 You can listen to more of Más Hangok music on all major streaming platforms.
               </p>
             </div>
+        <div className="label">
+            <p><strong>Credits</strong></p>
+        </div>
+        <div className="row">
+          <div className="twoParagraphs">
+            <p class="credit"><strong>Composition, production, mixing and sample selection</strong></p><p class="fullName">Guoda Diržytė</p>
+            <p class="credit"><strong>Vocals and lyrics</strong></p><p class="fullName">Maja Mihalik</p>
           </div>
-          <div className="col">
-            <div className="textContainer">
-              <p><strong>Credits:</strong></p>
-              <p><strong>Composition, production, mixing and sample selection:</strong> <br/> Guoda Diržytė</p>
-              <p><strong>Vocals and lyrics:</strong> <br/> Maja Mihalik</p>
-              <p><strong>Design and artwork:</strong> <br/> Gustav Freij</p>
-              <p><strong>Back end software development:</strong> <br/> Justas Bikulčius</p>
-              <p><strong>Front end software development:</strong> <br/> Danielius Šukys</p>
-              <p><strong>Supported by:</strong></p>
-              <div className='logoContainer'>
-                <a href = "https://www.helpmusicians.org.uk/" target="_blank" class="link">
-                  <img src="images/popup/help_musicians_white.png" class="supporterLogo"/>
-                </a>
-                <a href = "https://www.artscouncil.org.uk/" target="_blank" class="link">
-                  <img src="images/popup/grant_white.png" class="supporterLogo"/>
-                </a>
-              </div>
-            </div>
+          <div className="twoParagraphs">
+            <p class="credit"><strong>Design and artwork</strong></p><p class="fullName">Gustav Freij</p>
+            <p class="credit"><strong>Software development</strong></p><p class="fullName">Justas Bikulčius<br />Danielius Šukys</p>
           </div>
         </div>
+        <div className="row logoContainer">
+          <p class="label">Supported by</p>
+        <a href = "https://www.helpmusicians.org.uk/" target="_blank" className="link">
+          <img src="images/popup/help_musicians_white.png" className="supporterLogo"/>
+        </a>
+        <a href = "https://www.artscouncil.org.uk/" target="_blank" className="link">
+          <img src="images/popup/grant_white.png" className="supporterLogo"/>
+        </a>
+        </div>
       </div>
-      <div className={"popupClose"  + (popupOpen ? "" : " hidden")}>
-        <div className="stick"></div>
-        <div className="xButton"  onClick= { () => togglePopup() }></div>
-      </div>
+      <div className={"xButton"  + (popupOpen ? "" : " hidden")} onClick= { () => togglePopup() } />
     </>
   )
 
@@ -113,26 +112,26 @@ function App(props) {
     <div className={"mainContainer" + (initialised ? "" : "Loading")}>
       {initialised ? (
         <>
-          <div id="about" className="corner" onClick= { () => togglePopup() }>about</div>
-          <div id="mashangok" className="corner">Más Hangok</div>
+          <div id="about" className="corner nonselectable" onClick= { () => togglePopup() }>about</div>
+          <div id="mashangok" className="corner nonselectable">Más Hangok</div>
           <div id="links" className="corner">
-            <a href = "https://www.facebook.com/MasHangok" target="_blank" class="link">
+            <a href = "https://www.facebook.com/MasHangok" target="_blank" className="link">
               <img src="images/links/facebook.png"/>
             </a>
-            <a href = "https://www.instagram.com/mashangok" target="_blank" class="link">
+            <a href = "https://www.instagram.com/mashangok" target="_blank" className="link">
               <img src="images/links/instagram.png"/>
             </a>
-            <a href = "https://www.youtube.com/channel/UCHt141D2QfGVt3paSsgZddw" target="_blank" class="link">
+            <a href = "https://www.youtube.com/channel/UCHt141D2QfGVt3paSsgZddw" target="_blank" className="link">
               <img src="images/links/youtube.png"/>
             </a>
-            <a href = "https://open.spotify.com/artist/2fgJJlMfJdVNZDeuiLxwf4?si=dzFHueM1T_OvJdvEuPoc2A" target="_blank" class="link">
+            <a href = "https://open.spotify.com/artist/2fgJJlMfJdVNZDeuiLxwf4?si=dzFHueM1T_OvJdvEuPoc2A" target="_blank" className="link">
               <img src="images/links/spotify.png"/>
             </a>
-            <a href = "https://mashangok.bandcamp.com" target="_blank" class="link">
+            <a href = "https://mashangok.bandcamp.com" target="_blank" className="link">
               <img src="images/links/bc.png"/>
             </a>
           </div>
-          <div id="glasshouse" className="corner">glasshouse</div>
+          <div id="glasshouse" className="corner nonselectable">glasshouse</div>
 
           <div className="padding"></div>
           <SamplePlayer

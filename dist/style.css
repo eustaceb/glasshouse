@@ -23,6 +23,15 @@ body {
   font-family: "JazminAlt";
 }
 
+.nonselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .qureka-font {
   font-family: "Qureka";
 }
@@ -138,10 +147,9 @@ body {
 
 .popup {
   position:fixed;
-  top: 10vh;
-  left: 2vw;
-  width:96vw;
-  height: 80vh;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   background-color: #05455E;
   z-index: 100;
   border: 2px solid #fff;
@@ -149,6 +157,7 @@ body {
   overflow: auto;
   box-sizing: border-box;
   max-width: 96%;
+  padding: 15px;
 }
 
 .popupClose {
@@ -162,18 +171,13 @@ body {
   z-index: 100;
 }
 
-.stick {
-  width: 5vh;
-  height: 3vh;
-  margin:0;
-  background-image: url("images/popup/stickShort.png");
-  background-size:contain;
-}
-
 .xButton {
-  width: 5vh;
-  height: 5vh;
-  margin:0;
+  position: relative;
+  right: -5px;
+  top: 5px;
+  z-index: 100;
+  width: 32px;
+  height: 32px;
   background-image: url("images/popup/x_button.png");
   background-size:cover;
 }
@@ -182,41 +186,63 @@ body {
   background-image: url("images/popup/x_button.png"), url("images/popup/x_buttonHover.png");
 }
 
-
 .colContainer {
   display:flex;
-  width:100%;
+  flex-direction: row;
+  width: 100%;
   min-height: min-content;
   overflow: auto;
+  padding: 5px;
 }
-.col {
 
-    flex: 1 1 0px;
-    align-items: center;
-    margin-left:5%;
-    margin-right:5%;
+.row {
+    text-align: left;
     min-height: 0;
+    display: flex;
+    flex-wrap: wrap;
 }
 
+.label {
+  font-weight: bold;
+  font-size: large;
+}
+.credit {
+  width: 40%;
+  text-align: right;
+  font-size: small;
+  font-weight: bold;
+}
+.fullName {
+  width: 40%;
+  text-align: left;
+  font-size: small;
+}
+.twoParagraphs {
+  display: flex;
+  flex-basis: 50%;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-grow: 1;
+}
+.leftParagraph {
+}
+.rightParagraph {
+}
 .hidden {
   display: none;
 }
 
 .textContainer {
   height:100%;
-  display:flex;
-  flex-direction: column;
-  justify-content: space-evenly;
 }
-
 
 .logoContainer {
-  display:flex;
-  flex-direction: row;
-  justify-content: center;
+  justify-content: space-evenly;
+  
 }
 .supporterLogo {
-  height: 6.5vw;
+  height: 3vw;
   width: auto;
 }
 
