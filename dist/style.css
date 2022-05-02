@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: "JazminAlt";
-  src: url('fonts/JazminRegular/font.woff2') format('woff2'), url('fonts/JazminRegular/font.woff') format('woff');
+  src: url('fonts/JazminAltRegular/font.woff2') format('woff2'), url('fonts/JazminRegular/font.woff') format('woff');
 }
 
 @font-face {
