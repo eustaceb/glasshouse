@@ -168,11 +168,11 @@ export function LoadingScreen(props) {
 
   return (
     <>
-      <div className="startModal">
+      <div className="qureka-font startModal">
         <p>
           {loaded ? (
-            <a href="#" onClick={() => props.start()}>
-              MASHANGOK
+            <a href="#" onClick={() => props.start()} style={{textTransform: "uppercase"}}>
+              Más Hangok
             </a>
           ) : error ? (
             `Error`

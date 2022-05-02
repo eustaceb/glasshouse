@@ -1,6 +1,24 @@
+
+
+@font-face {
+  font-family: "JazminAlt-Regular";
+  src: url('fonts/JazminAltRegular/font.woff2') format('woff2'), url('fonts/JazminAltRegular/font.woff') format('woff');
+}
+
+@font-face {
+  font-family: "Qureka";
+  src: url('fonts/qureka/font.otf') format('woff2'), url('fonts/qureka/font.ttf') format('ttf');
+}
+
 body {
   padding: 0;
   margin: 0;
+
+  font-family: "JazminAlt-Regular";
+}
+
+.qureka-font {
+  font-family: "Qureka";
 }
 
 .loopVideo {
