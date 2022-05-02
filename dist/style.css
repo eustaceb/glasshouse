@@ -1,13 +1,14 @@
 
 
 @font-face {
-  font-family: "JazminAlt-Regular";
+  font-family: "JazminAlt";
   src: url('fonts/JazminRegular/font.woff2') format('woff2'), url('fonts/JazminRegular/font.woff') format('woff');
 }
 
 @font-face {
-  font-family: "JazminAlt-SemiBold";
+  font-family: "JazminAlt";
   src: url('fonts/JazminSemiBold/font.woff2') format('woff2'), url('fonts/JazminSemiBold/font.woff') format('woff');
+  font-weight: bold;
 }
 
 @font-face {
@@ -19,7 +20,7 @@ body {
   padding: 0;
   margin: 0;
 
-  font-family: "JazminAlt-Regular";
+  font-family: "JazminAlt";
 }
 
 .qureka-font {
@@ -92,6 +93,7 @@ body {
 }
 
 .popup {
+  /* display:none; */
   position:fixed;
   top: 10vh;
   left: 10vw;
@@ -109,7 +111,6 @@ body {
   /* flex-wrap: wrap; */
   /* height: 100%; */
   width:100%;
-
   /* align-content: space-evenly; */
   min-height: min-content;
   overflow: auto;
@@ -126,6 +127,9 @@ body {
     min-height: 0;
 }
 
+.hidden {
+  display: none;
+}
 
 .textContainer {
   height:100%;
@@ -137,12 +141,27 @@ body {
   /* overflow: auto; */
 }
 
-@media screen and (max-width: 700px) {
+
+.logoContainer {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.supporterLogo {
+  height: 6.5vw;
+  width: auto;
+}
+
+@media screen and (max-width: 970px) {
   .colContainer {
     flex-direction: column;
   }
   .col {
     flex: auto;
+  }
+  .supporterLogo {
+    height: 11vw;
+    width: auto;
   }
 }
 

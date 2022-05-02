@@ -25,6 +25,8 @@ function App(props) {
   const playback = useRef(null);
   const composition = useRef(null);
 
+  const [popupOpen, setPopupOpen] = useState(false);
+
   const start = function () {
     Tone.start();
     sampleController.current.playBackgroundSample();
@@ -45,6 +47,10 @@ function App(props) {
     Tone.Transport.bpm.value = 100;
   };
 
+  const togglePopup = function() {
+    setPopupOpen(true ^ popupOpen)
+  }
+
   return (
     <>
     <video autoPlay muted loop className={"loopVideo" + (initialised ? "" : "Loading")} playbackrate="0.5">
@@ -52,10 +58,10 @@ function App(props) {
     </video>
     <img src="images/bg.png" className={"bgimg" + (initialised ? "" : "Loading")} />
 
-    <div class = "popup">
-      <div class="colContainer">
-        <div class="col">
-          <div class="textContainer">
+    <div className = {"popup" + (popupOpen ? "" : " hidden")}>
+      <div className="colContainer">
+        <div className="col">
+          <div className="textContainer">
             <p>
               5 friends from different backgrounds decided to make their lives just that one bit harder, challenge their friendship and combine their knowledge in sound, graphic design and programming in order to create this platform of sonic exploration.
             </p>
@@ -73,16 +79,19 @@ function App(props) {
             </p>
           </div>
         </div>
-        <div class="col">
-          <div class="textContainer">
-            <p>Credits:</p>
-            <p>Composition, production, mixing and sample selection: Guoda Diržytė</p>
-            <p>Vocals and lyrics: Maja Mihalik</p>
-            <p>Design and artwork: Gustav Freij</p>
-            <p>Back end software development: Justas Bikulčius</p>
-            <p>Front end software development: Danielius Šukys</p>
-            <p>Supported by</p>
-            <p>LOGO</p>
+        <div className="col">
+          <div className="textContainer">
+            <p><strong>Credits:</strong></p>
+            <p><strong>Composition, production, mixing and sample selection:</strong> <br/> Guoda Diržytė</p>
+            <p><strong>Vocals and lyrics:</strong> <br/> Maja Mihalik</p>
+            <p><strong>Design and artwork:</strong> <br/> Gustav Freij</p>
+            <p><strong>Back end software development:</strong> <br/> Justas Bikulčius</p>
+            <p><strong>Front end software development:</strong> <br/> Danielius Šukys</p>
+            <p><strong>Supported by:</strong></p>
+            <div className='logoContainer'>
+            <img src="images/popup/grant_white.png" class="supporterLogo"/>
+            <img src="images/popup/help_musicians_white.png" class="supporterLogo"/>
+            </div>
           </div>
         </div>
       </div>
@@ -92,7 +101,7 @@ function App(props) {
       {initialised ? (
         <>
           <div className="padding">
-            <div id="about">ABOUT</div>
+            <div id="about" onClick= { () => togglePopup() }>ABOUT</div>
           </div>
           <SamplePlayer
             mouseController={mouseController.current}
