@@ -125,6 +125,8 @@ body {
     /* min-height: min-content; */
     min-height: 0;
 }
+
+
 .textContainer {
   height:100%;
   display:flex;
@@ -133,6 +135,15 @@ body {
   justify-content: space-evenly;
 
   /* overflow: auto; */
+}
+
+@media screen and (max-width: 700px) {
+  .colContainer {
+    flex-direction: column;
+  }
+  .col {
+    flex: auto;
+  }
 }
 
 .componentsContainer {
