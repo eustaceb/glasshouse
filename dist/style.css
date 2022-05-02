@@ -1079,13 +1079,11 @@ body {
   }
   .componentContainer {
     width: fit-content;
-    border: 2px white solid;
     padding: 5px;
   }
   .instrumentContainer {
     margin-top: 5%;
     margin-bottom: 5%;
-    border: 2px white solid;
   }
   .fadeOut {
     transform: scale(1);
