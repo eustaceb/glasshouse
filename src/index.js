@@ -25,6 +25,8 @@ function App(props) {
   const playback = useRef(null);
   const composition = useRef(null);
 
+  const [popupOpen, setPopupOpen] = useState(false);
+
   const start = function () {
     Tone.start();
     sampleController.current.playBackgroundSample();
@@ -45,16 +47,71 @@ function App(props) {
     Tone.Transport.bpm.value = 100;
   };
 
+  const togglePopup = function() {
+    setPopupOpen(true ^ popupOpen)
+  }
+
+  const popup = (
+    <>
+      <div className = {"popup" + (popupOpen ? "" : " hidden")}>
+        <div className="colContainer">
+          <div className="col">
+            <div className="textContainer">
+              <p>
+                Five friends from different backgrounds decided to make their lives just that one bit harder, challenge their friendship and combine their knowledge in sound, graphic design and programming in order to create this platform of sonic exploration.
+              </p>
+              <p>
+                This project aims to let visitors interact with the music in a more collaborative way, to have people become part of the project, not external to it. Our aim is to enable the person interacting with our platform to always create something different, to engage mentally and emotionally.
+              </p>
+              <p>
+                The samples on the site are taken from Glasshouse, the final track of Más Hangok EP entitled Contemporary Man.
+                Más Hangok (2016-present) is a collaborative project between Lithuanian born Glasgow based composer & instrument designer Guoda Dirzyte and Hungarian born Brighton based vocalist & lyricist Maja Mihalik. As a collective, our work aims to explore the possibilities of new worlds by experimenting with various sonic cultures and music creation tools.
+              </p>
+              <p>
+                You can listen to more of Más Hangok music on all major streaming platforms.
+              </p>
+            </div>
+          </div>
+          <div className="col">
+            <div className="textContainer">
+              <p><strong>Credits:</strong></p>
+              <p><strong>Composition, production, mixing and sample selection:</strong> <br/> Guoda Diržytė</p>
+              <p><strong>Vocals and lyrics:</strong> <br/> Maja Mihalik</p>
+              <p><strong>Design and artwork:</strong> <br/> Gustav Freij</p>
+              <p><strong>Back end software development:</strong> <br/> Justas Bikulčius</p>
+              <p><strong>Front end software development:</strong> <br/> Danielius Šukys</p>
+              <p><strong>Supported by:</strong></p>
+              <div className='logoContainer'>
+              <img src="images/popup/help_musicians_white.png" class="supporterLogo"/>
+              <img src="images/popup/grant_white.png" class="supporterLogo"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className={"popupClose"  + (popupOpen ? "" : " hidden")}>
+        <div className="stick"></div>
+        <div className="xButton"  onClick= { () => togglePopup() }></div>
+      </div>
+    </>
+  )
+
+
   return (
     <>
     <video autoPlay muted loop className={"loopVideo" + (initialised ? "" : "Loading")} playbackrate="0.5">
       <source src="images/bg_video.mp4" type="video/mp4" />
     </video>
     <img src="images/bg.png" className={"bgimg" + (initialised ? "" : "Loading")} />
+
+    {popup}
+
     <div className={"mainContainer" + (initialised ? "" : "Loading")}>
       {initialised ? (
         <>
-          <div className="padding"></div>
+          <div className="padding">
+            <div id="about" onClick= { () => togglePopup() }>ABOUT</div>
+          </div>
           <SamplePlayer
             mouseController={mouseController.current}
             sampleController={sampleController.current}
