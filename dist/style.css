@@ -138,10 +138,11 @@ body {
 
 .popup {
   position:fixed;
-  top: 10vh;
-  left: 2vw;
-  width:96vw;
-  height: 80vh;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width:60vw;
+  height: 70%;
   background-color: #05455E;
   z-index: 100;
   border: 2px solid #fff;
@@ -185,16 +186,13 @@ body {
 
 .colContainer {
   display:flex;
-  width:100%;
   min-height: min-content;
-  overflow: auto;
+  padding: 10px;
 }
 .col {
 
     flex: 1 1 0px;
     align-items: center;
-    margin-left:5%;
-    margin-right:5%;
     min-height: 0;
 }
 
@@ -206,7 +204,7 @@ body {
   height:100%;
   display:flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  padding: 10px;
 }
 
 
@@ -216,7 +214,7 @@ body {
   justify-content: center;
 }
 .supporterLogo {
-  height: 6.5vw;
+  height: 5vw;
   width: auto;
 }
 
