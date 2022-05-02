@@ -82,8 +82,12 @@ function App(props) {
               <p><strong>Front end software development:</strong> <br/> Danielius Šukys</p>
               <p><strong>Supported by:</strong></p>
               <div className='logoContainer'>
-              <img src="images/popup/help_musicians_white.png" class="supporterLogo"/>
-              <img src="images/popup/grant_white.png" class="supporterLogo"/>
+                <a href = "https://www.helpmusicians.org.uk/" target="_blank" class="link">
+                  <img src="images/popup/help_musicians_white.png" class="supporterLogo"/>
+                </a>
+                <a href = "https://www.artscouncil.org.uk/" target="_blank" class="link">
+                  <img src="images/popup/grant_white.png" class="supporterLogo"/>
+                </a>
               </div>
             </div>
           </div>
@@ -109,9 +113,28 @@ function App(props) {
     <div className={"mainContainer" + (initialised ? "" : "Loading")}>
       {initialised ? (
         <>
-          <div className="padding">
-            <div id="about" onClick= { () => togglePopup() }>ABOUT</div>
+          <div id="about" className="corner" onClick= { () => togglePopup() }>about</div>
+          <div id="mashangok" className="corner">Más Hangok</div>
+          <div id="links" className="corner">
+            <a href = "https://www.facebook.com/MasHangok" target="_blank" class="link">
+              <img src="images/links/facebook.png"/>
+            </a>
+            <a href = "https://www.instagram.com/mashangok" target="_blank" class="link">
+              <img src="images/links/instagram.png"/>
+            </a>
+            <a href = "https://www.youtube.com/channel/UCHt141D2QfGVt3paSsgZddw" target="_blank" class="link">
+              <img src="images/links/youtube.png"/>
+            </a>
+            <a href = "https://open.spotify.com/artist/2fgJJlMfJdVNZDeuiLxwf4?si=dzFHueM1T_OvJdvEuPoc2A" target="_blank" class="link">
+              <img src="images/links/spotify.png"/>
+            </a>
+            <a href = "https://mashangok.bandcamp.com" target="_blank" class="link">
+              <img src="images/links/bc.png"/>
+            </a>
           </div>
+          <div id="glasshouse" className="corner">glasshouse</div>
+
+          <div className="padding"></div>
           <SamplePlayer
             mouseController={mouseController.current}
             sampleController={sampleController.current}
