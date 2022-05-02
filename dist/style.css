@@ -118,6 +118,24 @@ body {
   bottom: 2vh;
 }
 
+@media screen and (max-width: 500px) {
+  #mashangok {
+    display:none;
+  }
+
+  #glasshouse {
+    left: 2vw;
+    top: 2vh;
+  }
+
+  #links {
+    left: 50%;
+    bottom: 2vh;
+    transform: translateX(-50%);
+  }
+
+}
+
 .popup {
   position:fixed;
   top: 10vh;
