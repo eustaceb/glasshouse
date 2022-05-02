@@ -2,6 +2,11 @@
 
 @font-face {
   font-family: "JazminAlt-Regular";
+  src: url('fonts/JazminRegular/font.woff2') format('woff2'), url('fonts/JazminRegular/font.woff') format('woff');
+}
+
+@font-face {
+  font-family: "JazminAlt-SemiBold";
   src: url('fonts/JazminSemiBold/font.woff2') format('woff2'), url('fonts/JazminSemiBold/font.woff') format('woff');
 }
 
@@ -124,11 +129,12 @@ body {
   height:100%;
   display:flex;
   flex-direction: column;
-  align-content: space-evenly;
+  /* align-content: space-evenly; */
   justify-content: space-evenly;
 
-  overflow: auto;
+  /* overflow: auto; */
 }
+
 .componentsContainer {
   display: flex;
   flex-direction: row;

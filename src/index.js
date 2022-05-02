@@ -74,14 +74,16 @@ function App(props) {
           </div>
         </div>
         <div class="col">
-        <p>Credits:</p>
-        <p>Composition, production, mixing and sample selection: Guoda Diržytė</p>
-        <p>Vocals and lyrics: Maja Mihalik</p>
-        <p>Design and artwork: Gustav Freij</p>
-        <p>Back end software development: Justas Bikulčius</p>
-        <p>Front end software development: Danielius Šukys</p>
-        <p>Supported by</p>
-        <p>LOGO</p>
+          <div class="textContainer">
+            <p>Credits:</p>
+            <p>Composition, production, mixing and sample selection: Guoda Diržytė</p>
+            <p>Vocals and lyrics: Maja Mihalik</p>
+            <p>Design and artwork: Gustav Freij</p>
+            <p>Back end software development: Justas Bikulčius</p>
+            <p>Front end software development: Danielius Šukys</p>
+            <p>Supported by</p>
+            <p>LOGO</p>
+          </div>
         </div>
       </div>
     </div>
