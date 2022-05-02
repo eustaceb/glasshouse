@@ -82,8 +82,12 @@ function App(props) {
               <p><strong>Front end software development:</strong> <br/> Danielius Šukys</p>
               <p><strong>Supported by:</strong></p>
               <div className='logoContainer'>
-              <img src="images/popup/help_musicians_white.png" class="supporterLogo"/>
-              <img src="images/popup/grant_white.png" class="supporterLogo"/>
+                <a href = "https://www.helpmusicians.org.uk/" target="_blank" class="link">
+                  <img src="images/popup/help_musicians_white.png" class="supporterLogo"/>
+                </a>
+                <a href = "https://www.artscouncil.org.uk/" target="_blank" class="link">
+                  <img src="images/popup/grant_white.png" class="supporterLogo"/>
+                </a>
               </div>
             </div>
           </div>
