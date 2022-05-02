@@ -142,7 +142,7 @@ export class Composition {
     const bgVolume = new FXControl(
       "volume",
       "volume",
-      2 // +2db to background sample
+      4 // +4db to background sample
     );
     this.bgSample.getPlayer().connect(bgVolume.getNode());
     bgVolume.getNode().toDestination();
