@@ -48,11 +48,12 @@ function App(props) {
   };
 
   const togglePopup = function() {
-    setPopupOpen(true ^ popupOpen)
+    setPopupOpen(!popupOpen);
   }
 
   const popup = (
     <>
+    <div className={"darkBackground" + (popupOpen ? "" : " hidden")} />
       <div className = {"popup" + (popupOpen ? "" : " hidden")}>
         <div className="colContainer">
           <div className="col">
@@ -82,11 +83,11 @@ function App(props) {
               <p><strong>Front end software development:</strong> <br/> Danielius Šukys</p>
               <p><strong>Supported by:</strong></p>
               <div className='logoContainer'>
-                <a href = "https://www.helpmusicians.org.uk/" target="_blank" class="link">
-                  <img src="images/popup/help_musicians_white.png" class="supporterLogo"/>
+                <a href = "https://www.helpmusicians.org.uk/" target="_blank" className="link">
+                  <img src="images/popup/help_musicians_white.png" className="supporterLogo"/>
                 </a>
-                <a href = "https://www.artscouncil.org.uk/" target="_blank" class="link">
-                  <img src="images/popup/grant_white.png" class="supporterLogo"/>
+                <a href = "https://www.artscouncil.org.uk/" target="_blank" className="link">
+                  <img src="images/popup/grant_white.png" className="supporterLogo"/>
                 </a>
               </div>
             </div>
@@ -94,8 +95,8 @@ function App(props) {
         </div>
       </div>
       <div className={"popupClose"  + (popupOpen ? "" : " hidden")}>
-        <div className="stick"></div>
         <div className="xButton"  onClick= { () => togglePopup() }></div>
+        <div className="stick"></div>
       </div>
     </>
   )
@@ -113,26 +114,26 @@ function App(props) {
     <div className={"mainContainer" + (initialised ? "" : "Loading")}>
       {initialised ? (
         <>
-          <div id="about" className="corner" onClick= { () => togglePopup() }>about</div>
-          <div id="mashangok" className="corner">Más Hangok</div>
+          <div id="about" className="corner nonselectable" onClick= { () => togglePopup() }>about</div>
+          <div id="mashangok" className="corner nonselectable">Más Hangok</div>
           <div id="links" className="corner">
-            <a href = "https://www.facebook.com/MasHangok" target="_blank" class="link">
+            <a href = "https://www.facebook.com/MasHangok" target="_blank" className="link">
               <img src="images/links/facebook.png"/>
             </a>
-            <a href = "https://www.instagram.com/mashangok" target="_blank" class="link">
+            <a href = "https://www.instagram.com/mashangok" target="_blank" className="link">
               <img src="images/links/instagram.png"/>
             </a>
-            <a href = "https://www.youtube.com/channel/UCHt141D2QfGVt3paSsgZddw" target="_blank" class="link">
+            <a href = "https://www.youtube.com/channel/UCHt141D2QfGVt3paSsgZddw" target="_blank" className="link">
               <img src="images/links/youtube.png"/>
             </a>
-            <a href = "https://open.spotify.com/artist/2fgJJlMfJdVNZDeuiLxwf4?si=dzFHueM1T_OvJdvEuPoc2A" target="_blank" class="link">
+            <a href = "https://open.spotify.com/artist/2fgJJlMfJdVNZDeuiLxwf4?si=dzFHueM1T_OvJdvEuPoc2A" target="_blank" className="link">
               <img src="images/links/spotify.png"/>
             </a>
-            <a href = "https://mashangok.bandcamp.com" target="_blank" class="link">
+            <a href = "https://mashangok.bandcamp.com" target="_blank" className="link">
               <img src="images/links/bc.png"/>
             </a>
           </div>
-          <div id="glasshouse" className="corner">glasshouse</div>
+          <div id="glasshouse" className="corner nonselectable">glasshouse</div>
 
           <div className="padding"></div>
           <SamplePlayer

@@ -81,6 +81,15 @@ body {
   min-height:30px;
 }
 
+.nonselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .corner {
   position:absolute;
   color: #fff;
@@ -138,10 +147,11 @@ body {
 
 .popup {
   position:fixed;
-  top: 10vh;
-  left: 2vw;
-  width:96vw;
-  height: 80vh;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width:60vw;
+  height: 70%;
   background-color: #05455E;
   z-index: 100;
   border: 2px solid #fff;
@@ -150,12 +160,19 @@ body {
   box-sizing: border-box;
   max-width: 96%;
 }
-
+.darkBackground {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: #000;
+  z-index: 99;
+  opacity: 70%;
+}
 .popupClose {
   position:fixed;
-  top: 90vh;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 10vh;
+  right: 20%;
+  transform: translateX(-20%);
   height: calc(2 * 3vh);
   width: 5vh;
   line-height: 0;
@@ -163,7 +180,7 @@ body {
 }
 
 .stick {
-  width: 5vh;
+  width: 32px;
   height: 3vh;
   margin:0;
   background-image: url("images/popup/stickShort.png");
@@ -171,8 +188,8 @@ body {
 }
 
 .xButton {
-  width: 5vh;
-  height: 5vh;
+  width: 32px;
+  height: 32px;
   margin:0;
   background-image: url("images/popup/x_button.png");
   background-size:cover;
@@ -185,16 +202,13 @@ body {
 
 .colContainer {
   display:flex;
-  width:100%;
   min-height: min-content;
-  overflow: auto;
+  padding: 10px;
 }
 .col {
 
     flex: 1 1 0px;
     align-items: center;
-    margin-left:5%;
-    margin-right:5%;
     min-height: 0;
 }
 
@@ -203,10 +217,9 @@ body {
 }
 
 .textContainer {
-  height:100%;
   display:flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  padding: 10px;
 }
 
 
@@ -216,7 +229,7 @@ body {
   justify-content: center;
 }
 .supporterLogo {
-  height: 6.5vw;
+  height: 5vw;
   width: auto;
 }
 
