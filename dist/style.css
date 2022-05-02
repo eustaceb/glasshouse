@@ -81,6 +81,15 @@ body {
   min-height:30px;
 }
 
+.nonselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .corner {
   position:absolute;
   color: #fff;
@@ -154,9 +163,9 @@ body {
 
 .popupClose {
   position:fixed;
-  top: 90vh;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 10vh;
+  right: 20%;
+  transform: translateX(-20%);
   height: calc(2 * 3vh);
   width: 5vh;
   line-height: 0;
@@ -164,7 +173,7 @@ body {
 }
 
 .stick {
-  width: 5vh;
+  width: 32px;
   height: 3vh;
   margin:0;
   background-image: url("images/popup/stickShort.png");
@@ -172,8 +181,8 @@ body {
 }
 
 .xButton {
-  width: 5vh;
-  height: 5vh;
+  width: 32px;
+  height: 32px;
   margin:0;
   background-image: url("images/popup/x_button.png");
   background-size:cover;
@@ -201,7 +210,6 @@ body {
 }
 
 .textContainer {
-  height:100%;
   display:flex;
   flex-direction: column;
   padding: 10px;
