@@ -133,7 +133,6 @@ export function LoadingScreen(props) {
 
   const incrementProgress = React.useCallback(() => {
     setProgress(ctx.progress + 1);
-    console.log(`${ctx.progress}/${progressCap.current}`);
     if (ctx.progress == progressCap.current) setLoaded(true);
   }, [progress]);
 

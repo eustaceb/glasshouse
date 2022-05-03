@@ -15,7 +15,6 @@ class FXControl {
 
   start() {
     if (["chorus", "autopanner"].includes(this.type)) {
-      console.log(`Starting LFO for ${this.type}`);
       this.node.start();
     }
   }
@@ -37,12 +36,8 @@ class FXControl {
       if (this.node[parameter].value !== value) {
         this.node[parameter].value = value;
       }
-      console.log(
-        `${this.type} ${parameter} is now ${this.node[parameter].value}`
-      );
     } else if (this.node[parameter] !== value) {
       this.node[parameter] = value;
-      console.log(`${this.type} ${parameter} is now ${this.node[parameter]}`);
     }
 
     if (this.sidechain !== null) {

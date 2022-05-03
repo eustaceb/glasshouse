@@ -1,6 +1,5 @@
 export class MouseController {
   constructor(document) {
-    console.log("Instantiated mouse controller");
     this.listeners = {
       mouseDown: new Map(),
       mouseMove: new Map(),
