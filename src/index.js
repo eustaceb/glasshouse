@@ -130,6 +130,9 @@ function App(props) {
             <a href = "https://mashangok.bandcamp.com" target="_blank" className="link">
               <img src="images/links/bc.png"/>
             </a>
+            <a href = "https://github.com/eustaceb/glasshouse" target="_blank" className="link">
+              <img src="images/links/github.png"/>
+            </a>
           </div>
           <div id="glasshouse" className="corner nonselectable">glasshouse</div>
 
