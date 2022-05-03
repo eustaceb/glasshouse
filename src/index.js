@@ -106,13 +106,12 @@ function App(props) {
       <source src="images/bg_video.mp4" type="video/mp4" />
     </video>
     <img src="images/bg.png" className={"bgimg" + (initialised ? "" : "Loading")} />
-
+    {initialised ? <div className="darkBackgroundLayer"/> : null}
     {popup}
 
     <div className={"mainContainer" + (initialised ? "" : "Loading")}>
       {initialised ? (
         <>
-          <div className="darkBackgroundLayer"/>
           <div id="about" className="corner nonselectable" onClick= { () => togglePopup() }>about</div>
           <div id="mashangok" className="corner nonselectable">Más Hangok</div>
           <div id="links" className="corner">
@@ -134,14 +133,14 @@ function App(props) {
           </div>
           <div id="glasshouse" className="corner nonselectable">glasshouse</div>
 
-          <div className="padding"></div>
+          <div className="topSpacing"></div>
           <SamplePlayer
             mouseController={mouseController.current}
             sampleController={sampleController.current}
             playback={playback.current}
             composition={composition.current}
           />
-          <div className="padding"></div>
+          <div className="bottomSpacing"></div>
         </>
       ) : (
         <LoadingScreen

@@ -81,11 +81,10 @@ body {
   flex-direction: column;
   position: relative;
 }
-.padding {
+.topSpacing, .bottomSpacing {
   height:10vh;
   display: inline-block;
   position: relative;
-  min-height:30px;
 }
 
 .nonselectable {
@@ -1115,7 +1114,7 @@ p {
 /* Multistate Switch */
 .switchContainer {
   background-image: url('images/switch/base.png');
-  width: 337px;
+  width: 349px;
   height: 41px;
   display: flex;
   flex-direction: row;
@@ -1130,13 +1129,13 @@ p {
   top: 38%;
 }
 .switchCircle1 {
-  left: -7px;
+  left: -14px;
 }
 .switchCircle2 {
-  left: 6px;
+  left: 0px;
 }
 .switchCircle3 {
-  left: 18px;
+  left: 12px;
 }
 .switchCircle:hover {
   background-image: url('images/switch/circleHover.png');
@@ -1271,20 +1270,41 @@ p {
   transform: scale(0.9);
 }
 
-@media only screen and (max-width: 830px) {
+@media only screen and (max-width: 1000px) {
+  .mainContainer {
+    transform: scale(0.8) translateY(-10%);
+  }
+}
+
+@media only screen and (max-height:800px)  {
+  .mainContainer {
+    transform: scale(0.8) translateY(-10%);
+  }
+}
+@media only screen and (max-width: 800px) {
+  .mainContainer {
+    transform: scale(0.6);
+  }
+}
+
+/* Mobile phones */
+@media only screen and (max-width: 640px) {
   .componentsContainer {
     flex-direction: column;
-    align-items: center;
   }
   .componentContainer {
-    width: fit-content;
-    padding: 5px;
+    margin-bottom: 2vh;
+    width: auto;
+    height: auto;
   }
   .instrumentContainer {
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin-top: 4vh;
+    margin-bottom: 4vh;
   }
-  .fadeOut {
+  .fadeOut, .fadeIn {
+    transform: scale(1);
+  }
+  .mainContainer {
     transform: scale(1);
   }
 }
