@@ -19,7 +19,6 @@
 body {
   padding: 0;
   margin: 0;
-
   font-family: "JazminAlt";
 }
 
@@ -27,6 +26,13 @@ body {
   font-family: "Qureka";
 }
 
+.darkBackgroundLayer {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: #000;
+  z-index: -2;
+}
 .loopVideo {
   position: fixed;
   right: 0;
@@ -34,6 +40,7 @@ body {
   min-width: 100%;
   min-height: 100%;
   z-index: -1;
+  opacity: 70%;
 }
 
 .loopVideoLoading {

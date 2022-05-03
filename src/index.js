@@ -78,7 +78,7 @@ function App(props) {
           </div>
           <div className="col">
             <div className="textContainer">
-              <p class="heading">Credits</p>
+              <p className="heading">Credits</p>
               <p><strong>Composition, production, mixing and sample selection:</strong> <br/> Guoda Diržytė</p>
               <p><strong>Vocals and lyrics:</strong> <br/> Maja Mihalik</p>
               <p><strong>Design and artwork:</strong> <br/> Gustav Freij</p>
@@ -112,6 +112,7 @@ function App(props) {
     <div className={"mainContainer" + (initialised ? "" : "Loading")}>
       {initialised ? (
         <>
+          <div className="darkBackgroundLayer"/>
           <div id="about" className="corner nonselectable" onClick= { () => togglePopup() }>about</div>
           <div id="mashangok" className="corner nonselectable">Más Hangok</div>
           <div id="links" className="corner">
