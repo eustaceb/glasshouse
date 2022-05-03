@@ -278,6 +278,7 @@ p {
   flex-direction: column;
   width: 421px;
   height: 640px;
+  align-items: center;
 }
 .component {
   width: 340px;
