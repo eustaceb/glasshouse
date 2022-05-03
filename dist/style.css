@@ -1280,7 +1280,38 @@ p {
   .mainContainer {
     transform: scale(0.7) translateY(-20%);
   }
+  .popup {
+      width:80vw;
+      height: 90vh;
+  }
+  .popupClose {
+    left: 90vw;
+    top: 1vh;
+  }
 }
+
+@media only screen and (min-height:800px) and (max-height:950px)  {
+  .popup {
+    width: 80vw;
+    height: 70vh;
+  }
+  .popupClose {
+    left: 90vw;
+    top: 9vh;
+  }
+}
+
+@media only screen and (min-height:950px) and (max-height:1100px)  {
+  .popup {
+    width: 80vw;
+    height: 60vh;
+  }
+  .popupClose {
+    left: 90vw;
+    top: 19vh;
+  }
+}
+
 @media only screen and (max-width: 800px) {
   .mainContainer {
     transform: scale(0.6) translateY(-20%);
