@@ -57,7 +57,6 @@ export function SamplePlayer(props) {
           description={percussion.getComponentDescription()}
         />
       </div>
-      <div className="padding"></div>
       <div className="footerContainer">
         <Navigation
           sectionIndex={sectionIndex}

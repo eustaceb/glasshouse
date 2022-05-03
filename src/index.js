@@ -141,6 +141,7 @@ function App(props) {
             playback={playback.current}
             composition={composition.current}
           />
+          <div className="padding"></div>
         </>
       ) : (
         <LoadingScreen
