@@ -158,7 +158,6 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
   width:60vw;
-  height: 60vh;
   background-color: #05455E;
   z-index: 100;
   border: 2px solid #fff;
@@ -1282,33 +1281,31 @@ p {
   }
   .popup {
       width:80vw;
-      height: 90vh;
+      height: 70vh;
   }
   .popupClose {
     left: 90vw;
-    top: 1vh;
+    top: 10vh;
   }
 }
 
 @media only screen and (min-height:800px) and (max-height:950px)  {
   .popup {
     width: 80vw;
-    height: 70vh;
   }
   .popupClose {
     left: 90vw;
-    top: 9vh;
+    top: 16vh;
   }
 }
 
 @media only screen and (min-height:950px) and (max-height:1100px)  {
   .popup {
     width: 80vw;
-    height: 60vh;
   }
   .popupClose {
     left: 90vw;
-    top: 19vh;
+    top: 16vh;
   }
 }
 
