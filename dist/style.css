@@ -1271,13 +1271,15 @@ p {
 
 @media only screen and (max-width: 1000px) {
   .mainContainer {
-    transform: scale(0.8) translateY(-10%);
+    transform: scale(0.8);
+    margin-top:-5vh;
   }
 }
 
 @media only screen and (max-height:800px)  {
   .mainContainer {
-    transform: scale(0.7) translateY(-20%);
+    transform: scale(0.7);
+    margin-top:-17vh;
   }
   .popup {
       width:80vw;
@@ -1311,7 +1313,8 @@ p {
 
 @media only screen and (max-width: 800px) {
   .mainContainer {
-    transform: scale(0.6) translateY(-20%);
+    transform: scale(0.6);
+    margin-top:-20vh;
   }
 }
 
@@ -1334,5 +1337,6 @@ p {
   }
   .mainContainer {
     transform: scale(1);
+    margin-top: 0;
   }
 }
