@@ -1,8 +1,8 @@
-You can find a deployed instance of the app at [https://web-sampler-sniif.ondigitalocean.app](https://web-sampler-sniif.ondigitalocean.app).
+You can find a deployed instance of the app at [https://mashangok.co.uk](https://mashangok.co.uk).
 
 ![Screenshot of application](docs/images/screenshot.png?raw=true "Screenshot of application")
 
-The application was built using React, Tone.js, Material-UI and Webpack.
+The application was built using React, Tone.js and Webpack.
 
 # Requirements
 

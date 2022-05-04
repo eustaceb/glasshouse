@@ -1,19 +1,19 @@
 {
   "name": "collab-synth",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Collaborative audio synthesis",
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.prod.js",
-    "start": "http-server ./dist -a 0.0.0.0 -p 8080 -c1800",
+    "start": "http-server ./dist -a 0.0.0.0 -p 8080 -c3600",
     "dev": "webpack serve --open --config webpack.dev.js",
     "format": "prettier --write src",
     "lint": "eslint src"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eustaceb/collab-synth.git"
+    "url": "git+https://github.com/eustaceb/glasshouse.git"
   },
   "keywords": [
     "audio",
@@ -24,13 +24,10 @@
   "author": "Guoda Dirzyte, Justinas Bikulcius",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/eustaceb/collab-synth/issues"
+    "url": "https://github.com/eustaceb/glasshouse/issues"
   },
-  "homepage": "https://github.com/eustaceb/collab-synth#readme",
+  "homepage": "https://mashangok.co.uk",
   "dependencies": {
-    "@material-ui/core": "^4.11.0",
-    "@material-ui/icons": "^4.11.2",
-    "@material-ui/styles": "^4.10.0",
     "node": "^14.13.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
