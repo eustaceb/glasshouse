@@ -18,10 +18,9 @@ export function DownSlider(props) {
 
   const positionToStep = (pos, steps) => {
     return Math.trunc((pos / maxPosition) * steps);
-  }
+  };
 
-  function transformPosition(position)
-  {
+  function transformPosition(position) {
     return Math.log10(0.5 * position + 0.07) + 1.2;
   }
 
@@ -34,7 +33,7 @@ export function DownSlider(props) {
         // Next position is a proportion of cursorY / element height (so [0,1])
         let nextPosition = (event.clientY - hitBox.top) / hitBox.height;
         nextPosition = clamp(nextPosition, minPosition, maxPosition);
-        nextPosition = transformPosition(nextPosition)
+        nextPosition = transformPosition(nextPosition);
 
         props.callback(nextPosition);
         setPosition(nextPosition);
@@ -78,7 +77,9 @@ export function DownSlider(props) {
 
   return (
     <div
-      className={className + " " + className + "_" + positionToStep(position, steps)}
+      className={
+        className + " " + className + "_" + positionToStep(position, steps)
+      }
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}></div>
   );

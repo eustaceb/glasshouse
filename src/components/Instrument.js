@@ -1,6 +1,5 @@
 import React, {createRef, useState, useEffect} from "react";
 
-
 function findAnimByName(elem, name) {
   const anims = elem.getAnimations();
   return anims.find((anim) => anim.animationName === name);
@@ -42,27 +41,32 @@ export function Instrument(props) {
     setPadState(padStates.READY);
 
     // Synchronise instrument pulse animations
-    dom.current ? dom.current.addEventListener("animationstart", (evt) => {
-    if (evt.animationName === "pulse") {
-      const thisAnim = findAnimByName(evt.target, "pulse");
-      const allInstruments = document.getElementsByClassName("instrument");
-      for (let i = 0; i < allInstruments.length; i++) {
-        const otherAnim = findAnimByName(allInstruments[i], "pulse");
-        if (otherAnim && (otherAnim !== thisAnim)) {
-          thisAnim.startTime = otherAnim.startTime;
-          break;
-        }
-      }
-    }
-  }) : null;
-
+    dom.current
+      ? dom.current.addEventListener("animationstart", (evt) => {
+          if (evt.animationName === "pulse") {
+            const thisAnim = findAnimByName(evt.target, "pulse");
+            const allInstruments = document.getElementsByClassName(
+              "instrument"
+            );
+            for (let i = 0; i < allInstruments.length; i++) {
+              const otherAnim = findAnimByName(allInstruments[i], "pulse");
+              if (otherAnim && otherAnim !== thisAnim) {
+                thisAnim.startTime = otherAnim.startTime;
+                break;
+              }
+            }
+          }
+        })
+      : null;
   }, [props.sample]);
   return (
     <div
-    ref={dom}
+      ref={dom}
       className={
         props.sample.getName() +
-        ((playing || scheduling) ? " " + props.sample.getName().split(" ")[1] + "Active" : "") +
+        (playing || scheduling
+          ? " " + props.sample.getName().split(" ")[1] + "Active"
+          : "") +
         (scheduling ? " blinking" : "")
       }
       onClick={() => {

@@ -91,43 +91,46 @@ export function XYPadStyled(props) {
     [props.callbackX, props.callbackY]
   );
 
-  const mouseDown = React.useCallback((e) => {
-    // Check if we clicked on one of the elements in the SVG
-    const thisElement =
-      e.target.id === componentId || e.target.id === "xyPadTracker";
-    if (thisElement) {
-      const componentDom = document.getElementById(componentId);
-      componentDom.style.cursor = "none";
-      const rect = componentDom.getBoundingClientRect();
-      const trackerSize = document
-        .getElementById("xyPadTracker")
-        .getBoundingClientRect().width;
+  const mouseDown = React.useCallback(
+    (e) => {
+      // Check if we clicked on one of the elements in the SVG
+      const thisElement =
+        e.target.id === componentId || e.target.id === "xyPadTracker";
+      if (thisElement) {
+        const componentDom = document.getElementById(componentId);
+        componentDom.style.cursor = "none";
+        const rect = componentDom.getBoundingClientRect();
+        const trackerSize = document
+          .getElementById("xyPadTracker")
+          .getBoundingClientRect().width;
 
-      const uiScale = getUIScale();
+        const uiScale = getUIScale();
 
-      // Calculate pos relative to dom element
-      const [relativeX, relativeY] = getRelativePosition(
-        e.clientX,
-        e.clientY,
-        rect,
-        trackerSize,
-        uiScale
-      );
+        // Calculate pos relative to dom element
+        const [relativeX, relativeY] = getRelativePosition(
+          e.clientX,
+          e.clientY,
+          rect,
+          trackerSize,
+          uiScale
+        );
 
-      // Transform to [0, 1] space
-      const [normalX, normalY] = normalisePosition(
-        relativeX,
-        relativeY,
-        (rect.width - trackerSize) * uiScale,
-        (rect.height - trackerSize) * uiScale
-      );
+        // Transform to [0, 1] space
+        const [normalX, normalY] = normalisePosition(
+          relativeX,
+          relativeY,
+          (rect.width - trackerSize) * uiScale,
+          (rect.height - trackerSize) * uiScale
+        );
 
-      if (props.callbackX) props.callbackX(normalX);
-      if (props.callbackY) props.callbackY(normalY);
-      setX(relativeX);
-      setY(relativeY);
-    }
-  }, [props.callbackX, props.callbackY]);
+        if (props.callbackX) props.callbackX(normalX);
+        if (props.callbackY) props.callbackY(normalY);
+        setX(relativeX);
+        setY(relativeY);
+      }
+    },
+    [props.callbackX, props.callbackY]
+  );
 
   const mouseUp = (_) => {
     const componentDom = document.getElementById(componentId);

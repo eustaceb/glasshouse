@@ -5,14 +5,11 @@ export function LayeredButton(props) {
 
   return (
     <div
-      className={
-        props.cssName + (active ? "Active" : "")
-      }
+      className={props.cssName + (active ? "Active" : "")}
       onClick={() => {
         props.callback();
         setActive(!active);
       }}
-      /*style={props.shape ? {clipPath: props.shape} : null}*/
     />
   );
 }

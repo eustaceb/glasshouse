@@ -1,6 +1,6 @@
 import * as Tone from "tone";
 import React, {useEffect, useState, useRef} from "react";
-import { useLocalContext } from "../utils/ReactHelpers";
+import {useLocalContext} from "../utils/ReactHelpers";
 
 const images = [
   "images/bg.png",
@@ -127,7 +127,7 @@ export function LoadingScreen(props) {
       image.onerror = errorCallback;
       image.src = src;
       image.style = "display:none;";
-      const el =  document.getElementsByTagName("body")[0];
+      const el = document.getElementsByTagName("body")[0];
       el.appendChild(image);
     });
 
@@ -170,13 +170,16 @@ export function LoadingScreen(props) {
       <div className="qureka-font startModal">
         <p>
           {loaded ? (
-            <a href="#" onClick={() => props.start()} style={{textTransform: "uppercase"}}>
+            <a
+              href="#"
+              onClick={() => props.start()}
+              style={{textTransform: "uppercase"}}>
               Más Hangok
             </a>
           ) : error ? (
             `Error`
           ) : (
-            `${Math.round(ctx.progress * 100 / progressCap.current)}%`
+            `${Math.round((ctx.progress * 100) / progressCap.current)}%`
           )}
         </p>
       </div>

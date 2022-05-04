@@ -51,7 +51,6 @@ export function ComponentA(props) {
         />
       );
     }
-
   }
   if (switchControl) {
     fxAppendageComponent = (

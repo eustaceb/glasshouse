@@ -64,7 +64,9 @@ export function DiscreteSlider(props) {
 
   return (
     <div
-      className={className + " " + className + "_" + (step + 1) + " nonselectable"}
+      className={
+        className + " " + className + "_" + (step + 1) + " nonselectable"
+      }
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}></div>
   );
