@@ -1,5 +1,5 @@
 {
-  "name": "collab-synth",
+  "name": "glasshouse",
   "version": "1.0.0",
   "description": "An interactive Web Audio experience that lets you rearrange Mas Hangok - Glasshouse",
   "private": true,
@@ -16,10 +16,10 @@
     "url": "git+https://github.com/eustaceb/glasshouse.git"
   },
   "keywords": [
+    "react",
     "audio",
-    "synth",
     "web",
-    "collaborative"
+    "samples"
   ],
   "author": "Guoda Dirzyte, Justinas Bikulcius",
   "license": "MIT",
