@@ -56,7 +56,8 @@ export function XYPad(props) {
   const mouseDown = React.useCallback((e) => {
     // Check if we clicked on one of the elements in the SVG
     const thisElement =
-      e.target.id === componentId || e.target.parentElement.id === componentId;
+      e.target.id === componentId ||
+      (e.target.parentElement && e.target.parentElement.id === componentId);
     if (thisElement) {
       const rect = document.getElementById(componentId).getBoundingClientRect();
       // Apply and constrain
@@ -95,12 +96,12 @@ export function XYPad(props) {
         <circle cx={x} cy={y} r={5} fill="yellow" stroke="black" />
       </svg>
       <div className="nonselectable">
-        {props.fx.getLabelX()}: {Math.round(x).toString().padStart(3, "0")}{" "}
-        / {maxValue}
+        {props.fx.getLabelX()}: {Math.round(x).toString().padStart(3, "0")} /{" "}
+        {maxValue}
       </div>
       <div className="nonselectable">
-        {props.fx.getLabelY()}: {Math.round(y).toString().padStart(3, "0")}{" "}
-        / {maxValue}
+        {props.fx.getLabelY()}: {Math.round(y).toString().padStart(3, "0")} /{" "}
+        {maxValue}
       </div>
     </div>
   );

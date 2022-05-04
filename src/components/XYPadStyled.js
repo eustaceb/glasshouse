@@ -53,7 +53,8 @@ export function XYPadStyled(props) {
   const mouseDown = React.useCallback((e) => {
     // Check if we clicked on one of the elements in the SVG
     const thisElement =
-      e.target.id === componentId || e.target.parentElement.id === componentId;
+      e.target.id === componentId ||
+      (e.target.parentElement && e.target.parentElement.id === componentId);
     if (thisElement) {
       const componentDom = document.getElementById(componentId);
       componentDom.style.cursor = "none";
