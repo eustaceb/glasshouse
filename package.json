@@ -1,7 +1,7 @@
 {
   "name": "collab-synth",
   "version": "1.0.0",
-  "description": "Collaborative audio synthesis",
+  "description": "An interactive Web Audio experience that lets you rearrange Mas Hangok - Glasshouse",
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
