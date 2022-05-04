@@ -36,10 +36,10 @@ export function XYPadStyled(props) {
     return [constrainedX * scale, constrainedY * scale];
   };
 
-  const normalisePosition = (x, y, rect) => {
+  const normalisePosition = (x, y, width, height) => {
     // Scale to [0, 1]
-    const scaledX = scale(x, 0, rect.width, 0, 1);
-    const scaledY = scale(y, 0, rect.height, 0, 1);
+    const scaledX = scale(x, 0, width, 0, 1);
+    const scaledY = scale(y, 0, height, 0, 1);
     return [scaledX, scaledY];
   };
 
@@ -57,20 +57,23 @@ export function XYPadStyled(props) {
             .getElementById("xyPadTracker")
             .getBoundingClientRect().width;
 
+          const uiScale = getUIScale();
+
           // Calculate pos relative to dom element
           const [relativeX, relativeY] = getRelativePosition(
             e.clientX,
             e.clientY,
             rect,
             trackerSize,
-            getUIScale()
+            uiScale
           );
 
           // Transform to [0, 1] space
           const [normalX, normalY] = normalisePosition(
             relativeX,
             relativeY,
-            rect
+            (rect.width - trackerSize) * uiScale,
+            (rect.height - trackerSize) * uiScale
           );
 
           // Only update state if value has changed
@@ -100,24 +103,31 @@ export function XYPadStyled(props) {
         .getElementById("xyPadTracker")
         .getBoundingClientRect().width;
 
+      const uiScale = getUIScale();
+
       // Calculate pos relative to dom element
       const [relativeX, relativeY] = getRelativePosition(
         e.clientX,
         e.clientY,
         rect,
         trackerSize,
-        getUIScale()
+        uiScale
       );
 
       // Transform to [0, 1] space
-      const [normalX, normalY] = normalisePosition(relativeX, relativeY, rect);
+      const [normalX, normalY] = normalisePosition(
+        relativeX,
+        relativeY,
+        (rect.width - trackerSize) * uiScale,
+        (rect.height - trackerSize) * uiScale
+      );
 
+      if (props.callbackX) props.callbackX(normalX);
+      if (props.callbackY) props.callbackY(normalY);
       setX(relativeX);
       setY(relativeY);
-      if (ctx.callbackX) ctx.callbackX(normalX);
-      if (ctx.callbackY) ctx.callbackY(normalY);
     }
-  });
+  }, [props.callbackX, props.callbackY]);
 
   const mouseUp = (_) => {
     const componentDom = document.getElementById(componentId);
@@ -130,8 +140,9 @@ export function XYPadStyled(props) {
       .getElementById("xyPadTracker")
       .getBoundingClientRect().width;
     const trackerMiddle = trackerSize / 2;
-    setX((rect.width / 2 - trackerMiddle) * getUIScale());
-    setY((rect.height / 2 - trackerMiddle) * getUIScale());
+    const uiScale = getUIScale();
+    setX((rect.width / 2 - trackerMiddle) * uiScale);
+    setY((rect.height / 2 - trackerMiddle) * uiScale);
 
     props.mouseController.registerListener(componentId, "mouseDown", mouseDown);
     props.mouseController.registerListener(componentId, "mouseMove", mouseMove);
