@@ -109,7 +109,7 @@ function App(props) {
     {initialised ? <div className="darkBackgroundLayer"/> : null}
     {popup}
 
-    <div className={"mainContainer" + (initialised ? "" : "Loading")}>
+    <div id="mainContainer" className={"mainContainer" + (initialised ? "" : "Loading")}>
       {initialised ? (
         <>
           <div id="about" className="corner nonselectable" onClick= { () => togglePopup() }>about</div>

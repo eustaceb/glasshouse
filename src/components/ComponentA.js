@@ -1,11 +1,10 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 
 import {DiscreteSlider} from "./DiscreteSlider.js";
 import {DownSlider} from "./DownSlider.js";
 import {InstrumentGroup} from "./InstrumentGroup.js";
 import {MultistateSwitch} from "./MultistateSwitch.js";
 import {XYPadStyled} from "./XYPadStyled.js";
-import {scale} from "../utils/Math.js";
 
 export function ComponentA(props) {
   const sliderControl = props.group.getFxControls()["slider"];
@@ -19,13 +18,10 @@ export function ComponentA(props) {
     const desc = props.description.getXYPadDescription();
     fxXYComponent = (
       <XYPadStyled
-        minValue={0}
-        maxValue={123}
-        trackerSize={57}
         boxClassName={desc.getBoxClassName()}
         trackerClassName={desc.getTrackerClassName()}
-        callbackX={(val) => xyControl.setX(scale(val, 0, 123, 0, 1))} // Need to scale to [0, 1]
-        callbackY={(val) => xyControl.setY(scale(val, 0, 123, 0, 1))} // Need to scale to [0, 1]
+        callbackX={(val) => xyControl.setX(val)}
+        callbackY={(val) => xyControl.setY(val)}
         mouseController={props.mouseController}
       />
     );
