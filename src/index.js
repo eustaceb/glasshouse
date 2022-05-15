@@ -10,6 +10,7 @@ import {PlaybackController} from "./controllers/PlaybackController.js";
 import {SampleController} from "./controllers/SampleController.js";
 
 // Components
+import {AboutPopup, HelpPopup} from "./components/Popups.js";
 import {LoadingScreen} from "./components/LoadingScreen.js";
 import {SamplePlayer} from "./components/SamplePlayer.js";
 
@@ -25,7 +26,18 @@ function App(props) {
   const playback = useRef(null);
   const composition = useRef(null);
 
-  const [popupOpen, setPopupOpen] = useState(false);
+  // Popups
+  const [aboutOpen, setAboutOpen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
+
+  const toggleHelp = () => {
+    setAboutOpen(false);
+    setHelpOpen(!helpOpen);
+  }
+  const toggleAbout = () => {
+    setHelpOpen(false);
+    setAboutOpen(!aboutOpen);
+  }
 
   const start = function () {
     Tone.start();
@@ -47,104 +59,6 @@ function App(props) {
     Tone.Transport.bpm.value = 100;
   };
 
-  const togglePopup = function () {
-    setPopupOpen(!popupOpen);
-  };
-
-  const popup = (
-    <>
-      <div
-        className={"darkBackground" + (popupOpen ? "" : " hidden")}
-        onClick={() => togglePopup()}
-      />
-      <div className={"popupClose" + (popupOpen ? "" : " hidden")}>
-        <div className="xButton" onClick={() => togglePopup()}></div>
-      </div>
-      <div className={"popup" + (popupOpen ? "" : " hidden")}>
-        <div className="colContainer">
-          <div className="col">
-            <div className="textContainer">
-              <p>
-                Five friends from different backgrounds decided to make their
-                lives just that one bit harder, challenge their friendship and
-                combine their knowledge in sound, graphic design and programming
-                in order to create this platform of sonic exploration.
-              </p>
-              <p>
-                This project aims to let visitors interact with the music in a
-                more collaborative way, to have people become part of the
-                project, not external to it. Our aim is to enable the person
-                interacting with our platform to always create something
-                different, to engage mentally and emotionally.
-              </p>
-              <p>
-                The samples on the site are taken from Glasshouse, the final
-                track of Más Hangok EP entitled Contemporary Man. Más Hangok
-                (2016-present) is a collaborative project between Lithuanian
-                born Glasgow based composer & instrument designer Guoda Dirzyte
-                and Hungarian born Brighton based vocalist & lyricist Maja
-                Mihalik. As a collective, our work aims to explore the
-                possibilities of new worlds by experimenting with various sonic
-                cultures and music creation tools.
-              </p>
-              <p>
-                You can listen to more of Más Hangok music on all major
-                streaming platforms.
-              </p>
-            </div>
-          </div>
-          <div className="col">
-            <div className="textContainer">
-              <p className="heading">Credits</p>
-              <p>
-                <strong>
-                  Composition, production, mixing and sample selection:
-                </strong>{" "}
-                <br /> Guoda Diržytė
-              </p>
-              <p>
-                <strong>Vocals and lyrics:</strong> <br /> Maja Mihalik
-              </p>
-              <p>
-                <strong>Design and artwork:</strong> <br /> Gustav Freij
-              </p>
-              <p>
-                <strong>Software development:</strong>
-                <br />
-                Justas Bikulčius
-                <br />
-                Danielius Šukys
-              </p>
-              <p>
-                <strong>Supported by:</strong>
-              </p>
-              <div className="logoContainer">
-                <a
-                  href="https://www.helpmusicians.org.uk/"
-                  target="_blank"
-                  className="link">
-                  <img
-                    src="images/popup/help_musicians_white.png"
-                    className="supporterLogo"
-                  />
-                </a>
-                <a
-                  href="https://www.artscouncil.org.uk/"
-                  target="_blank"
-                  className="link">
-                  <img
-                    src="images/popup/grant_white.png"
-                    className="supporterLogo"
-                  />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-
   return (
     <>
       <video
@@ -160,19 +74,34 @@ function App(props) {
         className={"bgimg" + (initialised ? "" : "Loading")}
       />
       {initialised ? <div className="darkBackgroundLayer" /> : null}
-      {popup}
+      {
+        <AboutPopup
+          toggle={() => setAboutOpen(!aboutOpen)}
+          isOpen={aboutOpen}
+        />
+      }
+      {<HelpPopup toggle={() => setHelpOpen(!helpOpen)} isOpen={helpOpen} />}
 
       <div
         id="mainContainer"
         className={"mainContainer" + (initialised ? "" : "Loading")}>
         {initialised ? (
           <>
-            <div
-              id="about"
-              className="corner nonselectable"
-              onClick={() => togglePopup()}>
-              about
+            <div className="topRightContainer corner">
+              <div
+                id="about"
+                className="nonselectable"
+                onClick={toggleAbout}>
+                about
+              </div>
+              <div
+                id="questionmark"
+                className="nonselectable blinkingSlow"
+                onClick={toggleHelp}>
+                ?
+              </div>
             </div>
+
             <div id="mashangok" className="corner nonselectable">
               Más Hangok
             </div>

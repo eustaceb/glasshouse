@@ -105,15 +105,25 @@ body {
   z-index:100;
 }
 
-#about {
-  right: 2vw;
+.topRightContainer {
+  right: 6vw;
   top: 2vh;
+}
+#about {
   cursor: pointer;
 }
 
 #mashangok {
   left: 2vw;
   top: 2vh;
+}
+
+#questionmark {
+  text-align: center;
+  font-size: calc(20px + 1.5vh);
+  cursor: pointer;
+  color: white;
+  float: right;
 }
 
 #links {
@@ -1252,6 +1262,9 @@ p {
 /* Animations*/
 .blinking {
   animation: blinker 1s linear infinite;
+}
+.blinkingSlow {
+  animation: blinker 2s linear infinite;
 }
 @keyframes blinker {
   50% {
