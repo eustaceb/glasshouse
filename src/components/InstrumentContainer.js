@@ -8,6 +8,7 @@ export function InstrumentContainer(props) {
       playSample={() => props.playSample(instrument.id)}
       stopSample={() => props.stopSample(instrument.id)}
       sample={instrument}
+      labeled={true}
     />
   ));
 

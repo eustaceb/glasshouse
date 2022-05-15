@@ -59,16 +59,28 @@ export function Instrument(props) {
         })
       : null;
   }, [props.sample]);
-  return (
+
+  const className =
+    props.sample.getName() +
+    (playing || scheduling
+      ? " " + props.sample.getName().split(" ")[1] + "Active"
+      : "") +
+    (scheduling ? " blinking" : "");
+
+  return props.labeled ? (
     <div
       ref={dom}
-      className={
-        props.sample.getName() +
-        (playing || scheduling
-          ? " " + props.sample.getName().split(" ")[1] + "Active"
-          : "") +
-        (scheduling ? " blinking" : "")
-      }
+      className={className}
+      onClick={() => {
+        triggerSample();
+      }}
+      data-intro={props.sample.getName().split(" ")[1]}
+      data-position={"right"}
+    />
+  ) : (
+    <div
+      ref={dom}
+      className={className}
       onClick={() => {
         triggerSample();
       }}

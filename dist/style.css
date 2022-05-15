@@ -1269,10 +1269,23 @@ p {
   transform: scale(0.9);
 }
 
+#questionmark {
+  font-size: xxx-large;
+  position: fixed;
+  right: 2vw;
+  bottom: 2vh;
+  cursor: pointer;
+  color: white;
+}
+
 @media only screen and (max-width: 1000px) {
   .mainContainer {
     transform: scale(0.8) translateY(-10%);
   }
+  .chardinjs-helper-layer, .chardinjs-right, .chardinjs-tooltip {
+    transform: scale(0.8) translateY(-10%);
+  }
+  
 }
 
 @media only screen and (max-height:800px)  {
@@ -1286,6 +1299,9 @@ p {
   .popupClose {
     left: 90vw;
     top: 10vh;
+  }
+  .chardinjs-helper-layer, .chardinjs-right, .chardinjs-tooltip {
+    transform: scale(0.7) translateY(-20%);
   }
 }
 
@@ -1311,6 +1327,9 @@ p {
 
 @media only screen and (max-width: 800px) {
   .mainContainer {
+    transform: scale(0.6) translateY(-20%);
+  }
+  .chardinjs-helper-layer, .chardinjs-right, .chardinjs-tooltip {
     transform: scale(0.6) translateY(-20%);
   }
 }

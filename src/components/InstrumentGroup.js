@@ -20,6 +20,7 @@ export function InstrumentGroup(props) {
       playSample={() => playSample(sample.id)}
       stopSample={() => props.stopSample(sample.id)}
       sample={sample}
+      labeled={false}
     />
   ));
   return <>{instruments}</>;

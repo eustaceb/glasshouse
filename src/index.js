@@ -226,6 +226,7 @@ function App(props) {
               composition={composition.current}
             />
             <div className="bottomSpacing"></div>
+            <div data-toggle="chardinjs" id="questionmark" class="nonselectable">?</div>
           </>
         ) : (
           <LoadingScreen
