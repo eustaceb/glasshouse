@@ -84,7 +84,7 @@
     <div id="root"></div>
     <script src="main.js"></script>
     <script>
-      $('body').chardinJs({ url: "/help/Overlay.json" });
+      $('body').chardinJs();
       $('body').on('click', 'div[data-toggle="chardinjs"]', function (e) {
           e.preventDefault();
           return ($('body').data('chardinJs')).toggle();
